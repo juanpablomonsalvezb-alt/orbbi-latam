@@ -76,20 +76,24 @@ function ServiceCard({ card, onInfo }: { card: ServiceCard; onInfo: () => void }
           src={card.image}
           alt={card.title}
           fill
-          className="object-cover group-hover:scale-105 transition-transform duration-700"
-          style={{ filter: 'contrast(1.08) brightness(0.88) saturate(0.75)' }}
+          className="object-cover object-top group-hover:scale-105 transition-transform duration-700"
+          style={{ filter: 'contrast(1.12) brightness(0.82) saturate(0.6) grayscale(0.15)' }}
         />
       ) : (
         <div className={`absolute inset-0 ${card.bg || 'bg-grey-taupe'}`} />
       )}
-      {/* Filtro cinematográfico: tono verde oscuro + viñeta lateral */}
+      {/* Filtro cinematográfico */}
       {card.image && (
         <>
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(30,56,62,0.45) 0%, rgba(0,0,0,0.15) 50%, rgba(15,25,20,0.5) 100%)', mixBlendMode: 'multiply' }} />
-          <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.55) 100%)' }} />
+          {/* Tono verde oliva oscuro */}
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(160deg, rgba(20,42,35,0.55) 0%, rgba(10,20,15,0.3) 60%, rgba(5,15,10,0.6) 100%)', mixBlendMode: 'color' }} />
+          {/* Viñeta dramática */}
+          <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at 50% 40%, transparent 30%, rgba(0,0,0,0.7) 100%)' }} />
+          {/* Grain sutil */}
+          <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'n\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23n)\'/%3E%3C/svg%3E")', backgroundSize: '180px' }} />
         </>
       )}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent" />
 
       <div className="relative flex flex-col justify-between h-full p-24 s:p-28">
         <div className="flex items-center justify-between">
