@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   keywords: 'inteligencia artificial para profesionales, IA para mayores de 45, aprender IA latinoamerica, consultora IA Chile, IA para trabajadores con experiencia, ChatGPT profesionales, automatización trabajo, brecha digital generación, IA para empresas latam, coaching inteligencia artificial',
   authors: [{ name: 'Juan Pablo Monsalvez', url: 'https://www.linkedin.com/in/juan-pablo-monsalvez-b7b843321/' }],
   robots: { index: true, follow: true },
-  verification: { google: '0wJI5OYjkRsnZRjUQKPsIMLzGXHM7KCf7xUrGDyDPUA' },
+  verification: { google: ['0wJI5OYjkRsnZRjUQKPsIMLzGXHM7KCf7xUrGDyDPUA', 'rv_5iuD9fnmM932X2GipDmN7UFJdDAqvKnC8S019XJc'] },
   alternates: { canonical: `${BASE_URL}/` },
   openGraph: {
     type: 'website',
