@@ -172,7 +172,7 @@ export default function StatsSection() {
                     animationData={ANIMATIONS[i]}
                     loop
                     autoplay={false}
-                    style={{ width: '100%', maxWidth: i >= 2 ? '28.8rem' : '36rem', height: 'auto' }}
+                    style={{ width: '100%', maxWidth: i >= 2 ? '25.9rem' : '32.4rem', height: 'auto' }}
                   />
                 </div>
 

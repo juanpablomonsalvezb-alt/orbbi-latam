@@ -77,7 +77,7 @@ export default function Footer() {
             </p>
           </div>
           <button className="btn-link text-green border-green hover:bg-green hover:text-white flex-shrink-0">
-            Habla con nosotros
+            Contáctanos
           </button>
         </div>
       </div>

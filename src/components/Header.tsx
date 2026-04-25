@@ -64,8 +64,8 @@ export default function Header() {
           </a>
 
           {/* Contact us button */}
-          <button
-            onClick={() => setBookOpen(true)}
+          <a
+            href="/#contacto"
             className="flex items-center gap-10 text-12 font-medium uppercase tracking-[0.12rem] text-green border border-green rounded-[10rem] px-16 py-8 hover:bg-green hover:text-white transition-colors"
           >
             <span className="hidden s:flex items-center -space-x-6">
@@ -77,8 +77,8 @@ export default function Header() {
                 </span>
               ))}
             </span>
-            Habla con nosotros
-          </button>
+            Contáctanos
+          </a>
         </nav>
       </header>
 
