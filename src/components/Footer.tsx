@@ -143,7 +143,7 @@ export default function Footer() {
             <div className="py-16 s:py-0">
               <p className="text-12 text-white/30 uppercase tracking-[0.12rem] mb-16">Síguenos</p>
               <a
-                href="https://www.linkedin.com/company/outten-golden-llp"
+                href="https://www.linkedin.com/in/juan-pablo-monsalvez-b7b843321/"
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-8 text-12 text-white/60 font-medium uppercase tracking-[0.12rem] hover:text-white transition-opacity"

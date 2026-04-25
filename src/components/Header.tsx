@@ -154,7 +154,7 @@ export default function Header() {
               </div>
 
               {/* LinkedIn */}
-              <a href="https://www.linkedin.com/company/outten-golden-llp" target="_blank" rel="noreferrer" className="flex items-center gap-8 text-white text-12 uppercase tracking-[0.12rem] hover:opacity-70 transition-opacity">
+              <a href="https://www.linkedin.com/in/juan-pablo-monsalvez-b7b843321/" target="_blank" rel="noreferrer" className="flex items-center gap-8 text-white text-12 uppercase tracking-[0.12rem] hover:opacity-70 transition-opacity">
                 <svg viewBox="0 0 24 24" fill="currentColor" className="w-16 h-16">
                   <path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.27c-.97 0-1.75-.79-1.75-1.75s.78-1.75 1.75-1.75 1.75.79 1.75 1.75-.78 1.75-1.75 1.75zm13.5 11.27h-3v-5.5c0-1.38-.5-2.32-1.75-2.32-.95 0-1.52.64-1.77 1.26-.09.22-.11.54-.11.86v5.7h-3v-10h3v1.37c.4-.62 1.12-1.5 2.72-1.5 1.99 0 3.47 1.3 3.47 4.09v6.04z" />
                 </svg>
@@ -199,8 +199,8 @@ export default function Header() {
 
             <div className="mb-32">
               <p className="text-12 text-grey uppercase tracking-[0.12rem] mb-8">LinkedIn</p>
-              <a href="https://www.linkedin.com/company/orbbi-latam" target="_blank" rel="noreferrer" className="text-green text-16 ulink">
-                linkedin.com/company/orbbi-latam
+              <a href="https://www.linkedin.com/in/juan-pablo-monsalvez-b7b843321/" target="_blank" rel="noreferrer" className="text-green text-16 ulink">
+                linkedin.com/in/juan-pablo-monsalvez-b7b843321
               </a>
             </div>
 

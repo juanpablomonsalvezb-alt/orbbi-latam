@@ -48,7 +48,7 @@ const CARDS: NewsCard[] = [
 function NewsCard({ card }: { card: NewsCard }) {
   return (
     <a
-      href={card.href || 'https://www.linkedin.com/company/orbbi-latam'}
+      href={card.href || 'https://www.linkedin.com/in/juan-pablo-monsalvez-b7b843321/'}
       target="_blank"
       rel="noreferrer"
       className="group block relative overflow-hidden rounded-[1.6rem] min-h-[38rem] s:min-h-[44rem] flex-shrink-0 w-[28rem] s:w-[36rem] cursor-pointer"
@@ -129,7 +129,7 @@ export default function NewsroomSection() {
               </button>
             </div>
             <a
-              href="https://www.linkedin.com/company/orbbi-latam"
+              href="https://www.linkedin.com/in/juan-pablo-monsalvez-b7b843321/"
               target="_blank"
               rel="noreferrer"
               className="text-12 uppercase tracking-[0.12rem] font-medium text-green ulink"
