@@ -84,9 +84,9 @@ export default function ContactSection() {
         }),
       })
       if (res.ok) { setSent(true) }
-      else { alert('Hubo un error. Escríbenos a contacto@orbbi.lat') }
+      else { alert('Hubo un error. Escríbenos a contacto@orbbilatam.com') }
     } catch {
-      alert('Hubo un error. Escríbenos a contacto@orbbi.lat')
+      alert('Hubo un error. Escríbenos a contacto@orbbilatam.com')
     } finally { setLoading(false) }
   }
 
@@ -108,8 +108,8 @@ export default function ContactSection() {
           <p className="text-grey text-16 leading-[1.8] mb-24" style={{ fontFamily: 'system-ui, sans-serif' }}>
             Te respondemos en menos de 24 horas, de lunes a viernes.
           </p>
-          <a href="mailto:contacto@orbbi.lat" className="text-green text-20 font-normal hover:opacity-70 transition-opacity" style={{ fontFamily: '"disp", Georgia, serif' }}>
-            contacto@orbbi.lat
+          <a href="mailto:contacto@orbbilatam.com" className="text-green text-20 font-normal hover:opacity-70 transition-opacity" style={{ fontFamily: '"disp", Georgia, serif' }}>
+            contacto@orbbilatam.com
           </a>
         </div>
       </div>
@@ -137,8 +137,8 @@ export default function ContactSection() {
 
           <div className="mt-64 pt-40" style={{ borderTop: '1px solid rgba(255,255,255,0.1)' }}>
             <p className="text-white/30 text-11 uppercase tracking-[0.14rem] mb-12">Contacto directo</p>
-            <a href="mailto:contacto@orbbi.lat" className="block text-white text-18 font-normal mb-12 hover:opacity-70 transition-opacity" style={{ fontFamily: '"disp", Georgia, serif' }}>
-              contacto@orbbi.lat
+            <a href="mailto:contacto@orbbilatam.com" className="block text-white text-18 font-normal mb-12 hover:opacity-70 transition-opacity" style={{ fontFamily: '"disp", Georgia, serif' }}>
+              contacto@orbbilatam.com
             </a>
             <p className="text-white/35 text-13" style={{ fontFamily: 'system-ui, sans-serif' }}>
               Lunes a viernes · menos de 24 hrs

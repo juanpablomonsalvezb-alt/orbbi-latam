@@ -158,7 +158,7 @@ function Modal({ card, onClose }: { card: ServiceCard; onClose: () => void }) {
 
         {/* CTA */}
         <a
-          href="mailto:contacto@orbbi.lat"
+          href="mailto:contacto@orbbilatam.com"
           className="inline-flex items-center gap-10 text-12 font-medium uppercase tracking-[0.12rem] text-white bg-green px-28 py-14 rounded-[10rem] hover:opacity-90 transition-opacity"
         >
           Consultar por este servicio
@@ -206,7 +206,7 @@ export default function ServicesSection() {
                 </button>
               ))}
             </div>
-            <a href="mailto:contacto@orbbi.lat" className="text-12 uppercase tracking-[0.12rem] font-medium text-green ulink flex-shrink-0">
+            <a href="mailto:contacto@orbbilatam.com" className="text-12 uppercase tracking-[0.12rem] font-medium text-green ulink flex-shrink-0">
               Contáctanos
             </a>
           </div>

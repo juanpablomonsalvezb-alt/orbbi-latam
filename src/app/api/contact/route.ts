@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
 
       </div>
       <div style="padding:24px 40px;background:#1E383E;text-align:center">
-        <p style="color:rgba(255,255,255,0.4);font-size:11px;font-family:system-ui;margin:0">Orbbi Latam · contacto@orbbi.lat</p>
+        <p style="color:rgba(255,255,255,0.4);font-size:11px;font-family:system-ui;margin:0">Orbbi Latam · contacto@orbbilatam.com</p>
       </div>
     </div>
   `

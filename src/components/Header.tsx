@@ -147,7 +147,7 @@ export default function Header() {
               <div>
                 <p className="text-white/60 text-12 uppercase tracking-[0.12rem] mb-12">Contacto</p>
                 <p className="text-white/80 text-12 leading-[1.8]">
-                  hello@orbbi.lat<br />
+                  contacto@orbbilatam.com<br />
                   Lunes a viernes<br />
                   Respuesta en menos de 24 horas
                 </p>
@@ -192,8 +192,8 @@ export default function Header() {
 
             <div className="mb-32">
               <p className="text-12 text-grey uppercase tracking-[0.12rem] mb-8">Email</p>
-              <a href="mailto:hello@orbbi.lat" className="text-green text-32 font-medium hover:opacity-70 transition-opacity">
-                hello@orbbi.lat
+              <a href="mailto:contacto@orbbilatam.com" className="text-green text-32 font-medium hover:opacity-70 transition-opacity">
+                contacto@orbbilatam.com
               </a>
             </div>
 
