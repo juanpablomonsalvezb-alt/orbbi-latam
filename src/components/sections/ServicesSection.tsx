@@ -70,49 +70,61 @@ const tabs: { id: string; label: string; cards: ServiceCard[] }[] = [
 
 function ServiceCard({ card, onInfo }: { card: ServiceCard; onInfo: () => void }) {
   return (
-    <div className="group relative overflow-hidden rounded-[1.6rem] min-h-[36rem] s:min-h-[44rem] flex flex-col">
+    <div className="group relative overflow-hidden rounded-[1.6rem] min-h-[36rem] s:min-h-[44rem] flex flex-col cursor-pointer" onClick={onInfo}>
+      {/* Background */}
       {card.image ? (
         <Image
           src={card.image}
           alt={card.title}
           fill
-          className="object-cover object-top group-hover:scale-105 transition-transform duration-700"
-          style={{ filter: 'contrast(1.12) brightness(0.82) saturate(0.6) grayscale(0.15)' }}
+          className="object-cover object-center group-hover:scale-103 transition-transform duration-1000"
+          style={{ filter: 'contrast(1.1) brightness(0.8) saturate(0.55)' }}
         />
       ) : (
         <div className={`absolute inset-0 ${card.bg || 'bg-grey-taupe'}`} />
       )}
-      {/* Filtro cinematográfico */}
+
+      {/* Filtro azul cinemático */}
       {card.image && (
         <>
-          {/* Tono verde oliva oscuro */}
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(160deg, rgba(20,42,35,0.55) 0%, rgba(10,20,15,0.3) 60%, rgba(5,15,10,0.6) 100%)', mixBlendMode: 'color' }} />
-          {/* Viñeta dramática */}
-          <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at 50% 40%, transparent 30%, rgba(0,0,0,0.7) 100%)' }} />
-          {/* Grain sutil */}
-          <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'n\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23n)\'/%3E%3C/svg%3E")', backgroundSize: '180px' }} />
+          <div className="absolute inset-0" style={{ background: 'rgba(15,25,70,0.42)', mixBlendMode: 'color' }} />
+          <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at 50% 35%, transparent 25%, rgba(5,10,30,0.72) 100%)' }} />
         </>
       )}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent" />
+      <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(5,10,20,0.92) 0%, rgba(0,0,0,0.1) 50%, transparent 100%)' }} />
 
-      <div className="relative flex flex-col justify-between h-full p-24 s:p-28">
-        <div className="flex items-center justify-between">
-          <span className="text-white text-11 uppercase tracking-[0.12rem] font-medium bg-white/20 backdrop-blur-sm rounded-[10rem] px-12 py-5">
+      {/* Content */}
+      <div className="relative flex flex-col justify-between h-full p-28 s:p-32">
+        {/* Top */}
+        <div className="flex items-start justify-between">
+          <span className="text-white/60 text-10 uppercase tracking-[0.2rem] font-medium" style={{ fontFamily: 'system-ui, sans-serif' }}>
             {card.tag}
           </span>
-          <span className="text-white/60 text-11 uppercase tracking-[0.10rem] font-medium">100% Online</span>
+          <span className="text-white/40 text-10 uppercase tracking-[0.16rem]" style={{ fontFamily: 'system-ui, sans-serif' }}>Online</span>
         </div>
 
+        {/* Bottom */}
         <div>
-          <h3 className="text-white text-26 s:text-32 font-normal leading-[1.15] mb-20" style={{ fontFamily: '"disp", Georgia, serif' }}>
+          <h3
+            className="text-white text-24 s:text-28 font-normal leading-[1.2] mb-24"
+            style={{ fontFamily: '"disp", Georgia, serif' }}
+          >
             {card.title}
           </h3>
-          <button
-            onClick={onInfo}
-            className="inline-flex items-center gap-8 text-white text-12 uppercase tracking-[0.12rem] font-medium border border-white/40 rounded-[10rem] px-16 py-8 hover:bg-white hover:text-green transition-colors"
-          >
-            + Info
-          </button>
+
+          {/* Botón premium — línea minimalista */}
+          <div className="flex items-center gap-12 group/btn">
+            <span
+              className="text-white/70 text-11 uppercase tracking-[0.2rem] font-medium transition-all duration-300 group-hover/btn:text-white"
+              style={{ fontFamily: 'system-ui, sans-serif' }}
+            >
+              Ver detalle
+            </span>
+            <span className="flex-1 h-px bg-white/20 group-hover/btn:bg-white/50 transition-colors duration-300" style={{ maxWidth: '4rem' }} />
+            <svg viewBox="0 0 20 10" fill="none" className="w-16 h-8 text-white/50 group-hover/btn:text-white transition-colors duration-300">
+              <path d="M0 5H18M14 1L18 5L14 9" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </div>
         </div>
       </div>
     </div>
