@@ -15,8 +15,8 @@ const init: F = { nombre:'', email:'', telefono:'', pais:'', cargo:'', sector:''
 /* ── primitives ── */
 function Line({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div className="group border-b border-[#E8E4DD] pb-0">
-      <label className="block text-[1rem] uppercase tracking-[0.18rem] text-grey/50 font-medium pt-16 pb-4">{label}</label>
+    <div className="group border-b border-white/10 pb-0">
+      <label className="block text-[1rem] uppercase tracking-[0.18rem] text-white/35 font-medium pt-16 pb-4">{label}</label>
       {children}
     </div>
   )
@@ -24,14 +24,14 @@ function Line({ label, children }: { label: string; children: React.ReactNode })
 
 function TInput({ name, placeholder, type='text', value, onChange }: { name:string; placeholder:string; type?:string; value:string; onChange:(e:React.ChangeEvent<HTMLInputElement>)=>void }) {
   return <input type={type} name={name} placeholder={placeholder} value={value} onChange={onChange}
-    className="block w-full pb-14 text-18 text-green placeholder-[#C5C0B8] bg-transparent outline-none font-normal"
+    className="block w-full pb-14 text-18 text-white placeholder-white/20 bg-transparent outline-none font-normal"
     style={{ fontFamily: '"disp", Georgia, serif' }} />
 }
 
 function TSelect({ name, value, onChange, opts, placeholder }: { name:string; value:string; onChange:(e:React.ChangeEvent<HTMLSelectElement>)=>void; opts:string[]; placeholder:string }) {
   return <select name={name} value={value} onChange={onChange}
     className="block w-full pb-14 text-18 bg-transparent outline-none appearance-none cursor-pointer font-normal"
-    style={{ fontFamily: '"disp", Georgia, serif', color: value ? '#1E383E' : '#C5C0B8' }}>
+    style={{ fontFamily: '"disp", Georgia, serif', color: value ? "white" : "rgba(255,255,255,0.2)" }}>
     <option value="" disabled style={{color:'#7A7871'}}>{placeholder}</option>
     {opts.map(o => <option key={o} value={o} style={{color:'#1E383E'}}>{o}</option>)}
   </select>
@@ -40,7 +40,7 @@ function TSelect({ name, value, onChange, opts, placeholder }: { name:string; va
 function Pill({ label, active, onClick }: { label:string; active:boolean; onClick:()=>void }) {
   return (
     <button type="button" onClick={onClick}
-      className={`text-13 px-18 py-10 rounded-[10rem] border transition-all duration-200 ${active ? 'bg-green text-white border-green' : 'bg-transparent text-grey border-[#E8E4DD] hover:border-green hover:text-green'}`}
+      className={`text-13 px-18 py-10 rounded-[10rem] border transition-all duration-200 ${active ? 'bg-white text-green border-white' : 'bg-transparent text-white/50 border-white/15 hover:border-white/50 hover:text-white'}`}
       style={{ fontFamily: 'system-ui, sans-serif' }}>
       {label}
     </button>
@@ -50,9 +50,9 @@ function Pill({ label, active, onClick }: { label:string; active:boolean; onClic
 function SectionHead({ n, label }: { n: string; label: string }) {
   return (
     <div className="flex items-baseline gap-14 mb-28">
-      <span className="text-[1rem] text-grey/30 uppercase tracking-[0.2rem] font-medium">{n}</span>
-      <span className="text-[1.1rem] text-green uppercase tracking-[0.16rem] font-medium">{label}</span>
-      <div className="flex-1 h-px bg-[#E8E4DD]" />
+      <span className="text-[1rem] text-white/20 uppercase tracking-[0.2rem] font-medium">{n}</span>
+      <span className="text-[1.1rem] text-white/60 uppercase tracking-[0.16rem] font-medium">{label}</span>
+      <div className="flex-1 h-px bg-white/10" />
     </div>
   )
 }
@@ -92,7 +92,7 @@ export default function ContactSection() {
 
   /* ── success state ── */
   if (sent) return (
-    <section>
+    <section className="bg-[#0A0A0A]">
       <div className="grid s:grid-cols-2 min-h-[40rem]">
         <div className="bg-green flex flex-col items-center justify-center py-80 px-40 text-center">
           <div className="w-56 h-56 rounded-full border border-white/20 flex items-center justify-center mb-32">
@@ -108,7 +108,7 @@ export default function ContactSection() {
           <p className="text-grey text-16 leading-[1.8] mb-24" style={{ fontFamily: 'system-ui, sans-serif' }}>
             Te respondemos en menos de 24 horas, de lunes a viernes.
           </p>
-          <a href="mailto:contacto@orbbilatam.com" className="text-green text-20 font-normal hover:opacity-70 transition-opacity" style={{ fontFamily: '"disp", Georgia, serif' }}>
+          <a href="mailto:contacto@orbbilatam.com" className="text-white text-20 font-normal hover:opacity-70 transition-opacity" style={{ fontFamily: '"disp", Georgia, serif' }}>
             contacto@orbbilatam.com
           </a>
         </div>
@@ -117,11 +117,11 @@ export default function ContactSection() {
   )
 
   return (
-    <section>
+    <section className="bg-[#0A0A0A]">
       <div className="grid s:grid-cols-[1fr_1.6fr]">
 
-        {/* ── Panel izquierdo — verde oscuro ── */}
-        <div className="bg-green px-40 s:px-56 py-80 s:py-120 flex flex-col justify-between">
+        {/* ── Panel izquierdo — negro ── */}
+        <div className="bg-[#0A0A0A] px-40 s:px-56 py-80 s:py-120 flex flex-col justify-between" style={{ borderRight: '1px solid rgba(255,255,255,0.06)' }}>
           <div>
             <p className="text-white/40 text-11 uppercase tracking-[0.16rem] mb-24">Contacto</p>
             <h2
@@ -146,8 +146,8 @@ export default function ContactSection() {
           </div>
         </div>
 
-        {/* ── Panel derecho — blanco ── */}
-        <div className="bg-white px-40 s:px-64 py-80 s:py-120">
+        {/* ── Panel derecho — negro ── */}
+        <div className="bg-[#111111] px-40 s:px-64 py-80 s:py-120">
           <form onSubmit={submit} className="space-y-52">
 
             {/* 01 */}
@@ -168,7 +168,7 @@ export default function ContactSection() {
                 <Line label="Cargo o función actual"><TInput name="cargo" placeholder="Gerente, Abogado, Docente..." value={form.cargo} onChange={set('cargo')}/></Line>
                 <Line label="Sector o industria"><TSelect name="sector" value={form.sector} onChange={set('sector')} opts={SECTORES} placeholder="Selecciona"/></Line>
               </div>
-              <p className="text-[1rem] uppercase tracking-[0.18rem] text-grey/50 font-medium mb-12">Años de experiencia</p>
+              <p className="text-[1rem] uppercase tracking-[0.18rem] text-white/35 font-medium mb-12">Años de experiencia</p>
               <div className="flex flex-wrap gap-10">
                 {['10–15 años','15–20 años','20–25 años','25+ años'].map(v =>
                   <Pill key={v} label={v} active={form.experiencia===v} onClick={() => radio('experiencia', v)}/>
@@ -179,7 +179,7 @@ export default function ContactSection() {
             {/* 03 */}
             <div>
               <SectionHead n="03" label="Tu relación con la IA" />
-              <p className="text-[1rem] uppercase tracking-[0.18rem] text-grey/50 font-medium mb-12">¿Qué tan familiarizado estás hoy?</p>
+              <p className="text-[1rem] uppercase tracking-[0.18rem] text-white/35 font-medium mb-12">¿Qué tan familiarizado estás hoy?</p>
               <div className="flex flex-col gap-10">
                 {[
                   'Nunca la he usado, no sé por dónde empezar',
@@ -193,13 +193,13 @@ export default function ContactSection() {
             {/* 04 */}
             <div>
               <SectionHead n="04" label="Qué estás buscando" />
-              <p className="text-[1rem] uppercase tracking-[0.18rem] text-grey/50 font-medium mb-12">¿Es para ti o para tu equipo?</p>
+              <p className="text-[1rem] uppercase tracking-[0.18rem] text-white/35 font-medium mb-12">¿Es para ti o para tu equipo?</p>
               <div className="flex flex-wrap gap-10 mb-28">
                 {['Para mí, de forma individual','Para mi equipo o empresa'].map(v =>
                   <Pill key={v} label={v} active={form.para===v} onClick={() => radio('para', v)}/>
                 )}
               </div>
-              <p className="text-[1rem] uppercase tracking-[0.18rem] text-grey/50 font-medium mb-12">¿Qué servicio te interesa?</p>
+              <p className="text-[1rem] uppercase tracking-[0.18rem] text-white/35 font-medium mb-12">¿Qué servicio te interesa?</p>
               <div className="flex flex-wrap gap-10">
                 {SERVICIOS.map(v =>
                   <Pill key={v} label={v} active={form.servicios.includes(v)} onClick={() => toggle('servicios', v)}/>
@@ -214,12 +214,12 @@ export default function ContactSection() {
                 <textarea
                   placeholder="Describe con tus palabras qué te trajo aquí..."
                   value={form.desafio} onChange={set('desafio')} rows={4}
-                  className="block w-full pb-14 text-18 text-green placeholder-[#C5C0B8] bg-transparent outline-none resize-none font-normal"
+                  className="block w-full pb-14 text-18 text-green placeholder-white/20 bg-transparent outline-none resize-none font-normal"
                   style={{ fontFamily: '"disp", Georgia, serif' }}
                 />
               </Line>
               <div className="mt-24">
-                <p className="text-[1rem] uppercase tracking-[0.18rem] text-grey/50 font-medium mb-12">¿Cómo nos encontraste?</p>
+                <p className="text-[1rem] uppercase tracking-[0.18rem] text-white/35 font-medium mb-12">¿Cómo nos encontraste?</p>
                 <div className="flex flex-wrap gap-10">
                   {['LinkedIn','Recomendación','Google','Instagram','Un evento','Otro'].map(v =>
                     <Pill key={v} label={v} active={form.comoNosEncontro===v} onClick={() => radio('comoNosEncontro', v)}/>
@@ -230,7 +230,7 @@ export default function ContactSection() {
 
             {/* Submit */}
             <div className="flex items-center justify-between pt-24" style={{ borderTop: '1px solid #E8E4DD' }}>
-              <p className="text-grey/40 text-12" style={{ fontFamily: 'system-ui, sans-serif' }}>
+              <p className="text-white/25 text-12" style={{ fontFamily: 'system-ui, sans-serif' }}>
                 * Campos requeridos
               </p>
               <button

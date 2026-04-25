@@ -78,20 +78,11 @@ function ServiceCard({ card, onInfo }: { card: ServiceCard; onInfo: () => void }
           alt={card.title}
           fill
           className="object-cover object-center group-hover:scale-103 transition-transform duration-1000"
-          style={{ filter: 'contrast(1.1) brightness(0.8) saturate(0.55)' }}
         />
       ) : (
         <div className={`absolute inset-0 ${card.bg || 'bg-grey-taupe'}`} />
       )}
-
-      {/* Filtro azul cinemático */}
-      {card.image && (
-        <>
-          <div className="absolute inset-0" style={{ background: 'rgba(15,25,70,0.42)', mixBlendMode: 'color' }} />
-          <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at 50% 35%, transparent 25%, rgba(5,10,30,0.72) 100%)' }} />
-        </>
-      )}
-      <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(5,10,20,0.92) 0%, rgba(0,0,0,0.1) 50%, transparent 100%)' }} />
+      <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.08) 50%, transparent 100%)' }} />
 
       {/* Content */}
       <div className="relative flex flex-col justify-between h-full p-28 s:p-32">
