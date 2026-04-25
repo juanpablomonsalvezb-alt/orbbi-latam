@@ -204,18 +204,30 @@ export default function ServicesSection() {
             </h2>
           </div>
           <div className="col-span-full s:col-start-9 s:col-span-8 flex flex-col s:flex-row items-start s:items-end justify-between gap-16">
-            <div className="flex gap-8">
-              {tabs.map(tab => (
+            <div className="flex items-center gap-0" style={{ borderBottom: '1px solid #DEDAD3' }}>
+              {tabs.map((tab, i) => (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`text-12 uppercase tracking-[0.12rem] font-medium px-16 py-8 rounded-[10rem] border transition-colors ${
-                    activeTab === tab.id
-                      ? 'bg-green text-white border-green'
-                      : 'bg-transparent text-grey border-grey-taupe hover:border-green hover:text-green'
-                  }`}
+                  className="relative pb-12 transition-colors"
+                  style={{
+                    marginRight: i < tabs.length - 1 ? '2.8rem' : 0,
+                    fontFamily: 'system-ui, sans-serif',
+                    fontSize: '1.1rem',
+                    fontWeight: 500,
+                    letterSpacing: '0.14rem',
+                    textTransform: 'uppercase',
+                    color: activeTab === tab.id ? '#1E383E' : '#7A7871',
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                    padding: '0 0 1.2rem 0',
+                  }}
                 >
                   {tab.label}
+                  {activeTab === tab.id && (
+                    <span className="absolute bottom-0 left-0 w-full" style={{ height: '1px', backgroundColor: '#1E383E' }} />
+                  )}
                 </button>
               ))}
             </div>
