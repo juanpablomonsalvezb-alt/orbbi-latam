@@ -93,6 +93,9 @@ export default function HeroSection() {
               >
                 La inteligencia artificial no vino a reemplazarte. Vino a multiplicarte.
               </h1>
+              <p className="text-grey/60 text-12 s:text-13 tracking-[0.10rem] mt-20" style={{ fontFamily: 'system-ui, sans-serif' }}>
+                Disponible en toda Latinoamérica · 100% Online
+              </p>
             </div>
 
             {/* Screen / image — js-t-screen */}

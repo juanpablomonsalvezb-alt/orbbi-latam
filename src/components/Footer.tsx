@@ -171,10 +171,20 @@ export default function Footer() {
         </div>
       </div>
 
+      {/* Countries */}
+      <div className="site-max py-20 border-t border-white/10">
+        <p className="text-11 text-white/25 uppercase tracking-[0.14rem] mb-8" style={{ fontFamily: 'system-ui, sans-serif' }}>
+          Servicio disponible en
+        </p>
+        <p className="text-12 text-white/30 leading-[1.8]" style={{ fontFamily: 'system-ui, sans-serif' }}>
+          Chile · México · Colombia · Argentina · Perú · Ecuador · Uruguay · Bolivia · Paraguay · Venezuela · Costa Rica
+        </p>
+      </div>
+
       {/* Bottom bar */}
       <div className="site-max py-24 border-t border-white/10">
         <div className="flex flex-col s:flex-row items-start s:items-center justify-between gap-16">
-          <p className="text-12 text-grey">
+          <p className="text-12 text-white/30">
             &copy; 2026 Orbbi Latam. Todos los derechos reservados.
           </p>
           <div className="flex flex-wrap gap-16 s:gap-24">
