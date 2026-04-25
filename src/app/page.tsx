@@ -5,7 +5,7 @@ import StatsSection from '@/components/sections/StatsSection'
 import NewsroomSection from '@/components/sections/NewsroomSection'
 import ServicesSection from '@/components/sections/ServicesSection'
 import TestimonialsCarousel from '@/components/sections/TestimonialsCarousel'
-import ClientStoriesCarousel from '@/components/sections/ClientStoriesCarousel'
+
 import Footer from '@/components/Footer'
 
 export default function Home() {
@@ -21,8 +21,7 @@ export default function Home() {
           <NewsroomSection />
           <ServicesSection />
           <TestimonialsCarousel />
-          <ClientStoriesCarousel />
-          <Footer />
+<Footer />
         </div>
       </main>
     </>
