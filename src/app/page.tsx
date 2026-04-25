@@ -6,7 +6,6 @@ import NewsroomSection from '@/components/sections/NewsroomSection'
 import ServicesSection from '@/components/sections/ServicesSection'
 import ContactSection from '@/components/sections/ContactSection'
 import TestimonialsCarousel from '@/components/sections/TestimonialsCarousel'
-
 import Footer from '@/components/Footer'
 
 export default function Home() {
@@ -15,15 +14,14 @@ export default function Home() {
       <Header />
       <main className="pt-[6rem]">
         <HeroSection />
-        {/* All sections + footer need z-index:2 to cover the fixed hero layer (z:1) */}
         <div style={{ position: 'relative', zIndex: 2 }}>
-          <HighlightSection />
-          <StatsSection />
-          <NewsroomSection />
-          <ServicesSection />
-          <ContactSection />
-          <TestimonialsCarousel />
-<Footer />
+          <section id="para-quien"><HighlightSection /></section>
+          <section id="numeros"><StatsSection /></section>
+          <section id="publicaciones"><NewsroomSection /></section>
+          <section id="servicios"><ServicesSection /></section>
+          <section id="contacto"><ContactSection /></section>
+          <section id="testimonios"><TestimonialsCarousel /></section>
+          <Footer />
         </div>
       </main>
     </>
