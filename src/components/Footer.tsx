@@ -24,13 +24,13 @@ type AccordionProps = { title: string; children: React.ReactNode }
 function Accordion({ title, children }: AccordionProps) {
   const [open, setOpen] = useState(false)
   return (
-    <div className="border-b border-light-grey s:border-none">
+    <div className="border-b border-white/10 s:border-none">
       <button
         className="w-full flex items-center justify-between py-16 s:py-0 s:cursor-default text-left"
         onClick={() => setOpen(!open)}
       >
         <span className="text-12 text-grey uppercase tracking-[0.12rem] font-medium">{title}</span>
-        <span className="s:hidden text-grey text-16">{open ? '−' : '+'}</span>
+        <span className="s:hidden text-white/40 text-16">{open ? '−' : '+'}</span>
       </button>
       <div className={`s:block overflow-hidden transition-all duration-300 ${open ? 'max-h-[100rem]' : 'max-h-0 s:max-h-none'}`}>
         {children}
@@ -53,13 +53,13 @@ export default function Footer() {
   const ogLinks = ['Sobre nosotros', 'El fundador', 'Trabaja con nosotros', 'Contacto']
 
   return (
-    <footer className="bg-white border-t border-light-grey">
+    <footer className="bg-[#0F0F0F]">
       {/* Top section */}
       <div className="site-max py-40 s:py-60">
-        <div className="flex flex-col s:flex-row items-start s:items-center justify-between gap-24 pb-40 s:pb-60 border-b border-light-grey">
+        <div className="flex flex-col s:flex-row items-start s:items-center justify-between gap-24 pb-40 s:pb-60 border-b border-white/10">
           <div className="flex flex-col gap-12">
-            <LogoSVG className="w-[13.5rem] fill-green" />
-            <p className="text-grey text-12 max-w-[40rem] leading-[1.6]">
+            <LogoSVG className="w-[13.5rem] fill-white" />
+            <p className="text-white/40 text-12 max-w-[40rem] leading-[1.6]">
               Inteligencia Artificial para los que ya saben trabajar.
             </p>
           </div>
@@ -78,7 +78,7 @@ export default function Footer() {
               <ul className="flex flex-col gap-4 pb-20 s:pb-0 s:pt-16">
                 {allEmployeesLinks.map((link) => (
                   <li key={link}>
-                    <a href="#" className="text-12 text-black hover:text-green transition-colors leading-[2.0]">
+                    <a href="#" className="text-12 text-white/60 hover:text-white transition-colors leading-[2.0]">
                       {link}
                     </a>
                   </li>
@@ -93,7 +93,7 @@ export default function Footer() {
               <ul className="flex flex-col gap-4 pb-20 s:pb-0 s:pt-16">
                 {execLinks.map((link) => (
                   <li key={link}>
-                    <a href="#" className="text-12 text-black hover:text-green transition-colors leading-[2.0]">
+                    <a href="#" className="text-12 text-white/60 hover:text-white transition-colors leading-[2.0]">
                       {link}
                     </a>
                   </li>
@@ -105,7 +105,7 @@ export default function Footer() {
               <ul className="flex flex-col gap-4 pb-20 s:pb-0 s:pt-16">
                 {whistleblowerLinks.map((link) => (
                   <li key={link}>
-                    <a href="#" className="text-12 text-black hover:text-green transition-colors leading-[2.0]">
+                    <a href="#" className="text-12 text-white/60 hover:text-white transition-colors leading-[2.0]">
                       {link}
                     </a>
                   </li>
@@ -117,7 +117,7 @@ export default function Footer() {
               <ul className="flex flex-col gap-4 pb-20 s:pb-0 s:pt-16">
                 {newsroomLinks.map((link) => (
                   <li key={link}>
-                    <a href="#" className="text-12 text-black hover:text-green transition-colors leading-[2.0]">
+                    <a href="#" className="text-12 text-white/60 hover:text-white transition-colors leading-[2.0]">
                       {link}
                     </a>
                   </li>
@@ -132,7 +132,7 @@ export default function Footer() {
               <ul className="flex flex-col gap-4 pb-20 s:pb-0 s:pt-16">
                 {ogLinks.map((link) => (
                   <li key={link}>
-                    <a href="#" className="text-12 text-black hover:text-green transition-colors leading-[2.0]">
+                    <a href="#" className="text-12 text-white/60 hover:text-white transition-colors leading-[2.0]">
                       {link}
                     </a>
                   </li>
@@ -141,12 +141,12 @@ export default function Footer() {
             </Accordion>
 
             <div className="py-16 s:py-0">
-              <p className="text-12 text-grey uppercase tracking-[0.12rem] mb-16">Síguenos</p>
+              <p className="text-12 text-white/30 uppercase tracking-[0.12rem] mb-16">Síguenos</p>
               <a
                 href="https://www.linkedin.com/company/outten-golden-llp"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-8 text-12 text-green font-medium uppercase tracking-[0.12rem] hover:opacity-70 transition-opacity"
+                className="inline-flex items-center gap-8 text-12 text-white/60 font-medium uppercase tracking-[0.12rem] hover:text-white transition-opacity"
               >
                 <svg viewBox="0 0 24 24" fill="currentColor" className="w-16 h-16">
                   <path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.27c-.97 0-1.75-.79-1.75-1.75s.78-1.75 1.75-1.75 1.75.79 1.75 1.75-.78 1.75-1.75 1.75zm13.5 11.27h-3v-5.5c0-1.38-.5-2.32-1.75-2.32-.95 0-1.52.64-1.77 1.26-.09.22-.11.54-.11.86v5.7h-3v-10h3v1.37c.4-.62 1.12-1.5 2.72-1.5 1.99 0 3.47 1.3 3.47 4.09v6.04z" />
@@ -159,14 +159,14 @@ export default function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div className="site-max py-24 border-t border-light-grey">
+      <div className="site-max py-24 border-t border-white/10">
         <div className="flex flex-col s:flex-row items-start s:items-center justify-between gap-16">
           <p className="text-12 text-grey">
             &copy; 2026 Orbbi Latam. Todos los derechos reservados.
           </p>
           <div className="flex flex-wrap gap-16 s:gap-24">
             {['Política de Privacidad', 'Términos de Uso', 'Prensa'].map((item) => (
-              <a key={item} href="#" className="text-12 text-grey hover:text-green transition-colors ulink">
+              <a key={item} href="#" className="text-12 text-white/30 hover:text-white transition-colors">
                 {item}
               </a>
             ))}
