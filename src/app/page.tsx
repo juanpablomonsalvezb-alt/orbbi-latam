@@ -4,6 +4,7 @@ import HighlightSection from '@/components/sections/HighlightSection'
 import StatsSection from '@/components/sections/StatsSection'
 import NewsroomSection from '@/components/sections/NewsroomSection'
 import ServicesSection from '@/components/sections/ServicesSection'
+import ContactSection from '@/components/sections/ContactSection'
 import TestimonialsCarousel from '@/components/sections/TestimonialsCarousel'
 
 import Footer from '@/components/Footer'
@@ -20,6 +21,7 @@ export default function Home() {
           <StatsSection />
           <NewsroomSection />
           <ServicesSection />
+          <ContactSection />
           <TestimonialsCarousel />
 <Footer />
         </div>
