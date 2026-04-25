@@ -9,7 +9,6 @@ type ServiceCard = {
   bullets: string[]
   image?: string
   bg?: string
-  cta?: string
 }
 
 const tabs: { id: string; label: string; cards: ServiceCard[] }[] = [
@@ -69,10 +68,9 @@ const tabs: { id: string; label: string; cards: ServiceCard[] }[] = [
   },
 ]
 
-function ServiceCard({ card }: { card: ServiceCard }) {
+function ServiceCard({ card, onInfo }: { card: ServiceCard; onInfo: () => void }) {
   return (
     <div className="group relative overflow-hidden rounded-[1.6rem] min-h-[36rem] s:min-h-[44rem] flex flex-col">
-      {/* Background */}
       {card.image ? (
         <Image src={card.image} alt={card.title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
       ) : (
@@ -80,9 +78,7 @@ function ServiceCard({ card }: { card: ServiceCard }) {
       )}
       <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
 
-      {/* Content */}
       <div className="relative flex flex-col justify-between h-full p-24 s:p-28">
-        {/* Top */}
         <div className="flex items-center justify-between">
           <span className="text-white text-11 uppercase tracking-[0.12rem] font-medium bg-white/20 backdrop-blur-sm rounded-[10rem] px-12 py-5">
             {card.tag}
@@ -90,32 +86,86 @@ function ServiceCard({ card }: { card: ServiceCard }) {
           <span className="text-white/60 text-11 uppercase tracking-[0.10rem] font-medium">100% Online</span>
         </div>
 
-        {/* Bottom */}
         <div>
-          <h3 className="text-white text-18 s:text-22 font-normal leading-[1.25] mb-16" style={{ fontFamily: '"disp", Georgia, serif' }}>
+          <h3 className="text-white text-18 s:text-22 font-normal leading-[1.25] mb-20" style={{ fontFamily: '"disp", Georgia, serif' }}>
             {card.title}
           </h3>
-          <p className="text-white/65 text-13 leading-[1.6] mb-20" style={{ fontFamily: 'system-ui, sans-serif' }}>
-            {card.body}
-          </p>
-          <ul className="space-y-6 mb-24">
-            {card.bullets.map((b, i) => (
-              <li key={i} className="flex items-center gap-8 text-white/55 text-12" style={{ fontFamily: 'system-ui, sans-serif' }}>
-                <span className="w-4 h-4 rounded-full bg-white/30 flex-shrink-0" />
-                {b}
-              </li>
-            ))}
-          </ul>
-          <a
-            href="mailto:contacto@orbbi.lat"
+          <button
+            onClick={onInfo}
             className="inline-flex items-center gap-8 text-white text-12 uppercase tracking-[0.12rem] font-medium border border-white/40 rounded-[10rem] px-16 py-8 hover:bg-white hover:text-green transition-colors"
           >
-            Consultar
-            <svg viewBox="0 0 16 16" fill="none" className="w-10 h-10">
-              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </a>
+            + Info
+          </button>
         </div>
+      </div>
+    </div>
+  )
+}
+
+function Modal({ card, onClose }: { card: ServiceCard; onClose: () => void }) {
+  return (
+    <div
+      className="fixed inset-0 z-[500] flex items-center justify-center p-20 s:p-40"
+      onClick={onClose}
+    >
+      {/* Backdrop blur */}
+      <div className="absolute inset-0 bg-black/40 backdrop-blur-md" />
+
+      {/* Panel */}
+      <div
+        className="relative bg-white rounded-[2rem] max-w-[52rem] w-full p-40 s:p-56 shadow-2xl"
+        onClick={e => e.stopPropagation()}
+      >
+        {/* Close */}
+        <button
+          onClick={onClose}
+          className="absolute top-24 right-24 text-grey hover:text-green transition-colors text-24 leading-none"
+          aria-label="Cerrar"
+        >
+          ✕
+        </button>
+
+        {/* Tag */}
+        <span className="inline-block text-11 font-medium uppercase tracking-[0.12rem] text-green/70 bg-black/5 rounded-[10rem] px-12 py-5 mb-20">
+          {card.tag}
+        </span>
+
+        {/* Title */}
+        <h3
+          className="text-24 s:text-32 font-normal text-green leading-[1.2] mb-20"
+          style={{ fontFamily: '"disp", Georgia, serif' }}
+        >
+          {card.title}
+        </h3>
+
+        {/* Divider */}
+        <div className="w-full mb-24" style={{ height: '1px', backgroundColor: '#DEDAD3' }} />
+
+        {/* Body */}
+        <p className="text-grey text-15 leading-[1.7] mb-28" style={{ fontFamily: 'system-ui, sans-serif' }}>
+          {card.body}
+        </p>
+
+        {/* Bullets */}
+        <ul className="space-y-12 mb-36">
+          {card.bullets.map((b, i) => (
+            <li key={i} className="flex items-start gap-12 text-14 text-grey leading-[1.5]" style={{ fontFamily: 'system-ui, sans-serif' }}>
+              <span className="mt-[0.55em] w-4 h-4 rounded-full bg-green/30 flex-shrink-0" />
+              {b}
+            </li>
+          ))}
+        </ul>
+
+        {/* CTA */}
+        <a
+          href="mailto:contacto@orbbi.lat"
+          className="inline-flex items-center gap-10 text-12 font-medium uppercase tracking-[0.12rem] text-white bg-green px-28 py-14 rounded-[10rem] hover:opacity-90 transition-opacity"
+        >
+          Consultar por este servicio
+          <svg viewBox="0 0 16 16" fill="none" className="w-10 h-10">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </a>
       </div>
     </div>
   )
@@ -123,6 +173,7 @@ function ServiceCard({ card }: { card: ServiceCard }) {
 
 export default function ServicesSection() {
   const [activeTab, setActiveTab] = useState('personas')
+  const [openCard, setOpenCard] = useState<ServiceCard | null>(null)
   const activeData = tabs.find(t => t.id === activeTab)!
 
   return (
@@ -164,10 +215,13 @@ export default function ServicesSection() {
         {/* Cards */}
         <div className="grid-layout-newsroom">
           {activeData.cards.map((card, i) => (
-            <ServiceCard key={i} card={card} />
+            <ServiceCard key={i} card={card} onInfo={() => setOpenCard(card)} />
           ))}
         </div>
       </div>
+
+      {/* Modal */}
+      {openCard && <Modal card={openCard} onClose={() => setOpenCard(null)} />}
     </section>
   )
 }
