@@ -21,7 +21,7 @@ const tabs: { id: string; label: string; cards: ServiceCard[] }[] = [
         title: 'Aprende a usar la IA desde cero, sin tecnicismos',
         body: 'Para quien nunca ha usado inteligencia artificial y quiere empezar bien. Aprendes a tu ritmo, con casos reales de tu propia vida y trabajo.',
         bullets: ['ChatGPT, Copilot y otras herramientas clave', 'Sin conocimientos previos requeridos', 'Individual o grupal, 100% online'],
-        image: '/images/pay-equity.jpg',
+        image: '/images/svc-formacion.jpg',
       },
       {
         tag: 'Orientación Profesional',
@@ -35,7 +35,7 @@ const tabs: { id: string; label: string; cards: ServiceCard[] }[] = [
         title: 'Construimos una herramienta de IA diseñada para tu trabajo',
         body: 'Tú defines qué necesitas. Nosotros lo construimos. Tú lo usas desde el primer día — sin necesitar saber de tecnología.',
         bullets: ['Diseño y construcción completa', 'Entrega con capacitación incluida', 'Ajustes incluidos el primer mes'],
-        image: '/images/criminal.jpg',
+        image: '/images/svc-medida.jpg',
       },
     ],
   },
@@ -48,7 +48,7 @@ const tabs: { id: string; label: string; cards: ServiceCard[] }[] = [
         title: '2 horas para que tu equipo entienda qué es la IA y qué no es',
         body: 'El punto de partida ideal para organizaciones que quieren acercar a sus equipos a la inteligencia artificial sin presión ni tecnicismos.',
         bullets: ['Online o presencial', 'Hasta 100 participantes', 'Sin requisitos previos'],
-        image: '/images/interns.png',
+        image: '/images/svc-charla.jpg',
       },
       {
         tag: 'Taller Intensivo',
@@ -62,7 +62,7 @@ const tabs: { id: string; label: string; cards: ServiceCard[] }[] = [
         title: 'Programa por etapas o acompañamiento anual para tu organización',
         body: 'Para empresas que quieren un cambio real y sostenido. Incluye diagnóstico, formación, seguimiento e informe de resultados.',
         bullets: ['Diagnóstico inicial del equipo', 'Seguimiento de resultados medibles', 'Sesión de cierre y próximos pasos'],
-        image: '/images/data.png',
+        image: '/images/svc-corporativo.jpg',
       },
     ],
   },
@@ -72,11 +72,24 @@ function ServiceCard({ card, onInfo }: { card: ServiceCard; onInfo: () => void }
   return (
     <div className="group relative overflow-hidden rounded-[1.6rem] min-h-[36rem] s:min-h-[44rem] flex flex-col">
       {card.image ? (
-        <Image src={card.image} alt={card.title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
+        <Image
+          src={card.image}
+          alt={card.title}
+          fill
+          className="object-cover group-hover:scale-105 transition-transform duration-700"
+          style={{ filter: 'contrast(1.08) brightness(0.88) saturate(0.75)' }}
+        />
       ) : (
         <div className={`absolute inset-0 ${card.bg || 'bg-grey-taupe'}`} />
       )}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
+      {/* Filtro cinematográfico: tono verde oscuro + viñeta lateral */}
+      {card.image && (
+        <>
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(30,56,62,0.45) 0%, rgba(0,0,0,0.15) 50%, rgba(15,25,20,0.5) 100%)', mixBlendMode: 'multiply' }} />
+          <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.55) 100%)' }} />
+        </>
+      )}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
 
       <div className="relative flex flex-col justify-between h-full p-24 s:p-28">
         <div className="flex items-center justify-between">
