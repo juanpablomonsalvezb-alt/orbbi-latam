@@ -101,10 +101,10 @@ export default function Header() {
             {/* Left: menu boxes */}
             <div className="grid grid-cols-2 s:grid-cols-4 gap-16 s:gap-20">
               {[
-                { label: 'Servicios', img: '/images/gender.png', href: '#' },
-                { label: 'Metodología', img: '/images/pay-equity.jpg', href: '#' },
-                { label: 'Para Quién', img: '/images/restaurant.png', href: '#' },
-                { label: 'Sobre Nosotros', img: '/images/hero.jpg', href: '#' },
+                { label: 'Servicios', img: '/images/gender.png', href: '/#servicios' },
+                { label: 'Publicaciones', img: '/images/pay-equity.jpg', href: '/#publicaciones' },
+                { label: 'Para Quién', img: '/images/restaurant.png', href: '/#para-quien' },
+                { label: 'Contacto', img: '/images/hero.jpg', href: '/#contacto' },
               ].map(({ label, img, href }) => (
                 <a key={label} href={href} className="group block">
                   <div className="overflow-hidden rounded-24 mb-12 aspect-square">
@@ -123,22 +123,21 @@ export default function Header() {
 
             {/* Right sidebar */}
             <div className="flex flex-col gap-40 s:w-[24rem] s:pl-40 s:border-l s:border-white/20">
-              {/* Newsroom */}
+              {/* Recursos */}
               <div>
                 <p className="text-white/60 text-12 uppercase tracking-[0.12rem] mb-16">Recursos</p>
-                {['Blog', 'Casos de Éxito', 'Recursos gratuitos', 'Prensa'].map((item) => (
-                  <a key={item} href="#" className="block text-white text-14 py-8 border-b border-white/10 hover:opacity-70 transition-opacity">
-                    {item}
-                  </a>
-                ))}
+                <a href="/#publicaciones" className="block text-white text-14 py-8 border-b border-white/10 hover:opacity-70 transition-opacity">Blog</a>
               </div>
 
-              {/* O&G links */}
+              {/* Orbbi Latam */}
               <div>
                 <p className="text-white/60 text-12 uppercase tracking-[0.12rem] mb-16">Orbbi Latam</p>
-                {['Sobre Orbbi', 'El equipo', 'Trabaja con nosotros', 'Contacto'].map((item) => (
-                  <a key={item} href="#" className="block text-white text-14 py-8 border-b border-white/10 hover:opacity-70 transition-opacity">
-                    {item}
+                {[
+                  { label: 'Servicios', href: '/#servicios' },
+                  { label: 'Contacto', href: '/#contacto' },
+                ].map(({ label, href }) => (
+                  <a key={label} href={href} className="block text-white text-14 py-8 border-b border-white/10 hover:opacity-70 transition-opacity">
+                    {label}
                   </a>
                 ))}
               </div>

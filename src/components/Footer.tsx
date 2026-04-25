@@ -46,11 +46,24 @@ export default function Footer() {
     'Médicos y especialistas', 'Comerciales y vendedores',
   ]
 
-  const execLinks = ['Coaching 1 a 1', 'Talleres Grupales', 'Comunidad Orbbi', 'Herramientas a Medida']
-  const whistleblowerLinks = ['Desmitificar', 'Conectar con lo conocido', 'Resolver tu problema', 'Dominar las herramientas']
-  const newsroomLinks = ['Blog', 'Casos de Éxito', 'Recursos gratuitos']
-
-  const ogLinks = ['Sobre nosotros', 'El fundador', 'Trabaja con nosotros', 'Contacto']
+  const execLinks = [
+    { label: 'Formación Esencial', href: '/#servicios' },
+    { label: 'Orientación Profesional', href: '/#servicios' },
+    { label: 'Herramienta a Medida', href: '/#servicios' },
+    { label: 'Para Empresas', href: '/#servicios' },
+  ]
+  const whistleblowerLinks = [
+    { label: 'Desmitificar la IA', href: '/#servicios' },
+    { label: 'Aplicar en tu trabajo', href: '/#servicios' },
+    { label: 'Construir a medida', href: '/#servicios' },
+  ]
+  const newsroomLinks = [
+    { label: 'Blog', href: '/#publicaciones' },
+  ]
+  const ogLinks = [
+    { label: 'Sobre nosotros', href: '/#contacto' },
+    { label: 'Contacto', href: '/#contacto' },
+  ]
 
   return (
     <footer className="bg-[#0F0F0F]">
@@ -78,7 +91,7 @@ export default function Footer() {
               <ul className="flex flex-col gap-4 pb-20 s:pb-0 s:pt-16">
                 {allEmployeesLinks.map((link) => (
                   <li key={link}>
-                    <a href="#" className="text-12 text-white/60 hover:text-white transition-colors leading-[2.0]">
+                    <a href="/#contacto" className="text-12 text-white/60 hover:text-white transition-colors leading-[2.0]">
                       {link}
                     </a>
                   </li>
@@ -91,10 +104,10 @@ export default function Footer() {
           <div className="s:col-start-6 s:col-span-5 flex flex-col gap-0 s:gap-40">
             <Accordion title="Nuestros Servicios">
               <ul className="flex flex-col gap-4 pb-20 s:pb-0 s:pt-16">
-                {execLinks.map((link) => (
-                  <li key={link}>
-                    <a href="#" className="text-12 text-white/60 hover:text-white transition-colors leading-[2.0]">
-                      {link}
+                {execLinks.map(({ label, href }) => (
+                  <li key={label}>
+                    <a href={href} className="text-12 text-white/60 hover:text-white transition-colors leading-[2.0]">
+                      {label}
                     </a>
                   </li>
                 ))}
@@ -103,10 +116,10 @@ export default function Footer() {
 
             <Accordion title="Metodología">
               <ul className="flex flex-col gap-4 pb-20 s:pb-0 s:pt-16">
-                {whistleblowerLinks.map((link) => (
-                  <li key={link}>
-                    <a href="#" className="text-12 text-white/60 hover:text-white transition-colors leading-[2.0]">
-                      {link}
+                {whistleblowerLinks.map(({ label, href }) => (
+                  <li key={label}>
+                    <a href={href} className="text-12 text-white/60 hover:text-white transition-colors leading-[2.0]">
+                      {label}
                     </a>
                   </li>
                 ))}
@@ -115,10 +128,10 @@ export default function Footer() {
 
             <Accordion title="Recursos">
               <ul className="flex flex-col gap-4 pb-20 s:pb-0 s:pt-16">
-                {newsroomLinks.map((link) => (
-                  <li key={link}>
-                    <a href="#" className="text-12 text-white/60 hover:text-white transition-colors leading-[2.0]">
-                      {link}
+                {newsroomLinks.map(({ label, href }) => (
+                  <li key={label}>
+                    <a href={href} className="text-12 text-white/60 hover:text-white transition-colors leading-[2.0]">
+                      {label}
                     </a>
                   </li>
                 ))}
@@ -130,10 +143,10 @@ export default function Footer() {
           <div className="s:col-start-11 s:col-span-6 flex flex-col gap-0 s:gap-40">
             <Accordion title="Orbbi Latam">
               <ul className="flex flex-col gap-4 pb-20 s:pb-0 s:pt-16">
-                {ogLinks.map((link) => (
-                  <li key={link}>
-                    <a href="#" className="text-12 text-white/60 hover:text-white transition-colors leading-[2.0]">
-                      {link}
+                {ogLinks.map(({ label, href }) => (
+                  <li key={label}>
+                    <a href={href} className="text-12 text-white/60 hover:text-white transition-colors leading-[2.0]">
+                      {label}
                     </a>
                   </li>
                 ))}
