@@ -3,14 +3,9 @@ import { useEffect, useRef, useState, useCallback } from 'react'
 import { gsap } from 'gsap'
 
 const TESTIMONIALS = [
-  { quote: 'Llegué a Orbbi creyendo que la IA era para gente joven. En la primera sesión ya tenía resultados concretos en mi trabajo.', source: 'Contador Sénior, Sector Financiero', date: 'Santiago, Chile — 2025' },
-  { quote: 'Lo que más valoré fue que me explicaron desde mi realidad, no desde la tecnología. Fue como aprender con un colega, no con un manual.', source: 'Directora Académica, Universidad privada', date: 'Bogotá, Colombia — 2025' },
-  { quote: 'Estaba seguro de que esto no era para mí. Después de dos sesiones ya estaba usando IA para redactar contratos. No lo puedo creer todavía.', source: 'Abogado Independiente, 54 años', date: 'Buenos Aires, Argentina — 2025' },
-  { quote: 'En mi empresa ya hablan de IA en cada reunión. Gracias a Orbbi, ahora soy yo quien lidera esa conversación.', source: 'Gerente Comercial, empresa multinacional', date: 'Lima, Perú — 2025' },
-  { quote: 'Pensé que iba a necesitar meses. En tres semanas ya tenía un flujo de trabajo nuevo que me ahorra dos horas diarias.', source: 'Jefa de Área, Administración Pública', date: 'Ciudad de México — 2025' },
-  { quote: 'Orbbi no te enseña tecnología. Te enseña a trabajar mejor. Es una diferencia enorme.', source: 'Médico Especialista, Clínica privada', date: 'Montevideo, Uruguay — 2025' },
-  { quote: 'El mejor dinero que he invertido en mi carrera en los últimos 10 años.', source: 'Gerente General, empresa familiar', date: 'Quito, Ecuador — 2025' },
-  { quote: 'Tenía 52 años y sentía que el mundo digital me dejaba atrás. Ahora soy yo quien le explica IA a mis hijos.', source: 'Consultora de Recursos Humanos', date: 'Santiago, Chile — 2025' },
+  { quote: 'Llegué sin saber nada de IA. Salí con herramientas concretas para mi trabajo. No esperaba resultados tan rápidos.', source: 'Profesional del sector financiero', date: 'Chile' },
+  { quote: 'Lo que más valoré fue que me explicaron desde mi realidad, no desde la tecnología. Es una diferencia enorme.', source: 'Directora de área', date: 'Colombia' },
+  { quote: 'Pensaba que esto no era para mí. Me equivoqué completamente.', source: 'Profesional independiente', date: 'Argentina' },
 ]
 
 export default function TestimonialsCarousel() {
