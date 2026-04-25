@@ -3,7 +3,7 @@ import HeroSection from '@/components/sections/HeroSection'
 import HighlightSection from '@/components/sections/HighlightSection'
 import StatsSection from '@/components/sections/StatsSection'
 import NewsroomSection from '@/components/sections/NewsroomSection'
-import ServicesSlider from '@/components/sections/ServicesSlider'
+import ServicesSection from '@/components/sections/ServicesSection'
 import TestimonialsCarousel from '@/components/sections/TestimonialsCarousel'
 import ClientStoriesCarousel from '@/components/sections/ClientStoriesCarousel'
 import Footer from '@/components/Footer'
@@ -19,7 +19,7 @@ export default function Home() {
           <HighlightSection />
           <StatsSection />
           <NewsroomSection />
-          <ServicesSlider />
+          <ServicesSection />
           <TestimonialsCarousel />
           <ClientStoriesCarousel />
           <Footer />
