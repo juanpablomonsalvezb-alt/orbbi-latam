@@ -275,53 +275,75 @@ export default function StatsSection() {
     const textEls = section.querySelectorAll<HTMLElement>('.stat-text')
     const articles = section.querySelectorAll<HTMLElement>('[data-stat]')
     const triggers: ScrollTrigger[] = []
-
-    /* Initial state: hide all stroked SVG elements via dashoffset */
     const svgSelector = '.js-svg-color path, .js-svg-color circle, .js-svg-color line, .js-svg-color polyline'
-    section.querySelectorAll<SVGGeometryElement>(svgSelector).forEach(el => {
-      try {
-        const len = el.getTotalLength()
-        if (len > 0) gsap.set(el, { strokeDasharray: len, strokeDashoffset: len, opacity: 0 })
-        else gsap.set(el, { opacity: 0 })
-      } catch { gsap.set(el, { opacity: 0 }) }
-    })
+
+    /* Per-article activate functions stored so we can call them on refresh */
+    const activators: (() => void)[] = []
 
     articles.forEach((article, i) => {
       const stat = STATS[i]
       if (!stat) return
       const bg = BG[stat.bg]
       const tc = TC[stat.tc]
-      const paths = article.querySelectorAll<SVGGeometryElement>('.js-svg-color path, .js-svg-color circle, .js-svg-color line, .js-svg-color polyline')
+      const els = article.querySelectorAll<SVGGeometryElement>(svgSelector)
+
+      /* Hide elements initially — only paths without fill get dashoffset treatment */
+      els.forEach(el => {
+        try {
+          const len = el.getTotalLength()
+          if (len > 0) {
+            gsap.set(el, { strokeDasharray: `${len} ${len}`, strokeDashoffset: len, opacity: 0 })
+          } else {
+            gsap.set(el, { opacity: 0 })
+          }
+        } catch {
+          gsap.set(el, { opacity: 0 })
+        }
+      })
 
       const activate = () => {
         gsap.to(section, { backgroundColor: bg, duration: 0.6, ease: 'power2.out' })
         gsap.to(textEls, { color: tc, duration: 0.6, ease: 'power2.out' })
         if (header) gsap.to(header, { backgroundColor: bg, duration: 0.6, ease: 'power2.out' })
-        /* Draw stroke paths */
-        paths.forEach((p, pi) => {
+        els.forEach((el, pi) => {
           try {
-            const len = p.getTotalLength()
+            const len = el.getTotalLength()
             if (len > 0) {
-              gsap.to(p, { strokeDashoffset: 0, opacity: 1, duration: 1.8, ease: 'expo.out', delay: pi * 0.08 })
+              gsap.to(el, { strokeDashoffset: 0, opacity: 1, duration: 1.6, ease: 'expo.out', delay: pi * 0.06 })
             } else {
-              gsap.to(p, { opacity: 1, duration: 0.6 })
+              gsap.to(el, { opacity: 1, duration: 0.5, delay: pi * 0.04 })
             }
           } catch {
-            gsap.to(p, { opacity: 1, duration: 0.6 })
+            gsap.to(el, { opacity: 1, duration: 0.5 })
           }
         })
       }
+      activators.push(activate)
 
       triggers.push(ScrollTrigger.create({
         trigger: article,
-        start: 'top center',
-        end: 'bottom center',
+        start: 'top 75%',
+        end: 'bottom 25%',
         onEnter: activate,
         onEnterBack: activate,
       }))
     })
 
-    return () => triggers.forEach(t => t.kill())
+    /* After setup, check which articles are already in view and activate them */
+    const initTimer = setTimeout(() => {
+      ScrollTrigger.refresh()
+      articles.forEach((article, i) => {
+        const rect = article.getBoundingClientRect()
+        if (rect.top < window.innerHeight * 0.75) {
+          activators[i]?.()
+        }
+      })
+    }, 100)
+
+    return () => {
+      clearTimeout(initTimer)
+      triggers.forEach(t => t.kill())
+    }
   }, [])
 
   return (
