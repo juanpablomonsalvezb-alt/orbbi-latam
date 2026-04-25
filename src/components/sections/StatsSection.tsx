@@ -220,17 +220,19 @@ function Svg4() {
       {/* Círculo interior decorativo */}
       <circle cx="220" cy="130" r="95" stroke="currentColor" strokeWidth="0.5" strokeOpacity="0.2"/>
 
-      {/* Marcas de las horas — 12 tick marks */}
-      {Array.from({length:12}).map((_,i) => {
-        const angle = (i/12)*Math.PI*2 - Math.PI/2
-        const r1=88, r2=98
-        return (
-          <path key={i}
-            d={`M${220+r1*Math.cos(angle)} ${130+r1*Math.sin(angle)} L${220+r2*Math.cos(angle)} ${130+r2*Math.sin(angle)}`}
-            stroke="currentColor" strokeWidth={i===0||i===3||i===6||i===9 ? 2 : 1} strokeLinecap="round" strokeOpacity="0.6"
-          />
-        )
-      })}
+      {/* Marcas de las horas — 12 ticks, coordenadas pre-computadas para evitar hydration mismatch */}
+      <path d="M220 42 L220 52" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeOpacity="0.6"/>
+      <path d="M263.0 52.5 L258.7 61.4" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeOpacity="0.6"/>
+      <path d="M296.5 86.0 L289.0 91.8" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeOpacity="0.6"/>
+      <path d="M308 130 L318 130" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeOpacity="0.6"/>
+      <path d="M296.5 174.0 L289.0 168.2" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeOpacity="0.6"/>
+      <path d="M263.0 207.5 L258.7 198.6" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeOpacity="0.6"/>
+      <path d="M220 218 L220 208" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeOpacity="0.6"/>
+      <path d="M177.0 207.5 L181.3 198.6" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeOpacity="0.6"/>
+      <path d="M143.5 174.0 L151.0 168.2" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeOpacity="0.6"/>
+      <path d="M132 130 L122 130" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeOpacity="0.6"/>
+      <path d="M143.5 86.0 L151.0 91.8" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeOpacity="0.6"/>
+      <path d="M177.0 52.5 L181.3 61.4" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeOpacity="0.6"/>
 
       {/* Manecilla de horas — apuntando a las 11 */}
       <path d="M220 130 L201 72" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
