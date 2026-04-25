@@ -1,26 +1,404 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Spacing base: 1 unit = 0.1rem */
+  --spacing: 0.1rem;
+
+  /* Colors */
+  --color-green: #1E383E;
+  --color-yellow: #FCDC9B;
+  --color-grey: #7A7871;
+  --color-grey-taupe: #DEDAD3;
+  --color-white-smoke: #F7F5F2;
+  --color-black: #292929;
+  --color-green-resolved: #6DA479;
+  --color-lavender: #C292C1;
+  --color-light-grey: #E8E4DC;
+  --color-white: #ffffff;
+
+  /* Font families */
+  --font-family-sans: "sans", system-ui, sans-serif;
+  --font-family-disp: "disp", Georgia, serif;
+
+  /* Font sizes */
+  --text-10: 1rem;
+  --text-12: 1.2rem;
+  --text-14: 1.4rem;
+  --text-16: 1.6rem;
+  --text-20: 2rem;
+  --text-24: 2.4rem;
+  --text-26: 2.6rem;
+  --text-32: 3.2rem;
+  --text-40: 4rem;
+  --text-48: 4.8rem;
+  --text-56: 5.6rem;
+  --text-76: 7.6rem;
+
+  /* Border radius */
+  --radius-04: 0.4rem;
+  --radius-10: 1rem;
+  --radius-24: 2.4rem;
+
+  /* Breakpoints */
+  --breakpoint-s: 650px;
+  --breakpoint-m: 900px;
+  --breakpoint-l: 1024px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* ─── FONTS ───────────────────────────────────────────────────────────── */
+@layer base {
+  @font-face {
+    font-family: "sans";
+    src: url('/fonts/GerstnerProgrammFSL-Light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "sans";
+    src: url('/fonts/GerstnerProgrammFSL-LightItalic.woff2') format('woff2');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "sans";
+    src: url('/fonts/GerstnerProgrammFSL-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "disp";
+    src: url('/fonts/BradfordLL-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "disp";
+    src: url('/fonts/BradfordLL-Italic.woff2') format('woff2');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    font-size: clamp(1px, calc(10 * 100vw / 390), 12px);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  @media (min-width: 650px) {
+    html {
+      font-size: clamp(1px, calc(10 * 100vw / 1440), 12px);
+    }
+  }
+
+  body {
+    font-family: "sans", system-ui, sans-serif;
+    font-size: 1.4rem;
+    font-weight: 300;
+    line-height: 2.4rem;
+    color: #292929;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  p {
+    margin: 0;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ─── UTILITIES ──────────────────────────────────────────────────────── */
+@layer utilities {
+  .site-max {
+    --padding: 2rem;
+    padding-left: var(--padding);
+    padding-right: var(--padding);
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 144rem;
+  }
+
+  @media (min-width: 1024px) {
+    .site-max {
+      --padding: 3rem;
+    }
+  }
+
+  .site-grid {
+    display: grid;
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    column-gap: 0.8rem;
+  }
+
+  @media (min-width: 650px) {
+    .site-grid {
+      grid-template-columns: repeat(16, minmax(0, 1fr));
+      column-gap: 2.5rem;
+    }
+  }
+
+  .site-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #E8E4DC;
+    background: #ffffff;
+    padding: 0 2rem;
+    height: 6rem;
+  }
+
+  @media (min-width: 1024px) {
+    .site-nav {
+      padding: 0 3rem;
+    }
+  }
+
+  .font-disp {
+    font-family: "disp", Georgia, serif;
+  }
+
+  .font-sans {
+    font-family: "sans", system-ui, sans-serif;
+  }
+
+  .ulink {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: opacity 0.3s;
+  }
+
+  .ulink:hover {
+    opacity: 0.7;
+  }
+
+  /* Scrollbar hide */
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Column cards */
+  .column {
+    aspect-ratio: 1;
+  }
+
+  .column-inner {
+    min-height: 20rem;
+  }
+
+  @media (min-width: 650px) {
+    .column {
+      aspect-ratio: auto;
+    }
+  }
+
+  /* Newsroom grid */
+  .grid-layout-newsroom {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 2rem;
+  }
+
+  @media (min-width: 650px) {
+    .grid-layout-newsroom {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem;
+    }
+  }
+
+  /* Normal grid */
+  .grid-layout-normal {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+  }
+
+  @media (min-width: 650px) {
+    .grid-layout-normal {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem;
+    }
+  }
+
+  .col-span-full {
+    grid-column: 1 / -1;
+  }
+
+  /* Btn link */
+  .btn-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.12rem;
+    border: 1px solid currentColor;
+    border-radius: 10rem;
+    padding: 1rem 1.6rem;
+    transition: background-color 0.3s, color 0.3s;
+    cursor: pointer;
+  }
+
+  /* Transition helpers */
+  .transition-bg {
+    transition: background-color 0.6s ease;
+  }
+
+  /* Menu overlay */
+  .site-menu {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: #1E383E;
+    transform: translateY(-100%);
+    transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+    overflow-y: auto;
+  }
+
+  .site-menu.is-open {
+    transform: translateY(0);
+  }
+
+  /* Book a call panel */
+  .book-a-call {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: 48rem;
+    z-index: 300;
+    background: #ffffff;
+    transform: translateX(100%);
+    transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+    overflow-y: auto;
+  }
+
+  .book-a-call.is-open {
+    transform: translateX(0);
+  }
+
+  .js-booking-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 290;
+    background: rgba(41, 41, 41, 0.5);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s;
+  }
+
+  .js-booking-overlay.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Hamburger lines */
+  .burger-line {
+    display: block;
+    width: 2.4rem;
+    height: 1.5px;
+    background: currentColor;
+    transition: transform 0.3s, opacity 0.3s;
+  }
+
+  .is-menu-open .burger-line-1 {
+    transform: translateY(4px) rotate(45deg);
+  }
+
+  .is-menu-open .burger-line-2 {
+    transform: translateY(-4px) rotate(-45deg);
+  }
+
+  /* Aspect ratio helper */
+  .aspect-image {
+    position: relative;
+    padding-top: 67%;
+  }
+
+  /* Stats section: explicit grid-column shorthand (avoids Tailwind col-start + col-span cascade conflict) */
+  .stats-left {
+    grid-column: 1 / -1;
+  }
+  .stats-right {
+    grid-column: 1 / -1;
+  }
+  @media (min-width: 650px) {
+    .stats-left {
+      grid-column: 2 / span 6;
+    }
+    .stats-right {
+      grid-column: 9 / span 8;
+    }
+  }
+
+  /* Highlight section column */
+  .highlight-col {
+    grid-column: 1 / -1;
+  }
+  @media (min-width: 650px) {
+    .highlight-col {
+      grid-column: 2 / span 14;
+    }
+  }
+}
+
+/* Additional grid placement fixes for Tailwind v4 cascade conflict */
+@layer utilities {
+  /* Footer columns */
+  .footer-mid {
+    grid-column: 1 / -1;
+  }
+  .footer-right {
+    grid-column: 1 / -1;
+  }
+  @media (min-width: 650px) {
+    .footer-mid {
+      grid-column: 6 / span 5;
+    }
+    .footer-right {
+      grid-column: 11 / span 6;
+    }
+  }
+
+  /* Testimonials arrows */
+  .t-prev {
+    grid-column: 4 / span 1;
+    order: 2;
+  }
+  .t-next {
+    grid-column: 5 / span 1;
+    order: 3;
+    display: flex;
+    justify-content: flex-end;
+  }
+  @media (min-width: 650px) {
+    .t-prev {
+      grid-column: 1 / span 1;
+      order: 0;
+    }
+    .t-next {
+      grid-column: 16 / span 1;
+      order: 0;
+    }
+  }
 }
