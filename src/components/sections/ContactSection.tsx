@@ -68,10 +68,36 @@ export default function ContactSection() {
     setForm(p => ({ ...p, [k]: p[k].includes(v) ? p[k].filter((x:string)=>x!==v) : [...p[k], v] }))
   const radio = (k: keyof F, v: string) => setForm(p => ({ ...p, [k]: v }))
 
+  const FORMSPREE_ID = 'REEMPLAZA_CON_TU_ID' // ej: xyzabcde
+
   const submit = async (e: React.FormEvent) => {
     e.preventDefault(); setLoading(true)
-    await new Promise(r => setTimeout(r, 800))
-    setLoading(false); setSent(true)
+    try {
+      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          nombre: form.nombre,
+          email: form.email,
+          telefono: form.telefono,
+          pais: form.pais,
+          cargo: form.cargo,
+          sector: form.sector,
+          experiencia: form.experiencia,
+          nivel_ia: form.nivelIA,
+          para: form.para,
+          servicios: form.servicios.join(', '),
+          desafio: form.desafio,
+          como_nos_encontro: form.comoNosEncontro,
+        }),
+      })
+      if (res.ok) { setSent(true) }
+      else { alert('Hubo un error al enviar. Escríbenos directo a contacto@orbbi.lat') }
+    } catch {
+      alert('Hubo un error al enviar. Escríbenos directo a contacto@orbbi.lat')
+    } finally {
+      setLoading(false)
+    }
   }
 
   /* ── success state ── */
