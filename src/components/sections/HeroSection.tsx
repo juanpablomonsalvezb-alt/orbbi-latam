@@ -108,7 +108,7 @@ export default function HeroSection() {
               >
                 <Image
                   src="/images/hero.jpg"
-                  alt="Outten & Golden"
+                  alt="Orbbi Latam — Profesionales de 45 a 60 años aprendiendo inteligencia artificial"
                   fill
                   priority
                   className="object-cover object-top"
