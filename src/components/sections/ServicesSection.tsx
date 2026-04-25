@@ -87,7 +87,7 @@ function ServiceCard({ card, onInfo }: { card: ServiceCard; onInfo: () => void }
         </div>
 
         <div>
-          <h3 className="text-white text-18 s:text-22 font-normal leading-[1.25] mb-20" style={{ fontFamily: '"disp", Georgia, serif' }}>
+          <h3 className="text-white text-26 s:text-32 font-normal leading-[1.15] mb-20" style={{ fontFamily: '"disp", Georgia, serif' }}>
             {card.title}
           </h3>
           <button
