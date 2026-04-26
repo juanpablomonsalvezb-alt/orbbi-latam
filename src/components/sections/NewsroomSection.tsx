@@ -17,7 +17,7 @@ const CARDS: NewsCard[] = [
     category: 'Inteligencia Artificial',
     date: 'Abr 25, 2026',
     title: 'Esta semana salieron dos informes que confirman lo que llevamos meses diciendo sobre la IA y tu generación.',
-    image: '/images/data.png',
+    image: '/images/blog-ai-index-2026.jpg',
     href: 'https://www.linkedin.com/posts/juan-pablo-monsalvez-b7b843321_esta-semana-salieron-dos-informes-que-confirman-activity-7453988016466956288-lXCo',
   },
   {
