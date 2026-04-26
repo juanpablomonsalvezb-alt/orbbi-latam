@@ -28,7 +28,7 @@ const tabs: { id: string; label: string; cards: ServiceCard[] }[] = [
         title: 'Las mejores herramientas de IA para tu cargo específico',
         body: 'Analizamos tu trabajo real y te mostramos exactamente qué herramientas usar y cómo. Sin perder tiempo explorando cientos de opciones.',
         bullets: ['Diagnóstico de tu función y tareas diarias', '3 a 5 herramientas seleccionadas para ti', 'Práctica con tus propios documentos'],
-        bg: 'bg-green',
+        image: '/images/svc-herramienta.jpg',
       },
       {
         tag: 'Herramienta a Medida',
