@@ -147,7 +147,7 @@ export default function ContactSection() {
         </div>
 
         {/* ── Panel derecho — negro ── */}
-        <div className="bg-white px-40 s:px-64 py-80 s:py-120">
+        <div className="bg-[#F5F0E8] px-40 s:px-64 py-80 s:py-120">
           <form onSubmit={submit} className="space-y-52">
 
             {/* 01 */}
