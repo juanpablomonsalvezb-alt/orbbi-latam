@@ -136,10 +136,10 @@ export default function MetodoSection() {
 
         {/* Quote */}
         <div className="site-grid mt-80">
-          <div className="col-span-full s:col-start-2 s:col-span-12">
+          <div className="col-span-full s:col-start-2 s:col-span-14 text-center">
             <p
-              className="text-20 s:text-28 font-normal text-green/60 leading-[1.4] italic"
-              style={{ fontFamily: '"disp", Georgia, serif' }}
+              className="text-22 s:text-32 font-normal text-green/60 leading-[1.4] italic mx-auto"
+              style={{ fontFamily: '"disp", Georgia, serif', maxWidth: '72rem' }}
             >
               "Tus 20 años de experiencia más las herramientas de hoy. Esa combinación no la puede imitar nadie."
             </p>

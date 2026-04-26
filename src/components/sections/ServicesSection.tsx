@@ -196,21 +196,21 @@ export default function ServicesSection() {
   const activeData = tabs.find(t => t.id === activeTab)!
 
   return (
-    <section className="bg-white">
+    <section className="bg-[#0A0A0A]">
       <div className="site-max py-80 s:py-120">
         {/* Header */}
         <div className="site-grid mb-40 s:mb-60">
           <div className="col-span-full s:col-span-8 mb-24 s:mb-0">
-            <p className="text-grey text-12 uppercase tracking-[0.12rem] mb-12">Servicios · 100% Online</p>
+            <p className="text-white/40 text-12 uppercase tracking-[0.12rem] mb-12">Servicios · 100% Online</p>
             <h2
-              className="text-32 s:text-48 font-normal text-green leading-[1.1]"
+              className="text-32 s:text-48 font-normal text-white leading-[1.1]"
               style={{ fontFamily: '"disp", Georgia, serif' }}
             >
               Elige el camino que se adapta a tu momento.
             </h2>
           </div>
           <div className="col-span-full s:col-start-9 s:col-span-8 flex flex-col s:flex-row items-start s:items-end justify-between gap-16">
-            <div className="flex items-center gap-0" style={{ borderBottom: '1px solid #DEDAD3' }}>
+            <div className="flex items-center gap-0" style={{ borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
               {tabs.map((tab, i) => (
                 <button
                   key={tab.id}
@@ -223,7 +223,7 @@ export default function ServicesSection() {
                     fontWeight: 500,
                     letterSpacing: '0.14rem',
                     textTransform: 'uppercase',
-                    color: activeTab === tab.id ? '#1E383E' : '#7A7871',
+                    color: activeTab === tab.id ? 'white' : 'rgba(255,255,255,0.35)',
                     background: 'none',
                     border: 'none',
                     cursor: 'pointer',
@@ -232,12 +232,12 @@ export default function ServicesSection() {
                 >
                   {tab.label}
                   {activeTab === tab.id && (
-                    <span className="absolute bottom-0 left-0 w-full" style={{ height: '1px', backgroundColor: '#1E383E' }} />
+                    <span className="absolute bottom-0 left-0 w-full" style={{ height: '1px', backgroundColor: 'white' }} />
                   )}
                 </button>
               ))}
             </div>
-            <a href="mailto:contacto@orbbilatam.com" className="text-12 uppercase tracking-[0.12rem] font-medium text-green ulink flex-shrink-0">
+            <a href="mailto:contacto@orbbilatam.com" className="text-12 uppercase tracking-[0.12rem] font-medium text-white/50 hover:text-white flex-shrink-0">
               Contáctanos
             </a>
           </div>
