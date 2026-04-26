@@ -56,7 +56,7 @@ function NewsCard({ card }: { card: NewsCard }) {
       className="group block relative overflow-hidden rounded-[1.6rem] min-h-[38rem] s:min-h-[44rem] flex-shrink-0 w-[28rem] s:w-[36rem] cursor-pointer"
     >
       {card.image ? (
-        <Image src={card.image} alt={card.title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
+        <Image src={card.image} alt={card.title} fill className="object-cover object-center group-hover:scale-105 transition-transform duration-700" sizes="(max-width: 650px) 28rem, 36rem" />
       ) : (
         <div className={`absolute inset-0 ${card.bg || 'bg-grey-taupe'}`} />
       )}
