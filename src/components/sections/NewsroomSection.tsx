@@ -24,7 +24,7 @@ const CARDS: NewsCard[] = [
     category: 'IA para Profesionales',
     date: 'Abr 25, 2026',
     title: 'La IA iguala a todos. Pero favorece a los que ya saben.',
-    bg: 'bg-green',
+    image: '/images/blog-anthropic-index.jpg',
     href: 'https://www.linkedin.com/pulse/la-ia-iguala-todos-favorece-los-que-ya-saben-juan-pablo-monsalvez-pyggf',
   },
   {
