@@ -103,12 +103,12 @@ export default function NewsroomSection() {
         {/* Header */}
         <div className="site-grid mb-40 s:mb-60">
           <div className="col-span-full s:col-span-10 mb-24 s:mb-0">
-            <p className="text-grey text-12 uppercase tracking-[0.12rem] mb-12">Publicaciones</p>
+            <p className="text-grey text-12 uppercase tracking-[0.12rem] mb-12">Blog</p>
             <h2
               className="text-32 s:text-48 font-normal text-green leading-[1.1]"
               style={{ fontFamily: '"disp", Georgia, serif' }}
             >
-              Ideas y casos reales desde adentro de la generación.
+              Tu generación tiene más para ganar con la IA. El problema es que nadie se lo está explicando.
             </h2>
           </div>
           <div className="col-span-full s:col-start-12 s:col-span-5 flex items-end justify-between s:justify-end gap-16">
