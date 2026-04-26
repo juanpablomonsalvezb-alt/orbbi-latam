@@ -21,7 +21,7 @@ const tabs: { id: string; label: string; cards: ServiceCard[] }[] = [
         title: 'Aprende a usar la IA desde cero, sin tecnicismos',
         body: 'Para quien nunca ha usado inteligencia artificial y quiere empezar bien. Aprendes a tu ritmo, con casos reales de tu propia vida y trabajo.',
         bullets: ['ChatGPT, Copilot y otras herramientas clave', 'Sin conocimientos previos requeridos', 'Individual o grupal, 100% online'],
-        image: '/images/svc-formacion.jpg',
+        image: '/images/svc-formacion.jpg', // hombre ~50 home
       },
       {
         tag: 'Orientación Profesional',
@@ -35,7 +35,7 @@ const tabs: { id: string; label: string; cards: ServiceCard[] }[] = [
         title: 'Construimos una herramienta de IA diseñada para tu trabajo',
         body: 'Tú defines qué necesitas. Nosotros lo construimos. Tú lo usas desde el primer día — sin necesitar saber de tecnología.',
         bullets: ['Diseño y construcción completa', 'Entrega con capacitación incluida', 'Ajustes incluidos el primer mes'],
-        image: '/images/svc-medida.jpg',
+        image: '/images/svc-medida.jpg', // mujer ejecutiva blazer azul
       },
     ],
   },
