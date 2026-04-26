@@ -15,8 +15,8 @@ const init: F = { nombre:'', email:'', telefono:'', pais:'', cargo:'', sector:''
 /* ── primitives ── */
 function Line({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div className="group border-b border-white/10 pb-0">
-      <label className="block text-[1rem] uppercase tracking-[0.18rem] text-white/35 font-medium pt-16 pb-4">{label}</label>
+    <div className="group border-b border-[#E8E4DD] pb-0">
+      <label className="block text-[1rem] uppercase tracking-[0.18rem] text-grey/50 font-medium pt-16 pb-4">{label}</label>
       {children}
     </div>
   )
@@ -24,14 +24,14 @@ function Line({ label, children }: { label: string; children: React.ReactNode })
 
 function TInput({ name, placeholder, type='text', value, onChange }: { name:string; placeholder:string; type?:string; value:string; onChange:(e:React.ChangeEvent<HTMLInputElement>)=>void }) {
   return <input type={type} name={name} placeholder={placeholder} value={value} onChange={onChange}
-    className="block w-full pb-14 text-18 text-white placeholder-white/20 bg-transparent outline-none font-normal"
+    className="block w-full pb-14 text-18 text-green placeholder-grey/30 bg-transparent outline-none font-normal"
     style={{ fontFamily: '"disp", Georgia, serif' }} />
 }
 
 function TSelect({ name, value, onChange, opts, placeholder }: { name:string; value:string; onChange:(e:React.ChangeEvent<HTMLSelectElement>)=>void; opts:string[]; placeholder:string }) {
   return <select name={name} value={value} onChange={onChange}
     className="block w-full pb-14 text-18 bg-transparent outline-none appearance-none cursor-pointer font-normal"
-    style={{ fontFamily: '"disp", Georgia, serif', color: value ? "white" : "rgba(255,255,255,0.2)" }}>
+    style={{ fontFamily: '"disp", Georgia, serif', color: value ? "#1E383E" : "rgba(122,120,113,0.4)" }}>
     <option value="" disabled style={{color:'#7A7871'}}>{placeholder}</option>
     {opts.map(o => <option key={o} value={o} style={{color:'#1E383E'}}>{o}</option>)}
   </select>
@@ -40,7 +40,7 @@ function TSelect({ name, value, onChange, opts, placeholder }: { name:string; va
 function Pill({ label, active, onClick }: { label:string; active:boolean; onClick:()=>void }) {
   return (
     <button type="button" onClick={onClick}
-      className={`text-13 px-18 py-10 rounded-[10rem] border transition-all duration-200 ${active ? 'bg-white text-green border-white' : 'bg-transparent text-white/50 border-white/15 hover:border-white/50 hover:text-white'}`}
+      className={`text-13 px-18 py-10 rounded-[10rem] border transition-all duration-200 ${active ? 'bg-green text-white border-green' : 'bg-transparent text-grey border-[#E8E4DD] hover:border-green hover:text-green'}`}
       style={{ fontFamily: 'system-ui, sans-serif' }}>
       {label}
     </button>
@@ -50,9 +50,9 @@ function Pill({ label, active, onClick }: { label:string; active:boolean; onClic
 function SectionHead({ n, label }: { n: string; label: string }) {
   return (
     <div className="flex items-baseline gap-14 mb-28">
-      <span className="text-[1rem] text-white/20 uppercase tracking-[0.2rem] font-medium">{n}</span>
-      <span className="text-[1.1rem] text-white/60 uppercase tracking-[0.16rem] font-medium">{label}</span>
-      <div className="flex-1 h-px bg-white/10" />
+      <span className="text-[1rem] text-grey/30 uppercase tracking-[0.2rem] font-medium">{n}</span>
+      <span className="text-[1.1rem] text-green uppercase tracking-[0.16rem] font-medium">{label}</span>
+      <div className="flex-1 h-px bg-[#E8E4DD]" />
     </div>
   )
 }
@@ -147,7 +147,7 @@ export default function ContactSection() {
         </div>
 
         {/* ── Panel derecho — negro ── */}
-        <div className="bg-[#111111] px-40 s:px-64 py-80 s:py-120">
+        <div className="bg-white px-40 s:px-64 py-80 s:py-120">
           <form onSubmit={submit} className="space-y-52">
 
             {/* 01 */}
@@ -230,7 +230,7 @@ export default function ContactSection() {
 
             {/* Submit */}
             <div className="flex items-center justify-between pt-24" style={{ borderTop: '1px solid #E8E4DD' }}>
-              <p className="text-white/25 text-12" style={{ fontFamily: 'system-ui, sans-serif' }}>
+              <p className="text-grey/40 text-12" style={{ fontFamily: 'system-ui, sans-serif' }}>
                 * Campos requeridos
               </p>
               <button
