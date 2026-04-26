@@ -22,9 +22,10 @@ const CARDS: NewsCard[] = [
   },
   {
     category: 'IA para Profesionales',
-    date: 'Feb 28, 2026',
-    title: 'ChatGPT para abogados: guía práctica para profesionales sin conocimientos técnicos',
+    date: 'Abr 25, 2026',
+    title: 'La IA iguala a todos. Pero favorece a los que ya saben.',
     bg: 'bg-green',
+    href: 'https://www.linkedin.com/pulse/la-ia-iguala-todos-favorece-los-que-ya-saben-juan-pablo-monsalvez-pyggf',
   },
   {
     category: 'Brecha Digital',
