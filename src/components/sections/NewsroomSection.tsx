@@ -53,22 +53,18 @@ function NewsCard({ card }: { card: NewsCard }) {
       href={card.href || 'https://www.linkedin.com/in/juan-pablo-monsalvez-b7b843321/'}
       target="_blank"
       rel="noreferrer"
-      className="group block relative overflow-hidden rounded-[1.6rem] min-h-[38rem] s:min-h-[44rem] flex-shrink-0 w-[28rem] s:w-[36rem] cursor-pointer"
+      className="group block relative overflow-hidden rounded-[1.6rem] flex-shrink-0 cursor-pointer"
+      style={{ width: '36rem', aspectRatio: '3/4' }}
     >
       {card.image ? (
-        <Image src={card.image} alt={card.title} fill className="object-cover object-center group-hover:scale-105 transition-transform duration-700" sizes="(max-width: 650px) 28rem, 36rem" />
+        <Image src={card.image} alt={card.title} fill className="object-cover object-center group-hover:scale-105 transition-transform duration-700" sizes="36rem" />
       ) : (
         <div className={`absolute inset-0 ${card.bg || 'bg-grey-taupe'}`} />
       )}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
 
-      <div className="relative h-full flex flex-col justify-between p-24">
-        <div className="flex items-start justify-between">
-          <span className="text-white text-11 uppercase tracking-[0.12rem] bg-white/20 backdrop-blur-sm rounded-[10rem] px-12 py-5">
-            {card.category}
-          </span>
-          <span className="text-white/60 text-11">{card.date}</span>
-        </div>
+      <div className="relative h-full flex flex-col justify-end p-24">
+        <span className="text-white/50 text-11 mb-8" style={{ fontFamily: 'system-ui, sans-serif' }}>{card.date}</span>
         <div className="flex items-end justify-between gap-16">
           <h3 className="text-white text-16 s:text-18 font-normal leading-[1.3]" style={{ fontFamily: '"disp", Georgia, serif' }}>
             {card.title}
