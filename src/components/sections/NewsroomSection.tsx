@@ -57,11 +57,15 @@ function NewsCard({ card }: { card: NewsCard }) {
       style={{ width: '36rem', aspectRatio: '3/4' }}
     >
       {card.image ? (
-        <Image src={card.image} alt={card.title} fill className="object-cover object-center group-hover:scale-105 transition-transform duration-700" sizes="36rem" />
+        <>
+          {/* Fondo neutro detrás de la imagen */}
+          <div className="absolute inset-0 bg-[#1a1a1a]" />
+          <Image src={card.image} alt={card.title} fill className="object-contain object-center" sizes="36rem" />
+        </>
       ) : (
         <div className={`absolute inset-0 ${card.bg || 'bg-grey-taupe'}`} />
       )}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
 
       <div className="relative h-full flex flex-col justify-end p-24">
         <span className="text-white/50 text-11 mb-8" style={{ fontFamily: 'system-ui, sans-serif' }}>{card.date}</span>
