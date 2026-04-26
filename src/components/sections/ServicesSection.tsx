@@ -80,38 +80,41 @@ function ServiceCard({ card, onInfo }: { card: ServiceCard; onInfo: () => void }
         <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.08) 50%, transparent 100%)' }} />
       )}
 
+      {/* Gradiente superior para legibilidad del título */}
+      {card.image && (
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.1) 45%, transparent 100%)' }} />
+      )}
+
       {/* Content */}
       <div className="relative flex flex-col justify-between h-full p-28 s:p-32">
-        {/* Top */}
-        <div className="flex items-start justify-between">
-          <span className="text-white/60 text-10 uppercase tracking-[0.2rem] font-medium" style={{ fontFamily: 'system-ui, sans-serif' }}>
-            {card.tag}
-          </span>
-          <span className="text-white/40 text-10 uppercase tracking-[0.16rem]" style={{ fontFamily: 'system-ui, sans-serif' }}>Online</span>
-        </div>
-
-        {/* Bottom */}
+        {/* Top — título + tag */}
         <div>
+          <div className="flex items-start justify-between mb-16">
+            <span className="text-white/60 text-10 uppercase tracking-[0.2rem] font-medium" style={{ fontFamily: 'system-ui, sans-serif' }}>
+              {card.tag}
+            </span>
+            <span className="text-white/40 text-10 uppercase tracking-[0.16rem]" style={{ fontFamily: 'system-ui, sans-serif' }}>Online</span>
+          </div>
           <h3
-            className="text-white text-24 s:text-28 font-normal leading-[1.2] mb-24"
+            className="text-white text-24 s:text-28 font-normal leading-[1.2]"
             style={{ fontFamily: '"disp", Georgia, serif' }}
           >
             {card.title}
           </h3>
+        </div>
 
-          {/* Botón premium — línea minimalista */}
-          <div className="flex items-center gap-12 group/btn">
-            <span
-              className="text-white/70 text-11 uppercase tracking-[0.2rem] font-medium transition-all duration-300 group-hover/btn:text-white"
-              style={{ fontFamily: 'system-ui, sans-serif' }}
-            >
-              Ver detalle
-            </span>
-            <span className="flex-1 h-px bg-white/20 group-hover/btn:bg-white/50 transition-colors duration-300" style={{ maxWidth: '4rem' }} />
-            <svg viewBox="0 0 20 10" fill="none" className="w-16 h-8 text-white/50 group-hover/btn:text-white transition-colors duration-300">
-              <path d="M0 5H18M14 1L18 5L14 9" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </div>
+        {/* Bottom — botón */}
+        <div className="flex items-center gap-12 group/btn">
+          <span
+            className="text-white/70 text-11 uppercase tracking-[0.2rem] font-medium transition-all duration-300 group-hover/btn:text-white"
+            style={{ fontFamily: 'system-ui, sans-serif' }}
+          >
+            Ver detalle
+          </span>
+          <span className="flex-1 h-px bg-white/20 group-hover/btn:bg-white/50 transition-colors duration-300" style={{ maxWidth: '4rem' }} />
+          <svg viewBox="0 0 20 10" fill="none" className="w-16 h-8 text-white/50 group-hover/btn:text-white transition-colors duration-300">
+            <path d="M0 5H18M14 1L18 5L14 9" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
         </div>
       </div>
     </div>
