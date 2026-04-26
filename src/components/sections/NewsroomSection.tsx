@@ -108,7 +108,7 @@ export default function NewsroomSection() {
               className="text-32 s:text-48 font-normal text-green leading-[1.1]"
               style={{ fontFamily: '"disp", Georgia, serif' }}
             >
-              Lo que la IA le está haciendo a tu generación.
+              La IA no vino a reemplazarte. Vino a multiplicarte.
             </h2>
           </div>
           <div className="col-span-full s:col-start-12 s:col-span-5 flex items-end justify-between s:justify-end gap-16">
