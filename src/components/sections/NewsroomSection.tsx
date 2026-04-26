@@ -15,9 +15,10 @@ type NewsCard = {
 const CARDS: NewsCard[] = [
   {
     category: 'Inteligencia Artificial',
-    date: 'Mar 14, 2026',
-    title: 'Cómo un contador de 52 años automatizó 3 horas de trabajo diario con una sola herramienta de IA',
+    date: 'Abr 25, 2026',
+    title: 'Esta semana salieron dos informes que confirman lo que llevamos meses diciendo sobre la IA y tu generación.',
     image: '/images/data.png',
+    href: 'https://www.linkedin.com/posts/juan-pablo-monsalvez-b7b843321_esta-semana-salieron-dos-informes-que-confirman-activity-7453988016466956288-lXCo',
   },
   {
     category: 'IA para Profesionales',
