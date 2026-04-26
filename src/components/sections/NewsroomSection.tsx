@@ -108,7 +108,7 @@ export default function NewsroomSection() {
               className="text-32 s:text-48 font-normal text-green leading-[1.1]"
               style={{ fontFamily: '"disp", Georgia, serif' }}
             >
-              Tu generación tiene más para ganar con la IA. El problema es que nadie se lo está explicando.
+              Lo que la IA le está haciendo a tu generación.
             </h2>
           </div>
           <div className="col-span-full s:col-start-12 s:col-span-5 flex items-end justify-between s:justify-end gap-16">
