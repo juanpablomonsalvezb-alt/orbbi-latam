@@ -82,7 +82,10 @@ function ServiceCard({ card, onInfo }: { card: ServiceCard; onInfo: () => void }
       ) : (
         <div className={`absolute inset-0 ${card.bg || 'bg-grey-taupe'}`} />
       )}
-      <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.08) 50%, transparent 100%)' }} />
+      {/* Gradiente solo sobre imágenes, nunca sobre la card verde */}
+      {card.image && (
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.08) 50%, transparent 100%)' }} />
+      )}
 
       {/* Content */}
       <div className="relative flex flex-col justify-between h-full p-28 s:p-32">
