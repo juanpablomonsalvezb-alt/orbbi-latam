@@ -4,6 +4,7 @@ import HighlightSection from '@/components/sections/HighlightSection'
 import StatsSection from '@/components/sections/StatsSection'
 import NewsroomSection from '@/components/sections/NewsroomSection'
 import ServicesSection from '@/components/sections/ServicesSection'
+import MetodoSection from '@/components/sections/MetodoSection'
 import ContactSection from '@/components/sections/ContactSection'
 import TestimonialsCarousel from '@/components/sections/TestimonialsCarousel'
 import Footer from '@/components/Footer'
@@ -19,6 +20,7 @@ export default function Home() {
           <section id="numeros"><StatsSection /></section>
           <section id="publicaciones"><NewsroomSection /></section>
           <section id="servicios"><ServicesSection /></section>
+          <MetodoSection />
           <section id="contacto"><ContactSection /></section>
           <section id="testimonios"><TestimonialsCarousel /></section>
           <Footer />
