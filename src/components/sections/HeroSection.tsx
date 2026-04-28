@@ -73,7 +73,7 @@ export default function HeroSection() {
   }, [])
 
   return (
-    <div className="w-full relative h-auto s:h-[300vh] mt-0 s:-mt-[8rem]" style={{ zIndex: 1 }}>
+    <div className="w-full relative h-auto s:h-[300vh] mt-0 s:-mt-[8rem]" style={{ zIndex: 1, isolation: 'isolate' }}>
       <div ref={trackerRef} className="js-tracker flex items-center justify-center w-full h-full">
         {/* Fixed container — stays in place while tracker scrolls. z-index:1 stays below subsequent content (z:2) */}
         <div className="w-full h-full s:fixed s:top-0 s:left-0 s:right-0" style={{ zIndex: 1 }}>
