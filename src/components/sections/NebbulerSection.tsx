@@ -23,7 +23,7 @@ export default function NebbulerSection() {
             </p>
 
             <a
-              href="https://www.nebbuler.com"
+              href="https://landings.orbbilatam.com"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-12 text-12 font-medium uppercase tracking-[0.14rem] text-white bg-green px-32 py-16 rounded-[10rem] hover:opacity-85 transition-opacity"
@@ -71,13 +71,13 @@ export default function NebbulerSection() {
             </div>
 
             <a
-              href="https://www.nebbuler.com"
+              href="https://landings.orbbilatam.com"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-8 mt-32 text-11 font-medium uppercase tracking-[0.14rem] text-green/60 hover:text-green transition-colors"
               style={{ fontFamily: 'system-ui, sans-serif' }}
             >
-              Ver nebbuler.com
+              Ver landings.orbbilatam.com
               <svg viewBox="0 0 12 12" fill="none" className="w-8 h-8">
                 <path d="M1 11L11 1M11 1H4M11 1V8" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
