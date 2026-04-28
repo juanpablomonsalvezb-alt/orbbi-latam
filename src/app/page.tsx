@@ -1,4 +1,5 @@
 import Header from '@/components/Header'
+import BrandPortal from '@/components/sections/BrandPortal'
 import HeroSection from '@/components/sections/HeroSection'
 import HighlightSection from '@/components/sections/HighlightSection'
 import StatsSection from '@/components/sections/StatsSection'
@@ -14,7 +15,9 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main className="pt-[6rem]">
+      <main>
+        <BrandPortal />
+        <div className="pt-[6rem]">
         <HeroSection />
         <div style={{ position: 'relative', zIndex: 2 }}>
           <section id="para-quien"><HighlightSection /></section>
@@ -26,6 +29,7 @@ export default function Home() {
           <section id="contacto"><ContactSection /></section>
           <section id="testimonios"><TestimonialsCarousel /></section>
           <Footer />
+        </div>
         </div>
       </main>
     </>
