@@ -106,7 +106,7 @@ export default function Header() {
                 { label: 'Para Quién', img: '/images/restaurant.png', href: '/#para-quien' },
                 { label: 'Contacto', img: '/images/hero.jpg', href: '/#contacto' },
               ].map(({ label, img, href }) => (
-                <a key={label} href={href} className="group block">
+                <a key={label} href={href} onClick={() => setMenuOpen(false)} className="group block">
                   <div className="overflow-hidden rounded-24 mb-12 aspect-square">
                     <Image
                       src={img}
@@ -126,17 +126,18 @@ export default function Header() {
               {/* Recursos */}
               <div>
                 <p className="text-white/60 text-12 uppercase tracking-[0.12rem] mb-16">Recursos</p>
-                <a href="/#publicaciones" className="block text-white text-14 py-8 border-b border-white/10 hover:opacity-70 transition-opacity">Blog</a>
+                <a href="/#publicaciones" onClick={() => setMenuOpen(false)} className="block text-white text-14 py-8 border-b border-white/10 hover:opacity-70 transition-opacity">Blog</a>
               </div>
 
               {/* Orbbi Latam */}
               <div>
                 <p className="text-white/60 text-12 uppercase tracking-[0.12rem] mb-16">Orbbi Latam</p>
                 {[
-                  { label: 'Servicios', href: '/#servicios' },
+                  { label: 'Servicios IA', href: '/#servicios' },
+                  { label: 'Desarrollo Web', href: '/#desarrollo-web' },
                   { label: 'Contacto', href: '/#contacto' },
                 ].map(({ label, href }) => (
-                  <a key={label} href={href} className="block text-white text-14 py-8 border-b border-white/10 hover:opacity-70 transition-opacity">
+                  <a key={label} href={href} onClick={() => setMenuOpen(false)} className="block text-white text-14 py-8 border-b border-white/10 hover:opacity-70 transition-opacity">
                     {label}
                   </a>
                 ))}
