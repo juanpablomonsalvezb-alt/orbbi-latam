@@ -29,6 +29,8 @@ export default function BrandPortal() {
         alignItems: 'center',
         justifyContent: 'center',
         padding: '8rem 2.4rem 6rem',
+        position: 'relative',
+        zIndex: 10,
       }}
     >
       {/* Wordmark */}
