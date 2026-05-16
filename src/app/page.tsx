@@ -4,9 +4,8 @@ import Grain               from '@/components/Grain'
 import Spotlight           from '@/components/Spotlight'
 import HeroSection         from '@/components/sections/HeroSection'
 import TickerSection       from '@/components/sections/TickerSection'
-import ParaQuienSection    from '@/components/sections/ParaQuienSection'
+import BentoSection        from '@/components/sections/BentoSection'
 import StatsSection        from '@/components/sections/StatsSection'
-import ServicesSection     from '@/components/sections/ServicesSection'
 import ProcesoSection      from '@/components/sections/ProcesoSection'
 import TestimonialsSection from '@/components/sections/TestimonialsSection'
 import ContactSection      from '@/components/sections/ContactSection'
@@ -22,9 +21,8 @@ export default function Home() {
       <main>
         <HeroSection />
         <TickerSection />
-        <ParaQuienSection />
+        <BentoSection />
         <StatsSection />
-        <ServicesSection />
         <ProcesoSection />
         <TestimonialsSection />
         <ContactSection />

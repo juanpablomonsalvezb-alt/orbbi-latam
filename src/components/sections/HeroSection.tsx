@@ -2,181 +2,138 @@
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 
-function Line({ children, delay = 0, style = {} }: { children: React.ReactNode; delay?: number; style?: React.CSSProperties }) {
-  return (
-    <div style={{ overflow:'hidden', ...style }}>
-      <motion.div
-        initial={{ y:'106%' }}
-        animate={{ y:0 }}
-        transition={{ duration:1.1, delay, ease:[0.16,1,0.3,1] }}
-      >
-        {children}
-      </motion.div>
-    </div>
-  )
-}
-
 export default function HeroSection() {
   return (
-    <section
-      style={{
-        minHeight:'100svh',
-        display:'grid',
-        gridTemplateColumns:'1fr',
-        position:'relative',
-        background:'#F7F3EE',
-      }}
-    >
-      {/* ── Desktop: split layout ── */}
+    <section style={{ position:'relative', height:'100svh', overflow:'hidden', background:'#111110' }}>
+
+      {/* ── FULL BLEED IMAGE ── */}
+      <Image
+        src="/images/hero.jpg"
+        alt="Mujeres profesionales latinoamericanas aprendiendo inteligencia artificial"
+        fill priority
+        style={{ objectFit:'cover', objectPosition:'center 20%' }}
+        sizes="100vw"
+      />
+
+      {/* ── Cinematic gradient: dark bottom, slight top vignette ── */}
       <div style={{
-        display:'grid',
-        gridTemplateColumns:'1fr',
-        minHeight:'100svh',
-      }} className="l:grid-cols-[1fr_1fr]" >
+        position:'absolute', inset:0,
+        background:'linear-gradient(to top, rgba(10,10,8,0.92) 0%, rgba(10,10,8,0.55) 35%, rgba(10,10,8,0.15) 65%, rgba(10,10,8,0.35) 100%)',
+      }} />
 
-        {/* Left — text */}
-        <div
-          style={{
-            display:'flex', flexDirection:'column', justifyContent:'flex-end',
-            padding:'10rem 2.4rem 6rem',
-            position:'relative', zIndex:2,
-          }}
-          className="l:px-48 l:py-80"
-        >
-          {/* Tag */}
-          <div style={{ overflow:'hidden', marginBottom:'3.2rem' }}>
-            <motion.div
-              initial={{ y:'120%' }}
-              animate={{ y:0 }}
-              transition={{ duration:.7, delay:.15, ease:[0.16,1,0.3,1] }}
-            >
-              <span className="pill">
-                <span style={{ width:6,height:6,borderRadius:'50%',background:'#1E3A2F',flexShrink:0 }} />
-                IA para mujeres profesionales
-              </span>
-            </motion.div>
-          </div>
+      {/* ── Top-left: badge ── */}
+      <motion.div
+        initial={{ opacity:0 }}
+        animate={{ opacity:1 }}
+        transition={{ duration:1, delay:.3 }}
+        style={{
+          position:'absolute', top:'8rem', left:'2.4rem',
+          display:'flex', alignItems:'center', gap:'.8rem',
+        }}
+        className="l:left-48"
+      >
+        <span style={{ width:5,height:5,borderRadius:'50%',background:'#C9A96E',display:'block' }} />
+        <span style={{ fontSize:'1.1rem',fontWeight:500,textTransform:'uppercase',letterSpacing:'.18em',color:'rgba(250,250,248,0.55)' }}>
+          IA para Mujeres Profesionales · Latinoamérica
+        </span>
+      </motion.div>
 
-          {/* Headline */}
-          <h1 className="t-hero" style={{ marginBottom:'3.2rem' }}>
-            <Line delay={.3}>La IA no vino</Line>
-            <Line delay={.45}>
-              a{' '}
-              <em style={{ fontStyle:'italic', color:'#B8924A' }}>reemplazarte.</em>
-            </Line>
-            <Line delay={.6}>
-              Vino a{' '}
-              <em style={{ fontStyle:'italic', color:'#1E3A2F' }}>multiplicarte.</em>
-            </Line>
-          </h1>
+      {/* ── Bottom-left: headline ── */}
+      <div style={{
+        position:'absolute', bottom:0, left:0, right:0,
+        padding:'4rem 2.4rem',
+        display:'flex', alignItems:'flex-end', justifyContent:'space-between', gap:'4rem',
+      }} className="l:px-48 l:pb-56">
 
-          {/* Sub */}
-          <div style={{ overflow:'hidden', marginBottom:'4rem' }}>
-            <motion.p
-              className="t-body"
-              initial={{ y:'100%' }}
-              animate={{ y:0 }}
-              transition={{ duration:.9, delay:.8, ease:[0.16,1,0.3,1] }}
-              style={{ maxWidth:'44rem' }}
-            >
-              Formamos a mujeres líderes en Latinoamérica para dominar
-              la inteligencia artificial en su trabajo real.
-              Sin tecnicismos. Con resultados medibles.
-            </motion.p>
-          </div>
-
-          {/* CTAs */}
+        <div>
+          {/* Line 1 */}
           <div style={{ overflow:'hidden' }}>
-            <motion.div
-              initial={{ y:'100%' }}
+            <motion.h1
+              initial={{ y:'108%' }}
               animate={{ y:0 }}
-              transition={{ duration:.8, delay:1, ease:[0.16,1,0.3,1] }}
-              style={{ display:'flex', flexWrap:'wrap', gap:'1.6rem', alignItems:'center' }}
+              transition={{ duration:1.1, delay:.25, ease:[0.16,1,0.3,1] }}
+              className="display"
+              style={{ color:'#FAFAF8', display:'block' }}
             >
-              <a href="/#contacto" className="btn-primary">
-                Diagnóstico gratuito
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </a>
-              <a href="/#servicios" className="btn-outline">Ver programas</a>
-            </motion.div>
+              La IA no vino
+            </motion.h1>
           </div>
-
-          {/* Stats strip */}
-          <motion.div
-            initial={{ opacity:0, y:16 }}
-            animate={{ opacity:1, y:0 }}
-            transition={{ duration:.8, delay:1.3, ease:'easeOut' }}
-            style={{
-              display:'flex', gap:'4rem', flexWrap:'wrap',
-              marginTop:'6rem', paddingTop:'4rem',
-              borderTop:'1px solid rgba(28,28,26,0.1)',
-            }}
-          >
-            {[
-              { n:'847+', label:'Mujeres formadas' },
-              { n:'12',   label:'Países' },
-              { n:'94%',  label:'Satisfacción' },
-            ].map(s => (
-              <div key={s.label}>
-                <p style={{ fontFamily:'"disp",Georgia,serif', fontSize:'clamp(2.8rem,3.5vw,4.8rem)', lineHeight:1, color:'#1E3A2F', letterSpacing:'-0.02em' }}>{s.n}</p>
-                <p className="t-small" style={{ marginTop:'.6rem' }}>{s.label}</p>
-              </div>
-            ))}
-          </motion.div>
+          {/* Line 2 */}
+          <div style={{ overflow:'hidden' }}>
+            <motion.span
+              initial={{ y:'108%' }}
+              animate={{ y:0 }}
+              transition={{ duration:1.1, delay:.42, ease:[0.16,1,0.3,1] }}
+              className="display"
+              style={{ color:'#FAFAF8', display:'block' }}
+            >
+              a{' '}
+              <em style={{ fontStyle:'italic', color:'#C9A96E' }}>reemplazarte.</em>
+            </motion.span>
+          </div>
+          {/* Line 3 */}
+          <div style={{ overflow:'hidden' }}>
+            <motion.span
+              initial={{ y:'108%' }}
+              animate={{ y:0 }}
+              transition={{ duration:1.1, delay:.58, ease:[0.16,1,0.3,1] }}
+              className="display"
+              style={{ color:'#FAFAF8', display:'block' }}
+            >
+              Vino a{' '}
+              <em style={{ fontStyle:'italic', color:'rgba(250,250,248,0.65)' }}>multiplicarte.</em>
+            </motion.span>
+          </div>
         </div>
 
-        {/* Right — image (hidden on mobile, visible on desktop) */}
+        {/* Bottom-right: CTA + sub */}
         <motion.div
-          initial={{ opacity:0, scale:1.04 }}
-          animate={{ opacity:1, scale:1 }}
-          transition={{ duration:1.4, delay:.2, ease:[0.16,1,0.3,1] }}
-          style={{
-            position:'relative',
-            minHeight:'50vh',
-            overflow:'hidden',
-            display:'none',
-          }}
-          className="l:block"
+          initial={{ opacity:0, y:24 }}
+          animate={{ opacity:1, y:0 }}
+          transition={{ duration:.9, delay:.9, ease:[0.16,1,0.3,1] }}
+          style={{ display:'flex', flexDirection:'column', gap:'2rem', alignItems:'flex-end', flexShrink:0 }}
+          className="hidden s:flex"
         >
-          <Image
-            src="/images/hero.jpg"
-            alt="Mujeres profesionales aprendiendo inteligencia artificial en Latinoamérica"
-            fill
-            priority
-            style={{ objectFit:'cover', objectPosition:'center' }}
-            sizes="50vw"
-          />
-          {/* Subtle gradient on left edge to blend with content */}
-          <div style={{
-            position:'absolute', top:0, left:0, bottom:0, width:'12rem',
-            background:'linear-gradient(to right, #F7F3EE, transparent)',
-          }} />
+          <p style={{ fontSize:'1.4rem',color:'rgba(250,250,248,0.5)',textAlign:'right',maxWidth:'28rem',lineHeight:1.7 }}>
+            Formamos a mujeres líderes en Latinoamérica para dominar la inteligencia artificial.
+          </p>
+          <div style={{ display:'flex',gap:'1.2rem' }}>
+            <a href="/#contacto" className="btn-gold">
+              Diagnóstico gratuito
+              <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M1.5 6.5h10M7.5 2.5l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            </a>
+            <a href="/#servicios" className="btn-ghost">Ver programas</a>
+          </div>
         </motion.div>
-
-        {/* Mobile image below text */}
-        <motion.div
-          initial={{ opacity:0 }}
-          animate={{ opacity:1 }}
-          transition={{ duration:1, delay:.5 }}
-          style={{
-            position:'relative', height:'50vw', minHeight:'28rem',
-            overflow:'hidden', margin:'0 2.4rem 4rem', borderRadius:'1.6rem',
-          }}
-          className="l:hidden"
-        >
-          <Image
-            src="/images/hero.jpg"
-            alt="Mujeres profesionales aprendiendo inteligencia artificial"
-            fill
-            priority
-            style={{ objectFit:'cover', objectPosition:'center top' }}
-            sizes="100vw"
-          />
-        </motion.div>
-
       </div>
+
+      {/* Mobile CTA */}
+      <motion.div
+        initial={{ opacity:0 }}
+        animate={{ opacity:1 }}
+        transition={{ delay:1.1, duration:.8 }}
+        style={{ position:'absolute', bottom:'2rem', right:'2.4rem' }}
+        className="s:hidden"
+      >
+        <a href="/#contacto" className="btn-gold" style={{ fontSize:'1.1rem',padding:'1rem 2rem' }}>
+          Diagnóstico gratis
+        </a>
+      </motion.div>
+
+      {/* Scroll cue */}
+      <motion.div
+        initial={{ opacity:0 }}
+        animate={{ opacity:1 }}
+        transition={{ delay:1.5, duration:1 }}
+        style={{ position:'absolute', bottom:'2.4rem', left:'50%', transform:'translateX(-50%)', display:'flex', flexDirection:'column', alignItems:'center', gap:'.8rem' }}
+      >
+        <motion.div
+          animate={{ y:[0,8,0] }}
+          transition={{ duration:2, repeat:Infinity, ease:'easeInOut' }}
+          style={{ width:1, height:'3.2rem', background:'linear-gradient(to bottom, rgba(250,250,248,0.5), transparent)' }}
+        />
+      </motion.div>
+
     </section>
   )
 }
