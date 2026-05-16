@@ -1,91 +1,100 @@
 'use client'
-import { useEffect, useRef } from 'react'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-gsap.registerPlugin(ScrollTrigger)
+import { motion } from 'framer-motion'
+import Image from 'next/image'
 
 const PROFILES = [
-  { role: 'Ejecutiva & Directiva',       desc: 'Decisiones más rápidas y fundamentadas. La IA te da ventaja competitiva inmediata.' },
-  { role: 'Emprendedora',                desc: 'Automatiza operaciones y escala sin contratar más. Tu capacidad de ejecución se multiplica.' },
-  { role: 'Docente & Educadora',         desc: 'Diseña experiencias de aprendizaje más impactantes. La IA transforma cómo enseñas.' },
-  { role: 'Consultora independiente',    desc: 'Diferénciate y entrega proyectos más rápido. La IA es tu ventaja competitiva real.' },
-  { role: 'Profesional de salud',        desc: 'Menos carga administrativa, más tiempo para las personas que necesitan tu atención.' },
-  { role: 'Abogada & Contadora',         desc: 'Automatiza análisis repetitivos y entrega más valor a tus clientes en menos tiempo.' },
+  {
+    role: 'Ejecutiva & Directiva',
+    desc: 'Decisiones más rápidas, mejor fundamentadas. La IA amplifica tu liderazgo.',
+    img: '/images/pay-equity.jpg',
+    color: '#1E3A2F',
+  },
+  {
+    role: 'Emprendedora',
+    desc: 'Automatiza operaciones y escala sin contratar más. Tu capacidad se multiplica.',
+    img: '/images/gender.png',
+    color: '#2C4A3E',
+  },
+  {
+    role: 'Docente & Educadora',
+    desc: 'Experiencias de aprendizaje más impactantes. La IA transforma cómo enseñas.',
+    img: '/images/restaurant.png',
+    color: '#1E3A2F',
+  },
+  {
+    role: 'Consultora & Profesional independiente',
+    desc: 'Diferénciate y entrega proyectos más rápido. La IA es tu ventaja real.',
+    img: '/images/hero.jpg',
+    color: '#2C4A3E',
+  },
 ]
 
 export default function ParaQuienSection() {
-  const sectionRef = useRef<HTMLElement>(null)
-  const headerRef  = useRef<HTMLDivElement>(null)
-  const rowsRef    = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo(headerRef.current,
-        { opacity: 0, y: 40 },
-        { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out',
-          scrollTrigger: { trigger: headerRef.current, start: 'top 85%' } }
-      )
-      gsap.fromTo(rowsRef.current?.children ?? [],
-        { opacity: 0, x: -24 },
-        { opacity: 1, x: 0, duration: 0.6, ease: 'power3.out', stagger: 0.08,
-          scrollTrigger: { trigger: rowsRef.current, start: 'top 80%' } }
-      )
-    }, sectionRef)
-    return () => ctx.revert()
-  }, [])
-
   return (
-    <section
-      id="para-quien"
-      ref={sectionRef}
-      className="section"
-      style={{ background: 'rgba(15,15,22,0.97)' }}
-    >
+    <section id="para-quien" className="section" style={{ background:'#EDEAE3' }}>
       <div className="wrap">
 
-        {/* Header */}
-        <div
-          ref={headerRef}
-          className="mb-80 s:mb-100"
-          style={{ opacity: 0 }}
+        <motion.div
+          initial={{ opacity:0, y:32 }}
+          whileInView={{ opacity:1, y:0 }}
+          viewport={{ once:true, margin:'-80px' }}
+          transition={{ duration:.9, ease:[0.16,1,0.3,1] }}
+          style={{ marginBottom:'7rem' }}
         >
-          <p className="t-tag mb-20">Para quién</p>
-          <h2 className="t-h2" style={{ maxWidth: '60rem' }}>
-            Para mujeres que ya{' '}
-            <em className="t-italic t-gold">dominan</em>
-            {' '}su campo y quieren ir más lejos.
+          <p className="t-tag" style={{ marginBottom:'1.6rem' }}>Para quién</p>
+          <h2 className="t-h2" style={{ maxWidth:'60rem' }}>
+            Diseñado para mujeres que{' '}
+            <em style={{ fontStyle:'italic', color:'#B8924A' }}>ya lideran</em>
+            {' '}y quieren ir más lejos.
           </h2>
-        </div>
+        </motion.div>
 
-        {/* Profile list */}
-        <div ref={rowsRef} className="flex flex-col">
+        <div style={{
+          display:'grid',
+          gridTemplateColumns:'repeat(2,1fr)',
+          gap:'1.6rem',
+        }} className="s:grid-cols-4">
           {PROFILES.map((p, i) => (
-            <div
+            <motion.div
               key={i}
-              className="flex flex-col s:flex-row s:items-baseline s:justify-between gap-12 s:gap-40 py-32 s:py-36"
+              initial={{ opacity:0, y:40 }}
+              whileInView={{ opacity:1, y:0 }}
+              viewport={{ once:true, margin:'-60px' }}
+              transition={{ duration:.8, delay:i*0.1, ease:[0.16,1,0.3,1] }}
               style={{
-                borderTop: '1px solid rgba(201,169,110,0.07)',
-                ...(i === PROFILES.length - 1 ? { borderBottom: '1px solid rgba(201,169,110,0.07)' } : {}),
+                background:'#F7F3EE',
+                borderRadius:'2rem',
+                overflow:'hidden',
+                display:'flex', flexDirection:'column',
+                cursor:'none',
               }}
             >
-              <h3
-                style={{
-                  fontFamily: '"disp",Georgia,serif',
-                  fontSize: 'clamp(2.2rem, 2.8vw, 3.6rem)',
-                  lineHeight: 1.15,
-                  letterSpacing: '-0.01em',
-                  color: '#F2EDE4',
-                  minWidth: '30rem',
-                  flexShrink: 0,
-                }}
-              >
-                {p.role}
-              </h3>
-              <p className="t-body" style={{ maxWidth: '52rem' }}>
-                {p.desc}
-              </p>
-            </div>
+              {/* Image */}
+              <div style={{ position:'relative', aspectRatio:'3/4', overflow:'hidden' }}>
+                <Image
+                  src={p.img} alt={p.role}
+                  fill style={{ objectFit:'cover', objectPosition:'center', transition:'transform .6s' }}
+                  sizes="25vw"
+                />
+                <div style={{
+                  position:'absolute', inset:0,
+                  background:'linear-gradient(to top, rgba(30,58,47,0.65) 0%, transparent 50%)',
+                }} />
+                <div style={{ position:'absolute', bottom:'2rem', left:'2rem', right:'2rem' }}>
+                  <h3 style={{
+                    fontFamily:'"disp",Georgia,serif',
+                    fontSize:'clamp(1.6rem,1.8vw,2.2rem)',
+                    lineHeight:1.2,
+                    color:'#F7F3EE',
+                    letterSpacing:'-0.01em',
+                  }}>{p.role}</h3>
+                </div>
+              </div>
+              {/* Text */}
+              <div style={{ padding:'2rem 2.4rem 2.4rem' }}>
+                <p className="t-small" style={{ lineHeight:1.7 }}>{p.desc}</p>
+              </div>
+            </motion.div>
           ))}
         </div>
 

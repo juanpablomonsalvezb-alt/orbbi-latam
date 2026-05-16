@@ -1,33 +1,14 @@
 'use client'
-import { useEffect, useRef, useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import dynamic from 'next/dynamic'
+import { motion } from 'framer-motion'
+import Image from 'next/image'
 
-/* Three.js canvas — SSR off to avoid hydration mismatch */
-const HeroCanvas = dynamic(() => import('@/components/HeroCanvas'), {
-  ssr: false,
-  loading: () => null,
-})
-
-/* —— Line clip reveal — the Awwwards standard —— */
-function Line({
-  children,
-  delay = 0,
-  className = '',
-  style = {},
-}: {
-  children: React.ReactNode
-  delay?: number
-  className?: string
-  style?: React.CSSProperties
-}) {
+function Line({ children, delay = 0, style = {} }: { children: React.ReactNode; delay?: number; style?: React.CSSProperties }) {
   return (
-    <div style={{ overflow: 'hidden', ...style }}>
+    <div style={{ overflow:'hidden', ...style }}>
       <motion.div
-        className={className}
-        initial={{ y: '105%' }}
-        animate={{ y: 0 }}
-        transition={{ duration: 1.05, delay, ease: [0.16, 1, 0.3, 1] }}
+        initial={{ y:'106%' }}
+        animate={{ y:0 }}
+        transition={{ duration:1.1, delay, ease:[0.16,1,0.3,1] }}
       >
         {children}
       </motion.div>
@@ -35,197 +16,164 @@ function Line({
   )
 }
 
-/* —— Scramble text badge —— */
-const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ·'
-function ScrambleBadge({ text }: { text: string }) {
-  const [display, setDisplay] = useState(text)
-  const itersRef = useRef(0)
-
-  useEffect(() => {
-    let frame: number
-    const interval = setInterval(() => {
-      setDisplay(prev =>
-        prev.split('').map((char, i) => {
-          if (i < itersRef.current) return text[i]
-          return char === ' ' ? ' ' : CHARS[Math.floor(Math.random() * CHARS.length)]
-        }).join('')
-      )
-      if (itersRef.current >= text.length) clearInterval(interval)
-      itersRef.current += 0.5
-    }, 30)
-    return () => clearInterval(interval)
-  }, [text])
-
-  return (
-    <span style={{ fontFamily: 'monospace', letterSpacing: '0.08em' }}>{display}</span>
-  )
-}
-
 export default function HeroSection() {
   return (
     <section
       style={{
-        position: 'relative',
-        minHeight: '100svh',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'flex-end',
-        paddingBottom: '8rem',
-        zIndex: 1,
-        isolation: 'isolate',
+        minHeight:'100svh',
+        display:'grid',
+        gridTemplateColumns:'1fr',
+        position:'relative',
+        background:'#F7F3EE',
       }}
     >
-      {/* ── 3D Canvas ── */}
-      <HeroCanvas />
+      {/* ── Desktop: split layout ── */}
+      <div style={{
+        display:'grid',
+        gridTemplateColumns:'1fr',
+        minHeight:'100svh',
+      }} className="l:grid-cols-[1fr_1fr]" >
 
-      {/* ── Gradient: keeps text readable over sphere ── */}
-      <div
-        aria-hidden
-        style={{
-          position: 'absolute', inset: 0, zIndex: 1, pointerEvents: 'none',
-          background:
-            'linear-gradient(to top, rgba(9,9,14,0.96) 0%, rgba(9,9,14,0.55) 40%, rgba(9,9,14,0.15) 70%, transparent 100%)',
-        }}
-      />
-
-      {/* ── Content ── */}
-      <div className="wrap" style={{ position: 'relative', zIndex: 2 }}>
-
-        {/* Badge */}
-        <div style={{ overflow: 'hidden', marginBottom: '3.2rem' }}>
-          <motion.div
-            initial={{ y: '120%' }}
-            animate={{ y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <span
-              style={{
-                display: 'inline-flex', alignItems: 'center', gap: '1rem',
-                fontSize: '1.1rem', fontWeight: 500,
-                textTransform: 'uppercase', letterSpacing: '0.18em',
-                color: 'rgba(201,169,110,0.65)',
-                border: '1px solid rgba(201,169,110,0.18)',
-                borderRadius: '10rem', padding: '0.8rem 1.6rem',
-                background: 'rgba(201,169,110,0.04)',
-              }}
-            >
-              <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#C9A96E' }} />
-              <ScrambleBadge text="IA · MUJERES PROFESIONALES · LATINOAMÉRICA" />
-            </span>
-          </motion.div>
-        </div>
-
-        {/* Headline — word-by-word clip reveal */}
-        <h1
-          style={{
-            fontFamily: '"disp", Georgia, serif',
-            fontSize: 'clamp(4.8rem, 9.5vw, 13rem)',
-            lineHeight: 1.0,
-            letterSpacing: '-0.025em',
-            color: '#F2EDE4',
-            marginBottom: '4rem',
-          }}
-        >
-          <Line delay={0.35}>
-            La IA no vino
-          </Line>
-          <Line delay={0.5}>
-            a{' '}
-            <em
-              style={{
-                fontStyle: 'italic',
-                background: 'linear-gradient(135deg, #E8C987, #C9A96E 50%, #A07C45)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}
-            >
-              reemplazarte.
-            </em>
-          </Line>
-          <Line delay={0.65}>
-            Vino a{' '}
-            <em style={{ fontStyle: 'italic', color: '#F2EDE4' }}>
-              multiplicarte.
-            </em>
-          </Line>
-        </h1>
-
-        {/* Sub + CTAs */}
+        {/* Left — text */}
         <div
           style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '3.2rem',
+            display:'flex', flexDirection:'column', justifyContent:'flex-end',
+            padding:'10rem 2.4rem 6rem',
+            position:'relative', zIndex:2,
           }}
+          className="l:px-48 l:py-80"
         >
-          <div style={{ overflow: 'hidden' }}>
+          {/* Tag */}
+          <div style={{ overflow:'hidden', marginBottom:'3.2rem' }}>
+            <motion.div
+              initial={{ y:'120%' }}
+              animate={{ y:0 }}
+              transition={{ duration:.7, delay:.15, ease:[0.16,1,0.3,1] }}
+            >
+              <span className="pill">
+                <span style={{ width:6,height:6,borderRadius:'50%',background:'#1E3A2F',flexShrink:0 }} />
+                IA para mujeres profesionales
+              </span>
+            </motion.div>
+          </div>
+
+          {/* Headline */}
+          <h1 className="t-hero" style={{ marginBottom:'3.2rem' }}>
+            <Line delay={.3}>La IA no vino</Line>
+            <Line delay={.45}>
+              a{' '}
+              <em style={{ fontStyle:'italic', color:'#B8924A' }}>reemplazarte.</em>
+            </Line>
+            <Line delay={.6}>
+              Vino a{' '}
+              <em style={{ fontStyle:'italic', color:'#1E3A2F' }}>multiplicarte.</em>
+            </Line>
+          </h1>
+
+          {/* Sub */}
+          <div style={{ overflow:'hidden', marginBottom:'4rem' }}>
             <motion.p
-              initial={{ y: '100%' }}
-              animate={{ y: 0 }}
-              transition={{ duration: 0.9, delay: 0.85, ease: [0.16, 1, 0.3, 1] }}
-              style={{
-                fontSize: 'clamp(1.4rem, 1.8vw, 1.8rem)',
-                lineHeight: 1.75,
-                color: 'rgba(242,237,228,0.52)',
-                maxWidth: '52rem',
-              }}
+              className="t-body"
+              initial={{ y:'100%' }}
+              animate={{ y:0 }}
+              transition={{ duration:.9, delay:.8, ease:[0.16,1,0.3,1] }}
+              style={{ maxWidth:'44rem' }}
             >
               Formamos a mujeres líderes en Latinoamérica para dominar
-              la inteligencia artificial. Sin tecnicismos. Con impacto real.
+              la inteligencia artificial en su trabajo real.
+              Sin tecnicismos. Con resultados medibles.
             </motion.p>
           </div>
 
-          <div style={{ overflow: 'hidden' }}>
+          {/* CTAs */}
+          <div style={{ overflow:'hidden' }}>
             <motion.div
-              initial={{ y: '100%' }}
-              animate={{ y: 0 }}
-              transition={{ duration: 0.8, delay: 1.0, ease: [0.16, 1, 0.3, 1] }}
-              style={{ display: 'flex', alignItems: 'center', gap: '1.6rem', flexWrap: 'wrap' }}
+              initial={{ y:'100%' }}
+              animate={{ y:0 }}
+              transition={{ duration:.8, delay:1, ease:[0.16,1,0.3,1] }}
+              style={{ display:'flex', flexWrap:'wrap', gap:'1.6rem', alignItems:'center' }}
             >
               <a href="/#contacto" className="btn-primary">
                 Diagnóstico gratuito
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </a>
               <a href="/#servicios" className="btn-outline">Ver programas</a>
             </motion.div>
           </div>
+
+          {/* Stats strip */}
+          <motion.div
+            initial={{ opacity:0, y:16 }}
+            animate={{ opacity:1, y:0 }}
+            transition={{ duration:.8, delay:1.3, ease:'easeOut' }}
+            style={{
+              display:'flex', gap:'4rem', flexWrap:'wrap',
+              marginTop:'6rem', paddingTop:'4rem',
+              borderTop:'1px solid rgba(28,28,26,0.1)',
+            }}
+          >
+            {[
+              { n:'847+', label:'Mujeres formadas' },
+              { n:'12',   label:'Países' },
+              { n:'94%',  label:'Satisfacción' },
+            ].map(s => (
+              <div key={s.label}>
+                <p style={{ fontFamily:'"disp",Georgia,serif', fontSize:'clamp(2.8rem,3.5vw,4.8rem)', lineHeight:1, color:'#1E3A2F', letterSpacing:'-0.02em' }}>{s.n}</p>
+                <p className="t-small" style={{ marginTop:'.6rem' }}>{s.label}</p>
+              </div>
+            ))}
+          </motion.div>
         </div>
 
-        {/* Scroll indicator */}
+        {/* Right — image (hidden on mobile, visible on desktop) */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.6, duration: 1 }}
+          initial={{ opacity:0, scale:1.04 }}
+          animate={{ opacity:1, scale:1 }}
+          transition={{ duration:1.4, delay:.2, ease:[0.16,1,0.3,1] }}
           style={{
-            display: 'flex', alignItems: 'center', gap: '1.2rem',
-            marginTop: '6rem',
+            position:'relative',
+            minHeight:'50vh',
+            overflow:'hidden',
+            display:'none',
           }}
+          className="l:block"
         >
+          <Image
+            src="/images/hero.jpg"
+            alt="Mujeres profesionales aprendiendo inteligencia artificial en Latinoamérica"
+            fill
+            priority
+            style={{ objectFit:'cover', objectPosition:'center' }}
+            sizes="50vw"
+          />
+          {/* Subtle gradient on left edge to blend with content */}
           <div style={{
-            width: 24, height: 40, borderRadius: 12,
-            border: '1px solid rgba(201,169,110,0.2)',
-            display: 'flex', alignItems: 'flex-start',
-            justifyContent: 'center', padding: '5px 0',
-          }}>
-            <motion.div
-              animate={{ y: [0, 10, 0] }}
-              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-              style={{
-                width: 3, height: 7, borderRadius: 2,
-                background: '#C9A96E',
-              }}
-            />
-          </div>
-          <span style={{
-            fontSize: '1.1rem', fontWeight: 500,
-            textTransform: 'uppercase', letterSpacing: '0.18em',
-            color: 'rgba(201,169,110,0.35)',
-          }}>
-            Scroll
-          </span>
+            position:'absolute', top:0, left:0, bottom:0, width:'12rem',
+            background:'linear-gradient(to right, #F7F3EE, transparent)',
+          }} />
+        </motion.div>
+
+        {/* Mobile image below text */}
+        <motion.div
+          initial={{ opacity:0 }}
+          animate={{ opacity:1 }}
+          transition={{ duration:1, delay:.5 }}
+          style={{
+            position:'relative', height:'50vw', minHeight:'28rem',
+            overflow:'hidden', margin:'0 2.4rem 4rem', borderRadius:'1.6rem',
+          }}
+          className="l:hidden"
+        >
+          <Image
+            src="/images/hero.jpg"
+            alt="Mujeres profesionales aprendiendo inteligencia artificial"
+            fill
+            priority
+            style={{ objectFit:'cover', objectPosition:'center top' }}
+            sizes="100vw"
+          />
         </motion.div>
 
       </div>
