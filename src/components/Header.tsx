@@ -1,170 +1,128 @@
 'use client'
-import { useEffect, useRef, useState } from 'react'
-import Image from 'next/image'
+import { useEffect, useState } from 'react'
 
-const Logo = ({ className }: { className?: string }) => (
-  <span
-    className={className}
-    style={{
-      fontFamily: '"sans", system-ui, sans-serif',
-      fontWeight: 500,
-      letterSpacing: '0.10em',
-      fontSize: '1.4rem',
-      lineHeight: 1,
-      display: 'inline-block',
-      color: '#C9A96E',
-    }}
-  >
-    ORBBI LATAM
+const LOGO = () => (
+  <span style={{
+    fontFamily:'"sans",system-ui,sans-serif',
+    fontWeight:500, letterSpacing:'0.12em',
+    fontSize:'1.3rem', lineHeight:1,
+    color:'#C9A96E', display:'inline-block',
+  }}>
+    ORBBI
   </span>
 )
 
+const LINKS = [
+  { label:'Para quién',  href:'/#para-quien'  },
+  { label:'Servicios',   href:'/#servicios'   },
+  { label:'Método',      href:'/#metodo'       },
+  { label:'Testimonios', href:'/#testimonios' },
+]
+
 export default function Header() {
-  const [menuOpen, setMenuOpen]     = useState(false)
-  const [scrolled, setScrolled]     = useState(false)
-  const headerRef                   = useRef<HTMLElement>(null)
+  const [open, setOpen]       = useState(false)
+  const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40)
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    const h = () => setScrolled(window.scrollY > 24)
+    window.addEventListener('scroll', h, { passive:true })
+    return () => window.removeEventListener('scroll', h)
   }, [])
 
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? 'hidden' : ''
+    document.body.style.overflow = open ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
-  }, [menuOpen])
-
-  const navLinks = [
-    { label: 'Para quién',  href: '/#para-quien'  },
-    { label: 'Servicios',   href: '/#servicios'   },
-    { label: 'Método',      href: '/#metodo'      },
-    { label: 'Testimonios', href: '/#testimonios' },
-    { label: 'Contacto',    href: '/#contacto'    },
-  ]
-
-  const menuCards = [
-    { label: 'Para quién',  img: '/images/gender.png',    href: '/#para-quien'  },
-    { label: 'Servicios',   img: '/images/pay-equity.jpg', href: '/#servicios'  },
-    { label: 'Método',      img: '/images/restaurant.png', href: '/#metodo'     },
-    { label: 'Contacto',    img: '/images/hero.jpg',       href: '/#contacto'   },
-  ]
+  }, [open])
 
   return (
     <>
-      <header
-        ref={headerRef}
-        className="fixed top-0 left-0 right-0 z-[100]"
-        style={{ transition: 'box-shadow 0.4s' }}
-      >
-        <nav
-          className="site-nav"
-          style={{ boxShadow: scrolled ? '0 1px 0 rgba(201,169,110,0.08)' : 'none' }}
+      <header className="nav-bar" style={{ borderBottomColor: scrolled ? 'rgba(201,169,110,0.08)' : 'transparent' }}>
+
+        {/* Hamburger */}
+        <button
+          onClick={()=>setOpen(v=>!v)}
+          style={{ background:'none', border:'none', cursor:'none', padding:'8px', display:'flex', flexDirection:'column', gap:'5px' }}
+          aria-label="Menú"
         >
-          {/* Hamburger */}
-          <button
-            onClick={() => setMenuOpen(v => !v)}
-            className="flex flex-col gap-[5px] p-8 -ml-8 border-none bg-transparent"
-            aria-label="Toggle menu"
-            style={{ cursor: 'none' }}
-          >
-            <span className="burger-line" style={{ transform: menuOpen ? 'translateY(4px) rotate(45deg)' : undefined }} />
-            <span className="burger-line" style={{ transform: menuOpen ? 'translateY(-3.5px) rotate(-45deg)' : undefined }} />
-          </button>
+          <span className="burger-line" style={{ transform: open ? 'translateY(6px) rotate(45deg)' : undefined }} />
+          <span className="burger-line" style={{ transform: open ? 'translateY(-6px) rotate(-45deg)' : undefined, width: open ? '2.4rem' : '1.6rem' }} />
+        </button>
 
-          {/* Logo */}
-          <a href="/" className="absolute left-1/2 -translate-x-1/2">
-            <Logo />
-          </a>
+        {/* Logo — centered */}
+        <a href="/" style={{ position:'absolute', left:'50%', transform:'translateX(-50%)', cursor:'none' }}>
+          <LOGO />
+        </a>
 
-          {/* Desktop nav links */}
-          <nav className="hidden l:flex items-center gap-32">
-            {navLinks.map(({ label, href }) => (
+        {/* Desktop links + CTA */}
+        <div className="flex items-center gap-32">
+          <nav className="hidden l:flex items-center gap-28">
+            {LINKS.map(l => (
               <a
-                key={label}
-                href={href}
-                className="text-12 font-medium uppercase tracking-[0.12rem]"
-                style={{ color: 'rgba(245,240,232,0.55)', transition: 'color 0.3s', cursor: 'none' }}
-                onMouseEnter={e => (e.currentTarget.style.color = '#C9A96E')}
-                onMouseLeave={e => (e.currentTarget.style.color = 'rgba(245,240,232,0.55)')}
+                key={l.label} href={l.href}
+                style={{ fontSize:'1.2rem', fontWeight:500, textTransform:'uppercase', letterSpacing:'0.12em', color:'rgba(242,237,228,0.4)', transition:'color 0.3s', cursor:'none' }}
+                onMouseEnter={e=>(e.currentTarget.style.color='#C9A96E')}
+                onMouseLeave={e=>(e.currentTarget.style.color='rgba(242,237,228,0.4)')}
               >
-                {label}
+                {l.label}
+              </a>
+            ))}
+          </nav>
+          <a href="/#contacto" className="btn-outline" style={{ padding:'1rem 2rem', fontSize:'1.1rem' }}>
+            Diagnóstico gratis
+          </a>
+        </div>
+      </header>
+
+      {/* Full-screen menu */}
+      <div className={`menu-overlay ${open ? 'open' : ''}`}>
+        <div style={{ height:'100%', display:'flex', flexDirection:'column', padding:'2.4rem 4.8rem', paddingTop:'7rem' }}>
+
+          {/* Close */}
+          <button
+            onClick={()=>setOpen(false)}
+            style={{ position:'absolute', top:'2rem', right:'2.4rem', background:'none', border:'none', cursor:'none', color:'rgba(242,237,228,0.35)', fontSize:'2rem', lineHeight:1 }}
+          >✕</button>
+
+          {/* Main links */}
+          <nav className="flex flex-col gap-0 flex-1 justify-center">
+            {[...LINKS, { label:'Contacto', href:'/#contacto' }].map((l, i) => (
+              <a
+                key={l.label}
+                href={l.href}
+                onClick={()=>setOpen(false)}
+                style={{
+                  fontFamily:'"disp",Georgia,serif',
+                  fontSize:'clamp(3.6rem,6vw,8rem)',
+                  lineHeight:1.15,
+                  color: i===0 ? '#F2EDE4' : 'rgba(242,237,228,0.25)',
+                  letterSpacing:'-0.02em',
+                  cursor:'none',
+                  transition:'color 0.3s',
+                  borderBottom:'1px solid rgba(201,169,110,0.06)',
+                  paddingBottom:'1.2rem',
+                  marginBottom:'0.4rem',
+                }}
+                onMouseEnter={e=>(e.currentTarget.style.color='#C9A96E')}
+                onMouseLeave={e=>(e.currentTarget.style.color= i===0 ? '#F2EDE4' : 'rgba(242,237,228,0.25)')}
+              >
+                {l.label}
               </a>
             ))}
           </nav>
 
-          {/* CTA */}
-          <a href="/#contacto" className="btn-gold text-12">
-            Diagnóstico gratis
-          </a>
-        </nav>
-      </header>
-
-      {/* Full-screen menu */}
-      <div className={`site-menu ${menuOpen ? 'is-open' : ''}`} style={{ zIndex: 200 }}>
-        <div className="site-max py-80 s:py-120">
-          <div className="flex items-center justify-between mb-60 s:mb-80">
-            <Logo />
-            <button
-              onClick={() => setMenuOpen(false)}
-              style={{ color: 'rgba(245,240,232,0.5)', fontSize: '2.4rem', lineHeight: 1, background: 'none', border: 'none', cursor: 'none' }}
-              aria-label="Cerrar"
+          {/* Footer of menu */}
+          <div className="flex items-center justify-between pt-32" style={{ borderTop:'1px solid rgba(201,169,110,0.08)' }}>
+            <LOGO />
+            <a
+              href="mailto:contacto@orbbilatam.com"
+              style={{ fontSize:'1.3rem', color:'rgba(242,237,228,0.3)', cursor:'none', transition:'color 0.3s' }}
+              onMouseEnter={e=>(e.currentTarget.style.color='#C9A96E')}
+              onMouseLeave={e=>(e.currentTarget.style.color='rgba(242,237,228,0.3)')}
             >
-              ✕
-            </button>
+              contacto@orbbilatam.com
+            </a>
           </div>
 
-          <div className="grid grid-cols-1 s:grid-cols-[1fr_auto] gap-60">
-            {/* Cards */}
-            <div className="grid grid-cols-2 s:grid-cols-4 gap-16 s:gap-20">
-              {menuCards.map(({ label, img, href }) => (
-                <a key={label} href={href} onClick={() => setMenuOpen(false)} className="group block">
-                  <div className="overflow-hidden rounded-24 mb-12 aspect-square" style={{ border: '1px solid rgba(201,169,110,0.1)' }}>
-                    <Image
-                      src={img} alt={label} width={300} height={300}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                  </div>
-                  <p className="text-12 s:text-14 font-medium uppercase tracking-[0.12rem]" style={{ color: 'rgba(245,240,232,0.6)' }}>{label}</p>
-                </a>
-              ))}
-            </div>
-
-            {/* Sidebar */}
-            <div className="flex flex-col gap-40 s:w-[24rem] s:pl-40 s:border-l" style={{ borderColor: 'rgba(201,169,110,0.1)' }}>
-              <div>
-                <p className="text-12 uppercase tracking-[0.12rem] mb-16" style={{ color: 'rgba(245,240,232,0.3)' }}>Programas</p>
-                {['Formación Esencial', 'Orientación Profesional', 'Herramienta a Medida', 'Programas Corporativos'].map(label => (
-                  <a key={label} href="/#servicios" onClick={() => setMenuOpen(false)}
-                    className="block text-14 py-8" style={{ color: 'rgba(245,240,232,0.6)', borderBottom: '1px solid rgba(245,240,232,0.06)', transition: 'color 0.3s' }}
-                    onMouseEnter={e => (e.currentTarget.style.color = '#C9A96E')}
-                    onMouseLeave={e => (e.currentTarget.style.color = 'rgba(245,240,232,0.6)')}
-                  >{label}</a>
-                ))}
-              </div>
-
-              <div>
-                <p className="text-12 uppercase tracking-[0.12rem] mb-12" style={{ color: 'rgba(245,240,232,0.3)' }}>Contacto</p>
-                <p className="text-12 leading-[1.8]" style={{ color: 'rgba(245,240,232,0.5)' }}>
-                  contacto@orbbilatam.com<br />
-                  Lunes a viernes<br />
-                  Respuesta en &lt;24 horas
-                </p>
-              </div>
-
-              <a href="https://www.linkedin.com/in/juan-pablo-monsalvez-b7b843321/" target="_blank" rel="noreferrer"
-                className="flex items-center gap-8 text-12 uppercase tracking-[0.12rem]"
-                style={{ color: 'rgba(245,240,232,0.4)', transition: 'color 0.3s', cursor: 'none' }}
-                onMouseEnter={e => (e.currentTarget.style.color = '#C9A96E')}
-                onMouseLeave={e => (e.currentTarget.style.color = 'rgba(245,240,232,0.4)')}
-              >
-                <svg viewBox="0 0 24 24" fill="currentColor" className="w-16 h-16">
-                  <path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.27c-.97 0-1.75-.79-1.75-1.75s.78-1.75 1.75-1.75 1.75.79 1.75 1.75-.78 1.75-1.75 1.75zm13.5 11.27h-3v-5.5c0-1.38-.5-2.32-1.75-2.32-.95 0-1.52.64-1.77 1.26-.09.22-.11.54-.11.86v5.7h-3v-10h3v1.37c.4-.62 1.12-1.5 2.72-1.5 1.99 0 3.47 1.3 3.47 4.09v6.04z" />
-                </svg>
-                LinkedIn
-              </a>
-            </div>
-          </div>
         </div>
       </div>
     </>

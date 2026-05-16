@@ -2,308 +2,170 @@
 import { useState } from 'react'
 
 const PAISES = ['Argentina','Bolivia','Chile','Colombia','Costa Rica','Ecuador','México','Paraguay','Perú','Uruguay','Venezuela','Otro']
-const SECTORES = ['Educación','Salud','Finanzas y Contabilidad','Derecho','Consultoría','Administración Pública','Empresa Familiar','Retail y Comercio','Recursos Humanos','Otro']
+const SECTORES = ['Educación','Salud','Finanzas y Contabilidad','Derecho','Consultoría','RRHH','Empresa Familiar','Retail','Administración Pública','Otro']
+const SERVICIOS = ['Formación Esencial','Orientación Profesional','Herramienta a Medida','Programas Corporativos','Necesito orientación']
 
-type FormData = {
-  nombre: string
-  email: string
-  cargo: string
-  pais: string
-  sector: string
-  mensaje: string
-  servicio: string
-}
-type FormErrors = Partial<Record<keyof FormData, string>>
-
-const SERVICIOS = ['Formación Esencial','Orientación Profesional','Herramienta a Medida','Programas Corporativos','No sé aún, quiero orientación']
+type F = { nombre:string; email:string; cargo:string; pais:string; sector:string; servicio:string; mensaje:string }
+type E = Partial<Record<keyof F, string>>
 
 export default function ContactSection() {
-  const [form, setForm] = useState<FormData>({
-    nombre: '', email: '', cargo: '', pais: '', sector: '', mensaje: '', servicio: '',
-  })
-  const [errors, setErrors]   = useState<FormErrors>({})
-  const [status, setStatus]   = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
+  const [form, setForm] = useState<F>({ nombre:'',email:'',cargo:'',pais:'',sector:'',servicio:'',mensaje:'' })
+  const [errors, setErrors] = useState<E>({})
+  const [status, setStatus] = useState<'idle'|'sending'|'ok'|'err'>('idle')
 
-  const set = (k: keyof FormData) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setForm(f => ({ ...f, [k]: e.target.value }))
-    setErrors(er => ({ ...er, [k]: undefined }))
+  const set = (k:keyof F) => (e:React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement|HTMLSelectElement>) => {
+    setForm(f=>({...f,[k]:e.target.value}))
+    setErrors(er=>({...er,[k]:undefined}))
   }
 
-  function validate(): boolean {
-    const e: FormErrors = {}
-    if (!form.nombre.trim())                 e.nombre  = 'Ingresa tu nombre'
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = 'Email inválido'
-    if (!form.cargo.trim())                  e.cargo   = 'Ingresa tu cargo'
-    if (!form.pais)                          e.pais    = 'Selecciona tu país'
-    if (!form.mensaje.trim())                e.mensaje = 'Cuéntanos algo'
+  function validate() {
+    const e:E={}
+    if (!form.nombre.trim())                             e.nombre='Requerido'
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email='Email inválido'
+    if (!form.cargo.trim())                              e.cargo='Requerido'
+    if (!form.pais)                                      e.pais='Selecciona tu país'
+    if (!form.mensaje.trim())                            e.mensaje='Cuéntanos algo'
     setErrors(e)
-    return Object.keys(e).length === 0
+    return Object.keys(e).length===0
   }
 
-  async function handleSubmit(ev: React.FormEvent) {
+  async function submit(ev:React.FormEvent) {
     ev.preventDefault()
     if (!validate()) return
     setStatus('sending')
     try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
-      })
-      setStatus(res.ok ? 'success' : 'error')
-    } catch {
-      setStatus('error')
-    }
-  }
-
-  const fieldStyle = {
-    width: '100%',
-    background: 'rgba(245,240,232,0.04)',
-    border: '1px solid rgba(201,169,110,0.15)',
-    borderRadius: '1rem',
-    padding: '1.4rem 1.8rem',
-    color: '#F5F0E8',
-    fontSize: '1.4rem',
-    fontFamily: '"sans", system-ui, sans-serif',
-    outline: 'none',
-    transition: 'border-color 0.3s',
+      const r = await fetch('/api/contact',{ method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(form) })
+      setStatus(r.ok?'ok':'err')
+    } catch { setStatus('err') }
   }
 
   return (
-    <section
-      id="contacto"
-      className="section-py"
-      style={{
-        position: 'relative', zIndex: 2,
-        background: 'rgba(13,13,18,0.98)',
-      }}
-    >
-      <div className="site-max">
+    <section id="contacto" className="section" style={{ background:'rgba(9,9,14,0.98)' }}>
+      <div className="wrap">
+        <div className="line-gold mb-80 s:mb-100" />
 
-        <div className="grid grid-cols-1 s:grid-cols-2 gap-60 s:gap-80">
+        <div className="grid grid-cols-1 s:grid-cols-2 gap-60 s:gap-100">
 
-          {/* Left — text */}
-          <div className="flex flex-col justify-between gap-40">
+          {/* Left */}
+          <div className="flex flex-col justify-between gap-48">
             <div>
-              <p className="text-11 uppercase tracking-[0.18rem] mb-16" style={{ color: '#C9A96E' }}>Contacto</p>
-              <h2
-                className="text-32 s:text-48 font-normal leading-[1.1] mb-24"
-                style={{ fontFamily: '"disp", Georgia, serif', color: '#F5F0E8' }}
-              >
-                Tu primer paso hacia la IA empieza{' '}
-                <em style={{ color: '#C9A96E', fontStyle: 'italic' }}>aquí</em>.
+              <p className="t-tag mb-20">Contacto</p>
+              <h2 className="t-h2 mb-24" style={{ maxWidth:'44rem' }}>
+                Tu primer paso
+                <br />
+                empieza{' '}
+                <em className="t-italic t-gold">aquí.</em>
               </h2>
-              <p className="text-14 leading-[1.8]" style={{ color: 'rgba(245,240,232,0.5)', maxWidth: '44rem' }}>
-                Escríbenos y una consultora te responderá en menos de 24 horas para entender tu situación y recomendarte el mejor programa.
+              <p className="t-body" style={{ maxWidth:'40rem' }}>
+                Escríbenos y una consultora te responderá en menos de 24 horas para entender tu situación y recomendarte el mejor camino.
               </p>
             </div>
-
-            <div className="flex flex-col gap-24">
+            <div className="flex flex-col gap-20">
               <div>
-                <p className="text-11 uppercase tracking-[0.14rem] mb-8" style={{ color: 'rgba(245,240,232,0.3)' }}>Email directo</p>
+                <p className="t-tag mb-8" style={{ color:'rgba(242,237,228,0.28)' }}>Email directo</p>
                 <a
                   href="mailto:contacto@orbbilatam.com"
-                  className="text-16 s:text-20 font-normal"
-                  style={{ color: '#C9A96E', fontFamily: '"disp", Georgia, serif', transition: 'opacity 0.3s', cursor: 'none' }}
-                  onMouseEnter={e => (e.currentTarget.style.opacity = '0.7')}
-                  onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
+                  style={{ fontFamily:'"disp",Georgia,serif', fontSize:'clamp(1.8rem,2.2vw,2.6rem)', color:'#C9A96E', cursor:'none', transition:'opacity 0.3s' }}
+                  onMouseEnter={e=>(e.currentTarget.style.opacity='0.7')}
+                  onMouseLeave={e=>(e.currentTarget.style.opacity='1')}
                 >
                   contacto@orbbilatam.com
                 </a>
               </div>
-              <div>
-                <p className="text-11 uppercase tracking-[0.14rem] mb-8" style={{ color: 'rgba(245,240,232,0.3)' }}>Disponibilidad</p>
-                <p className="text-13 leading-[1.8]" style={{ color: 'rgba(245,240,232,0.5)' }}>
-                  Lunes a viernes<br />Respuesta en menos de 24 horas
-                </p>
-              </div>
-              <div>
-                <p className="text-11 uppercase tracking-[0.14rem] mb-8" style={{ color: 'rgba(245,240,232,0.3)' }}>Cobertura</p>
-                <p className="text-13" style={{ color: 'rgba(245,240,232,0.5)' }}>
-                  Chile · México · Colombia · Argentina · Perú · Ecuador · Uruguay y más
-                </p>
-              </div>
+              <p className="t-small">
+                Lunes a viernes · Respuesta en &lt;24 h
+              </p>
             </div>
           </div>
 
-          {/* Right — form */}
+          {/* Right */}
           <div>
-            {status === 'success' ? (
-              <div
-                className="card-dark p-40 s:p-48 flex flex-col items-center text-center gap-20"
-                style={{ minHeight: '40rem', justifyContent: 'center' }}
-              >
+            {status==='ok' ? (
+              <div className="flex flex-col gap-20 pt-12">
                 <div
-                  className="w-60 h-60 rounded-full flex items-center justify-center mb-8"
-                  style={{ background: 'rgba(201,169,110,0.1)', border: '1px solid rgba(201,169,110,0.3)' }}
+                  style={{
+                    width:48, height:48, borderRadius:'50%',
+                    border:'1px solid rgba(201,169,110,0.3)',
+                    display:'flex', alignItems:'center', justifyContent:'center',
+                    color:'#C9A96E', fontSize:'2rem',
+                  }}
                 >
-                  <span style={{ fontSize: '2.4rem' }}>✓</span>
+                  ✓
                 </div>
-                <h3 className="text-24 font-normal" style={{ fontFamily: '"disp", Georgia, serif', color: '#F5F0E8' }}>
-                  ¡Mensaje recibido!
+                <h3 style={{ fontFamily:'"disp",Georgia,serif', fontSize:'clamp(2.4rem,3vw,3.6rem)', color:'#F2EDE4', lineHeight:1.2 }}>
+                  Mensaje recibido.
                 </h3>
-                <p className="text-14 leading-[1.8]" style={{ color: 'rgba(245,240,232,0.5)', maxWidth: '36rem' }}>
-                  Te responderemos en menos de 24 horas. Mientras tanto, puedes explorar nuestros programas.
-                </p>
-                <a href="/#servicios" className="btn-gold mt-8">Ver programas</a>
+                <p className="t-body">Te responderemos en menos de 24 horas.</p>
               </div>
             ) : (
-              <form
-                onSubmit={handleSubmit}
-                className="card-dark p-32 s:p-48 flex flex-col gap-20"
-                noValidate
-              >
+              <form onSubmit={submit} noValidate className="flex flex-col gap-32">
                 {/* Nombre + Email */}
-                <div className="grid grid-cols-1 s:grid-cols-2 gap-16">
-                  <div className="flex flex-col gap-8">
-                    <label className="text-11 uppercase tracking-[0.14rem]" style={{ color: 'rgba(245,240,232,0.4)' }}>
-                      Nombre *
-                    </label>
-                    <input
-                      type="text"
-                      value={form.nombre}
-                      onChange={set('nombre')}
-                      placeholder="Tu nombre"
-                      style={{
-                        ...fieldStyle,
-                        borderColor: errors.nombre ? 'rgba(255,80,80,0.5)' : 'rgba(201,169,110,0.15)',
-                      }}
-                      onFocus={e => (e.target.style.borderColor = '#C9A96E')}
-                      onBlur={e => (e.target.style.borderColor = errors.nombre ? 'rgba(255,80,80,0.5)' : 'rgba(201,169,110,0.15)')}
-                    />
-                    {errors.nombre && <p className="text-11" style={{ color: 'rgba(255,100,100,0.8)' }}>{errors.nombre}</p>}
+                <div className="grid grid-cols-1 s:grid-cols-2 gap-32">
+                  <div className="flex flex-col gap-6">
+                    <label className="t-tag" style={{ color:'rgba(242,237,228,0.28)', fontSize:'1rem' }}>Nombre *</label>
+                    <input className="field" type="text" value={form.nombre} onChange={set('nombre')} placeholder="Tu nombre" />
+                    {errors.nombre && <span style={{ fontSize:'1.1rem', color:'rgba(255,90,90,0.8)' }}>{errors.nombre}</span>}
                   </div>
-                  <div className="flex flex-col gap-8">
-                    <label className="text-11 uppercase tracking-[0.14rem]" style={{ color: 'rgba(245,240,232,0.4)' }}>
-                      Email *
-                    </label>
-                    <input
-                      type="email"
-                      value={form.email}
-                      onChange={set('email')}
-                      placeholder="tu@email.com"
-                      style={{
-                        ...fieldStyle,
-                        borderColor: errors.email ? 'rgba(255,80,80,0.5)' : 'rgba(201,169,110,0.15)',
-                      }}
-                      onFocus={e => (e.target.style.borderColor = '#C9A96E')}
-                      onBlur={e => (e.target.style.borderColor = errors.email ? 'rgba(255,80,80,0.5)' : 'rgba(201,169,110,0.15)')}
-                    />
-                    {errors.email && <p className="text-11" style={{ color: 'rgba(255,100,100,0.8)' }}>{errors.email}</p>}
+                  <div className="flex flex-col gap-6">
+                    <label className="t-tag" style={{ color:'rgba(242,237,228,0.28)', fontSize:'1rem' }}>Email *</label>
+                    <input className="field" type="email" value={form.email} onChange={set('email')} placeholder="tu@email.com" />
+                    {errors.email && <span style={{ fontSize:'1.1rem', color:'rgba(255,90,90,0.8)' }}>{errors.email}</span>}
                   </div>
                 </div>
 
                 {/* Cargo */}
-                <div className="flex flex-col gap-8">
-                  <label className="text-11 uppercase tracking-[0.14rem]" style={{ color: 'rgba(245,240,232,0.4)' }}>
-                    Cargo / Profesión *
-                  </label>
-                  <input
-                    type="text"
-                    value={form.cargo}
-                    onChange={set('cargo')}
-                    placeholder="Ej: Directora de Marketing, Abogada, Docente..."
-                    style={{
-                      ...fieldStyle,
-                      borderColor: errors.cargo ? 'rgba(255,80,80,0.5)' : 'rgba(201,169,110,0.15)',
-                    }}
-                    onFocus={e => (e.target.style.borderColor = '#C9A96E')}
-                    onBlur={e => (e.target.style.borderColor = errors.cargo ? 'rgba(255,80,80,0.5)' : 'rgba(201,169,110,0.15)')}
-                  />
-                  {errors.cargo && <p className="text-11" style={{ color: 'rgba(255,100,100,0.8)' }}>{errors.cargo}</p>}
+                <div className="flex flex-col gap-6">
+                  <label className="t-tag" style={{ color:'rgba(242,237,228,0.28)', fontSize:'1rem' }}>Cargo / Profesión *</label>
+                  <input className="field" type="text" value={form.cargo} onChange={set('cargo')} placeholder="Ej: Directora de Marketing, Abogada, Docente..." />
+                  {errors.cargo && <span style={{ fontSize:'1.1rem', color:'rgba(255,90,90,0.8)' }}>{errors.cargo}</span>}
                 </div>
 
                 {/* País + Sector */}
-                <div className="grid grid-cols-1 s:grid-cols-2 gap-16">
-                  <div className="flex flex-col gap-8">
-                    <label className="text-11 uppercase tracking-[0.14rem]" style={{ color: 'rgba(245,240,232,0.4)' }}>
-                      País *
-                    </label>
-                    <select
-                      value={form.pais}
-                      onChange={set('pais')}
-                      style={{
-                        ...fieldStyle,
-                        borderColor: errors.pais ? 'rgba(255,80,80,0.5)' : 'rgba(201,169,110,0.15)',
-                        cursor: 'none',
-                      }}
-                    >
+                <div className="grid grid-cols-1 s:grid-cols-2 gap-32">
+                  <div className="flex flex-col gap-6">
+                    <label className="t-tag" style={{ color:'rgba(242,237,228,0.28)', fontSize:'1rem' }}>País *</label>
+                    <select className="field" value={form.pais} onChange={set('pais')}>
                       <option value="">Selecciona</option>
-                      {PAISES.map(p => <option key={p} value={p}>{p}</option>)}
+                      {PAISES.map(p=><option key={p} value={p}>{p}</option>)}
                     </select>
-                    {errors.pais && <p className="text-11" style={{ color: 'rgba(255,100,100,0.8)' }}>{errors.pais}</p>}
+                    {errors.pais && <span style={{ fontSize:'1.1rem', color:'rgba(255,90,90,0.8)' }}>{errors.pais}</span>}
                   </div>
-                  <div className="flex flex-col gap-8">
-                    <label className="text-11 uppercase tracking-[0.14rem]" style={{ color: 'rgba(245,240,232,0.4)' }}>
-                      Sector
-                    </label>
-                    <select
-                      value={form.sector}
-                      onChange={set('sector')}
-                      style={{ ...fieldStyle, cursor: 'none' }}
-                    >
+                  <div className="flex flex-col gap-6">
+                    <label className="t-tag" style={{ color:'rgba(242,237,228,0.28)', fontSize:'1rem' }}>Sector</label>
+                    <select className="field" value={form.sector} onChange={set('sector')}>
                       <option value="">Selecciona</option>
-                      {SECTORES.map(s => <option key={s} value={s}>{s}</option>)}
+                      {SECTORES.map(s=><option key={s} value={s}>{s}</option>)}
                     </select>
                   </div>
                 </div>
 
-                {/* Servicio de interés */}
-                <div className="flex flex-col gap-8">
-                  <label className="text-11 uppercase tracking-[0.14rem]" style={{ color: 'rgba(245,240,232,0.4)' }}>
-                    ¿Qué te interesa?
-                  </label>
-                  <select
-                    value={form.servicio}
-                    onChange={set('servicio')}
-                    style={{ ...fieldStyle, cursor: 'none' }}
-                  >
+                {/* Servicio */}
+                <div className="flex flex-col gap-6">
+                  <label className="t-tag" style={{ color:'rgba(242,237,228,0.28)', fontSize:'1rem' }}>¿Qué te interesa?</label>
+                  <select className="field" value={form.servicio} onChange={set('servicio')}>
                     <option value="">Selecciona un programa</option>
-                    {SERVICIOS.map(s => <option key={s} value={s}>{s}</option>)}
+                    {SERVICIOS.map(s=><option key={s} value={s}>{s}</option>)}
                   </select>
                 </div>
 
                 {/* Mensaje */}
-                <div className="flex flex-col gap-8">
-                  <label className="text-11 uppercase tracking-[0.14rem]" style={{ color: 'rgba(245,240,232,0.4)' }}>
-                    Cuéntanos tu situación *
-                  </label>
-                  <textarea
-                    value={form.mensaje}
-                    onChange={set('mensaje')}
-                    placeholder="¿Qué quieres lograr con IA? ¿Qué te frena hoy?"
-                    rows={4}
-                    style={{
-                      ...fieldStyle,
-                      resize: 'none',
-                      borderColor: errors.mensaje ? 'rgba(255,80,80,0.5)' : 'rgba(201,169,110,0.15)',
-                    }}
-                    onFocus={e => (e.target.style.borderColor = '#C9A96E')}
-                    onBlur={e => (e.target.style.borderColor = errors.mensaje ? 'rgba(255,80,80,0.5)' : 'rgba(201,169,110,0.15)')}
-                  />
-                  {errors.mensaje && <p className="text-11" style={{ color: 'rgba(255,100,100,0.8)' }}>{errors.mensaje}</p>}
+                <div className="flex flex-col gap-6">
+                  <label className="t-tag" style={{ color:'rgba(242,237,228,0.28)', fontSize:'1rem' }}>Tu situación *</label>
+                  <textarea className="field" value={form.mensaje} onChange={set('mensaje')} placeholder="¿Qué quieres lograr con IA? ¿Qué te frena hoy?" rows={4} style={{ resize:'none' }} />
+                  {errors.mensaje && <span style={{ fontSize:'1.1rem', color:'rgba(255,90,90,0.8)' }}>{errors.mensaje}</span>}
                 </div>
 
-                {/* Submit */}
-                <button
-                  type="submit"
-                  disabled={status === 'sending'}
-                  className="btn-cream mt-8 self-start"
-                  style={{ opacity: status === 'sending' ? 0.6 : 1 }}
-                >
-                  {status === 'sending' ? 'Enviando…' : 'Enviar mensaje'}
-                  {status !== 'sending' && (
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                      <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  )}
-                </button>
-
-                {status === 'error' && (
-                  <p className="text-12" style={{ color: 'rgba(255,100,100,0.8)' }}>
-                    Hubo un error. Escríbenos directamente a contacto@orbbilatam.com
-                  </p>
-                )}
+                <div className="flex items-center gap-20">
+                  <button type="submit" className="btn-primary" disabled={status==='sending'} style={{ opacity:status==='sending'?0.6:1 }}>
+                    {status==='sending' ? 'Enviando…' : 'Enviar mensaje'}
+                    {status!=='sending' && (
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                        <path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    )}
+                  </button>
+                  {status==='err' && <span className="t-small" style={{ color:'rgba(255,90,90,0.8)' }}>Error al enviar. Escríbenos por email.</span>}
+                </div>
               </form>
             )}
           </div>
