@@ -5,82 +5,91 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
-/* Harvey's EXACT feature section:
-   - Light background (#F5F4F0)
-   - Left: small label "The top legal teams use Harvey for"
-   - Center: big list of features, one ACTIVE (dark), rest muted gray
-   - Right: "Explore Platform" button
-   - As user scrolls the pinned section, active item advances
+/* Harvey UseCaseTickerSection — exact behavior:
+   - bg: #FAFAF9
+   - Label left: "The top legal teams use Harvey for" (small sans, dark)
+   - Center: 56px serif list, OPACITY fades by distance from active
+     active=opacity:1 color:#0F0E0D, ±1=opacity:0.6, ±2=opacity:0.3, ±3=opacity:0.1
+   - Right: "Explore Platform" outlined button
+   - SCROLL DRIVEN: section is very tall, content is pinned
 */
 
 const FEATURES = [
-  'Formación en IA',
+  'Formación Esencial',
   'Orientación 1:1',
   'Herramientas a Medida',
-  'Comunidad Activa',
+  'Diagnóstico IA',
   'Programas Corporativos',
-  'Acompañamiento Continuo',
-  'Diagnóstico Personalizado',
+  'Comunidad Activa',
+  'Acompañamiento Real',
 ]
 
+const OPACITIES = [0.1, 0.3, 0.6, 1.0, 0.6, 0.3, 0.1]
+
 export default function FeaturesSection() {
-  const sectionRef  = useRef<HTMLDivElement>(null)
-  const pinRef      = useRef<HTMLDivElement>(null)
-  const [active, setActive] = useState(0)
+  const outerRef = useRef<HTMLDivElement>(null)
+  const innerRef = useRef<HTMLDivElement>(null)
+  const [active, setActive] = useState(3) // middle item starts active
 
   useEffect(() => {
     const ctx = gsap.context(() => {
       ScrollTrigger.create({
-        trigger: sectionRef.current!,
+        trigger: outerRef.current!,
         start: 'top top',
-        end: `+=${FEATURES.length * 140}`,
-        pin: pinRef.current!,
-        scrub: false,
-        snap: { snapTo: 1 / (FEATURES.length - 1), duration: 0.3, ease: 'power1.inOut' },
-        onUpdate: (self) => {
+        end: `+=${FEATURES.length * 200}`,
+        pin: innerRef.current!,
+        onUpdate(self) {
           const idx = Math.round(self.progress * (FEATURES.length - 1))
           setActive(Math.min(idx, FEATURES.length - 1))
         },
       })
-    }, sectionRef)
+    }, outerRef)
     return () => ctx.revert()
   }, [])
 
   return (
-    /* Outer wrapper — tall enough to scroll through features */
-    <div ref={sectionRef} style={{ height: `${FEATURES.length * 140 + 100}vh` }}>
-
-      {/* Pinned inner panel */}
+    <div ref={outerRef} style={{ height:`${FEATURES.length * 200 + 100}vh` }}>
       <div
-        ref={pinRef}
-        className="sec-paper"
-        style={{ height: '100vh', display:'flex', alignItems:'center' }}
+        ref={innerRef}
+        className="sec-light"
+        style={{ height:'100vh', display:'flex', alignItems:'center' }}
       >
-        <div className="wrap" style={{ width:'100%', display:'flex', alignItems:'center', justifyContent:'space-between', gap:'4rem' }}>
+        <div className="page-wrap" style={{ width:'100%', display:'grid', gridTemplateColumns:'1fr 2fr 1fr', alignItems:'center', gap:40 }}>
 
-          {/* Left label — Harvey: "The top legal teams use Harvey for" */}
-          <div style={{ flexShrink:0, maxWidth:'18rem' }}>
-            <p style={{ fontSize:'1.4rem', lineHeight:1.6, color:'rgba(13,12,10,0.6)', fontWeight:300 }}>
-              Las mejores profesionales de Latam confían en Orbbi para
-            </p>
+          {/* Left: Harvey's "The top legal teams use Harvey for" */}
+          <p className="t-body" style={{ color:'#0F0E0D', maxWidth:200 }}>
+            Las mejores profesionales de Latam confían en Orbbi para
+          </p>
+
+          {/* Center: feature list with opacity fading */}
+          <div>
+            {FEATURES.map((f, i) => {
+              const dist   = Math.abs(i - active)
+              const op     = dist === 0 ? 1 : dist === 1 ? 0.6 : dist === 2 ? 0.3 : 0.1
+              const isActive = i === active
+              return (
+                <div
+                  key={f}
+                  className="feature-item"
+                  style={{
+                    fontFamily:'"disp",Georgia,serif',
+                    fontSize:56, lineHeight:'58.8px', letterSpacing:'-0.56px', fontWeight:400,
+                    color: isActive ? '#0F0E0D' : '#706D66',
+                    opacity: op,
+                    transition:'opacity .4s, color .4s',
+                    cursor:'none',
+                    userSelect:'none',
+                  }}
+                >
+                  {f}
+                </div>
+              )
+            })}
           </div>
 
-          {/* Center: Feature list */}
-          <div style={{ flex:1, padding:'0 4rem' }}>
-            {FEATURES.map((f, i) => (
-              <div
-                key={f}
-                className={`feat-item ${i === active ? 'feat-item-active' : 'feat-item-inactive'}`}
-                style={{ display:'block' }}
-              >
-                {f}
-              </div>
-            ))}
-          </div>
-
-          {/* Right: Explore button */}
-          <div style={{ flexShrink:0 }}>
-            <a href="/#contacto" className="btn-outline-d">
+          {/* Right: Explore Platform button */}
+          <div style={{ display:'flex', justifyContent:'flex-end' }}>
+            <a href="/#contacto" className="btn-explore">
               Ver plataforma
             </a>
           </div>

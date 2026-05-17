@@ -1,21 +1,21 @@
 'use client'
 import { useEffect, useState } from 'react'
 
-const LINKS = ['Programas','Para quién','Clientes','Empresa','Blog']
+/* Harvey nav:
+   - Announce bar: #FAFAF9 bg, 34px, dark text, "Harvey Agents execute..."
+   - Nav: transparent on hero, fixed height 72px, logo LEFT, links CENTER, Login+Demo RIGHT
+   - After scrolling past hero (~800px), nav gets light bg
+*/
+
+const LINKS = ['Programas','Para quién','Clientes','Seguridad','Recursos','Empresa']
 
 export default function Header() {
-  const [open, setOpen]         = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-  const [onLight, setOnLight]   = useState(false)   // true when hero is past
+  const [open,setOpen]     = useState(false)
+  const [onLight,setLight] = useState(false)
 
   useEffect(() => {
-    const fn = () => {
-      const y = window.scrollY
-      setScrolled(y > 20)
-      // Hero is 100vh — after that, nav needs dark text
-      setOnLight(y > window.innerHeight - 80)
-    }
-    window.addEventListener('scroll', fn, { passive: true })
+    const fn = () => setLight(window.scrollY > 760)
+    window.addEventListener('scroll', fn, { passive:true })
     return () => window.removeEventListener('scroll', fn)
   }, [])
 
@@ -24,79 +24,103 @@ export default function Header() {
     return () => { document.body.style.overflow = '' }
   }, [open])
 
-  const textColor = (onLight && !open) ? '#0D0C0A' : '#FFFFFF'
-
   return (
     <>
-      <div className="nav-shell">
-
-        {/* Announcement bar — Harvey style */}
-        <div className="nav-announce" style={{ display: onLight ? 'none' : 'block' }}>
-          Nuevo programa · Mujeres en IA 2025 ·{' '}
-          <a href="/#contacto">Reservar lugar →</a>
+      <div className="harvey-nav">
+        {/* Announce bar */}
+        <div className="announce-bar">
+          <span className="t-small">Nuevo programa · IA para mujeres profesionales en Latam</span>
+          <a href="/#contacto" className="t-label" style={{ textDecoration:'underline', textUnderlineOffset:'2px', cursor:'none' }}>
+            Solicitar lugar
+          </a>
         </div>
 
-        {/* Main nav */}
-        <nav className={onLight ? 'nav-bar nav-on-light' : 'nav-bar nav-on-dark'}>
+        {/* Nav bar */}
+        <nav className={`nav-inner ${onLight ? 'nav-on-light' : 'nav-on-dark'}`}>
 
-          {/* Logo — left like Harvey */}
-          <a href="/" style={{ cursor:'none', marginRight:'4rem' }}>
+          {/* Logo — Harvey: serif wordmark left */}
+          <a href="/" style={{ marginRight:40, cursor:'none' }}>
             <span style={{
               fontFamily:'"disp",Georgia,serif',
-              fontSize:'2rem', fontWeight:'normal', letterSpacing:'-.02em',
-              color: textColor, transition:'color .3s',
-            }}>Orbbi</span>
+              fontSize:20, fontWeight:'normal',
+              color: onLight ? '#0F0E0D' : '#FAFAF9',
+              letterSpacing:-0.4,
+              transition:'color .3s',
+            }}>
+              Orbbi
+            </span>
           </a>
 
-          {/* Center links — desktop */}
-          <div style={{ display:'flex', alignItems:'center', gap:'2.8rem', flex:1 }} className="hidden l:flex">
+          {/* Center links — desktop only */}
+          <div style={{ display:'flex', alignItems:'center', gap:28, flex:1 }} className="hidden l:flex">
             {LINKS.map(l => (
               <a key={l} href={`/#${l.toLowerCase().replace(' ','-')}`}
-                style={{ fontSize:'1.3rem', color: onLight?'rgba(13,12,10,0.5)':'rgba(255,255,255,0.6)', transition:'color .3s', cursor:'none' }}
-                onMouseEnter={e=>(e.currentTarget.style.color=textColor)}
-                onMouseLeave={e=>(e.currentTarget.style.color=onLight?'rgba(13,12,10,0.5)':'rgba(255,255,255,0.6)')}
-              >{l}</a>
+                style={{ fontSize:14, fontWeight:400, color: onLight ? 'rgba(15,14,13,0.55)' : 'rgba(250,250,249,0.7)', transition:'color .2s', cursor:'none', display:'flex', alignItems:'center', gap:4 }}
+                onMouseEnter={e=>(e.currentTarget.style.color = onLight ? '#0F0E0D' : '#FAFAF9')}
+                onMouseLeave={e=>(e.currentTarget.style.color = onLight ? 'rgba(15,14,13,0.55)' : 'rgba(250,250,249,0.7)')}
+              >
+                {l}
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" style={{ opacity:.6 }}>
+                  <path d="M2 4l3 3 3-3" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </a>
             ))}
           </div>
 
           {/* Right: Login + CTA */}
-          <div style={{ display:'flex', alignItems:'center', gap:'1.2rem', marginLeft:'auto' }}>
+          <div style={{ display:'flex', alignItems:'center', gap:8, marginLeft:'auto' }}>
             <a href="mailto:contacto@orbbilatam.com"
-              style={{ fontSize:'1.3rem', color:textColor, transition:'color .3s', cursor:'none', padding:'.8rem 1.2rem' }}
-              className="hidden l:block"
-            >Login</a>
-            <a href="/#contacto" className={onLight ? 'btn-outline-d' : 'btn-outline-w'} style={{ fontSize:'1.2rem', padding:'.8rem 1.6rem' }}>
+              className={onLight ? 'btn-login-dark' : 'btn-login'}
+              style={{ fontSize:14 }}
+            >
+              Login
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" style={{ opacity:.6 }}>
+                <path d="M2 4l3 3 3-3" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </a>
+            <a href="/#contacto" className="btn-demo">
               Diagnóstico gratis
             </a>
           </div>
 
           {/* Hamburger — mobile */}
-          <button onClick={()=>setOpen(v=>!v)}
-            style={{ background:'none',border:'none',cursor:'none',padding:'8px 8px 8px 1.6rem',display:'flex',flexDirection:'column',gap:'5px' }}
-            className="l:hidden" aria-label="Menú"
+          <button
+            onClick={() => setOpen(v => !v)}
+            className="l:hidden"
+            style={{ background:'none', border:'none', cursor:'none', padding:'8px', display:'flex', flexDirection:'column', gap:5, marginLeft:16 }}
+            aria-label="Menú"
           >
-            <span className="burger" style={{ background:textColor, transform:open?'translateY(6px) rotate(45deg)':undefined }} />
-            <span className="burger" style={{ background:textColor, width:open?'2.2rem':'1.4rem', transform:open?'translateY(-6px) rotate(-45deg)':undefined }} />
+            <span className="burger-l" style={{ background: onLight?'#0F0E0D':'#FAFAF9', transform:open?'translateY(6px) rotate(45deg)':undefined }} />
+            <span className="burger-l" style={{ background: onLight?'#0F0E0D':'#FAFAF9', width:open?22:14, transform:open?'translateY(-6px) rotate(-45deg)':undefined }} />
           </button>
         </nav>
       </div>
 
-      {/* Full-screen menu — Harvey dark */}
-      <div className={`menu-panel ${open?'open':''}`}>
-        <div className="wrap" style={{ paddingTop:'9rem', height:'100%', display:'flex', flexDirection:'column', justifyContent:'space-between', paddingBottom:'4rem' }}>
-          <button onClick={()=>setOpen(false)} style={{ position:'absolute',top:'3.2rem',right:'2.4rem',background:'none',border:'none',cursor:'none',color:'rgba(255,255,255,0.4)',fontSize:'2rem',lineHeight:1 }}>✕</button>
+      {/* Full-screen menu */}
+      <div className={`menu-overlay ${open?'open':''}`}>
+        <div className="page-wrap" style={{ paddingTop:106, height:'100%', display:'flex', flexDirection:'column', justifyContent:'space-between', paddingBottom:40 }}>
+          <button onClick={()=>setOpen(false)} style={{ position:'absolute', top:32, right:36, background:'none', border:'none', cursor:'none', color:'rgba(250,250,249,0.4)', fontSize:24, lineHeight:1 }}>✕</button>
           <nav style={{ display:'flex', flexDirection:'column' }}>
-            {[...LINKS,'Contacto'].map((l,i)=>(
-              <a key={l} href={`/#${l.toLowerCase().replace(' ','-')}`} onClick={()=>setOpen(false)}
-                style={{ fontFamily:'"disp",Georgia,serif', fontSize:'clamp(4rem,7vw,9.6rem)', lineHeight:1.1, letterSpacing:'-.025em', color:i===0?'#FFFFFF':'rgba(255,255,255,0.2)', cursor:'none', transition:'color .3s', borderBottom:'1px solid rgba(255,255,255,0.06)', paddingBottom:'1rem', marginBottom:'.4rem' }}
-                onMouseEnter={e=>(e.currentTarget.style.color='#FFFFFF')}
-                onMouseLeave={e=>(e.currentTarget.style.color=i===0?'#FFFFFF':'rgba(255,255,255,0.2)')}
+            {[...LINKS,'Contacto'].map((l,i) => (
+              <a key={l} href={`/#${l.toLowerCase().replace(' ','-')}`}
+                onClick={() => setOpen(false)}
+                style={{
+                  fontFamily:'"disp",Georgia,serif',
+                  fontSize:'clamp(40px,7vw,96px)',
+                  lineHeight:1.1, letterSpacing:'-0.025em', fontWeight:'normal',
+                  color: i===0 ? '#FAFAF9' : 'rgba(250,250,249,0.2)',
+                  cursor:'none', transition:'color .3s',
+                  borderBottom:'1px solid rgba(250,250,249,0.06)',
+                  paddingBottom:10, marginBottom:4,
+                }}
+                onMouseEnter={e=>(e.currentTarget.style.color='#FAFAF9')}
+                onMouseLeave={e=>(e.currentTarget.style.color=i===0?'#FAFAF9':'rgba(250,250,249,0.2)')}
               >{l}</a>
             ))}
           </nav>
-          <div style={{ display:'flex',justifyContent:'space-between',alignItems:'center',paddingTop:'2.4rem',borderTop:'1px solid rgba(255,255,255,0.08)' }}>
-            <span style={{ fontFamily:'"disp"',fontSize:'1.8rem',color:'rgba(255,255,255,0.35)' }}>Orbbi</span>
-            <a href="mailto:contacto@orbbilatam.com" style={{ fontSize:'1.3rem',color:'rgba(255,255,255,0.35)',cursor:'none' }}>contacto@orbbilatam.com</a>
+          <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', paddingTop:24, borderTop:'1px solid rgba(250,250,249,0.08)' }}>
+            <span style={{ fontFamily:'"disp"', fontSize:20, color:'rgba(250,250,249,0.35)' }}>Orbbi</span>
+            <a href="mailto:contacto@orbbilatam.com" style={{ fontSize:14, color:'rgba(250,250,249,0.35)', cursor:'none' }}>contacto@orbbilatam.com</a>
           </div>
         </div>
       </div>

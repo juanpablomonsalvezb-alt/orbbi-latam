@@ -1,66 +1,70 @@
 'use client'
 import { motion } from 'framer-motion'
 
+/* Harvey statement section — exact:
+   - bg: #FAFAF9
+   - padding: 180px top, 180px bottom
+   - H3: 36px, lh 39.6px, ls -0.36px, weight 500
+   - First part: dark #0F0E0D (bold statement)
+   - Second part: muted #8F8B85 (continuation)
+   - Below: dark rounded product card
+*/
+
 export default function StatementSection() {
   return (
-    <section className="sec-paper" style={{ padding:'8rem 0 0' }}>
-      <div className="wrap" style={{ paddingBottom:'6rem' }}>
-
-        {/* Harvey's exact layout: bold statement left, muted continuation */}
+    <section className="sec-light sec-pad">
+      <div className="page-wrap">
         <motion.div
           initial={{ opacity:0, y:24 }}
           whileInView={{ opacity:1, y:0 }}
-          viewport={{ once:true, margin:'-100px' }}
+          viewport={{ once:true, margin:'-80px' }}
           transition={{ duration:.8, ease:[0.16,1,0.3,1] }}
-          style={{ maxWidth:'72rem' }}
         >
-          <p>
-            <span className="statement-text">
+          {/* Harvey exact text pattern: bold dark + muted continuation on same line */}
+          <h2 style={{ fontSize:36, lineHeight:'39.6px', letterSpacing:'-0.36px', fontWeight:500, fontFamily:'"sans",system-ui,sans-serif', maxWidth:760 }}>
+            <span style={{ color:'#0F0E0D' }}>
               Orbbi es IA diseñada para mujeres profesionales en Latinoamérica.{' '}
             </span>
-            <span className="statement-sub">
-              Potencia tu experiencia en una plataforma que te permite enfocarte en el trabajo que importa.
+            <span style={{ color:'#8F8B85' }}>
+              Potencia tu expertise en una plataforma segura que te permite enfocarte en el trabajo de alto valor.
             </span>
-          </p>
+          </h2>
         </motion.div>
 
+        {/* Product dark card — Harvey shows their interface screenshot */}
+        <motion.div
+          initial={{ opacity:0, y:32 }}
+          whileInView={{ opacity:1, y:0 }}
+          viewport={{ once:true, margin:'-60px' }}
+          transition={{ duration:.9, delay:.15, ease:[0.16,1,0.3,1] }}
+          style={{
+            marginTop:60,
+            borderRadius:16,
+            background:'#1A1916',
+            minHeight:400,
+            display:'flex', alignItems:'center', justifyContent:'center',
+            position:'relative', overflow:'hidden',
+          }}
+        >
+          {/* Harvey "H" logomark — we use "O" for Orbbi */}
+          <span style={{
+            fontFamily:'"disp",Georgia,serif',
+            fontSize:'clamp(120px,18vw,200px)',
+            color:'rgba(250,250,249,0.08)',
+            lineHeight:1, userSelect:'none', letterSpacing:'-4px',
+          }}>
+            O
+          </span>
+          {/* Subtle grid pattern like Harvey's interface preview */}
+          <div style={{
+            position:'absolute', inset:0,
+            backgroundImage:'linear-gradient(rgba(250,250,249,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(250,250,249,0.02) 1px, transparent 1px)',
+            backgroundSize:'80px 80px',
+          }} />
+          {/* Corner fade */}
+          <div style={{ position:'absolute', inset:0, background:'radial-gradient(ellipse at center, transparent 30%, rgba(26,25,22,0.6) 100%)' }} />
+        </motion.div>
       </div>
-
-      {/* Dark product card — Harvey's rounded dark rectangle showing the interface */}
-      <motion.div
-        initial={{ opacity:0, y:32 }}
-        whileInView={{ opacity:1, y:0 }}
-        viewport={{ once:true, margin:'-80px' }}
-        transition={{ duration:.9, delay:.15, ease:[0.16,1,0.3,1] }}
-        style={{
-          margin:'0 2.4rem 0',
-          borderRadius:'1.6rem 1.6rem 0 0',
-          background:'#1A1916',
-          minHeight:'36rem',
-          display:'flex', alignItems:'center', justifyContent:'center',
-          overflow:'hidden',
-          position:'relative',
-        }}
-        className="l:mx-[5.6rem]"
-      >
-        {/* Logo mark — Harvey shows their H logomark */}
-        <div style={{
-          fontFamily:'"disp",Georgia,serif',
-          fontSize:'clamp(8rem,12vw,16rem)',
-          color:'rgba(255,255,255,0.12)',
-          lineHeight:1,
-          userSelect:'none',
-        }}>
-          O
-        </div>
-        {/* Subtle grid overlay */}
-        <div style={{
-          position:'absolute', inset:0,
-          backgroundImage:'linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)',
-          backgroundSize:'8rem 8rem',
-        }} />
-      </motion.div>
-
     </section>
   )
 }

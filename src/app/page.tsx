@@ -1,7 +1,6 @@
 import Header             from '@/components/Header'
 import CustomCursor        from '@/components/CustomCursor'
 import Grain               from '@/components/Grain'
-import Spotlight           from '@/components/Spotlight'
 import HeroSection         from '@/components/sections/HeroSection'
 import StatementSection    from '@/components/sections/StatementSection'
 import FeaturesSection     from '@/components/sections/FeaturesSection'
@@ -10,25 +9,29 @@ import StatsSection        from '@/components/sections/StatsSection'
 import ContactSection      from '@/components/sections/ContactSection'
 import Footer              from '@/components/Footer'
 
+/* Harvey.ai structure — exact order:
+   1. Dark hero (video/image bg)
+   2. Light statement + product card
+   3. Light features scroll-pinned
+   4. Warm-light testimonials (#F2F1F0)
+   5. Dark client impact (omitted, no video assets)
+   6. Dark metrics (label | 80px number rows)
+   7. Dark contact
+   8. Footer (dark, giant logomark)
+*/
+
 export default function Home() {
   return (
     <>
       <Grain />
-      <Spotlight />
       <CustomCursor />
       <Header />
       <main>
-        {/* 1. DARK — split hero: text left, photo right */}
         <HeroSection />
-        {/* 2. PAPER — statement + product dark card */}
         <StatementSection />
-        {/* 3. PAPER — features list scroll-pinned */}
         <FeaturesSection />
-        {/* 4. PAPER — testimonials 50/50 */}
         <TestimonialsSection />
-        {/* 5. DARK — metrics two-column rows */}
         <StatsSection />
-        {/* 6. DARK — contact */}
         <ContactSection />
       </main>
       <Footer />
