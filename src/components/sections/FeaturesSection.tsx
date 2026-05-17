@@ -1,94 +1,92 @@
 'use client'
-import { useEffect, useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
+
+/* Harvey's EXACT feature section:
+   - Light background (#F5F4F0)
+   - Left: small label "The top legal teams use Harvey for"
+   - Center: big list of features, one ACTIVE (dark), rest muted gray
+   - Right: "Explore Platform" button
+   - As user scrolls the pinned section, active item advances
+*/
 
 const FEATURES = [
-  { label: 'Formación Esencial', sub: 'De cero a productiva en 8 semanas. Sin tecnicismos.' },
-  { label: 'Orientación 1:1',    sub: 'IA diseñada para tu cargo, tu sector, tu flujo de trabajo.' },
-  { label: 'Herramienta a Medida', sub: 'Tu propio asistente de IA, construido para ti.' },
-  { label: 'Programas Corporativos', sub: 'IA para equipos completos, con foco en liderazgo femenino.' },
-  { label: 'Comunidad activa',    sub: 'Red de mujeres líderes en IA en toda Latinoamérica.' },
-  { label: 'Acompañamiento real', sub: 'No termina cuando termina el programa. Te seguimos.' },
+  'Formación en IA',
+  'Orientación 1:1',
+  'Herramientas a Medida',
+  'Comunidad Activa',
+  'Programas Corporativos',
+  'Acompañamiento Continuo',
+  'Diagnóstico Personalizado',
 ]
 
 export default function FeaturesSection() {
+  const sectionRef  = useRef<HTMLDivElement>(null)
+  const pinRef      = useRef<HTMLDivElement>(null)
   const [active, setActive] = useState(0)
 
   useEffect(() => {
-    const id = setInterval(() => setActive(v => (v + 1) % FEATURES.length), 2800)
-    return () => clearInterval(id)
+    const ctx = gsap.context(() => {
+      ScrollTrigger.create({
+        trigger: sectionRef.current!,
+        start: 'top top',
+        end: `+=${FEATURES.length * 140}`,
+        pin: pinRef.current!,
+        scrub: false,
+        snap: { snapTo: 1 / (FEATURES.length - 1), duration: 0.3, ease: 'power1.inOut' },
+        onUpdate: (self) => {
+          const idx = Math.round(self.progress * (FEATURES.length - 1))
+          setActive(Math.min(idx, FEATURES.length - 1))
+        },
+      })
+    }, sectionRef)
+    return () => ctx.revert()
   }, [])
 
   return (
-    <section id="programas" className="section-dark">
-      <div className="wrap">
+    /* Outer wrapper — tall enough to scroll through features */
+    <div ref={sectionRef} style={{ height: `${FEATURES.length * 140 + 100}vh` }}>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '8rem' }} className="l:flex-row l:items-start l:gap-[12rem]">
+      {/* Pinned inner panel */}
+      <div
+        ref={pinRef}
+        className="sec-paper"
+        style={{ height: '100vh', display:'flex', alignItems:'center' }}
+      >
+        <div className="wrap" style={{ width:'100%', display:'flex', alignItems:'center', justifyContent:'space-between', gap:'4rem' }}>
 
-          {/* Left: label + description */}
-          <div style={{ maxWidth: '44rem', flexShrink: 0 }}>
-            <p className="label" style={{ color: 'rgba(255,255,255,0.35)', marginBottom: '3.2rem' }}>
-              Lo que hacemos
+          {/* Left label — Harvey: "The top legal teams use Harvey for" */}
+          <div style={{ flexShrink:0, maxWidth:'18rem' }}>
+            <p style={{ fontSize:'1.4rem', lineHeight:1.6, color:'rgba(13,12,10,0.6)', fontWeight:300 }}>
+              Las mejores profesionales de Latam confían en Orbbi para
             </p>
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={active}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -12 }}
-                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              >
-                <h2 className="title" style={{ color: '#FFFFFF', marginBottom: '2rem' }}>
-                  {FEATURES[active].label}
-                </h2>
-                <p className="body-l" style={{ color: 'rgba(255,255,255,0.45)' }}>
-                  {FEATURES[active].sub}
-                </p>
-              </motion.div>
-            </AnimatePresence>
-            <a href="/#contacto" className="btn-white" style={{ marginTop: '4rem', display: 'inline-flex' }}>
-              Solicitar diagnóstico gratuito
-            </a>
           </div>
 
-          {/* Right: feature list — Harvey-style */}
-          <div style={{ flex: 1 }}>
+          {/* Center: Feature list */}
+          <div style={{ flex:1, padding:'0 4rem' }}>
             {FEATURES.map((f, i) => (
-              <button
-                key={i}
-                onClick={() => setActive(i)}
-                style={{
-                  display: 'flex', alignItems: 'baseline', justifyContent: 'space-between',
-                  width: '100%', background: 'none', border: 'none', cursor: 'none',
-                  borderTop: '1px solid rgba(255,255,255,0.08)',
-                  padding: '2.4rem 0',
-                  transition: 'opacity .3s',
-                  ...(i === FEATURES.length - 1 ? { borderBottom: '1px solid rgba(255,255,255,0.08)' } : {}),
-                }}
+              <div
+                key={f}
+                className={`feat-item ${i === active ? 'feat-item-active' : 'feat-item-inactive'}`}
+                style={{ display:'block' }}
               >
-                <span style={{
-                  fontFamily: '"disp",Georgia,serif',
-                  fontSize: 'clamp(2.4rem,3.5vw,4.8rem)',
-                  lineHeight: 1.1, letterSpacing: '-0.02em',
-                  color: i === active ? '#FFFFFF' : 'rgba(255,255,255,0.18)',
-                  transition: 'color .4s',
-                  textAlign: 'left',
-                }}>
-                  {f.label}
-                </span>
-                <span style={{
-                  fontSize: '1.2rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.14em',
-                  color: i === active ? 'rgba(255,255,255,0.45)' : 'rgba(255,255,255,0.12)',
-                  transition: 'color .4s', flexShrink: 0, marginLeft: '2rem',
-                }}>
-                  0{i + 1}
-                </span>
-              </button>
+                {f}
+              </div>
             ))}
+          </div>
+
+          {/* Right: Explore button */}
+          <div style={{ flexShrink:0 }}>
+            <a href="/#contacto" className="btn-outline-d">
+              Ver plataforma
+            </a>
           </div>
 
         </div>
       </div>
-    </section>
+    </div>
   )
 }

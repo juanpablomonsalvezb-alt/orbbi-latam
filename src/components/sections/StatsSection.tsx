@@ -2,48 +2,87 @@
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { motion } from 'framer-motion'
 
 gsap.registerPlugin(ScrollTrigger)
 
+/* Harvey EXACT metrics layout:
+   - Dark background
+   - Header: italic serif "...measurable results"
+   - Each row: [label LEFT] [huge number RIGHT]
+   - Thin horizontal rule between rows
+*/
+
 const METRICS = [
-  { v: 847,  s: '+', l: 'mujeres formadas',    sub: 'en toda Latinoamérica' },
-  { v: 142,  s: 'k', l: 'horas ahorradas',     sub: 'por nuestras alumnas al mes' },
-  { v: 12,   s: '',  l: 'países',              sub: 'de cobertura activa' },
-  { v: 94,   s: '%', l: 'satisfacción',        sub: 'al finalizar el programa' },
+  { label: 'Horas ahorradas por alumna al mes',          val: 20,   suffix: '+',    display: '20+' },
+  { label: 'Mujeres formadas en toda Latinoamérica',     val: 847,  suffix: '+',    display: '847+' },
+  { label: 'Países de cobertura activa',                 val: 12,   suffix: '',     display: '12' },
+  { label: 'Tasa de satisfacción al finalizar',          val: 94,   suffix: '%',    display: '94%' },
+  { label: 'Sectores profesionales cubiertos',           val: 18,   suffix: '+',    display: '18+' },
 ]
 
-function N({ v, s }: { v: number; s: string }) {
-  const r = useRef<HTMLSpanElement>(null)
+function AnimNum({ target, suffix }: { target: number; suffix: string }) {
+  const ref = useRef<HTMLSpanElement>(null)
   useEffect(() => {
-    const el = r.current; if (!el) return
-    const obj = { val: 0 }
+    const el = ref.current; if (!el) return
+    const obj = { v: 0 }
     gsap.to(obj, {
-      val: v, duration: 2.4, ease: 'power2.out',
-      onUpdate: () => { el.textContent = Math.round(obj.val).toString() },
-      scrollTrigger: { trigger: el, start: 'top 82%', once: true }
+      v: target, duration: 2, ease: 'power2.out',
+      onUpdate: () => { el.textContent = Math.round(obj.v) + suffix },
+      scrollTrigger: { trigger: el, start: 'top 82%', once: true },
     })
-  }, [v])
-  return <><span ref={r}>0</span>{s}</>
+  }, [target, suffix])
+  return <span ref={ref}>0</span>
 }
 
 export default function StatsSection() {
   return (
-    <section className="section-dark" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+    <section className="sec-dark" style={{ padding:'8rem 0' }}>
       <div className="wrap">
-        <p className="label" style={{ color: 'rgba(255,255,255,0.3)', marginBottom: '7rem' }}>
-          Impacto real
-        </p>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: '4rem 2rem' }} className="l:grid-cols-4">
+
+        {/* Harvey header: italic serif + "measurable results" */}
+        <motion.div
+          initial={{ opacity:0, y:20 }}
+          whileInView={{ opacity:1, y:0 }}
+          viewport={{ once:true, margin:'-80px' }}
+          transition={{ duration:.8, ease:[0.16,1,0.3,1] }}
+          style={{ marginBottom:'6rem' }}
+        >
+          <h2 style={{ fontFamily:'"disp",Georgia,serif', fontSize:'clamp(2.8rem,4vw,5.6rem)', fontWeight:'normal', letterSpacing:'-.025em', lineHeight:1.1, color:'rgba(255,255,255,0.5)' }}>
+            Ayudamos a las mejores profesionales a <br/>
+            <em style={{ fontStyle:'italic', color:'#FFFFFF' }}>obtener resultados medibles</em>
+          </h2>
+        </motion.div>
+
+        {/* Metric rows — Harvey two-column: label left, number right */}
+        <div>
           {METRICS.map((m, i) => (
-            <div key={i} style={{ paddingTop: '3.2rem', borderTop: '1px solid rgba(255,255,255,0.10)' }}>
-              <p style={{ fontFamily: '"disp",Georgia,serif', fontSize: 'clamp(5.6rem,8vw,11.2rem)', lineHeight: 1, letterSpacing: '-0.03em', color: '#FFFFFF', marginBottom: '1.6rem' }}>
-                <N v={m.v} s={m.s} />
+            <motion.div
+              key={i}
+              initial={{ opacity:0 }}
+              whileInView={{ opacity:1 }}
+              viewport={{ once:true, margin:'-40px' }}
+              transition={{ duration:.6, delay: i * 0.05 }}
+              style={{
+                display:'flex', alignItems:'baseline', justifyContent:'space-between',
+                padding:'3.2rem 0',
+                borderTop:'1px solid rgba(255,255,255,0.1)',
+                ...(i === METRICS.length-1 ? { borderBottom:'1px solid rgba(255,255,255,0.1)' } : {}),
+                gap:'4rem',
+              }}
+            >
+              {/* Label — left, small */}
+              <p style={{ fontSize:'1.5rem', color:'rgba(255,255,255,0.55)', maxWidth:'44rem', lineHeight:1.5 }}>
+                {m.label}
               </p>
-              <p style={{ fontSize: '1.4rem', color: '#FFFFFF', fontWeight: 400, marginBottom: '.4rem' }}>{m.l}</p>
-              <p className="small" style={{ color: 'rgba(255,255,255,0.35)' }}>{m.sub}</p>
-            </div>
+              {/* Number — right, ENORMOUS */}
+              <p className="metric-num" style={{ flexShrink:0, textAlign:'right' }}>
+                <AnimNum target={m.val} suffix={m.suffix} />
+              </p>
+            </motion.div>
           ))}
         </div>
+
       </div>
     </section>
   )

@@ -2,45 +2,35 @@
 import { useEffect, useRef } from 'react'
 
 export default function CustomCursor() {
-  const blobRef = useRef<HTMLDivElement>(null)
-  const dotRef  = useRef<HTMLDivElement>(null)
+  const dot  = useRef<HTMLDivElement>(null)
+  const ring = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (typeof window === 'undefined') return
-    if (window.matchMedia('(hover:none)').matches) return
-    const blob = blobRef.current!
-    const dot  = dotRef.current!
-    let cx = -200, cy = -200, mx = -200, my = -200, big = false
-
-    const move = (e: MouseEvent) => { mx = e.clientX; my = e.clientY }
-    const enter = () => { big = true }
-    const leave = () => { big = false }
-    const addListeners = () => {
-      document.querySelectorAll<HTMLElement>('a,button,[data-cursor]').forEach(el => {
-        el.addEventListener('mouseenter', enter)
-        el.addEventListener('mouseleave', leave)
-      })
+    if (typeof window==='undefined' || window.matchMedia('(hover:none)').matches) return
+    let mx=-200,my=-200,rx=-200,ry=-200,big=false
+    const move=(e:MouseEvent)=>{ mx=e.clientX; my=e.clientY }
+    const enter=()=>{ big=true }
+    const leave=()=>{ big=false }
+    const add=()=>{ document.querySelectorAll<HTMLElement>('a,button').forEach(el=>{ el.addEventListener('mouseenter',enter); el.addEventListener('mouseleave',leave) }) }
+    add()
+    const obs=new MutationObserver(add)
+    obs.observe(document.body,{childList:true,subtree:true})
+    window.addEventListener('mousemove',move,{passive:true})
+    let raf:number
+    const tick=()=>{
+      dot.current!.style.transform=`translate(${mx-4}px,${my-4}px)`
+      rx+=(mx-rx)*0.10; ry+=(my-ry)*0.10
+      ring.current!.style.transform=`translate(${rx-17}px,${ry-17}px) scale(${big?2.2:1})`
+      raf=requestAnimationFrame(tick)
     }
-    addListeners()
-    const obs = new MutationObserver(addListeners)
-    obs.observe(document.body, { childList:true, subtree:true })
-    window.addEventListener('mousemove', move, { passive:true })
-
-    let raf: number
-    const tick = () => {
-      dot.style.transform  = `translate(${mx-4}px,${my-4}px)`
-      cx += (mx-cx) * 0.11; cy += (my-cy) * 0.11
-      blob.style.transform = `translate(${cx-20}px,${cy-20}px) scale(${big?2.6:1})`
-      raf = requestAnimationFrame(tick)
-    }
-    raf = requestAnimationFrame(tick)
-    return () => { window.removeEventListener('mousemove', move); obs.disconnect(); cancelAnimationFrame(raf) }
-  }, [])
+    raf=requestAnimationFrame(tick)
+    return ()=>{ window.removeEventListener('mousemove',move); obs.disconnect(); cancelAnimationFrame(raf) }
+  },[])
 
   return (
     <>
-      <div ref={dotRef} aria-hidden style={{ position:'fixed',top:0,left:0,width:8,height:8,borderRadius:'50%',background:'#1E3A2F',pointerEvents:'none',zIndex:99999,willChange:'transform' }} />
-      <div ref={blobRef} aria-hidden style={{ position:'fixed',top:0,left:0,width:40,height:40,borderRadius:'50%',border:'1px solid rgba(30,58,47,0.4)',pointerEvents:'none',zIndex:99998,willChange:'transform',transition:'scale 0.4s cubic-bezier(0.2,0.65,0.3,0.9)' }} />
+      <div ref={dot} className="c-dot" style={{ background:'#FFFFFF' }} />
+      <div ref={ring} className="c-ring" style={{ color:'rgba(255,255,255,0.4)', transition:'transform .08s linear, scale .35s cubic-bezier(.2,.65,.3,.9)' }} />
     </>
   )
 }

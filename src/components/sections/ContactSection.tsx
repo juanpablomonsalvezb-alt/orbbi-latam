@@ -2,119 +2,103 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 
-const PAISES  = ['Argentina','Bolivia','Chile','Colombia','Costa Rica','Ecuador','México','Paraguay','Perú','Uruguay','Venezuela','Otro']
-const PROGRAMAS = ['Formación Esencial (8 semanas)','Orientación Profesional 1:1','Herramienta de IA a Medida','Programa Corporativo','Necesito orientación']
+const PAISES = ['Argentina','Bolivia','Chile','Colombia','Costa Rica','Ecuador','México','Paraguay','Perú','Uruguay','Venezuela','Otro']
+const PROGS  = ['Formación Esencial','Orientación 1:1','Herramienta a Medida','Programa Corporativo','Necesito orientación']
 
-type F = { nombre:string; email:string; cargo:string; pais:string; programa:string; mensaje:string }
+type F = { nombre:string; email:string; cargo:string; pais:string; prog:string; msg:string }
 type E = Partial<Record<keyof F,string>>
 
 export default function ContactSection() {
-  const [form,setForm] = useState<F>({nombre:'',email:'',cargo:'',pais:'',programa:'',mensaje:''})
-  const [errors,setErrors] = useState<E>({})
-  const [status,setStatus] = useState<'idle'|'sending'|'ok'|'err'>('idle')
+  const [form,setForm] = useState<F>({nombre:'',email:'',cargo:'',pais:'',prog:'',msg:''})
+  const [errs,setErrs] = useState<E>({})
+  const [st,setSt]     = useState<'idle'|'sending'|'ok'|'err'>('idle')
 
-  const set = (k:keyof F) => (e:React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement|HTMLSelectElement>) => {
-    setForm(f=>({...f,[k]:e.target.value})); setErrors(er=>({...er,[k]:undefined}))
+  const set=(k:keyof F)=>(e:React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement|HTMLSelectElement>)=>{
+    setForm(f=>({...f,[k]:e.target.value})); setErrs(er=>({...er,[k]:undefined}))
   }
-  function validate() {
+  function validate(){
     const e:E={}
     if(!form.nombre.trim()) e.nombre='Requerido'
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email='Email inválido'
     if(!form.cargo.trim()) e.cargo='Requerido'
-    if(!form.pais) e.pais='Selecciona país'
-    if(!form.mensaje.trim()) e.mensaje='Cuéntanos algo'
-    setErrors(e); return Object.keys(e).length===0
+    if(!form.pais) e.pais='Selecciona'
+    if(!form.msg.trim()) e.msg='Requerido'
+    setErrs(e); return Object.keys(e).length===0
   }
-  async function submit(ev:React.FormEvent) {
-    ev.preventDefault(); if(!validate()) return
-    setStatus('sending')
-    try { const r=await fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(form)}); setStatus(r.ok?'ok':'err') }
-    catch { setStatus('err') }
+  async function submit(ev:React.FormEvent){
+    ev.preventDefault(); if(!validate()) return; setSt('sending')
+    try { const r=await fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(form)}); setSt(r.ok?'ok':'err') }
+    catch { setSt('err') }
   }
 
   return (
-    <section id="contacto" className="section-dark" style={{ borderTop:'1px solid rgba(255,255,255,0.06)' }}>
+    <section id="contacto" className="sec-dark" style={{ padding:'12rem 0', borderTop:'1px solid rgba(255,255,255,0.08)' }}>
       <div className="wrap">
-        <div style={{ display:'grid', gridTemplateColumns:'1fr', gap:'8rem' }} className="l:grid-cols-[1fr_1fr]">
+        <div style={{ display:'grid', gridTemplateColumns:'1fr', gap:'8rem' }} className="l:grid-cols-2">
 
-          {/* Left */}
-          <motion.div
-            initial={{opacity:0,y:32}} whileInView={{opacity:1,y:0}}
-            viewport={{once:true,margin:'-80px'}} transition={{duration:.9,ease:[0.16,1,0.3,1]}}
-            style={{ display:'flex', flexDirection:'column', justifyContent:'space-between', gap:'4rem' }}
-          >
-            <div>
-              <p className="label" style={{ color:'rgba(255,255,255,0.3)', marginBottom:'3.2rem' }}>Contacto</p>
-              <h2 className="headline" style={{ color:'#FFFFFF', maxWidth:'48rem', marginBottom:'2.4rem' }}>
-                Empieza hoy.
-                <br />
-                <em style={{ fontStyle:'italic', color:'rgba(255,255,255,0.35)' }}>Es gratis.</em>
-              </h2>
-              <p className="body-l" style={{ color:'rgba(255,255,255,0.42)', maxWidth:'40rem' }}>
-                Una consultora especializada se comunica contigo en menos de 24 horas.
-              </p>
-            </div>
-            <div>
-              <p className="label" style={{ color:'rgba(255,255,255,0.25)', marginBottom:'1.2rem' }}>Email directo</p>
-              <a href="mailto:contacto@orbbilatam.com" style={{ fontFamily:'"disp"',fontSize:'clamp(2rem,2.5vw,3rem)',color:'#C9A96E',cursor:'none',transition:'opacity .3s' }}
-                onMouseEnter={e=>(e.currentTarget.style.opacity='.7')}
-                onMouseLeave={e=>(e.currentTarget.style.opacity='1')}
-              >contacto@orbbilatam.com</a>
-              <p className="small" style={{ color:'rgba(255,255,255,0.28)', marginTop:'.8rem' }}>Lunes a viernes · &lt;24 h de respuesta</p>
-            </div>
+          <motion.div initial={{opacity:0,y:24}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:.8,ease:[0.16,1,0.3,1]}}>
+            <p style={{ fontSize:'1.2rem',fontWeight:500,textTransform:'uppercase',letterSpacing:'.16em',color:'rgba(255,255,255,0.35)',marginBottom:'3.2rem' }}>Contacto</p>
+            <h2 style={{ fontFamily:'"disp",Georgia,serif',fontSize:'clamp(3.2rem,5vw,7.2rem)',fontWeight:'normal',letterSpacing:'-.025em',lineHeight:1.08,color:'#FFFFFF',marginBottom:'2.4rem' }}>
+              Empieza hoy.
+            </h2>
+            <p style={{ fontSize:'1.6rem',color:'rgba(255,255,255,0.45)',lineHeight:1.7,maxWidth:'40rem',marginBottom:'4.8rem' }}>
+              Una consultora especializada te contacta en menos de 24 horas. El diagnóstico es completamente gratuito.
+            </p>
+            <a href="mailto:contacto@orbbilatam.com" style={{ fontFamily:'"disp"',fontSize:'clamp(1.8rem,2.2vw,2.8rem)',color:'rgba(255,255,255,0.6)',cursor:'none',transition:'color .3s' }}
+              onMouseEnter={e=>(e.currentTarget.style.color='#FFFFFF')}
+              onMouseLeave={e=>(e.currentTarget.style.color='rgba(255,255,255,0.6)')}
+            >contacto@orbbilatam.com</a>
           </motion.div>
 
-          {/* Right */}
-          <motion.div
-            initial={{opacity:0,y:32}} whileInView={{opacity:1,y:0}}
-            viewport={{once:true,margin:'-80px'}} transition={{duration:.9,delay:.12,ease:[0.16,1,0.3,1]}}
-          >
-            {status==='ok' ? (
-              <div style={{ display:'flex',flexDirection:'column',gap:'2rem',paddingTop:'2rem' }}>
-                <div style={{ width:48,height:48,borderRadius:'50%',border:'1px solid rgba(255,255,255,0.25)',display:'flex',alignItems:'center',justifyContent:'center',color:'#FFFFFF',fontSize:'2rem' }}>✓</div>
-                <h3 style={{ fontFamily:'"disp"',fontSize:'clamp(3.2rem,4vw,4.8rem)',color:'#FFFFFF',lineHeight:1.1 }}>Mensaje recibido.</h3>
-                <p className="body" style={{ color:'rgba(255,255,255,0.42)' }}>Te respondemos en menos de 24 horas.</p>
+          <motion.div initial={{opacity:0,y:24}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:.8,delay:.12,ease:[0.16,1,0.3,1]}}>
+            {st==='ok' ? (
+              <div style={{ display:'flex',flexDirection:'column',gap:'2rem' }}>
+                <div style={{ width:48,height:48,borderRadius:'50%',border:'1px solid rgba(255,255,255,0.3)',display:'flex',alignItems:'center',justifyContent:'center',color:'#FFFFFF',fontSize:'2rem' }}>✓</div>
+                <h3 style={{ fontFamily:'"disp"',fontSize:'clamp(3rem,4vw,4.8rem)',color:'#FFFFFF',lineHeight:1.1 }}>Mensaje recibido.</h3>
+                <p style={{ fontSize:'1.5rem',color:'rgba(255,255,255,0.45)' }}>Te respondemos en menos de 24 horas.</p>
               </div>
             ) : (
-              <form onSubmit={submit} noValidate style={{ display:'flex',flexDirection:'column',gap:'3.6rem' }}>
-                {[
-                  { k:'nombre' as keyof F, l:'Nombre *',  t:'text',  p:'Tu nombre completo' },
-                  { k:'email'  as keyof F, l:'Email *',   t:'email', p:'tu@email.com' },
-                  { k:'cargo'  as keyof F, l:'Cargo *',   t:'text',  p:'Directora, Docente, Abogada…' },
-                ].map(f=>(
-                  <div key={f.k} style={{ display:'flex',flexDirection:'column',gap:'.6rem' }}>
-                    <label className="label" style={{ color:'rgba(255,255,255,0.3)',fontSize:'1rem' }}>{f.l}</label>
-                    <input className="field" type={f.t} value={form[f.k] as string} onChange={set(f.k)} placeholder={f.p}/>
-                    {errors[f.k]&&<span style={{ fontSize:'1.1rem',color:'rgba(255,120,120,0.8)' }}>{errors[f.k]}</span>}
-                  </div>
-                ))}
+              <form onSubmit={submit} noValidate style={{ display:'flex',flexDirection:'column',gap:'3.2rem' }}>
+                <div style={{ display:'grid',gridTemplateColumns:'1fr 1fr',gap:'3.2rem' }}>
+                  {[{k:'nombre' as keyof F,l:'Nombre *',t:'text',p:'Tu nombre'},{k:'email' as keyof F,l:'Email *',t:'email',p:'tu@email.com'}].map(f=>(
+                    <div key={f.k} style={{ display:'flex',flexDirection:'column',gap:'.6rem' }}>
+                      <label style={{ fontSize:'1.1rem',fontWeight:500,textTransform:'uppercase',letterSpacing:'.14em',color:'rgba(255,255,255,0.3)' }}>{f.l}</label>
+                      <input className="field" type={f.t} value={form[f.k] as string} onChange={set(f.k)} placeholder={f.p}/>
+                      {errs[f.k]&&<span style={{ fontSize:'1.1rem',color:'rgba(255,100,100,.8)' }}>{errs[f.k]}</span>}
+                    </div>
+                  ))}
+                </div>
+                <div style={{ display:'flex',flexDirection:'column',gap:'.6rem' }}>
+                  <label style={{ fontSize:'1.1rem',fontWeight:500,textTransform:'uppercase',letterSpacing:'.14em',color:'rgba(255,255,255,0.3)' }}>Cargo *</label>
+                  <input className="field" type="text" value={form.cargo} onChange={set('cargo')} placeholder="Directora, Docente, Abogada..."/>
+                  {errs.cargo&&<span style={{ fontSize:'1.1rem',color:'rgba(255,100,100,.8)' }}>{errs.cargo}</span>}
+                </div>
                 <div style={{ display:'grid',gridTemplateColumns:'1fr 1fr',gap:'3.2rem' }}>
                   <div style={{ display:'flex',flexDirection:'column',gap:'.6rem' }}>
-                    <label className="label" style={{ color:'rgba(255,255,255,0.3)',fontSize:'1rem' }}>País *</label>
+                    <label style={{ fontSize:'1.1rem',fontWeight:500,textTransform:'uppercase',letterSpacing:'.14em',color:'rgba(255,255,255,0.3)' }}>País *</label>
                     <select className="field" value={form.pais} onChange={set('pais')}>
                       <option value="">Selecciona</option>
                       {PAISES.map(p=><option key={p}>{p}</option>)}
                     </select>
-                    {errors.pais&&<span style={{ fontSize:'1.1rem',color:'rgba(255,120,120,0.8)' }}>{errors.pais}</span>}
+                    {errs.pais&&<span style={{ fontSize:'1.1rem',color:'rgba(255,100,100,.8)' }}>{errs.pais}</span>}
                   </div>
                   <div style={{ display:'flex',flexDirection:'column',gap:'.6rem' }}>
-                    <label className="label" style={{ color:'rgba(255,255,255,0.3)',fontSize:'1rem' }}>Programa</label>
-                    <select className="field" value={form.programa} onChange={set('programa')}>
+                    <label style={{ fontSize:'1.1rem',fontWeight:500,textTransform:'uppercase',letterSpacing:'.14em',color:'rgba(255,255,255,0.3)' }}>Programa</label>
+                    <select className="field" value={form.prog} onChange={set('prog')}>
                       <option value="">Selecciona</option>
-                      {PROGRAMAS.map(p=><option key={p}>{p}</option>)}
+                      {PROGS.map(p=><option key={p}>{p}</option>)}
                     </select>
                   </div>
                 </div>
                 <div style={{ display:'flex',flexDirection:'column',gap:'.6rem' }}>
-                  <label className="label" style={{ color:'rgba(255,255,255,0.3)',fontSize:'1rem' }}>Tu situación *</label>
-                  <textarea className="field" value={form.mensaje} onChange={set('mensaje')} placeholder="¿Qué quieres lograr con IA? ¿Qué te frena hoy?" rows={4} style={{ resize:'none' }}/>
-                  {errors.mensaje&&<span style={{ fontSize:'1.1rem',color:'rgba(255,120,120,0.8)' }}>{errors.mensaje}</span>}
+                  <label style={{ fontSize:'1.1rem',fontWeight:500,textTransform:'uppercase',letterSpacing:'.14em',color:'rgba(255,255,255,0.3)' }}>Tu situación *</label>
+                  <textarea className="field" value={form.msg} onChange={set('msg')} placeholder="¿Qué quieres lograr con IA?" rows={4} style={{ resize:'none' }}/>
+                  {errs.msg&&<span style={{ fontSize:'1.1rem',color:'rgba(255,100,100,.8)' }}>{errs.msg}</span>}
                 </div>
-                <button type="submit" className="btn-white" style={{ alignSelf:'flex-start',opacity:status==='sending'?.6:1 }} disabled={status==='sending'}>
-                  {status==='sending'?'Enviando…':'Enviar mensaje'}
-                  {status!=='sending'&&<svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M1.5 6.5h10M7.5 2.5l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>}
+                <button type="submit" className="btn-solid-w" style={{ alignSelf:'flex-start',opacity:st==='sending'?.6:1 }} disabled={st==='sending'}>
+                  {st==='sending'?'Enviando…':'Enviar mensaje'}
                 </button>
-                {status==='err'&&<p className="small" style={{ color:'rgba(255,120,120,0.8)' }}>Error al enviar. Escríbenos a contacto@orbbilatam.com</p>}
+                {st==='err'&&<p style={{ fontSize:'1.2rem',color:'rgba(255,100,100,.8)' }}>Error al enviar. Escríbenos directamente.</p>}
               </form>
             )}
           </motion.div>

@@ -2,134 +2,113 @@
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 
-function Reveal({ children, delay = 0, style = {} }: { children: React.ReactNode; delay?: number; style?: React.CSSProperties }) {
+/* Line-clip reveal — used by Harvey hero */
+function R({ d = 0, children, style = {} }: { d?: number; children: React.ReactNode; style?: React.CSSProperties }) {
   return (
     <div style={{ overflow: 'hidden', ...style }}>
-      <motion.div
-        initial={{ y: '108%' }}
-        animate={{ y: 0 }}
-        transition={{ duration: 1.15, delay, ease: [0.16, 1, 0.3, 1] }}
-      >
+      <motion.div initial={{ y: '106%' }} animate={{ y: 0 }} transition={{ duration: 1.05, delay: d, ease: [0.16, 1, 0.3, 1] }}>
         {children}
       </motion.div>
     </div>
   )
 }
 
+const LOGOS = ['pwc', "O'Melveny", 'Bridgewater', 'MacFarlanes', 'KKR', 'Baker McKenzie', 'Cuatrecasas', 'EY']
+
 export default function HeroSection() {
   return (
-    <section style={{ position: 'relative', height: '100svh', overflow: 'hidden', background: '#0A0A0B' }}>
+    <section className="sec-dark" style={{ minHeight: '100svh', position: 'relative', display: 'flex', flexDirection: 'column' }}>
 
-      {/* Full-bleed cinematic image */}
-      <Image
-        src="/images/hero.jpg"
-        alt="Mujeres profesionales líderes en inteligencia artificial — Orbbi Latam"
-        fill priority
-        style={{ objectFit: 'cover', objectPosition: 'center 25%' }}
-        sizes="100vw"
-      />
+      {/* ── SPLIT LAYOUT ── */}
+      <div style={{ flex: 1, display: 'grid', gridTemplateColumns: '1fr', minHeight: '100svh' }} className="l:grid-cols-[1fr_1fr]">
 
-      {/* Multi-layer cinematic gradient — heavy at bottom, light at top */}
-      <div style={{
-        position: 'absolute', inset: 0,
-        background: [
-          'linear-gradient(to top, rgba(8,8,9,0.96) 0%, rgba(8,8,9,0.72) 30%, rgba(8,8,9,0.30) 55%, rgba(8,8,9,0.50) 100%)',
-        ].join(','),
-      }} />
+        {/* LEFT: content — matches Harvey's ~45% left column */}
+        <div style={{
+          display: 'flex', flexDirection: 'column', justifyContent: 'center',
+          padding: '12rem 2.4rem 4rem',
+          gap: '2.8rem',
+        }} className="l:px-[5.6rem] l:py-[8rem]">
 
-      {/* Content — LEFT aligned, bottom third */}
-      <div
-        style={{
-          position: 'absolute', bottom: 0, left: 0, right: 0,
-          padding: '4.8rem 2.4rem 5.6rem',
-          display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: '4rem',
-        }}
-        className="l:px-[6.4rem] l:pb-[7.2rem]"
-      >
-        {/* Left: headline */}
-        <div style={{ flex: 1, maxWidth: '96rem' }}>
-          {/* Label */}
-          <Reveal delay={0.15}>
-            <p style={{ fontSize: '1.2rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.18em', color: 'rgba(255,255,255,0.45)', marginBottom: '2.4rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-              <span style={{ width: 20, height: 1, background: 'rgba(255,255,255,0.35)', display: 'inline-block' }} />
-              IA para Mujeres Profesionales · Latinoamérica
+          {/* Headline — Harvey ~4-5rem serif */}
+          <div>
+            <R d={0.25}><h1 className="hero-headline">Tu carrera,</h1></R>
+            <R d={0.38}><h1 className="hero-headline">potenciada</h1></R>
+            <R d={0.50}><h1 className="hero-headline" style={{ color:'rgba(255,255,255,0.45)' }}>por IA.</h1></R>
+          </div>
+
+          {/* Subtext — Harvey style */}
+          <R d={0.65}>
+            <p style={{ fontSize:'1.6rem', lineHeight:1.65, color:'rgba(255,255,255,0.55)', maxWidth:'44rem' }}>
+              Las mejores profesionales de Latinoamérica confían en Orbbi para potenciar su trabajo con inteligencia artificial y navegar la complejidad del futuro.
             </p>
-          </Reveal>
+          </R>
 
-          {/* Big headline — left aligned */}
-          <Reveal delay={0.28}>
-            <h1 className="display" style={{ color: '#FFFFFF' }}>
-              Tu carrera,
-            </h1>
-          </Reveal>
-          <Reveal delay={0.42}>
-            <h1 className="display" style={{ color: '#FFFFFF' }}>
-              potenciada
-            </h1>
-          </Reveal>
-          <Reveal delay={0.56}>
-            <h1 className="display" style={{ color: '#FFFFFF' }}>
-              por{' '}
-              <em style={{ fontStyle: 'italic', color: '#C9A96E' }}>IA.</em>
-            </h1>
-          </Reveal>
+          {/* CTA — Harvey: single outlined button */}
+          <R d={0.78}>
+            <a href="/#contacto" className="btn-outline-w" style={{ alignSelf:'flex-start' }}>
+              Diagnóstico gratis
+            </a>
+          </R>
 
-          {/* Sub + CTA — mobile */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 1.0, ease: [0.16, 1, 0.3, 1] }}
-            style={{ marginTop: '3.6rem' }}
-          >
-            <p style={{ fontSize: '1.6rem', lineHeight: 1.72, color: 'rgba(255,255,255,0.52)', maxWidth: '52rem', marginBottom: '3rem' }}>
-              Formamos a mujeres líderes para dominar la inteligencia artificial en su trabajo real. Sin tecnicismos. Con resultados medibles.
-            </p>
-            <div style={{ display: 'flex', gap: '1.6rem', flexWrap: 'wrap' }}>
-              <a href="/#contacto" className="btn-white">
-                Diagnóstico gratuito
-                <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M1.5 6.5h10M7.5 2.5l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-              </a>
-              <a href="/#programas" className="btn-ghost-w">Ver programas</a>
-            </div>
-          </motion.div>
+          {/* "Our Customers" style link */}
+          <R d={0.88}>
+            <a href="/#testimonios" style={{ fontSize:'1.3rem', color:'rgba(255,255,255,0.45)', cursor:'none', display:'inline-flex', alignItems:'center', gap:'.8rem', transition:'color .3s' }}
+              onMouseEnter={e=>(e.currentTarget.style.color='#FFFFFF')}
+              onMouseLeave={e=>(e.currentTarget.style.color='rgba(255,255,255,0.45)')}
+            >
+              Nuestras clientas →
+            </a>
+          </R>
         </div>
 
-        {/* Right: stats strip — desktop only */}
+        {/* RIGHT: photo — Harvey editorial dark photo */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.2 }}
-          style={{
-            display: 'flex', flexDirection: 'column', gap: '2.8rem',
-            alignItems: 'flex-end', flexShrink: 0,
-          }}
-          className="hidden l:flex"
+          transition={{ duration: 1.4, delay: 0.1 }}
+          style={{ position: 'relative', minHeight: '50vh', overflow: 'hidden' }}
         >
-          {[
-            { n: '847+', l: 'Mujeres formadas' },
-            { n: '12',   l: 'Países de Latam' },
-            { n: '94%',  l: 'Satisfacción' },
-          ].map(s => (
-            <div key={s.l} style={{ textAlign: 'right' }}>
-              <p style={{ fontFamily: '"disp",Georgia,serif', fontSize: 'clamp(3.2rem,4vw,5.6rem)', lineHeight: 1, color: '#FFFFFF', letterSpacing: '-0.025em' }}>{s.n}</p>
-              <p style={{ fontSize: '1.2rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.14em', color: 'rgba(255,255,255,0.35)', marginTop: '.4rem' }}>{s.l}</p>
-            </div>
-          ))}
+          <Image
+            src="/images/hero.jpg"
+            alt="Mujer profesional latinoamericana dominando la inteligencia artificial"
+            fill priority
+            style={{ objectFit: 'cover', objectPosition: 'center 20%' }}
+            sizes="50vw"
+          />
+          {/* Dark overlay to blend with dark bg — Harvey signature */}
+          <div style={{
+            position: 'absolute', inset: 0,
+            background: 'linear-gradient(to right, rgba(13,12,10,0.35) 0%, rgba(13,12,10,0.0) 40%), linear-gradient(to top, rgba(13,12,10,0.5) 0%, transparent 30%)',
+          }} />
         </motion.div>
       </div>
 
-      {/* Scroll cue */}
+      {/* LOGO STRIP — bottom, Harvey has partner logos */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.8, duration: 1 }}
-        style={{ position: 'absolute', bottom: '2.4rem', left: '50%', transform: 'translateX(-50%)' }}
+        transition={{ delay: 1.2, duration: 1 }}
+        style={{
+          borderTop: '1px solid rgba(255,255,255,0.1)',
+          padding: '2rem 0',
+          overflow: 'hidden',
+          position: 'relative',
+        }}
       >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
-          style={{ width: 1, height: '3.6rem', background: 'linear-gradient(to bottom,rgba(255,255,255,0.5),transparent)', margin: '0 auto' }}
-        />
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 5.6rem', flexWrap: 'wrap', gap: '2rem' }} className="wrap">
+          <span style={{ fontSize:'1.1rem', fontWeight:500, textTransform:'uppercase', letterSpacing:'.16em', color:'rgba(255,255,255,0.28)', flexShrink:0 }}>
+            Profesionales en
+          </span>
+          <div style={{ display:'flex', alignItems:'center', gap:'4rem', flexWrap:'wrap' }}>
+            {LOGOS.map(l => (
+              <span key={l} style={{ fontSize:'1.3rem', color:'rgba(255,255,255,0.35)', fontWeight:400, whiteSpace:'nowrap' }}>{l}</span>
+            ))}
+          </div>
+          <a href="/#testimonios" style={{ fontSize:'1.2rem', color:'rgba(255,255,255,0.4)', cursor:'none', border:'1px solid rgba(255,255,255,0.2)', borderRadius:'.5rem', padding:'.6rem 1.2rem', transition:'border-color .3s' }}
+            onMouseEnter={e=>(e.currentTarget.style.borderColor='rgba(255,255,255,0.5)')}
+            onMouseLeave={e=>(e.currentTarget.style.borderColor='rgba(255,255,255,0.2)')}
+          >Nuestras clientas</a>
+        </div>
       </motion.div>
 
     </section>

@@ -3,50 +3,64 @@ import { motion } from 'framer-motion'
 
 export default function StatementSection() {
   return (
-    <section className="section-paper">
-      <div className="wrap">
+    <section className="sec-paper" style={{ padding:'8rem 0 0' }}>
+      <div className="wrap" style={{ paddingBottom:'6rem' }}>
+
+        {/* Harvey's exact layout: bold statement left, muted continuation */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ opacity:0, y:24 }}
+          whileInView={{ opacity:1, y:0 }}
+          viewport={{ once:true, margin:'-100px' }}
+          transition={{ duration:.8, ease:[0.16,1,0.3,1] }}
+          style={{ maxWidth:'72rem' }}
         >
-          <p className="label" style={{ color: 'rgba(15,15,14,0.38)', marginBottom: '4rem' }}>
-            — Por qué Orbbi
+          <p>
+            <span className="statement-text">
+              Orbbi es IA diseñada para mujeres profesionales en Latinoamérica.{' '}
+            </span>
+            <span className="statement-sub">
+              Potencia tu experiencia en una plataforma que te permite enfocarte en el trabajo que importa.
+            </span>
           </p>
-          <h2 className="headline" style={{ color: '#0F0F0E', maxWidth: '112rem' }}>
-            Orbbi es IA diseñada para mujeres{' '}
-            <em style={{ fontStyle: 'italic', color: 'rgba(15,15,14,0.38)' }}>
-              que ya lideran
-            </em>{' '}
-            y quieren ir más lejos.
-          </h2>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 32 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '2.4rem',
-            marginTop: '8rem',
-            paddingTop: '6rem',
-            borderTop: '1px solid rgba(15,15,14,0.09)',
-          }}
-          className="s:flex-row s:items-start s:justify-between"
-        >
-          <p className="body-l" style={{ color: 'rgba(15,15,14,0.52)', maxWidth: '56rem' }}>
-            No somos un curso de YouTube ni una academia genérica. Somos una consultora que trabaja contigo, entiende tu industria y diseña un programa exactamente para ti.
-          </p>
-          <div style={{ display: 'flex', gap: '1.6rem', flexShrink: 0, flexWrap: 'wrap' }}>
-            <a href="/#contacto" className="btn-dark">Solicitar diagnóstico</a>
-            <a href="/#programas" className="btn-outline-d">Ver programas</a>
-          </div>
-        </motion.div>
       </div>
+
+      {/* Dark product card — Harvey's rounded dark rectangle showing the interface */}
+      <motion.div
+        initial={{ opacity:0, y:32 }}
+        whileInView={{ opacity:1, y:0 }}
+        viewport={{ once:true, margin:'-80px' }}
+        transition={{ duration:.9, delay:.15, ease:[0.16,1,0.3,1] }}
+        style={{
+          margin:'0 2.4rem 0',
+          borderRadius:'1.6rem 1.6rem 0 0',
+          background:'#1A1916',
+          minHeight:'36rem',
+          display:'flex', alignItems:'center', justifyContent:'center',
+          overflow:'hidden',
+          position:'relative',
+        }}
+        className="l:mx-[5.6rem]"
+      >
+        {/* Logo mark — Harvey shows their H logomark */}
+        <div style={{
+          fontFamily:'"disp",Georgia,serif',
+          fontSize:'clamp(8rem,12vw,16rem)',
+          color:'rgba(255,255,255,0.12)',
+          lineHeight:1,
+          userSelect:'none',
+        }}>
+          O
+        </div>
+        {/* Subtle grid overlay */}
+        <div style={{
+          position:'absolute', inset:0,
+          backgroundImage:'linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)',
+          backgroundSize:'8rem 8rem',
+        }} />
+      </motion.div>
+
     </section>
   )
 }
