@@ -3,34 +3,41 @@
 export default function Footer() {
   const year = new Date().getFullYear()
   return (
-    <footer style={{ background:'#1C1C1A' }}>
-      <div className="wrap" style={{ paddingTop:'10rem',paddingBottom:'5rem' }}>
-        <div className="line-gold" style={{ marginBottom:'6rem' }} />
-        <div style={{ display:'grid', gridTemplateColumns:'1fr', gap:'4.8rem' }} className="s:grid-cols-[2fr_1fr_1fr_1fr]">
-          <div style={{ display:'flex', flexDirection:'column', gap:'2rem' }}>
-            <span style={{ fontFamily:'"sans"',fontWeight:500,letterSpacing:'0.12em',fontSize:'1.3rem',color:'#F7F3EE' }}>ORBBI LATAM</span>
-            <p style={{ fontSize:'1.4rem',lineHeight:1.8,color:'rgba(247,243,238,0.32)',maxWidth:'28rem' }}>Formamos a mujeres líderes en Latinoamérica para dominar la inteligencia artificial. Con impacto real.</p>
-            <a href="mailto:contacto@orbbilatam.com" style={{ fontSize:'1.3rem',color:'rgba(247,243,238,0.4)',cursor:'none',transition:'color .3s' }} onMouseEnter={e=>(e.currentTarget.style.color='#D4AD70')} onMouseLeave={e=>(e.currentTarget.style.color='rgba(247,243,238,0.4)')}>contacto@orbbilatam.com</a>
+    <footer style={{ background:'#0A0A0B', borderTop:'1px solid rgba(255,255,255,0.06)' }}>
+      <div className="wrap" style={{ padding:'6rem 0' }}>
+        <div style={{ display:'flex',flexDirection:'column',gap:'4rem' }} className="l:flex-row l:items-end l:justify-between">
+          <div style={{ display:'flex',flexDirection:'column',gap:'1.6rem' }}>
+            <span style={{ fontFamily:'"disp"',fontSize:'2.4rem',color:'rgba(255,255,255,0.9)',letterSpacing:'-0.02em' }}>Orbbi</span>
+            <p style={{ fontSize:'1.4rem',color:'rgba(255,255,255,0.3)',maxWidth:'36rem',lineHeight:1.7 }}>
+              Consultora de IA para mujeres profesionales en Latinoamérica. Formación, orientación y herramientas a medida.
+            </p>
           </div>
-          {[
-            { h:'Programas', items:[['Formación Esencial','/#servicios'],['Orientación Profesional','/#servicios'],['Herramienta a Medida','/#servicios'],['Corporativos','/#servicios']] },
-            { h:'Empresa',   items:[['Para quién','/#para-quien'],['Método','/#metodo'],['Testimonios','/#testimonios'],['Contacto','/#contacto']] },
-            { h:'Latam',     items:[['Chile','#'],['México','#'],['Colombia','#'],['Argentina','#'],['Perú','#'],['Ecuador','#']] },
-          ].map(col=>(
-            <div key={col.h} style={{ display:'flex',flexDirection:'column',gap:'1.6rem' }}>
-              <p style={{ fontSize:'1.1rem',fontWeight:500,textTransform:'uppercase',letterSpacing:'0.16em',color:'rgba(247,243,238,0.22)' }}>{col.h}</p>
-              <ul style={{ display:'flex',flexDirection:'column',gap:'1rem',listStyle:'none' }}>
-                {col.items.map(([label,href])=>(
-                  <li key={label}><a href={href} style={{ fontSize:'1.3rem',color:'rgba(247,243,238,0.4)',cursor:'none',transition:'color .3s' }} onMouseEnter={e=>(e.currentTarget.style.color='#D4AD70')} onMouseLeave={e=>(e.currentTarget.style.color='rgba(247,243,238,0.4)')}>{label}</a></li>
+          <div style={{ display:'flex',gap:'6rem',flexWrap:'wrap' }}>
+            {[
+              { h:'Programas', items:[['Formación Esencial','/#programas'],['Orientación 1:1','/#programas'],['Herramienta a Medida','/#programas'],['Corporativos','/#programas']] },
+              { h:'Empresa',   items:[['Para quién','/#para-quién'],['Método','/#metodo'],['Testimonios','/#testimonios'],['Contacto','/#contacto']] },
+            ].map(col=>(
+              <div key={col.h} style={{ display:'flex',flexDirection:'column',gap:'1.2rem' }}>
+                <p style={{ fontSize:'1.1rem',fontWeight:500,textTransform:'uppercase',letterSpacing:'0.16em',color:'rgba(255,255,255,0.22)' }}>{col.h}</p>
+                {col.items.map(([l,h])=>(
+                  <a key={l} href={h} style={{ fontSize:'1.3rem',color:'rgba(255,255,255,0.38)',cursor:'none',transition:'color .3s' }}
+                    onMouseEnter={e=>(e.currentTarget.style.color='#FFFFFF')}
+                    onMouseLeave={e=>(e.currentTarget.style.color='rgba(255,255,255,0.38)')}
+                  >{l}</a>
                 ))}
-              </ul>
-            </div>
-          ))}
+              </div>
+            ))}
+          </div>
         </div>
-        <div style={{ display:'flex',flexDirection:'column',gap:'1.2rem',paddingTop:'3.2rem',marginTop:'4rem',borderTop:'1px solid rgba(247,243,238,0.07)' }} className="s:flex-row s:justify-between s:items-center">
-          <p style={{ fontSize:'1.2rem',color:'rgba(247,243,238,0.2)' }}>© {year} Orbbi Latam · Todos los derechos reservados</p>
+        <div style={{ display:'flex',flexDirection:'column',gap:'1rem',paddingTop:'4rem',marginTop:'4rem',borderTop:'1px solid rgba(255,255,255,0.06)' }} className="s:flex-row s:justify-between s:items-center">
+          <p style={{ fontSize:'1.2rem',color:'rgba(255,255,255,0.2)' }}>© {year} Orbbi Latam · Todos los derechos reservados</p>
           <div style={{ display:'flex',gap:'2.4rem' }}>
-            {['Privacidad','Términos'].map(t=><a key={t} href="#" style={{ fontSize:'1.2rem',color:'rgba(247,243,238,0.2)',cursor:'none',transition:'color .3s' }} onMouseEnter={e=>(e.currentTarget.style.color='rgba(212,173,112,0.6)')} onMouseLeave={e=>(e.currentTarget.style.color='rgba(247,243,238,0.2)')}>{t}</a>)}
+            {['Privacidad','Términos'].map(t=>(
+              <a key={t} href="#" style={{ fontSize:'1.2rem',color:'rgba(255,255,255,0.2)',cursor:'none',transition:'color .3s' }}
+                onMouseEnter={e=>(e.currentTarget.style.color='rgba(255,255,255,0.5)')}
+                onMouseLeave={e=>(e.currentTarget.style.color='rgba(255,255,255,0.2)')}
+              >{t}</a>
+            ))}
           </div>
         </div>
       </div>
