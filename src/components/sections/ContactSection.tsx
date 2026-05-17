@@ -45,7 +45,7 @@ export default function ContactSection() {
               Una consultora especializada se comunica contigo en menos de 24 horas. El diagnóstico es completamente gratuito.
             </p>
             <a href="mailto:contacto@orbbilatam.com"
-              style={{ fontFamily:'"disp"', fontSize:28, color:'rgba(250,250,249,0.5)', cursor:'none', transition:'color .2s' }}
+              style={{ fontFamily:'"disp"', fontSize:28, color:'rgba(250,250,249,0.5)', cursor:'pointer', transition:'color .2s' }}
               onMouseEnter={e=>(e.currentTarget.style.color='#FAFAF9')}
               onMouseLeave={e=>(e.currentTarget.style.color='rgba(250,250,249,0.5)')}
             >contacto@orbbilatam.com</a>

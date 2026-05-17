@@ -98,7 +98,7 @@ export default function TestimonialsSection() {
               key={j}
               onClick={() => setI(j)}
               className={`testi-progress ${j===i?'active':''}`}
-              style={{ background: j===i ? '#0F0E0D' : 'rgba(15,14,13,0.15)', border:'none', cursor:'none', transition:'background .3s' }}
+              style={{ background: j===i ? '#0F0E0D' : 'rgba(15,14,13,0.15)', border:'none', cursor:'pointer', transition:'background .3s' }}
             />
           ))}
         </div>

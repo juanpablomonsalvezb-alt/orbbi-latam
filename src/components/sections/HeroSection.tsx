@@ -88,7 +88,7 @@ export default function HeroSection() {
                 Diagnóstico gratis
               </a>
               <a href="/#testimonios"
-                style={{ fontSize:14, color:'rgba(250,250,249,0.6)', cursor:'none', transition:'color .2s' }}
+                style={{ fontSize:14, color:'rgba(250,250,249,0.6)', cursor:'pointer', transition:'color .2s' }}
                 onMouseEnter={e=>(e.currentTarget.style.color='#FAFAF9')}
                 onMouseLeave={e=>(e.currentTarget.style.color='rgba(250,250,249,0.6)')}
               >

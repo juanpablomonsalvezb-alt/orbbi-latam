@@ -30,7 +30,7 @@ export default function Header() {
         {/* Announce bar */}
         <div className="announce-bar">
           <span className="t-small">Nuevo programa · IA para mujeres profesionales en Latam</span>
-          <a href="/#contacto" className="t-label" style={{ textDecoration:'underline', textUnderlineOffset:'2px', cursor:'none' }}>
+          <a href="/#contacto" className="t-label" style={{ textDecoration:'underline', textUnderlineOffset:'2px', cursor:'pointer' }}>
             Solicitar lugar
           </a>
         </div>
@@ -39,7 +39,7 @@ export default function Header() {
         <nav className={`nav-inner ${onLight ? 'nav-on-light' : 'nav-on-dark'}`}>
 
           {/* Logo — Harvey: serif wordmark left */}
-          <a href="/" style={{ marginRight:40, cursor:'none' }}>
+          <a href="/" style={{ marginRight:40, cursor:'pointer' }}>
             <span style={{
               fontFamily:'"disp",Georgia,serif',
               fontSize:20, fontWeight:'normal',
@@ -55,7 +55,7 @@ export default function Header() {
           <div style={{ display:'flex', alignItems:'center', gap:28, flex:1 }} className="hidden l:flex">
             {LINKS.map(l => (
               <a key={l} href={`/#${l.toLowerCase().replace(' ','-')}`}
-                style={{ fontSize:14, fontWeight:400, color: onLight ? 'rgba(15,14,13,0.55)' : 'rgba(250,250,249,0.7)', transition:'color .2s', cursor:'none', display:'flex', alignItems:'center', gap:4 }}
+                style={{ fontSize:14, fontWeight:400, color: onLight ? 'rgba(15,14,13,0.55)' : 'rgba(250,250,249,0.7)', transition:'color .2s', cursor:'pointer', display:'flex', alignItems:'center', gap:4 }}
                 onMouseEnter={e=>(e.currentTarget.style.color = onLight ? '#0F0E0D' : '#FAFAF9')}
                 onMouseLeave={e=>(e.currentTarget.style.color = onLight ? 'rgba(15,14,13,0.55)' : 'rgba(250,250,249,0.7)')}
               >
@@ -87,7 +87,7 @@ export default function Header() {
           <button
             onClick={() => setOpen(v => !v)}
             className="l:hidden"
-            style={{ background:'none', border:'none', cursor:'none', padding:'8px', display:'flex', flexDirection:'column', gap:5, marginLeft:16 }}
+            style={{ background:'none', border:'none', cursor:'pointer', padding:'8px', display:'flex', flexDirection:'column', gap:5, marginLeft:16 }}
             aria-label="Menú"
           >
             <span className="burger-l" style={{ background: onLight?'#0F0E0D':'#FAFAF9', transform:open?'translateY(6px) rotate(45deg)':undefined }} />
@@ -99,7 +99,7 @@ export default function Header() {
       {/* Full-screen menu */}
       <div className={`menu-overlay ${open?'open':''}`}>
         <div className="page-wrap" style={{ paddingTop:106, height:'100%', display:'flex', flexDirection:'column', justifyContent:'space-between', paddingBottom:40 }}>
-          <button onClick={()=>setOpen(false)} style={{ position:'absolute', top:32, right:36, background:'none', border:'none', cursor:'none', color:'rgba(250,250,249,0.4)', fontSize:24, lineHeight:1 }}>✕</button>
+          <button onClick={()=>setOpen(false)} style={{ position:'absolute', top:32, right:36, background:'none', border:'none', cursor:'pointer', color:'rgba(250,250,249,0.4)', fontSize:24, lineHeight:1 }}>✕</button>
           <nav style={{ display:'flex', flexDirection:'column' }}>
             {[...LINKS,'Contacto'].map((l,i) => (
               <a key={l} href={`/#${l.toLowerCase().replace(' ','-')}`}
@@ -109,7 +109,7 @@ export default function Header() {
                   fontSize:'clamp(40px,7vw,96px)',
                   lineHeight:1.1, letterSpacing:'-0.025em', fontWeight:'normal',
                   color: i===0 ? '#FAFAF9' : 'rgba(250,250,249,0.2)',
-                  cursor:'none', transition:'color .3s',
+                  cursor:'pointer', transition:'color .3s',
                   borderBottom:'1px solid rgba(250,250,249,0.06)',
                   paddingBottom:10, marginBottom:4,
                 }}
@@ -120,7 +120,7 @@ export default function Header() {
           </nav>
           <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', paddingTop:24, borderTop:'1px solid rgba(250,250,249,0.08)' }}>
             <span style={{ fontFamily:'"disp"', fontSize:20, color:'rgba(250,250,249,0.35)' }}>Orbbi</span>
-            <a href="mailto:contacto@orbbilatam.com" style={{ fontSize:14, color:'rgba(250,250,249,0.35)', cursor:'none' }}>contacto@orbbilatam.com</a>
+            <a href="mailto:contacto@orbbilatam.com" style={{ fontSize:14, color:'rgba(250,250,249,0.35)', cursor:'pointer' }}>contacto@orbbilatam.com</a>
           </div>
         </div>
       </div>

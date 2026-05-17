@@ -29,7 +29,7 @@ export default function Footer() {
               <p style={{ fontSize:14, fontWeight:500, color:'rgba(250,250,249,0.35)', letterSpacing:'0.04em' }}>{col.h}</p>
               {col.links.map(l => (
                 <a key={l} href="#"
-                  style={{ fontSize:14, color:'rgba(250,250,249,0.5)', cursor:'none', transition:'color .2s', lineHeight:'18.2px' }}
+                  style={{ fontSize:14, color:'rgba(250,250,249,0.5)', cursor:'pointer', transition:'color .2s', lineHeight:'18.2px' }}
                   onMouseEnter={e=>(e.currentTarget.style.color='#FAFAF9')}
                   onMouseLeave={e=>(e.currentTarget.style.color='rgba(250,250,249,0.5)')}
                 >{l}</a>
@@ -62,7 +62,7 @@ export default function Footer() {
           <div style={{ display:'flex', gap:24, flexWrap:'wrap' }}>
             {['Política de Privacidad','Términos de Uso','Configuración de Cookies'].map(t => (
               <a key={t} href="#"
-                style={{ fontSize:14, color:'rgba(250,250,249,0.28)', cursor:'none', transition:'color .2s' }}
+                style={{ fontSize:14, color:'rgba(250,250,249,0.28)', cursor:'pointer', transition:'color .2s' }}
                 onMouseEnter={e=>(e.currentTarget.style.color='rgba(250,250,249,0.6)')}
                 onMouseLeave={e=>(e.currentTarget.style.color='rgba(250,250,249,0.28)')}
               >{t}</a>

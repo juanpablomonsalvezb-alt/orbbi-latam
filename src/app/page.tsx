@@ -1,5 +1,4 @@
 import Header             from '@/components/Header'
-import CustomCursor        from '@/components/CustomCursor'
 import Grain               from '@/components/Grain'
 import HeroSection         from '@/components/sections/HeroSection'
 import StatementSection    from '@/components/sections/StatementSection'
@@ -24,7 +23,6 @@ export default function Home() {
   return (
     <>
       <Grain />
-      <CustomCursor />
       <Header />
       <main>
         <HeroSection />
