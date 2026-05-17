@@ -210,6 +210,11 @@
   /* ── TESTIMONIALS ── */
   .testi-progress { height:2px; background:rgba(15,14,13,0.15); flex:1; cursor:pointer; transition:background .3s; }
   .testi-progress.active { background:#0F0E0D; }
+  /* Responsive: stack foto + cita en mobile */
+  @media(max-width:900px){
+    .testi-grid { grid-template-columns:1fr !important; }
+    .testi-img  { width:100% !important; height:280px !important; }
+  }
 
   /* ── FORM ──*/
   .field-dark {
