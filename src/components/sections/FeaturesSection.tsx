@@ -1,17 +1,14 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { motion } from 'framer-motion'
 
-gsap.registerPlugin(ScrollTrigger)
-
-/* Harvey UseCaseTickerSection — exact behavior:
+/* Harvey UseCaseTickerSection — exact visual behavior:
    - bg: #FAFAF9
-   - Label left: "The top legal teams use Harvey for" (small sans, dark)
-   - Center: 56px serif list, OPACITY fades by distance from active
-     active=opacity:1 color:#0F0E0D, ±1=opacity:0.6, ±2=opacity:0.3, ±3=opacity:0.1
-   - Right: "Explore Platform" outlined button
-   - SCROLL DRIVEN: section is very tall, content is pinned
+   - Left label: small sans, dark, max 200px
+   - Center: 56px serif list, opacity fades by distance from active
+     active=1.0, ±1=0.6, ±2=0.3, ±3=0.1
+   - Right: "Ver plataforma" outlined button
+   - Auto-cycles every 2.2s (no 1500vh scroll bloat)
 */
 
 const FEATURES = [
@@ -24,78 +21,93 @@ const FEATURES = [
   'Acompañamiento Real',
 ]
 
-const OPACITIES = [0.1, 0.3, 0.6, 1.0, 0.6, 0.3, 0.1]
-
 export default function FeaturesSection() {
-  const outerRef = useRef<HTMLDivElement>(null)
-  const innerRef = useRef<HTMLDivElement>(null)
-  const [active, setActive] = useState(3) // middle item starts active
+  const [active, setActive] = useState(0)
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
+
+  function startCycle() {
+    intervalRef.current = setInterval(() => {
+      setActive(a => (a + 1) % FEATURES.length)
+    }, 2200)
+  }
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      ScrollTrigger.create({
-        trigger: outerRef.current!,
-        start: 'top top',
-        end: `+=${FEATURES.length * 200}`,
-        pin: innerRef.current!,
-        onUpdate(self) {
-          const idx = Math.round(self.progress * (FEATURES.length - 1))
-          setActive(Math.min(idx, FEATURES.length - 1))
-        },
-      })
-    }, outerRef)
-    return () => ctx.revert()
+    startCycle()
+    return () => { if (intervalRef.current) clearInterval(intervalRef.current) }
   }, [])
 
   return (
-    <div ref={outerRef} style={{ height:`${FEATURES.length * 200 + 100}vh` }}>
-      <div
-        ref={innerRef}
-        className="sec-light"
-        style={{ height:'100vh', display:'flex', alignItems:'center' }}
-      >
-        <div className="page-wrap" style={{ width:'100%', display:'grid', gridTemplateColumns:'1fr 2fr 1fr', alignItems:'center', gap:40 }}>
+    <section className="sec-light" style={{ padding: '144px 0', overflow: 'hidden' }}>
+      <div className="page-wrap">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: .8, ease: [0.16, 1, 0.3, 1] }}
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 2fr 1fr',
+            alignItems: 'center',
+            gap: 40,
+          }}
+          className="features-grid"
+        >
 
-          {/* Left: Harvey's "The top legal teams use Harvey for" */}
-          <p className="t-body" style={{ color:'#0F0E0D', maxWidth:200 }}>
+          {/* Left */}
+          <p className="t-body" style={{ color: '#0F0E0D', maxWidth: 200, lineHeight: '22px' }}>
             Las mejores profesionales de Latam confían en Orbbi para
           </p>
 
-          {/* Center: feature list with opacity fading */}
-          <div>
+          {/* Center: opacity-fade list */}
+          <div style={{ overflow: 'hidden' }}>
             {FEATURES.map((f, i) => {
-              const dist   = Math.abs(i - active)
-              const op     = dist === 0 ? 1 : dist === 1 ? 0.6 : dist === 2 ? 0.3 : 0.1
+              const dist = Math.abs(i - active)
+              // wrap distance (circular)
+              const wrapDist = Math.min(dist, FEATURES.length - dist)
+              const op = wrapDist === 0 ? 1 : wrapDist === 1 ? 0.6 : wrapDist === 2 ? 0.3 : 0.1
               const isActive = i === active
               return (
-                <div
+                <button
                   key={f}
-                  className="feature-item"
+                  onClick={() => {
+                    setActive(i)
+                    if (intervalRef.current) clearInterval(intervalRef.current)
+                    startCycle()
+                  }}
                   style={{
-                    fontFamily:'"disp",Georgia,serif',
-                    fontSize:56, lineHeight:'58.8px', letterSpacing:'-0.56px', fontWeight:400,
+                    display: 'block',
+                    width: '100%',
+                    textAlign: 'left',
+                    background: 'none',
+                    border: 'none',
+                    padding: 0,
+                    cursor: 'none',
+                    fontFamily: '"disp",Georgia,serif',
+                    fontSize: 56,
+                    lineHeight: '62px',
+                    letterSpacing: '-0.56px',
+                    fontWeight: 400,
                     color: isActive ? '#0F0E0D' : '#706D66',
                     opacity: op,
-                    transition:'opacity .4s, color .4s',
-                    cursor:'none',
-                    userSelect:'none',
+                    transition: 'opacity .5s cubic-bezier(.16,1,.3,1), color .5s cubic-bezier(.16,1,.3,1)',
+                    userSelect: 'none',
                   }}
                 >
                   {f}
-                </div>
+                </button>
               )
             })}
           </div>
 
-          {/* Right: Explore Platform button */}
-          <div style={{ display:'flex', justifyContent:'flex-end' }}>
+          {/* Right */}
+          <div style={{ display: 'flex', justifyContent: 'flex-end', alignSelf: 'flex-start', paddingTop: 8 }}>
             <a href="/#contacto" className="btn-explore">
               Ver plataforma
             </a>
           </div>
 
-        </div>
+        </motion.div>
       </div>
-    </div>
+    </section>
   )
 }

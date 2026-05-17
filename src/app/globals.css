@@ -200,8 +200,12 @@
   .menu-overlay.open { transform:translateX(0); }
   .burger-l { display:block; width:22px; height:1px; transition:transform .3s, background .3s; }
 
-  /* ── FEATURES SCROLL ── */
-  /* Feature section uses scroll-pin: items scroll past, opacity fades */
+  /* ── FEATURES GRID ── */
+  .features-grid { display:grid; grid-template-columns:1fr 2fr 1fr; align-items:flex-start; gap:40px; }
+  @media(max-width:900px){
+    .features-grid { grid-template-columns:1fr; }
+    .features-grid > :last-child { display:none; }
+  }
   .feature-item { padding:8px 0; }
 
   /* ── TESTIMONIALS ── */
