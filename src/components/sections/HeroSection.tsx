@@ -27,7 +27,7 @@ export default function HeroSection() {
           src="/images/hero.jpg"
           alt="Profesionales usando inteligencia artificial"
           fill priority
-          style={{ objectFit:'cover', objectPosition:'center top' }}
+          style={{ objectFit:'cover', objectPosition:'center 20%' }}
           sizes="100vw"
         />
         {/* Harvey has a subtle dark gradient on the left where text sits */}
