@@ -1,11 +1,26 @@
 import { MetadataRoute } from 'next'
 
+const BASE_URL = 'https://orbbilatam.com'
+
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
-    { url: 'https://orbbilatam.com/', lastModified: new Date(), changeFrequency: 'weekly', priority: 1 },
-    { url: 'https://orbbilatam.com/#servicios', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
-    { url: 'https://orbbilatam.com/#metodologia', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
-    { url: 'https://orbbilatam.com/#contacto', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.9 },
-    { url: 'https://orbbilatam.com/#publicaciones', lastModified: new Date(), changeFrequency: 'weekly', priority: 0.6 },
+    {
+      url: `${BASE_URL}/`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 1.0,
+    },
+    {
+      url: `${BASE_URL}/pago/exitoso`,
+      lastModified: new Date(),
+      changeFrequency: 'yearly',
+      priority: 0.1,
+    },
+    {
+      url: `${BASE_URL}/pago/fallido`,
+      lastModified: new Date(),
+      changeFrequency: 'yearly',
+      priority: 0.1,
+    },
   ]
 }
