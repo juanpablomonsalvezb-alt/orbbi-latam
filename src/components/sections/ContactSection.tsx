@@ -46,11 +46,11 @@ export default function ContactSection() {
             <p className="t-body-lg" style={{ color:'rgba(250,250,249,0.5)', maxWidth:400, marginBottom:40 }}>
               Una sesión 1:1. Sin compromiso. Te orientamos sobre el camino correcto para ti y diseñamos tu plan.
             </p>
-            <a href="mailto:contacto@orbbilatam.com"
+            <a href="mailto:cseplataforma@gmail.com"
               style={{ fontFamily:'"disp"', fontSize:28, color:'rgba(250,250,249,0.5)', cursor:'pointer', transition:'color .2s', display:'block', marginBottom:48 }}
               onMouseEnter={e=>(e.currentTarget.style.color='#FAFAF9')}
               onMouseLeave={e=>(e.currentTarget.style.color='rgba(250,250,249,0.5)')}
-            >contacto@orbbilatam.com</a>
+            >Escríbenos directamente</a>
 
             {/* Bloque calendario */}
             <div style={{ borderTop:'1px solid rgba(250,250,249,0.1)', paddingTop:40 }}>

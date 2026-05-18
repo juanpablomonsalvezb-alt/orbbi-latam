@@ -44,7 +44,7 @@ const jsonLd = {
   url: BASE_URL,
   logo: `${BASE_URL}/images/hero.jpg`,
   description: 'Consultora de inteligencia artificial especializada en mujeres profesionales de Latinoamérica',
-  email: 'contacto@orbbilatam.com',
+  email: 'cseplataforma@gmail.com',
   areaServed: ['Chile', 'México', 'Colombia', 'Argentina', 'Perú', 'Ecuador', 'Uruguay', 'Bolivia', 'Paraguay', 'Venezuela', 'Costa Rica'],
   knowsLanguage: 'es',
   founder: {
