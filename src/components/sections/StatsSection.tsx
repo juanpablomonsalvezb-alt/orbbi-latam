@@ -1,10 +1,5 @@
 'use client'
-import { useEffect, useRef } from 'react'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { motion } from 'framer-motion'
-
-gsap.registerPlugin(ScrollTrigger)
 
 /* Harvey metrics section — EXACT layout from screenshot:
    - bg: #0F0E0D, pt 144px pb 144px

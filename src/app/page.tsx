@@ -1,5 +1,4 @@
 import Header             from '@/components/Header'
-import Grain               from '@/components/Grain'
 import HeroSection         from '@/components/sections/HeroSection'
 import StatementSection    from '@/components/sections/StatementSection'
 import FeaturesSection     from '@/components/sections/FeaturesSection'
@@ -16,7 +15,6 @@ import Footer              from '@/components/Footer'
 export default function Home() {
   return (
     <>
-      <Grain />
       <Header />
       <main>
         <HeroSection />

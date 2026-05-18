@@ -1,6 +1,5 @@
 'use client'
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 
 const T = [
@@ -36,13 +35,11 @@ const T = [
 
 export default function TestimonialsSection() {
   const [i, setI] = useState(0)
-  const t = T[i]
 
   return (
     <section className="sec-testi sec-pad-t" id="testimonios">
       <div className="page-wrap">
 
-        {/* Header */}
         <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:64 }}>
           <h3 className="t-h3" style={{ color:'#0F0E0D' }}>
             Impacto real para profesionales reales
@@ -52,64 +49,64 @@ export default function TestimonialsSection() {
           </a>
         </div>
 
-        {/* Slide: foto izquierda fija 340px, texto derecha */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={i}
-            initial={{ opacity:0, x:20 }}
-            animate={{ opacity:1, x:0 }}
-            exit={{ opacity:0, x:-20 }}
-            transition={{ duration:.4, ease:[0.16,1,0.3,1] }}
-            style={{
-              display: 'grid',
-              gridTemplateColumns: '340px 1fr',
-              gap: 48,
-              marginBottom: 40,
-              alignItems: 'start',
-            }}
-          >
-            {/* Foto — 340×425px fijos */}
-            <div style={{
-              position: 'relative',
-              width: 340,
-              height: 425,
-              borderRadius: 8,
-              overflow: 'hidden',
-              background: '#E8E5E0',
-              flexShrink: 0,
-            }}>
-              <Image
-                src={t.img}
-                alt={t.name}
-                fill
-                style={{ objectFit:'cover', objectPosition:'center top' }}
-                sizes="340px"
-              />
-            </div>
-
-            {/* Quote + attribution */}
-            <div style={{ display:'flex', flexDirection:'column', justifyContent:'space-between', minHeight:425, padding:'24px 0' }}>
-              <p style={{
-                fontFamily: '"disp",Georgia,serif',
-                fontSize: 36,
-                lineHeight: '42px',
-                letterSpacing: '-0.36px',
-                fontWeight: 400,
-                color: '#0F0E0D',
-                marginBottom: 48,
+        {/* Contenedor relativo para transición CSS entre testimonios */}
+        <div style={{ position:'relative', marginBottom:40 }}>
+          {T.map((t, idx) => (
+            <div
+              key={idx}
+              style={{
+                display: 'grid',
+                gridTemplateColumns: '340px 1fr',
+                gap: 48,
+                alignItems: 'start',
+                position: idx === 0 ? 'relative' : 'absolute',
+                inset: idx === 0 ? undefined : 0,
+                opacity: idx === i ? 1 : 0,
+                transition: 'opacity 0.35s ease',
+                pointerEvents: idx === i ? 'auto' : 'none',
+              }}
+              className="testi-grid"
+            >
+              <div style={{
+                position: 'relative',
+                width: 340,
+                height: 425,
+                borderRadius: 8,
+                overflow: 'hidden',
+                background: '#E8E5E0',
+                flexShrink: 0,
               }}>
-                {t.quote}
-              </p>
-              <div>
-                <p style={{ fontSize:20, fontWeight:500, color:'#0F0E0D', lineHeight:'26px', marginBottom:4 }}>{t.name}</p>
-                <p className="t-body" style={{ color:'#706D66' }}>{t.role}</p>
-                <p className="t-body" style={{ color:'#706D66' }}>{t.company}</p>
+                <Image
+                  src={t.img}
+                  alt={t.name}
+                  fill
+                  style={{ objectFit:'cover', objectPosition:'center top' }}
+                  sizes="340px"
+                />
+              </div>
+
+              <div style={{ display:'flex', flexDirection:'column', justifyContent:'space-between', minHeight:425, padding:'24px 0' }}>
+                <p style={{
+                  fontFamily: '"disp",Georgia,serif',
+                  fontSize: 36,
+                  lineHeight: '42px',
+                  letterSpacing: '-0.36px',
+                  fontWeight: 400,
+                  color: '#0F0E0D',
+                  marginBottom: 48,
+                }}>
+                  {t.quote}
+                </p>
+                <div>
+                  <p style={{ fontSize:20, fontWeight:500, color:'#0F0E0D', lineHeight:'26px', marginBottom:4 }}>{t.name}</p>
+                  <p className="t-body" style={{ color:'#706D66' }}>{t.role}</p>
+                  <p className="t-body" style={{ color:'#706D66' }}>{t.company}</p>
+                </div>
               </div>
             </div>
-          </motion.div>
-        </AnimatePresence>
+          ))}
+        </div>
 
-        {/* Barra de progreso Harvey */}
         <div style={{ display:'flex', gap:6 }}>
           {T.map((_,j) => (
             <button

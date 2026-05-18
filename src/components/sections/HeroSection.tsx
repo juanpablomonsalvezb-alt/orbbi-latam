@@ -1,7 +1,7 @@
 'use client'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const SLIDES = [
   { src: '/images/slide-1.webp', alt: 'Profesional hombre joven con IA', pos: 'center 20%' },
@@ -28,49 +28,39 @@ export default function HeroSection() {
       className="sec-dark"
       style={{ position:'relative', minHeight:'100svh', overflow:'hidden' }}
     >
-      {/* ── Slideshow background ── */}
+      {/* ── Slideshow background — CSS opacity transitions, sin AnimatePresence ── */}
       <div style={{ position:'absolute', inset:0, zIndex:0 }}>
-        {/* Preload siguiente slide silenciosamente */}
-        <div style={{ display:'none' }}>
-          <Image
-            src={SLIDES[(current + 1) % SLIDES.length].src}
-            alt=""
-            fill
-            sizes="1px"
-          />
-        </div>
-        <AnimatePresence mode="sync">
-          <motion.div
-            key={current}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1.2, ease: 'easeInOut' }}
-            style={{ position:'absolute', inset:0, willChange:'opacity' }}
+        {SLIDES.map((slide, idx) => (
+          <div
+            key={idx}
+            style={{
+              position: 'absolute', inset: 0,
+              opacity: idx === current ? 1 : 0,
+              transition: 'opacity 1.2s ease-in-out',
+              willChange: 'opacity',
+            }}
           >
             <Image
-              src={SLIDES[current].src}
-              alt={SLIDES[current].alt}
+              src={slide.src}
+              alt={slide.alt}
               fill
-              priority={current === 0}
-              style={{ objectFit:'cover', objectPosition: SLIDES[current].pos }}
+              priority={idx === 0}
+              style={{ objectFit:'cover', objectPosition: slide.pos }}
               sizes="100vw"
             />
-          </motion.div>
-        </AnimatePresence>
-        {/* Harvey has a subtle dark gradient on the left where text sits */}
+          </div>
+        ))}
         <div style={{
           position:'absolute', inset:0,
           background:'linear-gradient(to right, rgba(15,14,13,0.75) 0%, rgba(15,14,13,0.45) 45%, rgba(15,14,13,0.1) 70%, transparent 100%)',
         }} />
-        {/* Bottom gradient for legibility */}
         <div style={{
           position:'absolute', bottom:0, left:0, right:0, height:'40%',
           background:'linear-gradient(to top, rgba(15,14,13,0.6) 0%, transparent 100%)',
         }} />
       </div>
 
-      {/* ── Content — Harvey: absolute bottom, 36px padding ── */}
+      {/* ── Content ── */}
       <div
         style={{
           position:'relative', zIndex:1,
@@ -80,10 +70,7 @@ export default function HeroSection() {
         }}
       >
         <div className="page-wrap">
-          {/* Harvey: grid grid-cols-2, text only in left col */}
           <div style={{ maxWidth:660 }}>
-
-            {/* Headline — 80px, lh 84px, ls -1px */}
             <motion.h1
               className="t-hero"
               initial={{ opacity:0, y:32 }}
@@ -94,7 +81,6 @@ export default function HeroSection() {
               Aprende IA.<br />Aplícala<br /><span style={{ color:'rgba(250,250,249,0.55)' }}>a tu trabajo.</span>
             </motion.h1>
 
-            {/* Subtext — 20px, lh 26px, max-width 600px */}
             <motion.p
               className="t-body-lg"
               initial={{ opacity:0, y:20 }}
@@ -105,7 +91,6 @@ export default function HeroSection() {
               Mentoría personalizada 1:1, 100% online. Aprendes lo que necesitas, aplicado exactamente a tu profesión. Sin cursos genéricos, sin teoría vacía.
             </motion.p>
 
-            {/* CTAs — Harvey: "Request a Demo" button + "Our Customers" link */}
             <motion.div
               initial={{ opacity:0, y:16 }}
               animate={{ opacity:1, y:0 }}
@@ -123,7 +108,6 @@ export default function HeroSection() {
                 Ver testimonios →
               </a>
             </motion.div>
-
           </div>
         </div>
 
@@ -149,10 +133,9 @@ export default function HeroSection() {
             />
           ))}
         </div>
-
       </div>
 
-      {/* ── Logo bar — Harvey: bottom strip with partner logos ── */}
+      {/* ── Logo bar ── */}
       <motion.div
         initial={{ opacity:0 }}
         animate={{ opacity:1 }}
@@ -167,7 +150,6 @@ export default function HeroSection() {
         }}
       >
         <div style={{ display:'flex', alignItems:'center', gap:0 }}>
-          {/* Fade left/right */}
           <div style={{ position:'absolute', left:0, top:0, bottom:0, width:120, background:'linear-gradient(to right, rgba(15,14,13,0.8), transparent)', zIndex:1 }} />
           <div style={{ position:'absolute', right:0, top:0, bottom:0, width:120, background:'linear-gradient(to left, rgba(15,14,13,0.8), transparent)', zIndex:1 }} />
           <div className="logos-track">
@@ -179,7 +161,6 @@ export default function HeroSection() {
           </div>
         </div>
       </motion.div>
-
     </section>
   )
 }

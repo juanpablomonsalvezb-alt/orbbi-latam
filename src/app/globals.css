@@ -230,6 +230,4 @@
   @keyframes logos { to { transform:translateX(-50%); } }
   .logos-track { animation:logos 30s linear infinite; display:flex; gap:80px; width:max-content; align-items:center; }
 
-  /* ── GRAIN ── */
-  .grain { position:fixed; inset:0; z-index:9990; pointer-events:none; opacity:.025; mix-blend-mode:screen; }
 }
