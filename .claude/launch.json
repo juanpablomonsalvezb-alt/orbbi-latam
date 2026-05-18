@@ -4,9 +4,8 @@
     {
       "name": "orbbi-latam",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
-      "port": 3001,
-      "autoPort": true
+      "runtimeArgs": ["run", "dev", "--", "--port", "3004"],
+      "port": 3004
     }
   ]
 }
