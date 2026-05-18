@@ -11,7 +11,7 @@ const SLIDES = [
   { src: '/images/slide-5.webp', alt: 'Profesional mujer joven con laptop', pos: 'center 20%' },
 ]
 
-const LOGOS = ['McKinsey','Deloitte','PwC','KPMG','Accenture','EY','Santander','BBVA','BCI','Falabella','Rappi','Mercado Libre']
+const LOGOS = ['Supabase','Vercel','Resend','GitHub','Stripe','Anthropic','Cloudflare','Notion','Linear','Figma']
 
 export default function HeroSection() {
   const [current, setCurrent] = useState(0)
