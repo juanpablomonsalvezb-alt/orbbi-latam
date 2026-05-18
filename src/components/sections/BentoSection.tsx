@@ -35,7 +35,7 @@ export default function BentoSection() {
               minHeight:'48rem', display:'flex', flexDirection:'column', justifyContent:'flex-end',
             }}
           >
-            <Image src="/images/pay-equity.jpg" alt="Formación en IA" fill style={{ objectFit:'cover', objectPosition:'center', opacity:.35 }} sizes="55vw" />
+            <Image src="/images/pay-equity.webp" alt="Formación en IA" fill style={{ objectFit:'cover', objectPosition:'center', opacity:.35 }} sizes="55vw" />
             <div style={{ position:'relative', zIndex:1, padding:'3.6rem 4rem' }}>
               <span style={{ fontSize:'1.1rem',fontWeight:500,textTransform:'uppercase',letterSpacing:'.18em',color:'rgba(201,169,110,0.7)',display:'block',marginBottom:'1.2rem' }}>01 · Formación Esencial</span>
               <h3 className="title" style={{ color:'#FAFAF8', marginBottom:'1.2rem' }}>De cero a productiva en 8 semanas.</h3>
@@ -75,7 +75,7 @@ export default function BentoSection() {
 
           {/* C — Image card: Ejecutiva */}
           <motion.div {...anim(.15)} className="bento-c" style={{ borderRadius:'2rem',overflow:'hidden',position:'relative',minHeight:'32rem' }}>
-            <Image src="/images/gender.png" alt="Ejecutiva" fill style={{ objectFit:'cover',objectPosition:'center' }} sizes="33vw" />
+            <Image src="/images/gender.webp" alt="Ejecutiva" fill style={{ objectFit:'cover',objectPosition:'center' }} sizes="33vw" />
             <div style={{ position:'absolute',inset:0,background:'linear-gradient(to top,rgba(10,10,8,0.8) 0%,transparent 55%)' }} />
             <div style={{ position:'absolute',bottom:'2.4rem',left:'2.8rem',right:'2.8rem' }}>
               <p className="label" style={{ color:'rgba(201,169,110,0.7)',marginBottom:'.8rem' }}>Perfil</p>
@@ -109,7 +109,7 @@ export default function BentoSection() {
 
           {/* E — Image: Emprendedora */}
           <motion.div {...anim(.25)} className="bento-e" style={{ borderRadius:'2rem',overflow:'hidden',position:'relative',minHeight:'32rem' }}>
-            <Image src="/images/restaurant.png" alt="Emprendedora" fill style={{ objectFit:'cover',objectPosition:'center' }} sizes="33vw" />
+            <Image src="/images/restaurant.webp" alt="Emprendedora" fill style={{ objectFit:'cover',objectPosition:'center' }} sizes="33vw" />
             <div style={{ position:'absolute',inset:0,background:'linear-gradient(to top,rgba(10,10,8,0.8) 0%,transparent 55%)' }} />
             <div style={{ position:'absolute',bottom:'2.4rem',left:'2.8rem',right:'2.8rem' }}>
               <p className="label" style={{ color:'rgba(201,169,110,0.7)',marginBottom:'.8rem' }}>Perfil</p>

@@ -9,28 +9,28 @@ const T = [
     name: 'Carlos Mendoza',
     role: 'Abogado Senior',
     company: 'Estudio Jurídico',
-    img: '/images/pay-equity.jpg',
+    img: '/images/pay-equity.webp',
   },
   {
     quote: '"El aprendizaje es 100% aplicado a mi trabajo real. Entendieron mi sector desde la primera sesión."',
     name: 'Luciana Reyes',
     role: 'Docente Universitaria',
     company: 'Universidad Nacional',
-    img: '/images/gender.png',
+    img: '/images/gender.webp',
   },
   {
     quote: '"Automaticé el 40% de mis tareas administrativas. Ahora tengo tiempo para lo que realmente importa."',
     name: 'Andrés Torres',
     role: 'Consultor independiente',
     company: 'Finanzas corporativas',
-    img: '/images/restaurant.png',
+    img: '/images/restaurant.webp',
   },
   {
     quote: '"Pedí aprender Notion IA específicamente para mis proyectos. En dos semanas lo dominaba completamente."',
     name: 'Patricia Vidal',
     role: 'Gerente de Proyectos',
     company: 'Empresa tecnológica',
-    img: '/images/hero.jpg',
+    img: '/images/hero.webp',
   },
 ]
 

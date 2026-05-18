@@ -4,11 +4,11 @@ import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
 const SLIDES = [
-  { src: '/images/slide-1.jpg', alt: 'Profesional hombre joven con IA', pos: 'center 20%' },
-  { src: '/images/slide-2.jpg', alt: 'Profesional hombre 45 usando IA', pos: 'center 20%' },
-  { src: '/images/slide-3.jpg', alt: 'Profesional mujer 50 usando IA', pos: 'center 20%' },
-  { src: '/images/slide-4.jpg', alt: 'Profesional mujer joven usando IA', pos: 'center 20%' },
-  { src: '/images/slide-5.jpg', alt: 'Profesional mujer joven con laptop', pos: 'center 20%' },
+  { src: '/images/slide-1.webp', alt: 'Profesional hombre joven con IA', pos: 'center 20%' },
+  { src: '/images/slide-2.webp', alt: 'Profesional hombre 45 usando IA', pos: 'center 20%' },
+  { src: '/images/slide-3.webp', alt: 'Profesional mujer 50 usando IA', pos: 'center 20%' },
+  { src: '/images/slide-4.webp', alt: 'Profesional mujer joven usando IA', pos: 'center 20%' },
+  { src: '/images/slide-5.webp', alt: 'Profesional mujer joven con laptop', pos: 'center 20%' },
 ]
 
 const LOGOS = ['McKinsey','Deloitte','PwC','KPMG','Accenture','EY','Santander','BBVA','BCI','Falabella','Rappi','Mercado Libre']
@@ -30,19 +30,29 @@ export default function HeroSection() {
     >
       {/* ── Slideshow background ── */}
       <div style={{ position:'absolute', inset:0, zIndex:0 }}>
-        <AnimatePresence>
+        {/* Preload siguiente slide silenciosamente */}
+        <div style={{ display:'none' }}>
+          <Image
+            src={SLIDES[(current + 1) % SLIDES.length].src}
+            alt=""
+            fill
+            sizes="1px"
+          />
+        </div>
+        <AnimatePresence mode="sync">
           <motion.div
             key={current}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 1.4, ease: 'easeInOut' }}
-            style={{ position:'absolute', inset:0 }}
+            transition={{ duration: 1.2, ease: 'easeInOut' }}
+            style={{ position:'absolute', inset:0, willChange:'opacity' }}
           >
             <Image
               src={SLIDES[current].src}
               alt={SLIDES[current].alt}
-              fill priority={current === 0}
+              fill
+              priority={current === 0}
               style={{ objectFit:'cover', objectPosition: SLIDES[current].pos }}
               sizes="100vw"
             />

@@ -69,7 +69,7 @@ export default function ImageGridSection() {
             style={{ gridColumn: '1', gridRow: '1 / 3', borderRadius: 14, overflow: 'hidden', position: 'relative', minHeight: 540 }}
           >
             <Image
-              src="/images/grid-1.jpg"
+              src="/images/grid-1.webp"
               alt="Equipo trabajando con inteligencia artificial"
               fill
               style={{ objectFit: 'cover', objectPosition: 'center' }}
@@ -91,7 +91,7 @@ export default function ImageGridSection() {
             style={{ gridColumn: '2', gridRow: '1', borderRadius: 14, overflow: 'hidden', position: 'relative', minHeight: 260 }}
           >
             <Image
-              src="/images/grid-2.jpg"
+              src="/images/grid-2.webp"
               alt="Profesional hombre en reunión con IA"
               fill
               style={{ objectFit: 'cover', objectPosition: 'center top' }}
@@ -113,7 +113,7 @@ export default function ImageGridSection() {
             style={{ gridColumn: '3', gridRow: '1', borderRadius: 14, overflow: 'hidden', position: 'relative', minHeight: 260 }}
           >
             <Image
-              src="/images/grid-3.jpg"
+              src="/images/grid-3.webp"
               alt="Profesional mujer presentando con IA"
               fill
               style={{ objectFit: 'cover', objectPosition: 'center top' }}
@@ -135,7 +135,7 @@ export default function ImageGridSection() {
             style={{ gridColumn: '2 / 4', gridRow: '2', borderRadius: 14, overflow: 'hidden', position: 'relative', minHeight: 268 }}
           >
             <Image
-              src="/images/grid-4.jpg"
+              src="/images/grid-4.webp"
               alt="Mujer profesional en oficina usando IA"
               fill
               style={{ objectFit: 'cover', objectPosition: 'center 30%' }}
