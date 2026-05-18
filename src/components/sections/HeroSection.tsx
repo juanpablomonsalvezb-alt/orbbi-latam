@@ -74,7 +74,7 @@ export default function HeroSection() {
               transition={{ duration:.8, delay:.45, ease:[0.16,1,0.3,1] }}
               style={{ color:'rgba(250,250,249,0.85)', maxWidth:600, marginBottom:36 }}
             >
-              Las mejores profesionales de Latinoamérica confían en Orbbi para potenciar su trabajo con inteligencia artificial y navegar el futuro.
+              Los mejores profesionales de Latinoamérica confían en Orbbi para integrar inteligencia artificial a su trabajo y multiplicar sus resultados.
             </motion.p>
 
             {/* CTAs — Harvey: "Request a Demo" button + "Our Customers" link */}
@@ -92,7 +92,7 @@ export default function HeroSection() {
                 onMouseEnter={e=>(e.currentTarget.style.color='#FAFAF9')}
                 onMouseLeave={e=>(e.currentTarget.style.color='rgba(250,250,249,0.6)')}
               >
-                Nuestras clientas →
+                Ver casos de éxito →
               </a>
             </motion.div>
 

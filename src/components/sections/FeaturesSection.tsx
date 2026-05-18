@@ -12,13 +12,13 @@ import { motion } from 'framer-motion'
 */
 
 const FEATURES = [
-  'Formación Esencial',
-  'Orientación 1:1',
-  'Herramientas a Medida',
-  'Diagnóstico IA',
-  'Programas Corporativos',
-  'Comunidad Activa',
-  'Acompañamiento Real',
+  'ChatGPT & Claude al máximo',
+  'IA para tu profesión específica',
+  'Automatización sin código',
+  'Herramientas de imagen y video',
+  'Productividad con IA',
+  'Tu programa elegido',
+  'Resultados medibles',
 ]
 
 export default function FeaturesSection() {
@@ -55,7 +55,7 @@ export default function FeaturesSection() {
 
           {/* Left */}
           <p className="t-body" style={{ color: '#0F0E0D', maxWidth: 200, lineHeight: '22px' }}>
-            Las mejores profesionales de Latam confían en Orbbi para
+            Los mejores profesionales de Latam eligen Orbbi para
           </p>
 
           {/* Center: opacity-fade list */}

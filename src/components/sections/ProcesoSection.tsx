@@ -89,7 +89,7 @@ export default function ProcesoSection() {
             fontWeight:400,
             color:'rgba(250,250,249,0.5)',
           }}>
-            ¿Lista para empezar?
+            ¿Listo/a para empezar?
           </p>
           <a href="/#contacto" className="btn-hero">
             Agenda tu diagnóstico gratuito

@@ -9,7 +9,7 @@
 
 const COLS = [
   { h:'Plataforma',   links:['Formación Esencial','Orientación 1:1','Herramienta a Medida','Diagnóstico IA'] },
-  { h:'Soluciones',   links:['Ejecutivas','Emprendedoras','Docentes','Consultoras','Salud'] },
+  { h:'Soluciones',   links:['IA General', 'IA para tu Profesión', 'Programa a Medida', 'Equipos y Empresas'] },
   { h:'Clientes',     links:['Casos de éxito','Testimonios','Empresas'] },
   { h:'Seguridad',    links:['Privacidad','Seguridad de datos','GDPR','Términos de uso'] },
   { h:'Recursos',     links:['Blog','Guías de IA','Webinars','FAQ'] },

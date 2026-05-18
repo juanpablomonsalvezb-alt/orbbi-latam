@@ -23,10 +23,10 @@ export default function StatementSection() {
           {/* Harvey exact text pattern: bold dark + muted continuation on same line */}
           <h2 style={{ fontSize:36, lineHeight:'39.6px', letterSpacing:'-0.36px', fontWeight:500, fontFamily:'"sans",system-ui,sans-serif', maxWidth:760 }}>
             <span style={{ color:'#0F0E0D' }}>
-              Orbbi es IA diseñada para mujeres profesionales en Latinoamérica.{' '}
+              Orbbi es inteligencia artificial aplicada a tu trabajo real.{' '}
             </span>
             <span style={{ color:'#8F8B85' }}>
-              Potencia tu expertise en una plataforma segura que te permite enfocarte en el trabajo de alto valor.
+              Aprende las herramientas que importan, aplicadas a tu profesión. Consultoría 1:1 para profesionales de toda América Latina.
             </span>
           </h2>
         </motion.div>

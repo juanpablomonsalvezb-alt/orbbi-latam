@@ -16,11 +16,11 @@ gsap.registerPlugin(ScrollTrigger)
 */
 
 const METRICS = [
-  { label:'Horas ahorradas por alumna al mes',        num:'20+' },
-  { label:'Mujeres formadas en Latinoamérica',        num:'847+' },
-  { label:'Países de cobertura activa',               num:'12' },
-  { label:'Tasa de satisfacción al finalizar',        num:'94%' },
-  { label:'Sectores profesionales cubiertos',         num:'18+' },
+  { label:'Horas ahorradas por cliente al mes',        num:'20+' },
+  { label:'Profesionales formados en Latinoamérica',   num:'847+' },
+  { label:'Países de cobertura activa',                num:'12' },
+  { label:'Tasa de satisfacción al finalizar',         num:'94%' },
+  { label:'Sectores profesionales cubiertos',          num:'18+' },
 ]
 
 export default function StatsSection() {
@@ -37,7 +37,7 @@ export default function StatsSection() {
           className="t-h3"
           style={{ color:'rgba(250,250,249,0.5)', marginBottom:80 }}
         >
-          Ayudamos a las mejores profesionales a obtener{' '}
+          Ayudamos a los mejores profesionales a obtener{' '}
           <em style={{ fontFamily:'"disp",Georgia,serif', fontStyle:'italic', color:'#FAFAF9', fontWeight:400 }}>
             resultados medibles
           </em>

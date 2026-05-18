@@ -5,31 +5,31 @@ import Image from 'next/image'
 
 const T = [
   {
-    quote: '"Pasé de temer la IA a usarla todos los días. En tres semanas automaticé lo que antes me tomaba dos días completos."',
-    name: 'María Fernanda Ríos',
-    role: 'Directora Comercial',
-    company: 'Grupo Empresarial',
+    quote: '"En tres semanas automaticé lo que antes me tomaba dos días completos. La orientación 1:1 marcó la diferencia."',
+    name: 'Carlos Mendoza',
+    role: 'Abogado Senior',
+    company: 'Estudio Jurídico',
     img: '/images/pay-equity.jpg',
   },
   {
-    quote: '"El aprendizaje es 100% aplicado a mi trabajo real. Mi consultora entendió mi sector desde la primera sesión."',
+    quote: '"El aprendizaje es 100% aplicado a mi trabajo real. Entendieron mi sector desde la primera sesión."',
     name: 'Luciana Reyes',
     role: 'Docente Universitaria',
     company: 'Universidad Nacional',
     img: '/images/gender.png',
   },
   {
-    quote: '"En 6 semanas automaticé el 40% de mis tareas. Ahora tengo tiempo para lo que realmente importa."',
-    name: 'Camila Torres',
-    role: 'Fundadora & CEO',
-    company: 'Consultora RRHH',
+    quote: '"Automaticé el 40% de mis tareas administrativas. Ahora tengo tiempo para lo que realmente importa."',
+    name: 'Andrés Torres',
+    role: 'Consultor independiente',
+    company: 'Finanzas corporativas',
     img: '/images/restaurant.png',
   },
   {
-    quote: '"La experiencia acumulada es una ventaja enorme cuando se combina con IA. Orbbi me lo demostró."',
+    quote: '"Pedí aprender Notion IA específicamente para mis proyectos. En dos semanas lo dominaba completamente."',
     name: 'Patricia Vidal',
-    role: 'Abogada Senior',
-    company: 'Estudio Jurídico',
+    role: 'Gerente de Proyectos',
+    company: 'Empresa tecnológica',
     img: '/images/hero.jpg',
   },
 ]
@@ -45,7 +45,7 @@ export default function TestimonialsSection() {
         {/* Header */}
         <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:64 }}>
           <h3 className="t-h3" style={{ color:'#0F0E0D' }}>
-            Impacto real para clientas reales
+            Impacto real para profesionales reales
           </h3>
           <a href="/#contacto" className="btn-explore">
             Ver más

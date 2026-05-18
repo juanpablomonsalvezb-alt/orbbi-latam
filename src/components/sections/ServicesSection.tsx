@@ -6,29 +6,29 @@ const SERVICES = [
   {
     n: '01',
     title: 'Formación Esencial',
-    sub: 'De cero a productiva en 8 semanas.',
-    body: 'Un programa intensivo y práctico para dominar ChatGPT, herramientas de automatización y IA de productividad. Todo aplicado a tu trabajo real, no a teoría genérica.',
+    sub: 'Las herramientas de IA más importantes.',
+    body: 'Aprende ChatGPT, Claude, Gemini y las herramientas de IA más utilizadas globalmente. Curso práctico, aplicado a tu trabajo. Ideal para quien quiere empezar o ir más a fondo.',
     tags: ['8 semanas', 'Grupal o individual', 'Certificado'],
   },
   {
     n: '02',
     title: 'Orientación 1:1',
-    sub: 'IA diseñada para tu cargo específico.',
-    body: 'Sesiones individuales donde mapeamos exactamente qué herramientas necesitas para tu rol. Diagnóstico, plan e implementación personalizada con seguimiento real.',
+    sub: 'IA aplicada a tu profesión.',
+    body: 'Sesiones individuales donde mapeamos qué herramientas necesitas para tu cargo específico. Tú trabajas, nosotros te guiamos. Sin contenido genérico, sin teoría vacía.',
     tags: ['4 sesiones 1:1', 'Plan a medida', 'Seguimiento 30 días'],
   },
   {
     n: '03',
-    title: 'Herramienta a Medida',
-    sub: 'Tu propio asistente de IA.',
-    body: 'Desarrollamos una herramienta de IA diseñada exclusivamente para tus procesos. Un asistente que conoce tu sector, tu lenguaje y trabaja contigo desde el primer día.',
+    title: 'Programa a tu Medida',
+    sub: 'Aprendes lo que tú necesitas aprender.',
+    body: '¿Tienes un programa específico en mente? ¿Necesitas dominar una herramienta concreta para tu trabajo? Diseñamos las sesiones exactamente para eso.',
     tags: ['Desarrollo completo', 'Capacitación incluida', 'Soporte técnico'],
   },
   {
     n: '04',
-    title: 'Programas Corporativos',
+    title: 'Equipos y Empresas',
     sub: 'IA para todo tu equipo.',
-    body: 'Formamos equipos completos con un programa diseñado para tu industria y objetivos específicos. Métricas de impacto, seguimiento continuo y resultados medibles.',
+    body: 'Programas para equipos completos adaptados a tu industria. Diagnóstico, formación y métricas de impacto reales.',
     tags: ['Diagnóstico organizacional', 'Programa personalizado', 'Métricas de impacto'],
   },
 ]
@@ -50,12 +50,12 @@ export default function ServicesSection() {
           <div>
             <p style={{ fontSize:14, fontWeight:500, textTransform:'uppercase', letterSpacing:'0.1em', color:'rgba(15,14,13,0.4)', marginBottom:16 }}>Servicios</p>
             <h2 style={{ fontFamily:'"disp",Georgia,serif', fontSize:'clamp(36px,4vw,56px)', lineHeight:1.05, letterSpacing:'-0.03em', fontWeight:400, color:'#0F0E0D', maxWidth:560 }}>
-              Cuatro formas de transformar tu relación con la{' '}
-              <em style={{ fontStyle:'italic', color:'#706D66' }}>IA.</em>
+              Cómo trabajamos{' '}
+              <em style={{ fontStyle:'italic', color:'#706D66' }}>contigo.</em>
             </h2>
           </div>
           <a href="/#contacto" className="btn-explore" style={{ flexShrink:0 }}>
-            Hablar con una asesora
+            Hablar con nosotros
           </a>
         </motion.div>
 
