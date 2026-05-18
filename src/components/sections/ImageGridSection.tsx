@@ -2,14 +2,6 @@
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 
-const GRID_IMAGES = [
-  { src: '/images/svc-formacion.jpg',   label: 'Formación personalizada', span: 'tall' },
-  { src: '/images/svc-corporativo.jpg', label: 'Equipos corporativos',     span: 'normal' },
-  { src: '/images/svc-herramienta.jpg', label: 'Herramientas de IA',       span: 'normal' },
-  { src: '/images/svc-taller.jpg',      label: 'Talleres prácticos',       span: 'wide' },
-  { src: '/images/svc-charla.jpg',      label: 'Charlas y conferencias',   span: 'normal' },
-]
-
 export default function ImageGridSection() {
   return (
     <section className="sec-dark sec-pad" style={{ background: '#0F0E0D' }}>
@@ -42,7 +34,7 @@ export default function ImageGridSection() {
             </h2>
           </div>
           <a
-            href="/#contacto"
+            href="/#mentorias"
             style={{
               flexShrink: 0,
               fontSize: 14,
@@ -56,11 +48,11 @@ export default function ImageGridSection() {
             onMouseEnter={e => (e.currentTarget.style.color = '#FAFAF9')}
             onMouseLeave={e => (e.currentTarget.style.color = 'rgba(250,250,249,0.6)')}
           >
-            Ver todos los programas →
+            Ver mentorías →
           </a>
         </motion.div>
 
-        {/* Grid editorial — 3 columnas con alturas variadas */}
+        {/* Grid editorial — 3 columnas, 2 filas */}
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(3, 1fr)',
@@ -68,35 +60,25 @@ export default function ImageGridSection() {
           gap: 12,
         }}>
 
-          {/* Col 1 — imagen tall, ocupa 2 rows */}
+          {/* Col 1 — tall, ocupa 2 rows */}
           <motion.div
             initial={{ opacity: 0, scale: 0.97 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: .9, delay: 0, ease: [0.16, 1, 0.3, 1] }}
-            style={{
-              gridColumn: '1',
-              gridRow: '1 / 3',
-              borderRadius: 14,
-              overflow: 'hidden',
-              position: 'relative',
-              minHeight: 540,
-            }}
+            style={{ gridColumn: '1', gridRow: '1 / 3', borderRadius: 14, overflow: 'hidden', position: 'relative', minHeight: 540 }}
           >
             <Image
-              src="/images/svc-formacion.jpg"
-              alt="Formación personalizada en IA"
+              src="/images/grid-1.jpg"
+              alt="Equipo trabajando con inteligencia artificial"
               fill
               style={{ objectFit: 'cover', objectPosition: 'center' }}
               sizes="(max-width:768px) 100vw, 33vw"
             />
-            <div style={{
-              position: 'absolute', inset: 0,
-              background: 'linear-gradient(to top, rgba(15,14,13,0.7) 0%, transparent 50%)',
-            }} />
+            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(15,14,13,0.75) 0%, transparent 50%)' }} />
             <div style={{ position: 'absolute', bottom: 24, left: 24, right: 24 }}>
-              <p style={{ fontSize: 13, fontWeight: 500, color: 'rgba(250,250,249,0.5)', marginBottom: 6, letterSpacing: '0.06em', textTransform: 'uppercase' }}>01</p>
-              <p style={{ fontSize: 18, fontWeight: 400, color: '#FAFAF9', lineHeight: '22px', fontFamily: '"disp",Georgia,serif' }}>Formación personalizada</p>
+              <p style={{ fontSize: 12, fontWeight: 500, color: 'rgba(250,250,249,0.45)', marginBottom: 6, letterSpacing: '0.08em', textTransform: 'uppercase' }}>01</p>
+              <p style={{ fontSize: 18, fontWeight: 400, color: '#FAFAF9', lineHeight: '22px', fontFamily: '"disp",Georgia,serif' }}>Trabajo en equipo con IA</p>
             </div>
           </motion.div>
 
@@ -106,26 +88,19 @@ export default function ImageGridSection() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: .9, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-            style={{
-              gridColumn: '2',
-              gridRow: '1',
-              borderRadius: 14,
-              overflow: 'hidden',
-              position: 'relative',
-              minHeight: 260,
-            }}
+            style={{ gridColumn: '2', gridRow: '1', borderRadius: 14, overflow: 'hidden', position: 'relative', minHeight: 260 }}
           >
             <Image
-              src="/images/svc-corporativo.jpg"
-              alt="Equipos corporativos"
+              src="/images/grid-2.jpg"
+              alt="Profesional hombre en reunión con IA"
               fill
-              style={{ objectFit: 'cover', objectPosition: 'center' }}
+              style={{ objectFit: 'cover', objectPosition: 'center top' }}
               sizes="(max-width:768px) 100vw, 33vw"
             />
             <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(15,14,13,0.65) 0%, transparent 55%)' }} />
             <div style={{ position: 'absolute', bottom: 20, left: 20, right: 20 }}>
-              <p style={{ fontSize: 13, fontWeight: 500, color: 'rgba(250,250,249,0.5)', marginBottom: 5, letterSpacing: '0.06em', textTransform: 'uppercase' }}>02</p>
-              <p style={{ fontSize: 17, fontWeight: 400, color: '#FAFAF9', lineHeight: '21px', fontFamily: '"disp",Georgia,serif' }}>Equipos corporativos</p>
+              <p style={{ fontSize: 12, fontWeight: 500, color: 'rgba(250,250,249,0.45)', marginBottom: 5, letterSpacing: '0.08em', textTransform: 'uppercase' }}>02</p>
+              <p style={{ fontSize: 17, fontWeight: 400, color: '#FAFAF9', lineHeight: '21px', fontFamily: '"disp",Georgia,serif' }}>Mentoría profesional 1:1</p>
             </div>
           </motion.div>
 
@@ -135,55 +110,41 @@ export default function ImageGridSection() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: .9, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
-            style={{
-              gridColumn: '3',
-              gridRow: '1',
-              borderRadius: 14,
-              overflow: 'hidden',
-              position: 'relative',
-              minHeight: 260,
-            }}
+            style={{ gridColumn: '3', gridRow: '1', borderRadius: 14, overflow: 'hidden', position: 'relative', minHeight: 260 }}
           >
             <Image
-              src="/images/svc-herramienta.jpg"
-              alt="Herramientas de IA"
+              src="/images/grid-3.jpg"
+              alt="Profesional mujer presentando con IA"
               fill
-              style={{ objectFit: 'cover', objectPosition: 'center' }}
+              style={{ objectFit: 'cover', objectPosition: 'center top' }}
               sizes="(max-width:768px) 100vw, 33vw"
             />
             <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(15,14,13,0.65) 0%, transparent 55%)' }} />
             <div style={{ position: 'absolute', bottom: 20, left: 20, right: 20 }}>
-              <p style={{ fontSize: 13, fontWeight: 500, color: 'rgba(250,250,249,0.5)', marginBottom: 5, letterSpacing: '0.06em', textTransform: 'uppercase' }}>03</p>
-              <p style={{ fontSize: 17, fontWeight: 400, color: '#FAFAF9', lineHeight: '21px', fontFamily: '"disp",Georgia,serif' }}>Herramientas de IA</p>
+              <p style={{ fontSize: 12, fontWeight: 500, color: 'rgba(250,250,249,0.45)', marginBottom: 5, letterSpacing: '0.08em', textTransform: 'uppercase' }}>03</p>
+              <p style={{ fontSize: 17, fontWeight: 400, color: '#FAFAF9', lineHeight: '21px', fontFamily: '"disp",Georgia,serif' }}>Presentaciones con IA</p>
             </div>
           </motion.div>
 
-          {/* Col 2+3, Row 2 — wide, spans 2 columns */}
+          {/* Col 2+3, Row 2 — wide */}
           <motion.div
             initial={{ opacity: 0, scale: 0.97 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: .9, delay: 0.22, ease: [0.16, 1, 0.3, 1] }}
-            style={{
-              gridColumn: '2 / 4',
-              gridRow: '2',
-              borderRadius: 14,
-              overflow: 'hidden',
-              position: 'relative',
-              minHeight: 268,
-            }}
+            style={{ gridColumn: '2 / 4', gridRow: '2', borderRadius: 14, overflow: 'hidden', position: 'relative', minHeight: 268 }}
           >
             <Image
-              src="/images/svc-taller.jpg"
-              alt="Talleres prácticos de IA"
+              src="/images/grid-4.jpg"
+              alt="Mujer profesional en oficina usando IA"
               fill
               style={{ objectFit: 'cover', objectPosition: 'center 30%' }}
               sizes="(max-width:768px) 100vw, 66vw"
             />
             <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(15,14,13,0.6) 0%, transparent 60%)' }} />
             <div style={{ position: 'absolute', bottom: 28, left: 28, right: 28 }}>
-              <p style={{ fontSize: 13, fontWeight: 500, color: 'rgba(250,250,249,0.5)', marginBottom: 5, letterSpacing: '0.06em', textTransform: 'uppercase' }}>04</p>
-              <p style={{ fontSize: 20, fontWeight: 400, color: '#FAFAF9', lineHeight: '24px', fontFamily: '"disp",Georgia,serif' }}>Talleres y workshops prácticos</p>
+              <p style={{ fontSize: 12, fontWeight: 500, color: 'rgba(250,250,249,0.45)', marginBottom: 5, letterSpacing: '0.08em', textTransform: 'uppercase' }}>04</p>
+              <p style={{ fontSize: 20, fontWeight: 400, color: '#FAFAF9', lineHeight: '24px', fontFamily: '"disp",Georgia,serif' }}>IA aplicada a tu profesión</p>
             </div>
           </motion.div>
 
