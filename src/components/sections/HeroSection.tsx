@@ -4,9 +4,11 @@ import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
 const SLIDES = [
-  { src: '/images/hero.jpg',   alt: 'Profesional mujer con suéter usando IA', pos: 'center 20%' },
-  { src: '/images/hero-2.jpg', alt: 'Profesional hombre usando inteligencia artificial', pos: 'center 25%' },
-  { src: '/images/hero-3.jpg', alt: 'Profesional mujer en patio usando IA', pos: 'center 30%' },
+  { src: '/images/slide-1.jpg', alt: 'Profesional hombre joven con IA', pos: 'center 20%' },
+  { src: '/images/slide-2.jpg', alt: 'Profesional hombre 45 usando IA', pos: 'center 20%' },
+  { src: '/images/slide-3.jpg', alt: 'Profesional mujer 50 usando IA', pos: 'center 20%' },
+  { src: '/images/slide-4.jpg', alt: 'Profesional mujer joven usando IA', pos: 'center 20%' },
+  { src: '/images/slide-5.jpg', alt: 'Profesional mujer joven con laptop', pos: 'center 20%' },
 ]
 
 const LOGOS = ['McKinsey','Deloitte','PwC','KPMG','Accenture','EY','Santander','BBVA','BCI','Falabella','Rappi','Mercado Libre']
