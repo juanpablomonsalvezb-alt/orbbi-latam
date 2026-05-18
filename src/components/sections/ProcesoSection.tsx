@@ -2,69 +2,100 @@
 import { motion } from 'framer-motion'
 
 const STEPS = [
-  { n:'01', title:'Diagnóstico', body:'Entendemos tu contexto real: qué haces, cuánto tiempo pierdes y qué resultados quieres lograr con IA.', time:'1 sesión · 60 min' },
+  { n:'01', title:'Diagnóstico', body:'Entendemos tu contexto real: qué haces, cuánto tiempo pierdes y qué resultados concretos quieres lograr con IA.', time:'1 sesión · 60 min' },
   { n:'02', title:'Diseño',      body:'Creamos tu mapa personalizado de herramientas. No te enseñamos todo — te enseñamos exactamente lo que necesitas.', time:'1 semana' },
   { n:'03', title:'Formación',   body:'Aprendes con ejercicios reales de tu trabajo. Acompañamiento permanente. Sin teoría vacía, sin contenido genérico.', time:'4 a 8 semanas' },
-  { n:'04', title:'Seguimiento', body:'Revisamos resultados, ajustamos herramientas y aseguramos que el cambio sea real y duradero.', time:'30 días post-programa' },
+  { n:'04', title:'Seguimiento', body:'Revisamos resultados, ajustamos herramientas y aseguramos que el cambio sea real, sostenido y duradero.', time:'30 días post-programa' },
 ]
 
 export default function ProcesoSection() {
   return (
-    <section id="metodo" className="section" style={{ background:'#EDEAE3' }}>
-      <div className="wrap">
+    <section id="metodo" className="sec-dark sec-pad">
+      <div className="page-wrap">
+
         <motion.div
-          initial={{ opacity:0, y:32 }}
+          initial={{ opacity:0, y:24 }}
           whileInView={{ opacity:1, y:0 }}
           viewport={{ once:true, margin:'-80px' }}
-          transition={{ duration:.9, ease:[0.16,1,0.3,1] }}
-          style={{ marginBottom:'8rem' }}
+          transition={{ duration:.8, ease:[0.16,1,0.3,1] }}
+          style={{ marginBottom:80 }}
         >
-          <p className="t-tag" style={{ marginBottom:'1.6rem' }}>Método</p>
-          <h2 className="t-h2" style={{ maxWidth:'56rem' }}>
+          <p style={{ fontSize:14, fontWeight:500, textTransform:'uppercase', letterSpacing:'0.1em', color:'rgba(250,250,249,0.35)', marginBottom:16 }}>Método</p>
+          <h2 className="t-h3" style={{ color:'rgba(250,250,249,0.5)', maxWidth:640 }}>
             Un proceso claro,{' '}
-            <em style={{ fontStyle:'italic', color:'#B8924A' }}>sin atajos</em>,
-            {' '}con resultados reales.
+            <em style={{ fontFamily:'"disp",Georgia,serif', fontStyle:'italic', color:'#FAFAF9', fontWeight:400 }}>
+              sin atajos
+            </em>
+            {', '}con resultados reales.
           </h2>
         </motion.div>
 
-        <div style={{ display:'grid', gridTemplateColumns:'1fr', gap:'0' }} className="s:grid-cols-4">
-          {STEPS.map((s,i) => (
+        <div style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:0 }}>
+          {STEPS.map((s, i) => (
             <motion.div
               key={i}
-              initial={{ opacity:0, y:32 }}
+              initial={{ opacity:0, y:24 }}
               whileInView={{ opacity:1, y:0 }}
               viewport={{ once:true, margin:'-40px' }}
-              transition={{ duration:.7, delay:i*.12, ease:[0.16,1,0.3,1] }}
+              transition={{ duration:.7, delay:i*.1, ease:[0.16,1,0.3,1] }}
               style={{
-                padding:'4rem 3.2rem',
-                borderLeft: i>0?'1px solid rgba(28,28,26,0.08)':undefined,
-                borderTop:'1px solid rgba(28,28,26,0.08)',
-                background:'#F7F3EE',
-                display:'flex', flexDirection:'column', gap:'1.6rem',
+                padding:'40px 32px',
+                borderLeft: i > 0 ? '1px solid rgba(250,250,249,0.08)' : undefined,
+                borderTop: '1px solid rgba(250,250,249,0.08)',
+                display:'flex', flexDirection:'column', gap:20,
               }}
             >
-              <span style={{ fontFamily:'"disp",Georgia,serif', fontSize:'clamp(4rem,5vw,7.2rem)', lineHeight:1, color:'rgba(30,58,47,0.1)', letterSpacing:'-0.02em' }}>{s.n}</span>
-              <h3 style={{ fontFamily:'"disp",Georgia,serif', fontSize:'clamp(2rem,2.2vw,2.8rem)', lineHeight:1.2, color:'#1C1C1A', letterSpacing:'-0.01em' }}>{s.title}</h3>
-              <p className="t-body" style={{ fontSize:'1.3rem' }}>{s.body}</p>
-              <span style={{ fontSize:'1.1rem', fontWeight:500, textTransform:'uppercase', letterSpacing:'.14em', color:'#B8924A' }}>{s.time}</span>
+              <span style={{
+                fontFamily:'"disp",Georgia,serif',
+                fontSize:'clamp(56px,6vw,96px)',
+                lineHeight:1,
+                color:'rgba(250,250,249,0.06)',
+                letterSpacing:'-0.03em',
+              }}>{s.n}</span>
+              <h3 style={{
+                fontFamily:'"disp",Georgia,serif',
+                fontSize:'clamp(22px,2vw,32px)',
+                lineHeight:1.15,
+                letterSpacing:'-0.02em',
+                fontWeight:400,
+                color:'#FAFAF9',
+              }}>{s.title}</h3>
+              <p style={{ fontSize:14, lineHeight:'20px', color:'rgba(250,250,249,0.5)', flex:1 }}>{s.body}</p>
+              <span style={{
+                fontSize:12, fontWeight:500, textTransform:'uppercase',
+                letterSpacing:'0.12em', color:'rgba(250,250,249,0.3)',
+              }}>{s.time}</span>
             </motion.div>
           ))}
         </div>
 
         <motion.div
-          initial={{ opacity:0, y:24 }}
+          initial={{ opacity:0, y:20 }}
           whileInView={{ opacity:1, y:0 }}
           viewport={{ once:true }}
-          transition={{ duration:.8, ease:[0.16,1,0.3,1] }}
-          style={{ display:'flex', flexDirection:'column', gap:'2rem', marginTop:'6rem', alignItems:'flex-start' }}
-          className="s:flex-row s:items-center"
+          transition={{ duration:.8, delay:.2, ease:[0.16,1,0.3,1] }}
+          style={{
+            borderTop:'1px solid rgba(250,250,249,0.08)',
+            marginTop:0,
+            paddingTop:48,
+            display:'flex', alignItems:'center', justifyContent:'space-between', flexWrap:'wrap', gap:24,
+          }}
         >
-          <p style={{ fontFamily:'"disp",Georgia,serif', fontSize:'clamp(2rem,2.5vw,3rem)', color:'#1C1C1A', lineHeight:1.2 }}>¿Lista para empezar?</p>
-          <a href="/#contacto" className="btn-primary">
+          <p style={{
+            fontFamily:'"disp",Georgia,serif',
+            fontSize:'clamp(28px,3vw,40px)',
+            lineHeight:1.1,
+            letterSpacing:'-0.02em',
+            fontWeight:400,
+            color:'rgba(250,250,249,0.5)',
+          }}>
+            ¿Lista para empezar?
+          </p>
+          <a href="/#contacto" className="btn-hero">
             Agenda tu diagnóstico gratuito
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
           </a>
         </motion.div>
+
       </div>
     </section>
   )
