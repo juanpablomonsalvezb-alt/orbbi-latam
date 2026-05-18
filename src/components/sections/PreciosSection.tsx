@@ -1,9 +1,45 @@
 'use client'
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 
-const PLANES = [
+type PlanId = 'diagnostico' | 'sesion' | 'programa'
+
+async function iniciarPago(planId: PlanId, setLoading: (id: PlanId | null) => void) {
+  setLoading(planId)
+  try {
+    const res = await fetch('/api/mp/checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ plan_id: planId }),
+    })
+    const data = await res.json()
+    if (data.init_point) {
+      window.location.href = data.init_point
+    } else {
+      alert('Error al iniciar el pago. Escríbenos a cseplataforma@gmail.com')
+    }
+  } catch {
+    alert('Error al iniciar el pago. Escríbenos a cseplataforma@gmail.com')
+  } finally {
+    setLoading(null)
+  }
+}
+
+const PLANES: {
+  badge: string | null
+  planId: PlanId
+  name: string
+  price: string
+  period: string
+  sub: string
+  desc: string
+  items: string[]
+  cta: string
+  highlight: boolean
+}[] = [
   {
     badge: null,
+    planId: 'diagnostico',
     name: 'Diagnóstico',
     price: '$40',
     period: 'USD',
@@ -16,11 +52,11 @@ const PLANES = [
       'Se descuenta si contratas el programa',
     ],
     cta: 'Reservar diagnóstico',
-    href: '/#contacto',
     highlight: false,
   },
   {
     badge: null,
+    planId: 'sesion',
     name: '1 Sesión',
     price: '$90',
     period: 'USD',
@@ -33,11 +69,11 @@ const PLANES = [
       'Acceso por WhatsApp 48h post-sesión',
     ],
     cta: 'Empezar con 1 sesión',
-    href: '/#contacto',
     highlight: false,
   },
   {
     badge: 'Más elegido',
+    planId: 'programa',
     name: '4 Sesiones',
     price: '$299',
     period: 'USD',
@@ -52,12 +88,13 @@ const PLANES = [
       'Ahorras $61 vs. sesiones individuales',
     ],
     cta: 'Empezar el programa',
-    href: '/#contacto',
     highlight: true,
   },
 ]
 
 export default function PreciosSection() {
+  const [loading, setLoading] = useState<PlanId | null>(null)
+
   return (
     <section id="precios" className="sec-light sec-pad">
       <div className="page-wrap">
@@ -91,11 +128,9 @@ export default function PreciosSection() {
                 padding:'40px 36px 36px',
                 display:'flex',
                 flexDirection:'column',
-                gap:0,
                 position:'relative',
               }}
             >
-              {/* Badge */}
               {p.badge && (
                 <span style={{
                   position:'absolute', top:20, right:20,
@@ -107,48 +142,37 @@ export default function PreciosSection() {
                 </span>
               )}
 
-              {/* Plan name */}
               <p style={{
                 fontSize:13, fontWeight:500, textTransform:'uppercase', letterSpacing:'0.1em',
                 color: p.highlight ? 'rgba(250,250,249,0.4)' : 'rgba(15,14,13,0.4)',
                 marginBottom:24,
               }}>{p.name}</p>
 
-              {/* Price */}
               <div style={{ marginBottom:8 }}>
                 <span style={{
                   fontFamily:'"disp",Georgia,serif',
                   fontSize:'clamp(48px,5vw,72px)',
-                  lineHeight:1,
-                  letterSpacing:'-0.03em',
-                  fontWeight:400,
+                  lineHeight:1, letterSpacing:'-0.03em', fontWeight:400,
                   color: p.highlight ? '#FAFAF9' : '#0F0E0D',
                 }}>{p.price}</span>
                 {' '}
-                <span style={{
-                  fontSize:16, fontWeight:400,
-                  color: p.highlight ? 'rgba(250,250,249,0.4)' : 'rgba(15,14,13,0.4)',
-                }}>{p.period}</span>
+                <span style={{ fontSize:16, color: p.highlight ? 'rgba(250,250,249,0.4)' : 'rgba(15,14,13,0.4)' }}>{p.period}</span>
               </div>
 
-              {/* Sub */}
               <p style={{
                 fontSize:13,
                 color: p.highlight ? 'rgba(250,250,249,0.35)' : 'rgba(15,14,13,0.4)',
                 marginBottom:24,
               }}>{p.sub}</p>
 
-              {/* Divider */}
               <div style={{ height:1, background: p.highlight ? 'rgba(250,250,249,0.1)' : 'rgba(15,14,13,0.08)', marginBottom:24 }} />
 
-              {/* Desc */}
               <p style={{
                 fontSize:14, lineHeight:'22px',
                 color: p.highlight ? 'rgba(250,250,249,0.6)' : 'rgba(15,14,13,0.55)',
                 marginBottom:28,
               }}>{p.desc}</p>
 
-              {/* Items */}
               <ul style={{ listStyle:'none', padding:0, margin:0, display:'flex', flexDirection:'column', gap:12, flex:1, marginBottom:36 }}>
                 {p.items.map((item, j) => (
                   <li key={j} style={{ display:'flex', alignItems:'flex-start', gap:10 }}>
@@ -160,31 +184,31 @@ export default function PreciosSection() {
                 ))}
               </ul>
 
-              {/* CTA */}
-              <a
-                href={p.href}
+              <button
+                onClick={() => iniciarPago(p.planId, setLoading)}
+                disabled={loading !== null}
                 style={{
                   display:'flex', alignItems:'center', justifyContent:'center',
-                  height:44, borderRadius:4,
+                  height:44, borderRadius:4, width:'100%',
                   background: p.highlight ? '#FAFAF9' : 'transparent',
                   border: p.highlight ? 'none' : '1px solid rgba(15,14,13,0.25)',
-                  color: p.highlight ? '#0F0E0D' : '#0F0E0D',
+                  color: '#0F0E0D',
                   fontSize:14, fontWeight:500,
                   fontFamily:'"sans",system-ui,sans-serif',
-                  cursor:'pointer', transition:'opacity .2s',
-                  textDecoration:'none',
+                  cursor: loading ? 'wait' : 'pointer',
+                  transition:'opacity .2s',
+                  opacity: loading && loading !== p.planId ? 0.4 : 1,
                 }}
-                onMouseEnter={e=>(e.currentTarget.style.opacity='.8')}
-                onMouseLeave={e=>(e.currentTarget.style.opacity='1')}
+                onMouseEnter={e => { if (!loading) e.currentTarget.style.opacity = '.8' }}
+                onMouseLeave={e => { if (!loading) e.currentTarget.style.opacity = '1' }}
               >
-                {p.cta}
-              </a>
+                {loading === p.planId ? 'Redirigiendo…' : p.cta}
+              </button>
 
             </motion.div>
           ))}
         </div>
 
-        {/* Nota al pie */}
         <motion.p
           initial={{ opacity:0 }}
           whileInView={{ opacity:1 }}
@@ -192,7 +216,7 @@ export default function PreciosSection() {
           transition={{ duration:.6, delay:.3 }}
           style={{ textAlign:'center', fontSize:13, color:'rgba(15,14,13,0.35)', marginTop:32 }}
         >
-          Todos los precios en USD · Pagos seguros con Stripe o transferencia bancaria · Los $40 del diagnóstico se descuentan si contratas el programa
+          Pago seguro con MercadoPago · Los $40 del diagnóstico se descuentan si contratas el programa
         </motion.p>
 
       </div>
