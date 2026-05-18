@@ -5,31 +5,35 @@ import { motion, AnimatePresence } from 'framer-motion'
 const SERVICES = [
   {
     n: '01',
-    title: 'Formación Esencial',
-    sub: 'Las herramientas de IA más importantes.',
-    body: 'Aprende ChatGPT, Claude, Gemini y las herramientas de IA más utilizadas globalmente. Curso práctico, aplicado a tu trabajo. Ideal para quien quiere empezar o ir más a fondo.',
-    tags: ['8 semanas', 'Grupal o individual', 'Certificado'],
+    title: 'Mentoría en IA General',
+    sub: 'Quiero aprender inteligencia artificial.',
+    body: 'Empieza desde donde estás. Aprendes ChatGPT, Claude, Gemini, herramientas de imagen, automatización y productividad con IA — guiado por un mentor real, a tu ritmo, aplicado a tu vida cotidiana y profesional. Ideal si quieres dominar la IA sin saber por dónde empezar.',
+    tags: ['100% online', '1:1 personalizado', 'A tu ritmo'],
+    badge: null,
   },
   {
     n: '02',
-    title: 'Orientación 1:1',
-    sub: 'IA aplicada a tu profesión.',
-    body: 'Sesiones individuales donde mapeamos qué herramientas necesitas para tu cargo específico. Tú trabajas, nosotros te guiamos. Sin contenido genérico, sin teoría vacía.',
-    tags: ['4 sesiones 1:1', 'Plan a medida', 'Seguimiento 30 días'],
+    title: 'Mentoría Profesional',
+    sub: 'Quiero aplicar IA a mi trabajo específico.',
+    body: 'Sesiones individuales enfocadas en tu profesión concreta. Diagnosticamos qué herramientas de IA necesitas para tu cargo, tu industria y tus resultados. Sin contenido genérico — todo lo que aprendes lo usas al día siguiente en tu trabajo.',
+    tags: ['100% online', 'Diagnóstico inicial', 'Plan a tu medida'],
+    badge: null,
   },
   {
     n: '03',
-    title: 'Programa a tu Medida',
-    sub: 'Aprendes lo que tú necesitas aprender.',
-    body: '¿Tienes un programa específico en mente? ¿Necesitas dominar una herramienta concreta para tu trabajo? Diseñamos las sesiones exactamente para eso.',
-    tags: ['Desarrollo completo', 'Capacitación incluida', 'Soporte técnico'],
+    title: 'Programa Específico',
+    sub: 'Quiero aprender una herramienta o programa concreto.',
+    body: '¿Tienes en mente una herramienta, plataforma o habilidad específica que necesitas dominar? Diseñamos un programa de sesiones exactamente para eso. Tú defines qué aprender — nosotros te acompañamos hasta que lo dominas.',
+    tags: ['100% online', 'Programa a demanda', 'Sesiones personalizadas'],
+    badge: null,
   },
   {
     n: '04',
-    title: 'Equipos y Empresas',
-    sub: 'IA para todo tu equipo.',
-    body: 'Programas para equipos completos adaptados a tu industria. Diagnóstico, formación y métricas de impacto reales.',
-    tags: ['Diagnóstico organizacional', 'Programa personalizado', 'Métricas de impacto'],
+    title: 'Convenio Empresarial',
+    sub: 'Mi empresa quiere capacitar a su equipo.',
+    body: 'Programa de mentorías para equipos y organizaciones. Diagnóstico grupal, rutas de formación por rol y seguimiento de impacto real. El mismo enfoque personalizado, escalado a tu empresa.',
+    tags: ['Para equipos', 'Diagnóstico organizacional', 'Métricas de impacto'],
+    badge: 'Para empresas',
   },
 ]
 
@@ -37,7 +41,7 @@ export default function ServicesSection() {
   const [open, setOpen] = useState<number | null>(null)
 
   return (
-    <section id="servicios" className="sec-light sec-pad">
+    <section id="mentorias" className="sec-light sec-pad">
       <div className="page-wrap">
 
         <motion.div
@@ -48,10 +52,10 @@ export default function ServicesSection() {
           style={{ display:'flex', alignItems:'flex-end', justifyContent:'space-between', marginBottom:80, flexWrap:'wrap', gap:24 }}
         >
           <div>
-            <p style={{ fontSize:14, fontWeight:500, textTransform:'uppercase', letterSpacing:'0.1em', color:'rgba(15,14,13,0.4)', marginBottom:16 }}>Servicios</p>
+            <p style={{ fontSize:14, fontWeight:500, textTransform:'uppercase', letterSpacing:'0.1em', color:'rgba(15,14,13,0.4)', marginBottom:16 }}>Mentorías</p>
             <h2 style={{ fontFamily:'"disp",Georgia,serif', fontSize:'clamp(36px,4vw,56px)', lineHeight:1.05, letterSpacing:'-0.03em', fontWeight:400, color:'#0F0E0D', maxWidth:560 }}>
-              Cómo trabajamos{' '}
-              <em style={{ fontStyle:'italic', color:'#706D66' }}>contigo.</em>
+              Elige el camino{' '}
+              <em style={{ fontStyle:'italic', color:'#706D66' }}>que es tuyo.</em>
             </h2>
           </div>
           <a href="/#contacto" className="btn-explore" style={{ flexShrink:0 }}>
@@ -77,17 +81,27 @@ export default function ServicesSection() {
                   <div style={{ display:'flex', alignItems:'baseline', gap:28, flex:1 }}>
                     <span style={{ fontSize:14, fontWeight:500, color:'rgba(15,14,13,0.25)', minWidth:28, flexShrink:0 }}>{s.n}</span>
                     <div style={{ flex:1 }}>
-                      <h3 style={{
-                        fontFamily:'"disp",Georgia,serif',
-                        fontSize:'clamp(24px,2.8vw,40px)',
-                        lineHeight:1.1,
-                        letterSpacing:'-0.02em',
-                        fontWeight:400,
-                        color:'#0F0E0D',
-                        marginBottom:6,
-                      }}>
-                        {s.title}
-                      </h3>
+                      <div style={{ display:'flex', alignItems:'center', gap:10, marginBottom:6 }}>
+                        <h3 style={{
+                          fontFamily:'"disp",Georgia,serif',
+                          fontSize:'clamp(24px,2.8vw,40px)',
+                          lineHeight:1.1,
+                          letterSpacing:'-0.02em',
+                          fontWeight:400,
+                          color: s.badge ? 'rgba(15,14,13,0.4)' : '#0F0E0D',
+                        }}>
+                          {s.title}
+                        </h3>
+                        {s.badge && (
+                          <span style={{
+                            fontSize:11, fontWeight:500, textTransform:'uppercase',
+                            letterSpacing:'0.1em', color:'rgba(15,14,13,0.4)',
+                            border:'1px solid rgba(15,14,13,0.15)',
+                            borderRadius:100, padding:'3px 10px', whiteSpace:'nowrap',
+                            flexShrink:0,
+                          }}>{s.badge}</span>
+                        )}
+                      </div>
                       <p style={{ fontSize:14, color:'#706D66' }}>{s.sub}</p>
                     </div>
                   </div>

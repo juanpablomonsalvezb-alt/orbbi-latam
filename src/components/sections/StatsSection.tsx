@@ -37,9 +37,9 @@ export default function StatsSection() {
           className="t-h3"
           style={{ color:'rgba(250,250,249,0.5)', marginBottom:80 }}
         >
-          Ayudamos a los mejores profesionales a obtener{' '}
+          Personas reales, resultados{' '}
           <em style={{ fontFamily:'"disp",Georgia,serif', fontStyle:'italic', color:'#FAFAF9', fontWeight:400 }}>
-            resultados medibles
+            concretos y medibles
           </em>
         </motion.h3>
 

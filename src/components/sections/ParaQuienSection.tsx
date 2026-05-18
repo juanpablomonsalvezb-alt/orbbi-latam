@@ -3,18 +3,18 @@ import { motion } from 'framer-motion'
 
 const PATHS = [
   {
-    tag: 'Camino 01',
-    title: 'IA General',
-    desc: 'Empieza desde cero o fortalece lo que ya sabes. Aprende las herramientas de IA más utilizadas en el mundo: ChatGPT, Claude, Gemini, Perplexity, herramientas de imagen y automatización. Para cualquier persona que quiera dominar la IA.',
-    items: ['ChatGPT & Claude avanzado', 'Generación de imágenes', 'Automatización sin código', 'Herramientas de productividad', 'IA para investigación'],
+    tag: 'Tu dimensión personal',
+    title: 'Quiero aprender IA',
+    desc: 'Curiosidad, ganas de entender este mundo nuevo o necesidad de no quedarte atrás. Sea cual sea tu punto de partida, te acompañamos a dominar las herramientas de IA más importantes — a tu ritmo, con un mentor real, 100% online.',
+    items: ['ChatGPT, Claude y Gemini en profundidad', 'Generación de imágenes y video con IA', 'Automatización sin código', 'Productividad personal con IA', 'IA para investigación y escritura'],
     cta: 'Quiero aprender IA →',
   },
   {
-    tag: 'Camino 02',
-    title: 'IA para tu Profesión',
-    desc: 'Sesiones 1:1 enfocadas exactamente en lo que haces. Elegimos juntos las herramientas correctas para tu trabajo, o te guiamos en el programa específico que necesitas aprender. Diagnóstico, plan y acompañamiento real.',
-    items: ['Diagnóstico de tu flujo de trabajo', 'Herramientas para tu sector', 'Programa específico a pedido', 'Acompañamiento personalizado', 'Resultados medibles en semanas'],
-    cta: 'Quiero orientación específica →',
+    tag: 'Tu dimensión profesional',
+    title: 'IA aplicada a mi trabajo',
+    desc: 'Ya sea porque lo demanda tu sector, porque quieres destacar en tu carrera o porque tienes un programa específico en mente — diseñamos tu mentoría exactamente para ti. Sin contenido genérico. Solo lo que necesitas para tu profesión.',
+    items: ['Diagnóstico de tu flujo de trabajo real', 'Herramientas IA para tu industria específica', 'Programa a pedido: tú defines qué aprender', 'Acompañamiento personalizado sesión a sesión', 'Resultados concretos en semanas'],
+    cta: 'Quiero aplicarlo a mi trabajo →',
   },
 ]
 
@@ -33,9 +33,9 @@ export default function ParaQuienSection() {
           <div>
             <p style={{ fontSize:14, fontWeight:500, textTransform:'uppercase', letterSpacing:'0.1em', color:'rgba(15,14,13,0.4)', marginBottom:16 }}>Para quién</p>
             <h2 style={{ fontFamily:'"disp",Georgia,serif', fontSize:'clamp(36px,4vw,56px)', lineHeight:1.05, letterSpacing:'-0.03em', fontWeight:400, color:'#0F0E0D', maxWidth:600 }}>
-              Dos caminos.{' '}
-              <em style={{ fontStyle:'italic', color:'#706D66' }}>Un objetivo:</em>
-              {' '}que la IA trabaje para ti.
+              Dos dimensiones,{' '}
+              <em style={{ fontStyle:'italic', color:'#706D66' }}>una sola persona:</em>
+              {' '}tú.
             </h2>
           </div>
           <a href="/#contacto" className="btn-explore" style={{ flexShrink:0 }}>

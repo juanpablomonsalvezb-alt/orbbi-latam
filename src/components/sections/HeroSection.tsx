@@ -81,7 +81,7 @@ export default function HeroSection() {
               transition={{ duration:.9, delay:.2, ease:[0.16,1,0.3,1] }}
               style={{ marginBottom:20 }}
             >
-              Tu carrera,<br />potenciada<br /><span style={{ color:'rgba(250,250,249,0.55)' }}>por IA.</span>
+              Aprende IA.<br />Aplícala<br /><span style={{ color:'rgba(250,250,249,0.55)' }}>a tu trabajo.</span>
             </motion.h1>
 
             {/* Subtext — 20px, lh 26px, max-width 600px */}
@@ -92,7 +92,7 @@ export default function HeroSection() {
               transition={{ duration:.8, delay:.45, ease:[0.16,1,0.3,1] }}
               style={{ color:'rgba(250,250,249,0.85)', maxWidth:600, marginBottom:36 }}
             >
-              Los mejores profesionales de Latinoamérica confían en Orbbi para integrar inteligencia artificial a su trabajo y multiplicar sus resultados.
+              Mentoría personalizada 1:1, 100% online. Aprendes lo que necesitas, aplicado exactamente a tu profesión. Sin cursos genéricos, sin teoría vacía.
             </motion.p>
 
             {/* CTAs — Harvey: "Request a Demo" button + "Our Customers" link */}
@@ -103,14 +103,14 @@ export default function HeroSection() {
               style={{ display:'flex', flexDirection:'column', gap:16, alignItems:'flex-start' }}
             >
               <a href="/#contacto" className="btn-hero">
-                Diagnóstico gratis
+                Primera mentoría gratis
               </a>
               <a href="/#testimonios"
                 style={{ fontSize:14, color:'rgba(250,250,249,0.6)', cursor:'pointer', transition:'color .2s' }}
                 onMouseEnter={e=>(e.currentTarget.style.color='#FAFAF9')}
                 onMouseLeave={e=>(e.currentTarget.style.color='rgba(250,250,249,0.6)')}
               >
-                Ver casos de éxito →
+                Ver testimonios →
               </a>
             </motion.div>
 
