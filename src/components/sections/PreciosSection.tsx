@@ -5,16 +5,17 @@ const PLANES = [
   {
     badge: null,
     name: 'Diagnóstico',
-    price: '$0',
-    period: 'gratuito',
+    price: '$40',
+    period: 'USD',
     sub: '30 minutos',
-    desc: 'Conversamos, entendemos tu situación y vemos si podemos ayudarte. Sin compromiso.',
+    desc: 'Conversamos, entendemos tu situación y diseñamos tu plan de aprendizaje personalizado.',
     items: [
-      'Llamada de 30 minutos por videollamada',
+      'Videollamada de 30 minutos 1:1',
       'Diagnóstico de tu nivel actual con IA',
-      'Recomendación personalizada de siguiente paso',
+      'Plan de aprendizaje personalizado para ti',
+      'Se descuenta si contratas el programa',
     ],
-    cta: 'Reservar diagnóstico gratis',
+    cta: 'Reservar diagnóstico',
     href: '/#contacto',
     highlight: false,
   },
@@ -191,7 +192,7 @@ export default function PreciosSection() {
           transition={{ duration:.6, delay:.3 }}
           style={{ textAlign:'center', fontSize:13, color:'rgba(15,14,13,0.35)', marginTop:32 }}
         >
-          Todos los precios en USD · Pagos seguros con Stripe o transferencia bancaria · Primera sesión con garantía de satisfacción
+          Todos los precios en USD · Pagos seguros con Stripe o transferencia bancaria · Los $40 del diagnóstico se descuentan si contratas el programa
         </motion.p>
 
       </div>
