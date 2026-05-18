@@ -3,6 +3,7 @@ import Grain               from '@/components/Grain'
 import HeroSection         from '@/components/sections/HeroSection'
 import StatementSection    from '@/components/sections/StatementSection'
 import FeaturesSection     from '@/components/sections/FeaturesSection'
+import ImageGridSection    from '@/components/sections/ImageGridSection'
 import ParaQuienSection    from '@/components/sections/ParaQuienSection'
 import ServicesSection     from '@/components/sections/ServicesSection'
 import ProcesoSection      from '@/components/sections/ProcesoSection'
@@ -20,6 +21,7 @@ export default function Home() {
         <HeroSection />
         <StatementSection />
         <FeaturesSection />
+        <ImageGridSection />
         <ParaQuienSection />
         <ServicesSection />
         <ProcesoSection />
