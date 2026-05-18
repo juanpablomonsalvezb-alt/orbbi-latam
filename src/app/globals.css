@@ -226,6 +226,9 @@
   .field-dark:focus { border-bottom-color:rgba(250,250,249,0.6); }
   .field-dark::placeholder { color:rgba(250,250,249,0.35); }
 
+  /* ── PROYECTOS ── */
+  @media(max-width:768px){ .proyectos-grid { grid-template-columns:1fr !important; } }
+
   /* ── LOGOS SCROLL ── */
   @keyframes logos { to { transform:translateX(-50%); } }
   .logos-track { animation:logos 30s linear infinite; display:flex; gap:80px; width:max-content; align-items:center; }

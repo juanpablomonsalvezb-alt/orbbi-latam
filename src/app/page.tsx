@@ -9,6 +9,7 @@ import ProcesoSection      from '@/components/sections/ProcesoSection'
 import PreciosSection      from '@/components/sections/PreciosSection'
 import TestimonialsSection from '@/components/sections/TestimonialsSection'
 import StatsSection        from '@/components/sections/StatsSection'
+import ProyectosSection    from '@/components/sections/ProyectosSection'
 import ContactSection      from '@/components/sections/ContactSection'
 import Footer              from '@/components/Footer'
 
@@ -27,6 +28,7 @@ export default function Home() {
         <PreciosSection />
         <TestimonialsSection />
         <StatsSection />
+        <ProyectosSection />
         <ContactSection />
       </main>
       <Footer />
