@@ -1,16 +1,16 @@
 import Header             from '@/components/Header'
 import HeroSection         from '@/components/sections/HeroSection'
 import StatementSection    from '@/components/sections/StatementSection'
-import FeaturesSection     from '@/components/sections/FeaturesSection'
-import ImageGridSection    from '@/components/sections/ImageGridSection'
 import ParaQuienSection    from '@/components/sections/ParaQuienSection'
-import ServicesSection     from '@/components/sections/ServicesSection'
 import ProcesoSection      from '@/components/sections/ProcesoSection'
 import PreciosSection      from '@/components/sections/PreciosSection'
 import TestimonialsSection from '@/components/sections/TestimonialsSection'
+import ContactSection      from '@/components/sections/ContactSection'
+import FeaturesSection     from '@/components/sections/FeaturesSection'
+import ServicesSection     from '@/components/sections/ServicesSection'
+import ImageGridSection    from '@/components/sections/ImageGridSection'
 import StatsSection        from '@/components/sections/StatsSection'
 import ProyectosSection    from '@/components/sections/ProyectosSection'
-import ContactSection      from '@/components/sections/ContactSection'
 import Footer              from '@/components/Footer'
 
 export default function Home() {
@@ -18,18 +18,29 @@ export default function Home() {
     <>
       <Header />
       <main>
+        {/* 1 — Qué es esto / ¿para mí? */}
         <HeroSection />
         <StatementSection />
-        <FeaturesSection />
-        <ImageGridSection />
+
+        {/* 2 — Identificación y proceso */}
         <ParaQuienSection />
-        <ServicesSection />
         <ProcesoSection />
+
+        {/* 3 — Precio + prueba social → momento de decisión */}
         <PreciosSection />
         <TestimonialsSection />
-        <StatsSection />
-        <ProyectosSection />
+
+        {/* 4 — Formulario: captura la intención */}
         <ContactSection />
+
+        {/* 5 — Más detalle para quien aún evalúa */}
+        <FeaturesSection />
+        <ServicesSection />
+        <ImageGridSection />
+        <StatsSection />
+
+        {/* 6 — Ecosistema */}
+        <ProyectosSection />
       </main>
       <Footer />
     </>
