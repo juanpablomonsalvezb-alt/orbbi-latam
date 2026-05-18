@@ -7,6 +7,7 @@ import ImageGridSection    from '@/components/sections/ImageGridSection'
 import ParaQuienSection    from '@/components/sections/ParaQuienSection'
 import ServicesSection     from '@/components/sections/ServicesSection'
 import ProcesoSection      from '@/components/sections/ProcesoSection'
+import PreciosSection      from '@/components/sections/PreciosSection'
 import TestimonialsSection from '@/components/sections/TestimonialsSection'
 import StatsSection        from '@/components/sections/StatsSection'
 import ContactSection      from '@/components/sections/ContactSection'
@@ -25,6 +26,7 @@ export default function Home() {
         <ParaQuienSection />
         <ServicesSection />
         <ProcesoSection />
+        <PreciosSection />
         <TestimonialsSection />
         <StatsSection />
         <ContactSection />
