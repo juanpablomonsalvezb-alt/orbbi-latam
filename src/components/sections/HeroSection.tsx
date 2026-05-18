@@ -1,35 +1,51 @@
 'use client'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
+import { useEffect, useState } from 'react'
 
-/* Harvey hero — exact structure:
-   - section position:relative, bg #0F0E0D, height ~804px (100vh)
-   - video: absolute inset-0, z-0, object-cover
-   - content: grid grid-cols-2, px 36px, absolute bottom ~80px
-   - H1: 80px, lh 84px, ls -1px, weight 400, white
-   - Sub: 20px, lh 26px, max-width 600px, white
-   - CTA: btn-demo style (solid white), slightly bigger for hero
-   - "Our Customers" link below CTA
-   - Logo bar at very bottom
-*/
+const SLIDES = [
+  { src: '/images/hero.jpg',   alt: 'Profesional mujer con suéter usando IA', pos: 'center 20%' },
+  { src: '/images/hero-2.jpg', alt: 'Profesional hombre usando inteligencia artificial', pos: 'center 25%' },
+  { src: '/images/hero-3.jpg', alt: 'Profesional mujer en patio usando IA', pos: 'center 30%' },
+]
 
 const LOGOS = ['McKinsey','Deloitte','PwC','KPMG','Accenture','EY','Santander','BBVA','BCI','Falabella','Rappi','Mercado Libre']
 
 export default function HeroSection() {
+  const [current, setCurrent] = useState(0)
+
+  useEffect(() => {
+    const t = setInterval(() => {
+      setCurrent(c => (c + 1) % SLIDES.length)
+    }, 7000)
+    return () => clearInterval(t)
+  }, [])
+
   return (
     <section
       className="sec-dark"
       style={{ position:'relative', minHeight:'100svh', overflow:'hidden' }}
     >
-      {/* ── Video/Image background — absolute inset-0 ── */}
+      {/* ── Slideshow background ── */}
       <div style={{ position:'absolute', inset:0, zIndex:0 }}>
-        <Image
-          src="/images/hero.jpg"
-          alt="Profesionales usando inteligencia artificial"
-          fill priority
-          style={{ objectFit:'cover', objectPosition:'center 20%' }}
-          sizes="100vw"
-        />
+        <AnimatePresence>
+          <motion.div
+            key={current}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.4, ease: 'easeInOut' }}
+            style={{ position:'absolute', inset:0 }}
+          >
+            <Image
+              src={SLIDES[current].src}
+              alt={SLIDES[current].alt}
+              fill priority={current === 0}
+              style={{ objectFit:'cover', objectPosition: SLIDES[current].pos }}
+              sizes="100vw"
+            />
+          </motion.div>
+        </AnimatePresence>
         {/* Harvey has a subtle dark gradient on the left where text sits */}
         <div style={{
           position:'absolute', inset:0,
@@ -98,6 +114,30 @@ export default function HeroSection() {
 
           </div>
         </div>
+
+        {/* ── Slide dots ── */}
+        <div style={{
+          position:'absolute', bottom: 96, right: 40,
+          display:'flex', flexDirection:'column', gap: 8, zIndex: 2,
+        }}>
+          {SLIDES.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrent(i)}
+              style={{
+                width: 6,
+                height: i === current ? 24 : 6,
+                borderRadius: 4,
+                background: i === current ? '#FAFAF9' : 'rgba(250,250,249,0.3)',
+                border: 'none',
+                cursor: 'pointer',
+                padding: 0,
+                transition: 'all 0.4s ease',
+              }}
+            />
+          ))}
+        </div>
+
       </div>
 
       {/* ── Logo bar — Harvey: bottom strip with partner logos ── */}
