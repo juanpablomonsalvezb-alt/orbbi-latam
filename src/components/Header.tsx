@@ -37,7 +37,7 @@ export default function Header() {
         <div className="announce-bar">
           <span className="t-small">Mentoría 1:1 en inteligencia artificial · 100% online · Para profesionales de Latinoamérica</span>
           <a href="/#contacto" className="t-label" style={{ textDecoration:'underline', textUnderlineOffset:'2px', cursor:'pointer' }}>
-            Primera sesión gratis
+            Diagnóstico inicial — $40 USD
           </a>
         </div>
 
@@ -73,7 +73,7 @@ export default function Header() {
           {/* Right: Login + CTA */}
           <div style={{ display:'flex', alignItems:'center', gap:8, marginLeft:'auto' }}>
             <a href="/#contacto" className="btn-demo">
-              Mentoría gratis →
+              Contanos tu caso →
             </a>
           </div>
 
