@@ -38,20 +38,20 @@ const PLANES: {
   highlight: boolean
 }[] = [
   {
-    badge: null,
+    badge: 'Gratis',
     planId: 'diagnostico',
     name: 'Diagnóstico',
-    price: '$40',
-    period: 'USD',
-    sub: '30 minutos',
+    price: '$0',
+    period: '',
+    sub: '30 minutos · Sin costo',
     desc: 'Conversamos, entendemos tu situación y diseñamos tu plan de aprendizaje personalizado.',
     items: [
       'Videollamada de 30 minutos 1:1',
       'Diagnóstico de tu nivel actual con IA',
       'Plan de aprendizaje personalizado para ti',
-      'Se descuenta si contratas el programa',
+      'Sin compromiso de compra',
     ],
-    cta: 'Reservar diagnóstico',
+    cta: 'Agendar diagnóstico gratis',
     highlight: false,
   },
   {
@@ -135,7 +135,8 @@ export default function PreciosSection() {
                 <span style={{
                   position:'absolute', top:20, right:20,
                   fontSize:11, fontWeight:500, textTransform:'uppercase', letterSpacing:'0.1em',
-                  color:'#FAFAF9', background:'rgba(250,250,249,0.15)',
+                  color: p.badge === 'Gratis' ? '#0F0E0D' : '#FAFAF9',
+                  background: p.badge === 'Gratis' ? '#6EE7A0' : 'rgba(250,250,249,0.15)',
                   borderRadius:100, padding:'4px 12px',
                 }}>
                   {p.badge}
@@ -184,26 +185,48 @@ export default function PreciosSection() {
                 ))}
               </ul>
 
-              <button
-                onClick={() => iniciarPago(p.planId, setLoading)}
-                disabled={loading !== null}
-                style={{
-                  display:'flex', alignItems:'center', justifyContent:'center',
-                  height:44, borderRadius:4, width:'100%',
-                  background: p.highlight ? '#FAFAF9' : 'transparent',
-                  border: p.highlight ? 'none' : '1px solid rgba(15,14,13,0.25)',
-                  color: '#0F0E0D',
-                  fontSize:14, fontWeight:500,
-                  fontFamily:'"sans",system-ui,sans-serif',
-                  cursor: loading ? 'wait' : 'pointer',
-                  transition:'opacity .2s',
-                  opacity: loading && loading !== p.planId ? 0.4 : 1,
-                }}
-                onMouseEnter={e => { if (!loading) e.currentTarget.style.opacity = '.8' }}
-                onMouseLeave={e => { if (!loading) e.currentTarget.style.opacity = '1' }}
-              >
-                {loading === p.planId ? 'Redirigiendo…' : p.cta}
-              </button>
+              {p.planId === 'diagnostico' ? (
+                <a
+                  href="/#contacto"
+                  style={{
+                    display:'flex', alignItems:'center', justifyContent:'center',
+                    height:44, borderRadius:4, width:'100%',
+                    background:'#0F0E0D',
+                    border:'none',
+                    color:'#FAFAF9',
+                    fontSize:14, fontWeight:500,
+                    fontFamily:'"sans",system-ui,sans-serif',
+                    cursor:'pointer',
+                    transition:'opacity .2s',
+                    textDecoration:'none',
+                  }}
+                  onMouseEnter={e => { e.currentTarget.style.opacity = '.8' }}
+                  onMouseLeave={e => { e.currentTarget.style.opacity = '1' }}
+                >
+                  {p.cta}
+                </a>
+              ) : (
+                <button
+                  onClick={() => iniciarPago(p.planId, setLoading)}
+                  disabled={loading !== null}
+                  style={{
+                    display:'flex', alignItems:'center', justifyContent:'center',
+                    height:44, borderRadius:4, width:'100%',
+                    background: p.highlight ? '#FAFAF9' : 'transparent',
+                    border: p.highlight ? 'none' : '1px solid rgba(15,14,13,0.25)',
+                    color: '#0F0E0D',
+                    fontSize:14, fontWeight:500,
+                    fontFamily:'"sans",system-ui,sans-serif',
+                    cursor: loading ? 'wait' : 'pointer',
+                    transition:'opacity .2s',
+                    opacity: loading && loading !== p.planId ? 0.4 : 1,
+                  }}
+                  onMouseEnter={e => { if (!loading) e.currentTarget.style.opacity = '.8' }}
+                  onMouseLeave={e => { if (!loading) e.currentTarget.style.opacity = '1' }}
+                >
+                  {loading === p.planId ? 'Redirigiendo…' : p.cta}
+                </button>
+              )}
 
             </motion.div>
           ))}
@@ -216,7 +239,7 @@ export default function PreciosSection() {
           transition={{ duration:.6, delay:.3 }}
           style={{ textAlign:'center', fontSize:13, color:'rgba(15,14,13,0.35)', marginTop:32 }}
         >
-          Pago seguro con MercadoPago · Los $40 del diagnóstico se descuentan si contratas el programa
+          Pago seguro con MercadoPago · El diagnóstico es siempre sin costo
         </motion.p>
 
       </div>

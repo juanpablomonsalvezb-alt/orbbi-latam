@@ -77,7 +77,7 @@ export default function ContactSection() {
                 ¿Querés arrancar ya?
               </p>
               <p style={{ fontSize: 15, color: 'rgba(250,250,249,0.45)', marginBottom: 20, lineHeight: '22px' }}>
-                Reserva tu diagnóstico de 30 min ($40 USD) y coordinamos la sesión directamente.
+                Reserva tu diagnóstico gratis de 30 min y coordinamos la sesión directamente.
               </p>
               <a
                 href="/#precios"
@@ -94,7 +94,7 @@ export default function ContactSection() {
                 onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(250,250,249,0.6)'; e.currentTarget.style.background = 'rgba(250,250,249,0.05)' }}
                 onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(250,250,249,0.25)'; e.currentTarget.style.background = 'transparent' }}
               >
-                Ver diagnóstico — $40 USD →
+                Ver diagnóstico gratis →
               </a>
             </div>
           </motion.div>
@@ -131,7 +131,7 @@ export default function ContactSection() {
                     textDecoration: 'none',
                   }}
                 >
-                  Reservar diagnóstico — $40 USD
+                  Agendar diagnóstico gratis
                 </a>
               </div>
             ) : (

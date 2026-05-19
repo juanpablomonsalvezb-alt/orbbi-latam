@@ -37,7 +37,7 @@ export default function Header() {
         <div className="announce-bar">
           <span className="t-small">Mentoría 1:1 en inteligencia artificial · 100% online · Para profesionales de Latinoamérica</span>
           <a href="/#contacto" className="t-label" style={{ textDecoration:'underline', textUnderlineOffset:'2px', cursor:'pointer' }}>
-            Diagnóstico inicial — $40 USD
+            Diagnóstico gratis — 30 min
           </a>
         </div>
 

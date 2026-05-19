@@ -2,7 +2,7 @@
 import { motion } from 'framer-motion'
 
 const STEPS = [
-  { n:'01', title:'Conversamos', body:'Cuéntanos tu caso por el formulario. Entendemos quién eres, qué haces y qué quieres lograr con IA — aplicado exactamente a tu trabajo.', time:'Diagnóstico · 30 min · $40 USD' },
+  { n:'01', title:'Conversamos', body:'Cuéntanos tu caso por el formulario. Entendemos quién eres, qué haces y qué quieres lograr con IA — aplicado exactamente a tu trabajo.', time:'Diagnóstico · 30 min · Gratis' },
   { n:'02', title:'Diseñamos',   body:'Construimos tu ruta de aprendizaje personalizada. Solo lo que necesitas, en el orden correcto, aplicado a tu realidad.', time:'Plan en 48 horas' },
   { n:'03', title:'Aprendemos',  body:'Sesiones 1:1 online, a tu ritmo. Ejercicios reales de tu trabajo. Tu mentor te acompaña en cada paso, sin dejarte solo.', time:'Sesiones semanales' },
   { n:'04', title:'Aplicamos',   body:'Medimos resultados concretos. Ajustamos lo que necesitas. El objetivo es que la IA trabaje para ti — de forma sostenida.', time:'Seguimiento continuo' },
@@ -89,7 +89,7 @@ export default function ProcesoSection() {
             fontWeight:400,
             color:'rgba(250,250,249,0.5)',
           }}>
-            Empezá con el diagnóstico — 30 min para entender tu caso y diseñar tu plan.
+            El diagnóstico es gratis — 30 min para entender tu caso y diseñar tu plan.
           </p>
           <a href="/#contacto" className="btn-hero">
             Cuéntanos tu caso
