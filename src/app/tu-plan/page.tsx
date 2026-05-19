@@ -15,10 +15,10 @@ async function iniciarPago(planId: PlanId, setLoading: (id: PlanId | null) => vo
     if (data.init_point) {
       window.location.href = data.init_point
     } else {
-      alert('Error al iniciar el pago. Escríbenos a cseplataforma@gmail.com')
+      alert('Error al iniciar el pago. Escríbenos a cse.coordinacion@gmail.com')
     }
   } catch {
-    alert('Error al iniciar el pago. Escríbenos a cseplataforma@gmail.com')
+    alert('Error al iniciar el pago. Escríbenos a cse.coordinacion@gmail.com')
   } finally {
     setLoading(null)
   }
@@ -234,8 +234,8 @@ export default function TuPlan() {
         textAlign: 'center',
       }}>
         Pago seguro con MercadoPago · ¿Dudas?{' '}
-        <a href="mailto:cseplataforma@gmail.com" style={{ color: 'rgba(250,250,249,0.4)' }}>
-          cseplataforma@gmail.com
+        <a href="mailto:cse.coordinacion@gmail.com" style={{ color: 'rgba(250,250,249,0.4)' }}>
+          cse.coordinacion@gmail.com
         </a>
       </p>
 

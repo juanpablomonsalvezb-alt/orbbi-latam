@@ -20,7 +20,7 @@ export default function PagoFallido() {
           >
             Intentar nuevamente
           </Link>
-          <a href="mailto:cseplataforma@gmail.com" style={{ fontSize:14, color:'rgba(250,250,249,0.35)', textDecoration:'none' }}>
+          <a href="mailto:cse.coordinacion@gmail.com" style={{ fontSize:14, color:'rgba(250,250,249,0.35)', textDecoration:'none' }}>
             Pagar por transferencia
           </a>
         </div>

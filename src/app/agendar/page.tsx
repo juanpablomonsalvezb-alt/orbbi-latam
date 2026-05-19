@@ -318,7 +318,7 @@ export default function Agendar() {
                 {st === 'sending' ? 'Enviando…' : selected ? 'Confirmar sesión' : 'Elige un horario primero'}
               </button>
 
-              {st === 'err' && <p style={{ fontSize:12, color:'rgba(200,50,50,.8)' }}>Error. Escríbenos a cseplataforma@gmail.com</p>}
+              {st === 'err' && <p style={{ fontSize:12, color:'rgba(200,50,50,.8)' }}>Error. Escríbenos a cse.coordinacion@gmail.com</p>}
 
               <p style={{ fontSize:11, color:'rgba(15,14,13,0.3)', textAlign:'center', lineHeight:'16px' }}>
                 Sin costo · Te confirmamos por email en menos de 24h

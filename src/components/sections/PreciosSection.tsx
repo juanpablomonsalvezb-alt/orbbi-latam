@@ -16,10 +16,10 @@ async function iniciarPago(planId: PlanId, setLoading: (id: PlanId | null) => vo
     if (data.init_point) {
       window.location.href = data.init_point
     } else {
-      alert('Error al iniciar el pago. Escríbenos a cseplataforma@gmail.com')
+      alert('Error al iniciar el pago. Escríbenos a cse.coordinacion@gmail.com')
     }
   } catch {
-    alert('Error al iniciar el pago. Escríbenos a cseplataforma@gmail.com')
+    alert('Error al iniciar el pago. Escríbenos a cse.coordinacion@gmail.com')
   } finally {
     setLoading(null)
   }

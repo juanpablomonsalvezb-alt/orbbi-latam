@@ -132,7 +132,7 @@ const schemaOrganization = {
   logo: `${BASE_URL}/images/hero.jpg`,
   image: `${BASE_URL}/og-image.jpg`,
   description: DESCRIPTION,
-  email: 'cseplataforma@gmail.com',
+  email: 'cse.coordinacion@gmail.com',
   foundingDate: '2025',
   founder: { '@id': `${BASE_URL}/#mentor` },
   areaServed: [

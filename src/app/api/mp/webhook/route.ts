@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
           },
           body: JSON.stringify({
             from: 'Orbbi Pagos <onboarding@resend.dev>',
-            to: 'cseplataforma@gmail.com',
+            to: 'cse.coordinacion@gmail.com',
             subject: `✅ Pago aprobado — Plan ${planId} · $${monto} USD`,
             html: `
               <h2>Nuevo pago aprobado</h2>

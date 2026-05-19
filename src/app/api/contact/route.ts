@@ -43,7 +43,7 @@ export async function POST(req: NextRequest) {
         </table>
       </div>
       <div style="padding:20px 40px;background:${badgeColor};text-align:center">
-        <p style="color:rgba(255,255,255,0.35);font-size:11px;font-family:system-ui;margin:0">Orbbi Latam · cseplataforma@gmail.com</p>
+        <p style="color:rgba(255,255,255,0.35);font-size:11px;font-family:system-ui;margin:0">Orbbi Latam · cse.coordinacion@gmail.com</p>
       </div>
     </div>
   `

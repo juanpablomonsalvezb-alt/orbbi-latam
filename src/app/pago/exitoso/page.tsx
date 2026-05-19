@@ -152,14 +152,14 @@ export default function PagoExitoso() {
 
             {st === 'err' && (
               <p style={{ fontSize: 13, color: 'rgba(255,100,100,.8)' }}>
-                Error al enviar. Escríbenos a cseplataforma@gmail.com
+                Error al enviar. Escríbenos a cse.coordinacion@gmail.com
               </p>
             )}
 
             <p style={{ fontSize: 13, color: 'rgba(250,250,249,0.25)', textAlign: 'center' }}>
               También puedes escribirnos directo a{' '}
-              <a href="mailto:cseplataforma@gmail.com" style={{ color: 'rgba(250,250,249,0.4)' }}>
-                cseplataforma@gmail.com
+              <a href="mailto:cse.coordinacion@gmail.com" style={{ color: 'rgba(250,250,249,0.4)' }}>
+                cse.coordinacion@gmail.com
               </a>
             </p>
           </form>

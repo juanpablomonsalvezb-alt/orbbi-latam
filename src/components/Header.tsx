@@ -114,7 +114,7 @@ export default function Header() {
           </nav>
           <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', paddingTop:24, borderTop:'1px solid rgba(250,250,249,0.08)' }}>
             <span style={{ fontFamily:'"disp"', fontSize:20, color:'rgba(250,250,249,0.35)' }}>Orbbi</span>
-            <a href="mailto:cseplataforma@gmail.com" style={{ fontSize:14, color:'rgba(250,250,249,0.35)', cursor:'pointer' }}>Contacto</a>
+            <a href="mailto:cse.coordinacion@gmail.com" style={{ fontSize:14, color:'rgba(250,250,249,0.35)', cursor:'pointer' }}>Contacto</a>
           </div>
         </div>
       </div>

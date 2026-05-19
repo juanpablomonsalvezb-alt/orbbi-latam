@@ -221,7 +221,7 @@ export default function ContactSection() {
 
                 {st === 'err' && (
                   <p style={{ fontSize: 13, color: 'rgba(255,100,100,.8)' }}>
-                    Error. Escríbenos directamente a cseplataforma@gmail.com
+                    Error. Escríbenos directamente a cse.coordinacion@gmail.com
                   </p>
                 )}
               </form>
