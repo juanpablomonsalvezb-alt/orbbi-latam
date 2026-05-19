@@ -5,9 +5,10 @@ export async function POST(req: NextRequest) {
   const resend = new Resend(process.env.RESEND_API_KEY)
   const d = await req.json()
 
-  const isPago   = d.source === 'pago'
-  const badgeColor = isPago ? '#1A6B3A' : '#1E383E'
-  const badgeLabel = isPago ? '💳 CLIENTE — ya pagó' : '📋 Consulta desde el landing'
+  const isPago    = d.source === 'pago'
+  const isAgendar = d.source === 'agendar'
+  const badgeColor = isPago ? '#1A6B3A' : isAgendar ? '#1A3A6B' : '#1E383E'
+  const badgeLabel = isPago ? '💳 CLIENTE — ya pagó' : isAgendar ? '📅 DIAGNÓSTICO — slot solicitado' : '📋 Consulta desde el landing'
 
   const html = `
     <div style="font-family:Georgia,serif;max-width:600px;margin:0 auto;color:#1E383E">
@@ -28,6 +29,10 @@ export async function POST(req: NextRequest) {
           <tr><td colspan="2" style="padding:16px 0 8px;border-bottom:1px solid #DEDAD3;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#7A7871;font-family:system-ui">Perfil</td></tr>
           <tr><td style="padding:10px 0 14px;font-size:11px;color:#7A7871;font-family:system-ui">Profesión</td><td style="padding:10px 0 14px;font-size:16px">${d.profesion || '—'}</td></tr>
 
+          ${d.slot ? `
+          <tr><td colspan="2" style="padding:16px 0 8px;border-bottom:1px solid #DEDAD3;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#7A7871;font-family:system-ui">Slot solicitado</td></tr>
+          <tr><td colspan="2" style="padding:10px 0 14px;font-size:18px;font-weight:bold;color:#1E383E">${d.slot}</td></tr>
+          ` : ''}
           <tr><td colspan="2" style="padding:16px 0 8px;border-bottom:1px solid #DEDAD3;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#7A7871;font-family:system-ui">¿Qué quiere lograr con IA?</td></tr>
           <tr><td colspan="2" style="padding:10px 0 14px;font-size:16px;line-height:1.75;color:#1E383E">${d.msg || d.objetivo || '—'}</td></tr>
 
@@ -44,7 +49,7 @@ export async function POST(req: NextRequest) {
       from: 'Orbbi Latam <contacto@orbbilatam.com>',
       to: process.env.RESEND_TO!,
       replyTo: d.email,
-      subject: `${d.source === 'pago' ? '💳 CLIENTE' : '📋 Contacto'}: ${d.nombre} — ${d.profesion || 'Orbbi Latam'}`,
+      subject: `${isPago ? '💳 CLIENTE' : isAgendar ? '📅 DIAGNÓSTICO' : '📋 Contacto'}: ${d.nombre}${d.slot ? ` — ${d.slot}` : ` — ${d.profesion || 'Orbbi Latam'}`}`,
       html,
     })
     return NextResponse.json({ ok: true })

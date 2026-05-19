@@ -97,8 +97,8 @@ export default function HeroSection() {
               transition={{ duration:.7, delay:.65, ease:[0.16,1,0.3,1] }}
               style={{ display:'flex', flexDirection:'column', gap:16, alignItems:'flex-start' }}
             >
-              <a href="/#contacto" className="btn-hero">
-                Cuéntanos tu caso
+              <a href="/agendar" className="btn-hero">
+                Agendar diagnóstico gratis
               </a>
               <a href="/#testimonios"
                 style={{ fontSize:14, color:'rgba(250,250,249,0.6)', cursor:'pointer', transition:'color .2s' }}

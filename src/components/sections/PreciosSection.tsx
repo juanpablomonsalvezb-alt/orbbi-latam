@@ -187,7 +187,7 @@ export default function PreciosSection() {
 
               {p.planId === 'diagnostico' ? (
                 <a
-                  href="/#contacto"
+                  href="/agendar"
                   style={{
                     display:'flex', alignItems:'center', justifyContent:'center',
                     height:44, borderRadius:4, width:'100%',

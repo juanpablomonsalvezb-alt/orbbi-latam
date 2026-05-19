@@ -91,8 +91,8 @@ export default function ProcesoSection() {
           }}>
             El diagnóstico es gratis — 30 min para entender tu caso y diseñar tu plan.
           </p>
-          <a href="/#contacto" className="btn-hero">
-            Cuéntanos tu caso
+          <a href="/agendar" className="btn-hero">
+            Agendar diagnóstico gratis
           </a>
         </motion.div>
 
