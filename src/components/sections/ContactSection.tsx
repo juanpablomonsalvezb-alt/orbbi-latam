@@ -65,10 +65,10 @@ export default function ContactSection() {
               fontSize: 56, lineHeight: '58.8px', letterSpacing: '-0.56px',
               fontWeight: 400, color: '#FAFAF9', marginBottom: 20,
             }}>
-              Contanos tu caso.
+              Cuéntanos tu caso.
             </h2>
             <p className="t-body-lg" style={{ color: 'rgba(250,250,249,0.45)', maxWidth: 380, marginBottom: 48, lineHeight: '28px' }}>
-              Respondemos en menos de 24 horas. Con lo que nos cuentes, preparamos la primera sesión exactamente para vos.
+              Respondemos en menos de 24 horas. Con lo que nos cuentes, preparamos la primera sesión exactamente para ti.
             </p>
 
             {/* CTA directo a diagnóstico */}
@@ -77,7 +77,7 @@ export default function ContactSection() {
                 ¿Querés arrancar ya?
               </p>
               <p style={{ fontSize: 15, color: 'rgba(250,250,249,0.45)', marginBottom: 20, lineHeight: '22px' }}>
-                Reservá tu diagnóstico de 30 min ($40 USD) y coordinamos la sesión directamente.
+                Reserva tu diagnóstico de 30 min ($40 USD) y coordinamos la sesión directamente.
               </p>
               <a
                 href="/#precios"
@@ -118,7 +118,7 @@ export default function ContactSection() {
                   Mensaje recibido.
                 </h3>
                 <p className="t-body-lg" style={{ color: 'rgba(250,250,249,0.45)', lineHeight: '26px' }}>
-                  Te respondemos en menos de 24 horas. Si querés avanzar más rápido, reservá tu diagnóstico directamente:
+                  Te respondemos en menos de 24 horas. Si quieres avanzar más rápido, reserva tu diagnóstico directamente:
                 </p>
                 <a
                   href="/#precios"
@@ -180,13 +180,13 @@ export default function ContactSection() {
                 {/* La pregunta clave */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
                   <label style={{ fontSize: 11, fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'rgba(250,250,249,0.35)' }}>
-                    ¿Qué querés lograr con IA en tu trabajo? *
+                    ¿Qué quieres lograr con IA en tu trabajo? *
                   </label>
                   <textarea
                     className="field-dark"
                     value={form.objetivo}
                     onChange={set('objetivo')}
-                    placeholder="Contanos en tus propias palabras. Eso nos permite prepararnos antes de la primera sesión."
+                    placeholder="Cuéntanos en tus propias palabras. Eso nos permite prepararnos antes de la primera sesión."
                     rows={5}
                     style={{ resize: 'none' }}
                   />
@@ -204,7 +204,7 @@ export default function ContactSection() {
 
                 {st === 'err' && (
                   <p style={{ fontSize: 13, color: 'rgba(255,100,100,.8)' }}>
-                    Error. Escribinos directamente a cseplataforma@gmail.com
+                    Error. Escríbenos directamente a cseplataforma@gmail.com
                   </p>
                 )}
               </form>

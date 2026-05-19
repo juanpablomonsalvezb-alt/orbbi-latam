@@ -73,7 +73,7 @@ export default function Header() {
           {/* Right: Login + CTA */}
           <div style={{ display:'flex', alignItems:'center', gap:8, marginLeft:'auto' }}>
             <a href="/#contacto" className="btn-demo">
-              Contanos tu caso →
+              Cuéntanos tu caso →
             </a>
           </div>
 

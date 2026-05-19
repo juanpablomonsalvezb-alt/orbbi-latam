@@ -66,7 +66,7 @@ export default function PagoExitoso() {
             Pago recibido.
           </h1>
           <p style={{ fontSize: 17, lineHeight: '26px', color: 'rgba(250,250,249,0.45)', maxWidth: 420, margin: '0 auto' }}>
-            Antes de tu sesión, contanos un poco sobre vos. Eso nos permite prepararnos y aprovechamos mejor el tiempo juntos.
+            Antes de tu sesión, cuéntanos un poco sobre ti. Eso nos permite prepararnos y aprovechar mejor el tiempo juntos.
           </p>
         </div>
 
@@ -128,7 +128,7 @@ export default function PagoExitoso() {
             {/* La pregunta clave */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
               <label style={{ fontSize: 11, fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'rgba(250,250,249,0.35)' }}>
-                ¿Qué querés lograr con IA en tu trabajo? *
+                ¿Qué quieres lograr con IA en tu trabajo? *
               </label>
               <textarea
                 className="field-dark"
@@ -152,12 +152,12 @@ export default function PagoExitoso() {
 
             {st === 'err' && (
               <p style={{ fontSize: 13, color: 'rgba(255,100,100,.8)' }}>
-                Error al enviar. Escribinos a cseplataforma@gmail.com
+                Error al enviar. Escríbenos a cseplataforma@gmail.com
               </p>
             )}
 
             <p style={{ fontSize: 13, color: 'rgba(250,250,249,0.25)', textAlign: 'center' }}>
-              También podés escribirnos directo a{' '}
+              También puedes escribirnos directo a{' '}
               <a href="mailto:cseplataforma@gmail.com" style={{ color: 'rgba(250,250,249,0.4)' }}>
                 cseplataforma@gmail.com
               </a>

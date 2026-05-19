@@ -98,7 +98,7 @@ export default function HeroSection() {
               style={{ display:'flex', flexDirection:'column', gap:16, alignItems:'flex-start' }}
             >
               <a href="/#contacto" className="btn-hero">
-                Contanos tu caso
+                Cuéntanos tu caso
               </a>
               <a href="/#testimonios"
                 style={{ fontSize:14, color:'rgba(250,250,249,0.6)', cursor:'pointer', transition:'color .2s' }}
