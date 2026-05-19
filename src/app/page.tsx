@@ -7,6 +7,8 @@ import PreciosSection       from '@/components/sections/PreciosSection'
 import TestimonialsSection  from '@/components/sections/TestimonialsSection'
 import ContactSection       from '@/components/sections/ContactSection'
 import QuienesSomosSection  from '@/components/sections/QuienesSomosSection'
+import FAQSection           from '@/components/sections/FAQSection'
+import ActivityToast        from '@/components/ActivityToast'
 import FeaturesSection      from '@/components/sections/FeaturesSection'
 import ServicesSection      from '@/components/sections/ServicesSection'
 import ImageGridSection     from '@/components/sections/ImageGridSection'
@@ -17,6 +19,7 @@ import Footer               from '@/components/Footer'
 export default function Home() {
   return (
     <>
+      <ActivityToast />
       <Header />
       <main>
         {/* 1 — Mensaje + claridad */}
@@ -36,6 +39,9 @@ export default function Home() {
 
         {/* 5 — Quiénes somos: confianza */}
         <QuienesSomosSection />
+
+        {/* 6 — FAQ: elimina objeciones */}
+        <FAQSection />
 
         {/* 6 — Más detalle para quien aún evalúa */}
         <FeaturesSection />

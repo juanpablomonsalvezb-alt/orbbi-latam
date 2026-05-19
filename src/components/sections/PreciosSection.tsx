@@ -239,7 +239,7 @@ export default function PreciosSection() {
           transition={{ duration:.6, delay:.3 }}
           style={{ textAlign:'center', fontSize:13, color:'rgba(15,14,13,0.35)', marginTop:32 }}
         >
-          Pago seguro con MercadoPago · El diagnóstico es siempre sin costo
+          Pago seguro con MercadoPago · El diagnóstico es siempre sin costo · <strong style={{ color:'rgba(15,14,13,0.55)' }}>Garantía de 7 días — si no te convence, te devolvemos el dinero</strong>
         </motion.p>
 
       </div>
