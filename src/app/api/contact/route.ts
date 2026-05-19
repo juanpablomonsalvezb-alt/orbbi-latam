@@ -33,6 +33,10 @@ export async function POST(req: NextRequest) {
           <tr><td colspan="2" style="padding:16px 0 8px;border-bottom:1px solid #DEDAD3;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#7A7871;font-family:system-ui">Slot solicitado</td></tr>
           <tr><td colspan="2" style="padding:10px 0 14px;font-size:18px;font-weight:bold;color:#1E383E">${d.slot}</td></tr>
           ` : ''}
+          ${d.motivo ? `
+          <tr><td colspan="2" style="padding:16px 0 8px;border-bottom:1px solid #DEDAD3;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#7A7871;font-family:system-ui">¿Qué lo motivó a contactarnos?</td></tr>
+          <tr><td colspan="2" style="padding:10px 0 14px;font-size:16px;line-height:1.75;color:#1E383E">${d.motivo}</td></tr>
+          ` : ''}
           <tr><td colspan="2" style="padding:16px 0 8px;border-bottom:1px solid #DEDAD3;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#7A7871;font-family:system-ui">¿Qué quiere lograr con IA?</td></tr>
           <tr><td colspan="2" style="padding:10px 0 14px;font-size:16px;line-height:1.75;color:#1E383E">${d.msg || d.objetivo || '—'}</td></tr>
 

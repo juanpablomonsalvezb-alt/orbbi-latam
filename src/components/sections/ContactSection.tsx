@@ -5,11 +5,11 @@ import { motion } from 'framer-motion'
 const PAISES     = ['Argentina','Bolivia','Chile','Colombia','Costa Rica','Ecuador','México','Paraguay','Perú','Uruguay','Venezuela','Otro']
 const PROFESIONES = ['Abogado/a','Médico/a o salud','Docente / Educador/a','Consultor/a independiente','Ejecutivo/a o directivo/a','Emprendedor/a','Marketing / Comunicaciones','Finanzas / Contabilidad','Recursos Humanos','Ingeniero/a / Tecnología','Otro']
 
-type F = { nombre: string; email: string; profesion: string; pais: string; objetivo: string }
+type F = { nombre: string; email: string; profesion: string; pais: string; motivo: string; objetivo: string }
 type E = Partial<Record<keyof F, string>>
 
 export default function ContactSection() {
-  const [form, setForm] = useState<F>({ nombre: '', email: '', profesion: '', pais: '', objetivo: '' })
+  const [form, setForm] = useState<F>({ nombre: '', email: '', profesion: '', pais: '', motivo: '', objetivo: '' })
   const [errs, setErrs] = useState<E>({})
   const [st, setSt]     = useState<'idle' | 'sending' | 'ok' | 'err'>('idle')
 
@@ -24,6 +24,7 @@ export default function ContactSection() {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = 'Email inválido'
     if (!form.profesion)      e.profesion = 'Selecciona'
     if (!form.pais)           e.pais      = 'Selecciona'
+    if (!form.motivo.trim())  e.motivo    = 'Requerido'
     if (!form.objetivo.trim()) e.objetivo = 'Requerido'
     setErrs(e)
     return Object.keys(e).length === 0
@@ -175,6 +176,22 @@ export default function ContactSection() {
                     </select>
                     {errs.pais && <span style={{ fontSize: 12, color: 'rgba(255,100,100,.8)' }}>{errs.pais}</span>}
                   </div>
+                </div>
+
+                {/* Motivación */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                  <label style={{ fontSize: 11, fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'rgba(250,250,249,0.35)' }}>
+                    ¿Qué te motivó a contactarnos? *
+                  </label>
+                  <textarea
+                    className="field-dark"
+                    value={form.motivo}
+                    onChange={set('motivo')}
+                    placeholder="¿Qué está pasando en tu trabajo que te llevó a buscar ayuda con IA? Puede ser una situación concreta, una presión, una oportunidad..."
+                    rows={3}
+                    style={{ resize: 'none' }}
+                  />
+                  {errs.motivo && <span style={{ fontSize: 12, color: 'rgba(255,100,100,.8)' }}>{errs.motivo}</span>}
                 </div>
 
                 {/* La pregunta clave */}
