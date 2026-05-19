@@ -60,12 +60,15 @@ export default function Footer() {
             © {year} Orbbi Latam. Todos los derechos reservados.
           </p>
           <div style={{ display:'flex', gap:24, flexWrap:'wrap' }}>
-            {['Política de Privacidad','Términos de Uso','Configuración de Cookies'].map(t => (
-              <a key={t} href="#"
+            {[
+              { label:'Política de Privacidad', href:'/privacidad' },
+              { label:'Términos de Uso',        href:'/terminos' },
+            ].map(t => (
+              <a key={t.label} href={t.href}
                 style={{ fontSize:14, color:'rgba(250,250,249,0.28)', cursor:'pointer', transition:'color .2s' }}
                 onMouseEnter={e=>(e.currentTarget.style.color='rgba(250,250,249,0.6)')}
                 onMouseLeave={e=>(e.currentTarget.style.color='rgba(250,250,249,0.28)')}
-              >{t}</a>
+              >{t.label}</a>
             ))}
           </div>
         </div>

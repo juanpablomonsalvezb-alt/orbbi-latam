@@ -8,6 +8,7 @@ import TestimonialsSection  from '@/components/sections/TestimonialsSection'
 import ContactSection       from '@/components/sections/ContactSection'
 import QuienesSomosSection  from '@/components/sections/QuienesSomosSection'
 import FAQSection           from '@/components/sections/FAQSection'
+import ComparadorSection    from '@/components/sections/ComparadorSection'
 import ActivityToast        from '@/components/ActivityToast'
 import FeaturesSection      from '@/components/sections/FeaturesSection'
 import ServicesSection      from '@/components/sections/ServicesSection'
@@ -30,7 +31,8 @@ export default function Home() {
         <ParaQuienSection />
         <ProcesoSection />
 
-        {/* 3 — Precio + prueba social → momento de decisión */}
+        {/* 3 — Comparador + Precio + prueba social → momento de decisión */}
+        <ComparadorSection />
         <PreciosSection />
         <TestimonialsSection />
 
