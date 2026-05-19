@@ -37,7 +37,7 @@ export default function FeaturesSection() {
   }, [])
 
   return (
-    <section className="sec-light" style={{ padding: '144px 0', overflow: 'hidden' }}>
+    <section className="sec-dark" style={{ padding: '144px 0', overflow: 'hidden' }}>
       <div className="page-wrap">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -54,7 +54,7 @@ export default function FeaturesSection() {
         >
 
           {/* Left */}
-          <p className="t-body" style={{ color: '#0F0E0D', maxWidth: 200, lineHeight: '22px' }}>
+          <p className="t-body" style={{ color: 'rgba(250,250,249,0.5)', maxWidth: 200, lineHeight: '22px' }}>
             Los mejores profesionales de Latam eligen Orbbi para
           </p>
 
@@ -62,7 +62,6 @@ export default function FeaturesSection() {
           <div style={{ overflow: 'hidden' }}>
             {FEATURES.map((f, i) => {
               const dist = Math.abs(i - active)
-              // wrap distance (circular)
               const wrapDist = Math.min(dist, FEATURES.length - dist)
               const op = wrapDist === 0 ? 1 : wrapDist === 1 ? 0.6 : wrapDist === 2 ? 0.3 : 0.1
               const isActive = i === active
@@ -87,7 +86,7 @@ export default function FeaturesSection() {
                     lineHeight: '62px',
                     letterSpacing: '-0.56px',
                     fontWeight: 400,
-                    color: isActive ? '#0F0E0D' : '#706D66',
+                    color: isActive ? '#FAFAF9' : 'rgba(250,250,249,0.4)',
                     opacity: op,
                     transition: 'opacity .5s cubic-bezier(.16,1,.3,1), color .5s cubic-bezier(.16,1,.3,1)',
                     userSelect: 'none',
@@ -101,7 +100,7 @@ export default function FeaturesSection() {
 
           {/* Right */}
           <div style={{ display: 'flex', justifyContent: 'flex-end', alignSelf: 'flex-start', paddingTop: 8 }}>
-            <a href="/#contacto" className="btn-explore">
+            <a href="/#contacto" className="btn-login">
               Ver plataforma
             </a>
           </div>
