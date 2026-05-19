@@ -9,8 +9,8 @@ import { useEffect, useState } from 'react'
 
 const LINKS = [
   { label: 'Mentorías',      href: '/#mentorias' },
-  { label: 'Para quién',     href: '/#para-quien' },
   { label: 'Cómo funciona',  href: '/#como-funciona' },
+  { label: 'Nosotros',       href: '/#nosotros' },
   { label: 'Testimonios',    href: '/#testimonios' },
   { label: 'Contacto',       href: '/#contacto' },
 ]
