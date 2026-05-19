@@ -1,41 +1,28 @@
 'use client'
 import { useState, useEffect } from 'react'
 
-// Slots base en hora Santiago (UTC-4 en invierno, UTC-3 en verano)
-// Se muestran como hora Santiago y se convierten al timezone del usuario
-const SLOTS_HORA = [9, 11, 15, 17] // 9am, 11am, 3pm, 5pm
+const SLOTS_HORA = [9, 10, 11, 14, 15, 16, 17, 18]
 
-// Patrón de slots bloqueados determinístico por fecha (no cambia en refresh)
-// Retorna true si el slot está "tomado"
+// Patrón determinístico — no cambia en refresh
 function esTomado(fecha: Date, horaIdx: number): boolean {
-  const seed = fecha.getDate() * 7 + fecha.getMonth() * 31 + horaIdx * 13
-  // ~65% de slots tomados
-  return (seed % 10) < 6
+  const seed = fecha.getDate() * 11 + fecha.getMonth() * 37 + horaIdx * 17
+  return (seed % 10) < 5  // 50% tomados → más slots disponibles visualmente
 }
 
 function getNombreDia(fecha: Date, tz: string): string {
   return fecha.toLocaleDateString('es', { weekday: 'long', timeZone: tz })
 }
 
-function getFechaNombreCorto(fecha: Date, tz: string): string {
+function getFechaCorta(fecha: Date, tz: string): string {
   return fecha.toLocaleDateString('es', { day: 'numeric', month: 'short', timeZone: tz })
 }
 
-// Convierte hora Santiago a timezone del usuario
 function convertirHora(fecha: Date, horaSantiago: number, userTZ: string): string {
-  // Santiago = America/Santiago
   const iso = `${fecha.getFullYear()}-${String(fecha.getMonth()+1).padStart(2,'0')}-${String(fecha.getDate()).padStart(2,'0')}T${String(horaSantiago).padStart(2,'0')}:00:00`
-  // Crear fecha como si fuera en Santiago
   const enSantiago = new Date(new Date(iso).toLocaleString('en-US', { timeZone: 'America/Santiago' }))
   const diff = new Date(iso).getTime() - enSantiago.getTime()
   const fechaReal = new Date(new Date(iso).getTime() + diff)
-
-  return fechaReal.toLocaleTimeString('es', {
-    timeZone: userTZ,
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: false,
-  })
+  return fechaReal.toLocaleTimeString('es', { timeZone: userTZ, hour: '2-digit', minute: '2-digit', hour12: false })
 }
 
 function getNombreTZ(tz: string): string {
@@ -51,7 +38,6 @@ function getNombreTZ(tz: string): string {
     'America/Asuncion': 'Asunción',
     'America/La_Paz': 'La Paz',
     'America/Caracas': 'Caracas',
-    'America/Managua': 'Managua',
     'America/Guatemala': 'Guatemala',
     'America/Costa_Rica': 'San José',
     'America/Panama': 'Panamá',
@@ -60,18 +46,13 @@ function getNombreTZ(tz: string): string {
   return nombres[tz] || tz.split('/')[1]?.replace('_', ' ') || tz
 }
 
-// Genera los próximos 7 días hábiles (lun-sáb)
 function getDiasDisponibles(): Date[] {
   const dias: Date[] = []
-  const hoy = new Date()
-  hoy.setHours(0, 0, 0, 0)
-  let d = new Date(hoy)
-  d.setDate(d.getDate() + 1) // empieza mañana
-  while (dias.length < 7) {
-    const dow = d.getDay()
-    if (dow !== 0) { // excluye domingo
-      dias.push(new Date(d))
-    }
+  const d = new Date()
+  d.setHours(0, 0, 0, 0)
+  d.setDate(d.getDate() + 1)
+  while (dias.length < 6) {
+    if (d.getDay() !== 0) dias.push(new Date(d))
     d.setDate(d.getDate() + 1)
   }
   return dias
@@ -99,224 +80,253 @@ export default function Agendar() {
     e.preventDefault()
     if (!selected || !form.nombre || !form.email) return
     setSt('sending')
-
     const horaUsuario = convertirHora(selected.fecha, selected.hora, userTZ)
-    const slotLabel = `${getNombreDia(selected.fecha, 'America/Santiago')} ${getFechaNombreCorto(selected.fecha, 'America/Santiago')} · ${selected.hora}:00 Santiago / ${horaUsuario} ${getNombreTZ(userTZ)}`
-
+    const slotLabel = `${getNombreDia(selected.fecha, 'America/Santiago')} ${getFechaCorta(selected.fecha, 'America/Santiago')} · ${selected.hora}:00 Santiago / ${horaUsuario} ${getNombreTZ(userTZ)}`
     try {
       const r = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...form,
-          source: 'agendar',
-          msg: `Solicitud de diagnóstico: ${slotLabel}`,
-          slot: slotLabel,
-        }),
+        body: JSON.stringify({ ...form, source: 'agendar', msg: `Sesión de orientación: ${slotLabel}`, slot: slotLabel }),
       })
       setSt(r.ok ? 'ok' : 'err')
-    } catch {
-      setSt('err')
-    }
+    } catch { setSt('err') }
   }
 
   if (st === 'ok') {
     return (
-      <main style={{ minHeight:'100vh', background:'#0F0E0D', display:'flex', alignItems:'center', justifyContent:'center', padding:'40px 20px' }}>
+      <main style={{ minHeight:'100vh', background:'#FAFAF9', display:'flex', alignItems:'center', justifyContent:'center', padding:'40px 20px' }}>
         <div style={{ textAlign:'center', maxWidth:480 }}>
-          <div style={{ width:56,height:56,borderRadius:'50%',border:'1px solid rgba(250,250,249,0.2)',display:'flex',alignItems:'center',justifyContent:'center',margin:'0 auto 28px',fontSize:22,color:'#FAFAF9' }}>✓</div>
-          <h1 style={{ fontFamily:'"disp",Georgia,serif', fontSize:'clamp(32px,4vw,48px)', lineHeight:1.05, letterSpacing:'-0.03em', fontWeight:400, color:'#FAFAF9', marginBottom:16 }}>
+          <div style={{ width:56, height:56, borderRadius:'50%', border:'1px solid rgba(15,14,13,0.15)', display:'flex', alignItems:'center', justifyContent:'center', margin:'0 auto 28px', fontSize:22, color:'#0F0E0D' }}>✓</div>
+          <h1 style={{ fontFamily:'"disp",Georgia,serif', fontSize:'clamp(32px,4vw,48px)', lineHeight:1.05, letterSpacing:'-0.03em', fontWeight:400, color:'#0F0E0D', marginBottom:16 }}>
             Solicitud recibida.
           </h1>
-          <p style={{ fontSize:17, lineHeight:'26px', color:'rgba(250,250,249,0.45)', marginBottom:8 }}>
+          <p style={{ fontSize:17, lineHeight:'26px', color:'rgba(15,14,13,0.5)', marginBottom:8 }}>
             Te confirmamos el horario por email en menos de 24 horas.
           </p>
           {selected && (
-            <p style={{ fontSize:14, color:'rgba(250,250,249,0.3)', marginBottom:40 }}>
-              Slot solicitado: {convertirHora(selected.fecha, selected.hora, userTZ)} ({getNombreTZ(userTZ)}) · {getFechaNombreCorto(selected.fecha, userTZ)}
+            <p style={{ fontSize:14, color:'rgba(15,14,13,0.35)', marginBottom:40 }}>
+              {convertirHora(selected.fecha, selected.hora, userTZ)} · {getFechaCorta(selected.fecha, userTZ)} · {getNombreTZ(userTZ)}
             </p>
           )}
-          <a href="/" style={{ fontSize:14, color:'rgba(250,250,249,0.3)', textDecoration:'none' }}>Volver al inicio</a>
+          <a href="/" style={{ fontSize:14, color:'rgba(15,14,13,0.35)', textDecoration:'none' }}>Volver al inicio</a>
         </div>
       </main>
     )
   }
 
   return (
-    <main style={{ minHeight:'100vh', background:'#0F0E0D', padding:'60px 20px' }}>
-      <div style={{ maxWidth:760, margin:'0 auto' }}>
+    <main style={{ minHeight:'100vh', background:'#FAFAF9' }}>
+      <div style={{ maxWidth:900, margin:'0 auto', padding:'52px 24px 80px' }}>
 
         {/* Logo */}
-        <a href="/" style={{ display:'block', marginBottom:52, textDecoration:'none' }}>
-          <span style={{ fontFamily:'"disp",Georgia,serif', fontSize:26, fontWeight:400, color:'#FAFAF9', letterSpacing:'-0.03em' }}>Orbbi</span>
+        <a href="/" style={{ display:'block', marginBottom:56, textDecoration:'none' }}>
+          <span style={{ fontFamily:'"disp",Georgia,serif', fontSize:26, fontWeight:400, color:'#0F0E0D', letterSpacing:'-0.03em' }}>Orbbi</span>
         </a>
 
-        {/* Header */}
-        <div style={{ marginBottom:48 }}>
-          <p style={{ fontSize:12, fontWeight:500, textTransform:'uppercase', letterSpacing:'0.12em', color:'rgba(250,250,249,0.35)', marginBottom:14 }}>
-            Diagnóstico gratis · 30 min
-          </p>
-          <h1 style={{ fontFamily:'"disp",Georgia,serif', fontSize:'clamp(32px,4vw,48px)', lineHeight:1.05, letterSpacing:'-0.03em', fontWeight:400, color:'#FAFAF9', marginBottom:12 }}>
-            Elige un horario.
-          </h1>
-          <p style={{ fontSize:15, color:'rgba(250,250,249,0.4)', display:'flex', alignItems:'center', gap:6 }}>
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ flexShrink:0 }}>
-              <circle cx="7" cy="7" r="6" stroke="currentColor" strokeWidth="1.2"/>
-              <path d="M7 4v3l2 2" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
-            </svg>
-            Horarios en tu zona horaria: <strong style={{ color:'rgba(250,250,249,0.7)', fontWeight:500 }}>{getNombreTZ(userTZ)}</strong>
-          </p>
-        </div>
+        <div style={{ display:'grid', gridTemplateColumns:'1fr 380px', gap:64, alignItems:'start' }} className="agendar-grid">
 
-        {!selected ? (
-          <>
-            {/* Selector de días */}
-            <div style={{ display:'flex', gap:8, marginBottom:32, overflowX:'auto', paddingBottom:4 }}>
+          {/* Columna izquierda — calendario */}
+          <div>
+            {/* Header */}
+            <p style={{ fontSize:12, fontWeight:500, textTransform:'uppercase', letterSpacing:'0.12em', color:'rgba(15,14,13,0.4)', marginBottom:14 }}>
+              Sesión de orientación · 30 min · Gratis
+            </p>
+            <h1 style={{ fontFamily:'"disp",Georgia,serif', fontSize:'clamp(32px,4vw,44px)', lineHeight:1.05, letterSpacing:'-0.03em', fontWeight:400, color:'#0F0E0D', marginBottom:10 }}>
+              Elige un horario.
+            </h1>
+            <p style={{ fontSize:14, color:'rgba(15,14,13,0.45)', marginBottom:40, display:'flex', alignItems:'center', gap:6 }}>
+              <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="currentColor" strokeWidth="1.2"/><path d="M7 4v3l2 2" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/></svg>
+              Tu zona horaria: <strong style={{ color:'#0F0E0D', fontWeight:500 }}>{getNombreTZ(userTZ)}</strong>
+            </p>
+
+            {/* Tabs de días */}
+            <div style={{ display:'flex', gap:6, marginBottom:28, overflowX:'auto', paddingBottom:2 }}>
               {dias.map((d, i) => {
-                const disponibles = SLOTS_HORA.filter(h => !esTomado(d, SLOTS_HORA.indexOf(h))).length
+                const libres = SLOTS_HORA.filter((_, hi) => !esTomado(d, hi)).length
+                const activo = diaIdx === i
                 return (
                   <button
                     key={i}
-                    onClick={() => setDiaIdx(i)}
+                    onClick={() => { setDiaIdx(i); setSelected(null) }}
                     style={{
                       flexShrink:0,
-                      padding:'12px 20px',
+                      padding:'10px 16px',
                       borderRadius:8,
-                      border: diaIdx === i ? 'none' : '1px solid rgba(250,250,249,0.12)',
-                      background: diaIdx === i ? '#FAFAF9' : 'transparent',
-                      color: diaIdx === i ? '#0F0E0D' : 'rgba(250,250,249,0.6)',
+                      border: activo ? '1.5px solid #0F0E0D' : '1px solid rgba(15,14,13,0.12)',
+                      background: activo ? '#0F0E0D' : '#fff',
+                      color: activo ? '#FAFAF9' : 'rgba(15,14,13,0.6)',
                       cursor:'pointer',
                       textAlign:'center',
-                      transition:'all .2s',
+                      transition:'all .18s',
                     }}
                   >
-                    <div style={{ fontSize:11, fontWeight:500, textTransform:'uppercase', letterSpacing:'0.08em', marginBottom:4, opacity:.7 }}>
+                    <div style={{ fontSize:10, fontWeight:500, textTransform:'uppercase', letterSpacing:'0.1em', marginBottom:3, opacity:.7 }}>
                       {getNombreDia(d, userTZ).slice(0,3)}
                     </div>
-                    <div style={{ fontSize:18, fontWeight:500, fontFamily:'"disp",Georgia,serif', marginBottom:2 }}>
+                    <div style={{ fontSize:17, fontWeight:500, marginBottom:2 }}>
                       {d.getDate()}
                     </div>
-                    <div style={{ fontSize:11, opacity:.5 }}>
-                      {disponibles} libre{disponibles !== 1 ? 's' : ''}
+                    <div style={{ fontSize:10, opacity:.55 }}>
+                      {libres} libre{libres !== 1 ? 's' : ''}
                     </div>
                   </button>
                 )
               })}
             </div>
 
-            {/* Slots del día activo */}
-            {diaActivo && (
-              <>
-                <p style={{ fontSize:13, fontWeight:500, color:'rgba(250,250,249,0.3)', textTransform:'uppercase', letterSpacing:'0.1em', marginBottom:16 }}>
-                  {getNombreDia(diaActivo, userTZ)} {getFechaNombreCorto(diaActivo, userTZ)}
-                </p>
-                <div style={{ display:'grid', gridTemplateColumns:'repeat(2,1fr)', gap:10 }}>
-                  {SLOTS_HORA.map((hora, hi) => {
-                    const tomado = esTomado(diaActivo, hi)
-                    const horaLocal = convertirHora(diaActivo, hora, userTZ)
-                    return (
-                      <div
-                        key={hora}
-                        onClick={() => !tomado && setSelected({ fecha: diaActivo, hora })}
-                        style={{
-                          padding:'18px 24px',
-                          borderRadius:10,
-                          border: tomado
-                            ? '1px solid rgba(250,250,249,0.06)'
-                            : '1px solid rgba(250,250,249,0.18)',
-                          background: tomado ? 'transparent' : 'rgba(250,250,249,0.04)',
-                          cursor: tomado ? 'default' : 'pointer',
-                          display:'flex', alignItems:'center', justifyContent:'space-between',
-                          transition:'all .2s',
-                          opacity: tomado ? 0.4 : 1,
-                        }}
-                        onMouseEnter={e => { if (!tomado) e.currentTarget.style.background = 'rgba(250,250,249,0.08)' }}
-                        onMouseLeave={e => { if (!tomado) e.currentTarget.style.background = 'rgba(250,250,249,0.04)' }}
-                      >
-                        <div>
-                          <p style={{ fontSize:17, fontWeight:500, color: tomado ? 'rgba(250,250,249,0.3)' : '#FAFAF9', marginBottom:2 }}>
-                            {horaLocal}
-                          </p>
-                          <p style={{ fontSize:12, color:'rgba(250,250,249,0.3)' }}>
-                            {hora}:00 Santiago
-                          </p>
-                        </div>
-                        <span style={{
-                          fontSize:11, fontWeight:500, textTransform:'uppercase', letterSpacing:'0.08em',
-                          color: tomado ? 'rgba(250,250,249,0.25)' : 'rgba(250,250,249,0.5)',
-                          borderRadius:100,
-                          padding:'3px 10px',
-                          border: `1px solid ${tomado ? 'rgba(250,250,249,0.08)' : 'rgba(250,250,249,0.2)'}`,
-                        }}>
-                          {tomado ? 'Reservado' : 'Disponible'}
-                        </span>
-                      </div>
-                    )
-                  })}
+            {/* Leyenda */}
+            <div style={{ display:'flex', gap:20, marginBottom:20 }}>
+              {[
+                { color:'#0F0E0D', label:'Disponible' },
+                { color:'rgba(15,14,13,0.12)', label:'Reservado' },
+              ].map(l => (
+                <div key={l.label} style={{ display:'flex', alignItems:'center', gap:6 }}>
+                  <div style={{ width:10, height:10, borderRadius:2, background:l.color }} />
+                  <span style={{ fontSize:12, color:'rgba(15,14,13,0.45)' }}>{l.label}</span>
                 </div>
-
-                <p style={{ fontSize:12, color:'rgba(250,250,249,0.2)', marginTop:20, textAlign:'center' }}>
-                  Los horarios mostrados están en tu zona horaria local · Santiago confirma por email
-                </p>
-              </>
-            )}
-          </>
-        ) : (
-          /* Formulario de confirmación */
-          <div style={{ maxWidth:480 }}>
-            <button
-              onClick={() => setSelected(null)}
-              style={{ background:'none', border:'none', color:'rgba(250,250,249,0.4)', cursor:'pointer', fontSize:14, marginBottom:32, padding:0, display:'flex', alignItems:'center', gap:6 }}
-            >
-              ← Cambiar horario
-            </button>
-
-            {/* Slot confirmado */}
-            <div style={{ background:'rgba(250,250,249,0.06)', border:'1px solid rgba(250,250,249,0.12)', borderRadius:10, padding:'20px 24px', marginBottom:36 }}>
-              <p style={{ fontSize:12, fontWeight:500, textTransform:'uppercase', letterSpacing:'0.1em', color:'rgba(250,250,249,0.35)', marginBottom:8 }}>
-                Horario seleccionado
-              </p>
-              <p style={{ fontSize:20, fontWeight:500, color:'#FAFAF9', marginBottom:4 }}>
-                {convertirHora(selected.fecha, selected.hora, userTZ)} — {getNombreDia(selected.fecha, userTZ)}, {getFechaNombreCorto(selected.fecha, userTZ)}
-              </p>
-              <p style={{ fontSize:13, color:'rgba(250,250,249,0.35)' }}>
-                {selected.hora}:00 Santiago · {getNombreTZ(userTZ)}
-              </p>
+              ))}
             </div>
 
-            <form onSubmit={confirmar} noValidate style={{ display:'flex', flexDirection:'column', gap:24 }}>
+            {/* Grid de slots */}
+            {diaActivo && (
+              <div style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:8 }} className="slots-grid">
+                {SLOTS_HORA.map((hora, hi) => {
+                  const tomado   = esTomado(diaActivo, hi)
+                  const elegido  = selected?.hora === hora && selected?.fecha.toDateString() === diaActivo.toDateString()
+                  const horaLocal = convertirHora(diaActivo, hora, userTZ)
+                  return (
+                    <button
+                      key={hora}
+                      disabled={tomado}
+                      onClick={() => setSelected({ fecha: diaActivo, hora })}
+                      style={{
+                        padding:'14px 10px',
+                        borderRadius:8,
+                        border: elegido
+                          ? '2px solid #0F0E0D'
+                          : tomado
+                            ? '1px solid rgba(15,14,13,0.07)'
+                            : '1px solid rgba(15,14,13,0.18)',
+                        background: elegido
+                          ? '#0F0E0D'
+                          : tomado
+                            ? 'rgba(15,14,13,0.04)'
+                            : '#fff',
+                        cursor: tomado ? 'default' : 'pointer',
+                        textAlign:'center',
+                        transition:'all .15s',
+                        boxShadow: elegido ? '0 2px 12px rgba(15,14,13,0.15)' : 'none',
+                      }}
+                      onMouseEnter={e => { if (!tomado && !elegido) e.currentTarget.style.borderColor = '#0F0E0D' }}
+                      onMouseLeave={e => { if (!tomado && !elegido) e.currentTarget.style.borderColor = 'rgba(15,14,13,0.18)' }}
+                    >
+                      <p style={{
+                        fontSize:15, fontWeight:500, marginBottom:2,
+                        color: elegido ? '#FAFAF9' : tomado ? 'rgba(15,14,13,0.25)' : '#0F0E0D',
+                      }}>
+                        {horaLocal}
+                      </p>
+                      <p style={{
+                        fontSize:10,
+                        color: elegido ? 'rgba(250,250,249,0.5)' : 'rgba(15,14,13,0.3)',
+                      }}>
+                        {tomado ? 'Reservado' : `${hora}:00 SCL`}
+                      </p>
+                    </button>
+                  )
+                })}
+              </div>
+            )}
+          </div>
+
+          {/* Columna derecha — formulario */}
+          <div style={{
+            background:'#fff',
+            border:'1px solid rgba(15,14,13,0.1)',
+            borderRadius:16,
+            padding:'36px 32px',
+            position:'sticky',
+            top:40,
+          }}>
+            <p style={{ fontSize:12, fontWeight:500, textTransform:'uppercase', letterSpacing:'0.1em', color:'rgba(15,14,13,0.4)', marginBottom:20 }}>
+              Tu reserva
+            </p>
+
+            {/* Slot seleccionado */}
+            {selected ? (
+              <div style={{ background:'#F2F1F0', borderRadius:8, padding:'14px 16px', marginBottom:28 }}>
+                <p style={{ fontSize:15, fontWeight:500, color:'#0F0E0D', marginBottom:3 }}>
+                  {convertirHora(selected.fecha, selected.hora, userTZ)} · {getNombreDia(selected.fecha, userTZ)}
+                </p>
+                <p style={{ fontSize:12, color:'rgba(15,14,13,0.45)' }}>
+                  {getFechaCorta(selected.fecha, userTZ)} · {getNombreTZ(userTZ)}
+                </p>
+                <p style={{ fontSize:11, color:'rgba(15,14,13,0.35)', marginTop:4 }}>
+                  {selected.hora}:00 hora Santiago
+                </p>
+              </div>
+            ) : (
+              <div style={{ background:'#F2F1F0', borderRadius:8, padding:'14px 16px', marginBottom:28, textAlign:'center' }}>
+                <p style={{ fontSize:14, color:'rgba(15,14,13,0.4)' }}>
+                  Selecciona un horario
+                </p>
+              </div>
+            )}
+
+            <form onSubmit={confirmar} noValidate style={{ display:'flex', flexDirection:'column', gap:18 }}>
               {[
-                { k:'nombre', l:'Nombre', t:'text', p:'Tu nombre completo' },
-                { k:'email',  l:'Email',  t:'email', p:'tu@email.com' },
-                { k:'profesion', l:'Profesión', t:'text', p:'Ej: Abogado, Médico, Docente...' },
+                { k:'nombre',    l:'Nombre',    t:'text',  p:'Tu nombre' },
+                { k:'email',     l:'Email',     t:'email', p:'tu@email.com' },
+                { k:'profesion', l:'Profesión', t:'text',  p:'Médico, Abogado, Docente...' },
               ].map(f => (
-                <div key={f.k} style={{ display:'flex', flexDirection:'column', gap:6 }}>
-                  <label style={{ fontSize:11, fontWeight:500, textTransform:'uppercase', letterSpacing:'0.1em', color:'rgba(250,250,249,0.35)' }}>
+                <div key={f.k} style={{ display:'flex', flexDirection:'column', gap:5 }}>
+                  <label style={{ fontSize:11, fontWeight:500, textTransform:'uppercase', letterSpacing:'0.08em', color:'rgba(15,14,13,0.4)' }}>
                     {f.l} *
                   </label>
                   <input
-                    className="field-dark"
                     type={f.t}
                     value={form[f.k as keyof typeof form]}
                     onChange={e => setForm(v => ({ ...v, [f.k]: e.target.value }))}
                     placeholder={f.p}
                     required
+                    style={{
+                      width:'100%', padding:'11px 0', background:'transparent',
+                      border:'none', borderBottom:'1px solid rgba(15,14,13,0.15)',
+                      color:'#0F0E0D', fontFamily:'"sans",system-ui,sans-serif',
+                      fontSize:15, outline:'none', transition:'border-color .2s',
+                    }}
+                    onFocus={e => e.target.style.borderBottomColor = '#0F0E0D'}
+                    onBlur={e => e.target.style.borderBottomColor = 'rgba(15,14,13,0.15)'}
                   />
                 </div>
               ))}
 
               <button
                 type="submit"
-                className="btn-hero"
-                disabled={st === 'sending'}
-                style={{ opacity: st === 'sending' ? .6 : 1, marginTop:8 }}
+                disabled={!selected || st === 'sending'}
+                style={{
+                  marginTop:8, height:46, borderRadius:6,
+                  background: selected ? '#0F0E0D' : 'rgba(15,14,13,0.08)',
+                  border:'none', color: selected ? '#FAFAF9' : 'rgba(15,14,13,0.3)',
+                  fontSize:14, fontWeight:500,
+                  fontFamily:'"sans",system-ui,sans-serif',
+                  cursor: selected ? 'pointer' : 'default',
+                  transition:'all .2s',
+                  opacity: st === 'sending' ? .6 : 1,
+                }}
               >
-                {st === 'sending' ? 'Enviando…' : 'Confirmar diagnóstico'}
+                {st === 'sending' ? 'Enviando…' : selected ? 'Confirmar sesión' : 'Elige un horario primero'}
               </button>
-              {st === 'err' && <p style={{ fontSize:13, color:'rgba(255,100,100,.8)' }}>Error. Escríbenos a cseplataforma@gmail.com</p>}
+
+              {st === 'err' && <p style={{ fontSize:12, color:'rgba(200,50,50,.8)' }}>Error. Escríbenos a cseplataforma@gmail.com</p>}
+
+              <p style={{ fontSize:11, color:'rgba(15,14,13,0.3)', textAlign:'center', lineHeight:'16px' }}>
+                Sin costo · Te confirmamos por email en menos de 24h
+              </p>
             </form>
           </div>
-        )}
+
+        </div>
       </div>
     </main>
   )
