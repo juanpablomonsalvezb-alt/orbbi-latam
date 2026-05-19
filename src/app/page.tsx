@@ -1,24 +1,25 @@
-import Header             from '@/components/Header'
-import HeroSection         from '@/components/sections/HeroSection'
-import StatementSection    from '@/components/sections/StatementSection'
-import ParaQuienSection    from '@/components/sections/ParaQuienSection'
-import ProcesoSection      from '@/components/sections/ProcesoSection'
-import PreciosSection      from '@/components/sections/PreciosSection'
-import TestimonialsSection from '@/components/sections/TestimonialsSection'
-import ContactSection      from '@/components/sections/ContactSection'
-import FeaturesSection     from '@/components/sections/FeaturesSection'
-import ServicesSection     from '@/components/sections/ServicesSection'
-import ImageGridSection    from '@/components/sections/ImageGridSection'
-import StatsSection        from '@/components/sections/StatsSection'
-import ProyectosSection    from '@/components/sections/ProyectosSection'
-import Footer              from '@/components/Footer'
+import Header              from '@/components/Header'
+import HeroSection          from '@/components/sections/HeroSection'
+import StatementSection     from '@/components/sections/StatementSection'
+import ParaQuienSection     from '@/components/sections/ParaQuienSection'
+import ProcesoSection       from '@/components/sections/ProcesoSection'
+import PreciosSection       from '@/components/sections/PreciosSection'
+import TestimonialsSection  from '@/components/sections/TestimonialsSection'
+import ContactSection       from '@/components/sections/ContactSection'
+import QuienesSomosSection  from '@/components/sections/QuienesSomosSection'
+import FeaturesSection      from '@/components/sections/FeaturesSection'
+import ServicesSection      from '@/components/sections/ServicesSection'
+import ImageGridSection     from '@/components/sections/ImageGridSection'
+import StatsSection         from '@/components/sections/StatsSection'
+import ProyectosSection     from '@/components/sections/ProyectosSection'
+import Footer               from '@/components/Footer'
 
 export default function Home() {
   return (
     <>
       <Header />
       <main>
-        {/* 1 — Qué es esto / ¿para mí? */}
+        {/* 1 — Mensaje + claridad */}
         <HeroSection />
         <StatementSection />
 
@@ -33,13 +34,16 @@ export default function Home() {
         {/* 4 — Formulario: captura la intención */}
         <ContactSection />
 
-        {/* 5 — Más detalle para quien aún evalúa */}
+        {/* 5 — Quiénes somos: confianza */}
+        <QuienesSomosSection />
+
+        {/* 6 — Más detalle para quien aún evalúa */}
         <FeaturesSection />
         <ServicesSection />
         <ImageGridSection />
         <StatsSection />
 
-        {/* 6 — Ecosistema */}
+        {/* 7 — Ecosistema */}
         <ProyectosSection />
       </main>
       <Footer />

@@ -78,7 +78,7 @@ export default function HeroSection() {
               transition={{ duration:.9, delay:.2, ease:[0.16,1,0.3,1] }}
               style={{ marginBottom:20 }}
             >
-              Aprende IA.<br />Aplícala<br /><span style={{ color:'rgba(250,250,249,0.55)' }}>a tu trabajo.</span>
+              Todo el mundo<br />habla de IA.<br /><span style={{ color:'rgba(250,250,249,0.5)' }}>Aquí aprendes<br />a usarla.</span>
             </motion.h1>
 
             <motion.p
@@ -86,9 +86,9 @@ export default function HeroSection() {
               initial={{ opacity:0, y:20 }}
               animate={{ opacity:1, y:0 }}
               transition={{ duration:.8, delay:.45, ease:[0.16,1,0.3,1] }}
-              style={{ color:'rgba(250,250,249,0.85)', maxWidth:600, marginBottom:36 }}
+              style={{ color:'rgba(250,250,249,0.8)', maxWidth:560, marginBottom:36, lineHeight:'28px' }}
             >
-              Mentoría personalizada 1:1, 100% online. Aprendes lo que necesitas, aplicado exactamente a tu profesión. Sin cursos genéricos, sin teoría vacía.
+              Si cada semana llega más información sobre IA y no sabes por dónde empezar, estás en el lugar correcto. Un mentor real, 1:1, que te acompaña a aplicarla exactamente en tu trabajo — sin perderte, sin teoría vacía.
             </motion.p>
 
             <motion.div

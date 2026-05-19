@@ -1,15 +1,6 @@
 'use client'
 import { motion } from 'framer-motion'
 
-/* Harvey statement section — exact:
-   - bg: #FAFAF9
-   - padding: 180px top, 180px bottom
-   - H3: 36px, lh 39.6px, ls -0.36px, weight 500
-   - First part: dark #0F0E0D (bold statement)
-   - Second part: muted #8F8B85 (continuation)
-   - Below: dark rounded product card
-*/
-
 export default function StatementSection() {
   return (
     <section className="sec-light sec-pad">
@@ -20,50 +11,74 @@ export default function StatementSection() {
           viewport={{ once:true, margin:'-80px' }}
           transition={{ duration:.8, ease:[0.16,1,0.3,1] }}
         >
-          {/* Harvey exact text pattern: bold dark + muted continuation on same line */}
-          <h2 style={{ fontSize:36, lineHeight:'39.6px', letterSpacing:'-0.36px', fontWeight:500, fontFamily:'"sans",system-ui,sans-serif', maxWidth:760 }}>
+          <h2 style={{ fontSize:'clamp(28px,3vw,36px)', lineHeight:'1.2', letterSpacing:'-0.36px', fontWeight:500, fontFamily:'"sans",system-ui,sans-serif', maxWidth:800 }}>
             <span style={{ color:'#0F0E0D' }}>
-              Orbbi es mentoría 1:1 en inteligencia artificial, 100% online.{' '}
+              Todos los días llega más información sobre IA. Más herramientas, más cambios, más urgencia. Eso genera un ruido que paraliza.{' '}
             </span>
             <span style={{ color:'#8F8B85' }}>
-              No un curso. No una plataforma. Un mentor real que te acompaña a aprender y aplicar IA exactamente a tu vida y tu profesión.
+              Orbbi existe para cortar ese ruido. Un mentor real que entiende tu profesión, que te acompaña exactamente desde donde estás, y te lleva a donde necesitas llegar.
             </span>
           </h2>
         </motion.div>
 
-        {/* Product dark card — Harvey shows their interface screenshot */}
+        {/* Tres ideas clave */}
         <motion.div
           initial={{ opacity:0, y:32 }}
           whileInView={{ opacity:1, y:0 }}
           viewport={{ once:true, margin:'-60px' }}
           transition={{ duration:.9, delay:.15, ease:[0.16,1,0.3,1] }}
           style={{
-            marginTop:60,
-            borderRadius:16,
-            background:'#1A1916',
-            minHeight:400,
-            display:'flex', alignItems:'center', justifyContent:'center',
-            position:'relative', overflow:'hidden',
+            marginTop:72,
+            display:'grid',
+            gridTemplateColumns:'repeat(3,1fr)',
+            gap:0,
+            borderTop:'1px solid rgba(15,14,13,0.1)',
           }}
+          className="statement-grid"
         >
-          {/* Harvey "H" logomark — we use "O" for Orbbi */}
-          <span style={{
-            fontFamily:'"disp",Georgia,serif',
-            fontSize:'clamp(120px,18vw,200px)',
-            color:'rgba(250,250,249,0.08)',
-            lineHeight:1, userSelect:'none', letterSpacing:'-4px',
-          }}>
-            O
-          </span>
-          {/* Subtle grid pattern like Harvey's interface preview */}
-          <div style={{
-            position:'absolute', inset:0,
-            backgroundImage:'linear-gradient(rgba(250,250,249,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(250,250,249,0.02) 1px, transparent 1px)',
-            backgroundSize:'80px 80px',
-          }} />
-          {/* Corner fade */}
-          <div style={{ position:'absolute', inset:0, background:'radial-gradient(ellipse at center, transparent 30%, rgba(26,25,22,0.6) 100%)' }} />
+          {[
+            {
+              n:'01',
+              title:'No es un curso.',
+              body:'No hay videos grabados ni módulos que completar. Cada sesión se construye en tiempo real contigo, aplicada a tu trabajo específico.',
+            },
+            {
+              n:'02',
+              title:'No es para expertos.',
+              body:'No necesitas saber de tecnología. Necesitas querer mejorar tu trabajo. Desde ahí construimos juntos tu camino con IA.',
+            },
+            {
+              n:'03',
+              title:'No es para después.',
+              body:'La IA no espera. Pero tampoco tienes que correr solo. Empezamos desde donde estás hoy y avanzamos a tu ritmo.',
+            },
+          ].map((item, i) => (
+            <div
+              key={i}
+              style={{
+                padding:'48px 40px 48px 0',
+                borderRight: i < 2 ? '1px solid rgba(15,14,13,0.1)' : 'none',
+                paddingLeft: i > 0 ? 40 : 0,
+              }}
+            >
+              <span style={{
+                display:'block',
+                fontFamily:'"disp",Georgia,serif',
+                fontSize:13, color:'rgba(15,14,13,0.25)',
+                marginBottom:20, letterSpacing:'0.05em',
+              }}>{item.n}</span>
+              <h3 style={{
+                fontFamily:'"disp",Georgia,serif',
+                fontSize:'clamp(22px,2.2vw,28px)',
+                lineHeight:1.1, letterSpacing:'-0.02em',
+                fontWeight:400, color:'#0F0E0D',
+                marginBottom:14,
+              }}>{item.title}</h3>
+              <p style={{ fontSize:15, lineHeight:'22px', color:'rgba(15,14,13,0.5)' }}>{item.body}</p>
+            </div>
+          ))}
         </motion.div>
+
       </div>
     </section>
   )
