@@ -209,16 +209,16 @@ export default function TuPlan() {
               style={{
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 height: 48, borderRadius: 6, width: '100%',
-                background: p.highlight ? '#0F0E0D' : 'rgba(250,250,249,0.1)',
-                border: 'none',
-                color: p.highlight ? '#FAFAF9' : '#FAFAF9',
+                background: p.highlight ? '#0F0E0D' : '#FAFAF9',
+                border: p.highlight ? 'none' : '1.5px solid #FAFAF9',
+                color: p.highlight ? '#FAFAF9' : '#0F0E0D',
                 fontSize: 14, fontWeight: 500,
                 fontFamily: '"sans",system-ui,sans-serif',
                 cursor: loading ? 'wait' : 'pointer',
                 transition: 'opacity .2s',
                 opacity: loading && loading !== p.id ? 0.4 : 1,
               }}
-              onMouseEnter={e => { if (!loading) e.currentTarget.style.opacity = '.75' }}
+              onMouseEnter={e => { if (!loading) e.currentTarget.style.opacity = '.85' }}
               onMouseLeave={e => { if (!loading) e.currentTarget.style.opacity = '1' }}
             >
               {loading === p.id ? 'Redirigiendo…' : p.cta}

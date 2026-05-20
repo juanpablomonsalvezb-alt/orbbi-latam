@@ -74,7 +74,11 @@ export default function Agendar() {
   useEffect(() => {
     const tz = Intl.DateTimeFormat().resolvedOptions().timeZone
     setUserTZ(tz)
-    setDias(getDiasDisponibles())
+    const ds = getDiasDisponibles()
+    setDias(ds)
+    // Auto-seleccionar primer día con al menos 1 slot libre
+    const idxFirstFree = ds.findIndex(d => SLOTS_HORA.some((_, hi) => !esTomado(d, hi)))
+    if (idxFirstFree > 0) setDiaIdx(idxFirstFree)
   }, [])
 
   const diaActivo = dias[diaIdx]

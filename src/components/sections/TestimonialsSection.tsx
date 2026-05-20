@@ -1,6 +1,5 @@
 'use client'
 import { useState } from 'react'
-import Image from 'next/image'
 
 const T = [
   {
@@ -8,30 +7,35 @@ const T = [
     name: 'Carlos Mendoza',
     role: 'Abogado Senior',
     company: 'Estudio Jurídico',
-    img: '/images/pay-equity.webp',
+    accent: '#C9A96E',
   },
   {
     quote: '"El aprendizaje es 100% aplicado a mi trabajo real. Entendieron mi sector desde la primera sesión."',
     name: 'Luciana Reyes',
     role: 'Docente Universitaria',
     company: 'Universidad Nacional',
-    img: '/images/gender.webp',
+    accent: '#8FA8C9',
   },
   {
     quote: '"Automaticé el 40% de mis tareas administrativas. Ahora tengo tiempo para lo que realmente importa."',
     name: 'Andrés Torres',
     role: 'Consultor independiente',
     company: 'Finanzas corporativas',
-    img: '/images/restaurant.webp',
+    accent: '#A8C98F',
   },
   {
     quote: '"Pedí aprender Notion IA específicamente para mis proyectos. En dos semanas lo dominaba completamente."',
     name: 'Patricia Vidal',
     role: 'Gerente de Proyectos',
     company: 'Empresa tecnológica',
-    img: '/images/hero.webp',
+    accent: '#C98FA8',
   },
 ]
+
+function initials(name: string): string {
+  const parts = name.trim().split(/\s+/)
+  return ((parts[0]?.[0] || '') + (parts[parts.length-1]?.[0] || '')).toUpperCase()
+}
 
 export default function TestimonialsSection() {
   const [i, setI] = useState(0)
@@ -73,16 +77,21 @@ export default function TestimonialsSection() {
                 height: 425,
                 borderRadius: 8,
                 overflow: 'hidden',
-                background: '#E8E5E0',
+                background: `linear-gradient(135deg, ${t.accent}30 0%, ${t.accent}10 100%)`,
                 flexShrink: 0,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                border: '1px solid rgba(15,14,13,0.06)',
               }}>
-                <Image
-                  src={t.img}
-                  alt={t.name}
-                  fill
-                  style={{ objectFit:'cover', objectPosition:'center top' }}
-                  sizes="340px"
-                />
+                <div style={{
+                  width: 140, height: 140, borderRadius: '50%',
+                  background: t.accent,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  fontFamily: '"disp",Georgia,serif',
+                  fontSize: 56, color: '#FAFAF9', fontWeight: 400,
+                  letterSpacing: '-0.02em',
+                }}>
+                  {initials(t.name)}
+                </div>
               </div>
 
               <div style={{ display:'flex', flexDirection:'column', justifyContent:'space-between', minHeight:425, padding:'24px 0' }}>

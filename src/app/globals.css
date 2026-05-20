@@ -248,6 +248,14 @@
   /* ── TU PLAN ── */
   @media(max-width:640px){ .tu-plan-grid { grid-template-columns:1fr !important; } }
 
+  /* ── NAV RESPONSIVE (fix tailwind v4 custom breakpoint) ── */
+  .nav-desktop { display: none; }
+  .nav-hamburger { display: flex; }
+  @media (min-width: 1024px) {
+    .nav-desktop { display: flex; }
+    .nav-hamburger { display: none !important; }
+  }
+
   /* ── AGENDAR ── */
   @media(max-width:780px){
     .agendar-grid { grid-template-columns:1fr !important; }

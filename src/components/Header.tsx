@@ -58,7 +58,7 @@ export default function Header() {
           </a>
 
           {/* Center links — desktop only */}
-          <div style={{ display:'flex', alignItems:'center', gap:28, flex:1 }} className="hidden l:flex">
+          <div style={{ alignItems:'center', gap:28, flex:1 }} className="nav-desktop">
             {LINKS.map(l => (
               <a key={l.label} href={l.href}
                 style={{ fontSize:14, fontWeight:400, color: onLight ? 'rgba(15,14,13,0.55)' : 'rgba(250,250,249,0.7)', transition:'color .2s', cursor:'pointer' }}
@@ -70,18 +70,18 @@ export default function Header() {
             ))}
           </div>
 
-          {/* Right: Login + CTA */}
-          <div style={{ display:'flex', alignItems:'center', gap:8, marginLeft:'auto' }}>
+          {/* Right: CTA (desktop only) */}
+          <div style={{ alignItems:'center', gap:8, marginLeft:'auto' }} className="nav-desktop">
             <a href="/agendar" className="btn-demo">
               Agendar diagnóstico →
             </a>
           </div>
 
-          {/* Hamburger — mobile */}
+          {/* Hamburger — mobile only */}
           <button
             onClick={() => setOpen(v => !v)}
-            className="l:hidden"
-            style={{ background:'none', border:'none', cursor:'pointer', padding:'8px', display:'flex', flexDirection:'column', gap:5, marginLeft:16 }}
+            className="nav-hamburger"
+            style={{ background:'none', border:'none', cursor:'pointer', padding:'8px', flexDirection:'column', gap:5, marginLeft:'auto' }}
             aria-label="Menú"
           >
             <span className="burger-l" style={{ background: onLight?'#0F0E0D':'#FAFAF9', transform:open?'translateY(6px) rotate(45deg)':undefined }} />
