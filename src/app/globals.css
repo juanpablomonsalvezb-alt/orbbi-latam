@@ -264,48 +264,59 @@
     .slots-grid   { grid-template-columns:repeat(2,1fr) !important; }
   }
 
-  /* ────────────────────────────────────────────────────────────────
-     RESPONSIVE OVERRIDES — fuerza colapso de grids inline en mobile
-     ──────────────────────────────────────────────────────────────── */
-  @media (max-width: 768px) {
-    /* TODOS los grids inline → 1 columna */
-    .paths-grid,
-    .contact-grid,
-    .precios-grid,
-    .proceso-grid,
-    .testi-grid,
-    .stats-grid {
-      grid-template-columns: 1fr !important;
-    }
-    /* Hero — texto más compacto */
-    .t-hero { font-size: 40px !important; line-height: 44px !important; letter-spacing: -0.5px !important; }
-    /* Section padding — reducir mucho en mobile */
-    .sec-pad     { padding-top: 72px !important; padding-bottom: 72px !important; }
-    .sec-pad-sm  { padding-top: 60px !important; padding-bottom: 60px !important; }
-    .sec-pad-t   { padding-top: 60px !important; padding-bottom: 32px !important; }
-    .sec-pad-lg  { padding-top: 72px !important; padding-bottom: 0 !important; }
-    /* Page wrap menos padding lateral */
-    .page-wrap   { padding: 0 16px !important; }
-    /* Announce bar — más compacto */
-    .announce-bar {
-      font-size: 12px !important;
-      height: auto !important;
-      padding: 8px 16px !important;
-      flex-direction: column !important;
-      gap: 4px !important;
-      text-align: center !important;
-    }
-    .nav-inner { padding: 0 16px !important; }
-    /* FeaturesSection — texto rotante grande quiebra el layout */
-    .t-feature { font-size: 28px !important; line-height: 32px !important; }
+}
+
+/* ────────────────────────────────────────────────────────────────
+   RESPONSIVE OVERRIDES — FUERA de @layer para ganar a inline styles
+   ──────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  /* Grids inline → 1 columna */
+  .paths-grid,
+  .contact-grid,
+  .precios-grid,
+  .proceso-grid,
+  .testi-grid,
+  .stats-grid,
+  .agendar-grid,
+  .equipo-grid,
+  .nosotros-header-grid,
+  .features-grid,
+  .statement-grid,
+  .faq-grid,
+  .proyectos-grid,
+  .tu-plan-grid {
+    grid-template-columns: 1fr !important;
   }
-
-  /* Logos ticker — siempre overflow hidden en su contenedor padre */
-  .logos-track { animation: logos 30s linear infinite; display: flex; gap: 80px; width: max-content; align-items: center; }
-  @media (max-width: 640px) { .logos-track { gap: 40px !important; } }
-
-  /* ── LOGOS SCROLL ── */
-  @keyframes logos { to { transform:translateX(-50%); } }
-  .logos-track { animation:logos 30s linear infinite; display:flex; gap:80px; width:max-content; align-items:center; }
-
+  /* FeaturesSection — ocultar columna derecha vacía cuando colapsa */
+  .features-grid > :last-child { display: none !important; }
+  /* Hero — texto más compacto */
+  .t-hero { font-size: 40px !important; line-height: 44px !important; letter-spacing: -0.5px !important; }
+  /* Section padding — reducir en mobile */
+  .sec-pad     { padding-top: 72px !important; padding-bottom: 72px !important; }
+  .sec-pad-sm  { padding-top: 60px !important; padding-bottom: 60px !important; }
+  .sec-pad-t   { padding-top: 60px !important; padding-bottom: 32px !important; }
+  .sec-pad-lg  { padding-top: 72px !important; padding-bottom: 0 !important; }
+  /* Page wrap lateral más chico */
+  .page-wrap   { padding: 0 16px !important; }
+  /* Announce bar más compacto */
+  .announce-bar {
+    font-size: 12px !important;
+    height: auto !important;
+    padding: 8px 16px !important;
+    flex-direction: column !important;
+    gap: 4px !important;
+    text-align: center !important;
+  }
+  .nav-inner { padding: 0 16px !important; }
+  /* FeaturesSection rotating list — font más chico */
+  .t-feature { font-size: 28px !important; line-height: 32px !important; }
+  /* FeaturesSection — forzar los botones inline de 56px también */
+  .features-grid button {
+    font-size: 28px !important;
+    line-height: 32px !important;
+  }
+  /* /agendar — slots grid 2 cols en mobile */
+  .slots-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  /* Logos ticker más compacto */
+  .logos-track { gap: 40px !important; }
 }
