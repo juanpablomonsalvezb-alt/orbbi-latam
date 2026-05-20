@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
     const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://orbbi-latam.vercel.app'
     const ref = `${plan_id}_${Date.now()}`
 
-    const body = {
+    const body: Record<string, unknown> = {
       items: [
         {
           title: `Orbbi · ${plan.nombre}`,
@@ -27,10 +27,6 @@ export async function POST(request: NextRequest) {
           currency_id: 'USD',
         },
       ],
-      payer: {
-        ...(email ? { email } : {}),
-        ...(nombre ? { name: nombre } : {}),
-      },
       back_urls: {
         success: `${appUrl}/pago/exitoso?plan=${plan_id}&ref=${ref}`,
         failure: `${appUrl}/pago/fallido?plan=${plan_id}`,
@@ -38,7 +34,13 @@ export async function POST(request: NextRequest) {
       },
       auto_return: 'approved',
       external_reference: ref,
-      statement_descriptor: 'ORBBI MENTORIA IA',
+    }
+
+    if (email || nombre) {
+      body.payer = {
+        ...(email ? { email } : {}),
+        ...(nombre ? { name: nombre } : {}),
+      }
     }
 
     const response = await fetch(`${MP_API}/checkout/preferences`, {
@@ -49,8 +51,8 @@ export async function POST(request: NextRequest) {
 
     if (!response.ok) {
       const err = await response.json().catch(() => ({}))
-      console.error('MercadoPago error:', response.status, err)
-      return NextResponse.json({ error: 'Error creando pago' }, { status: 500 })
+      console.error('MercadoPago error:', response.status, JSON.stringify(err))
+      return NextResponse.json({ error: 'Error creando pago', detail: err, mp_status: response.status }, { status: 500 })
     }
 
     const data = await response.json()
