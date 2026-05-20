@@ -1,8 +1,9 @@
 export const MP_API = 'https://api.mercadopago.com'
 
 export function getHeaders() {
+  const token = process.env.MERCADOPAGO_ACCESS_TOKEN || process.env.MP_ACCESS_TOKEN || ''
   return {
-    'Authorization': `Bearer ${process.env.MP_ACCESS_TOKEN}`,
+    'Authorization': `Bearer ${token}`,
     'Content-Type': 'application/json',
   }
 }
