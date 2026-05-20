@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Plan no válido' }, { status: 400 })
     }
 
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://orbbi-latam.vercel.app'
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://orbbilatam.com'
     const ref = `${plan_id}_${Date.now()}`
 
     const body: Record<string, unknown> = {
@@ -52,7 +52,7 @@ export async function POST(request: NextRequest) {
     if (!response.ok) {
       const err = await response.json().catch(() => ({}))
       console.error('MercadoPago error:', response.status, JSON.stringify(err))
-      return NextResponse.json({ error: 'Error creando pago', detail: err, sent_back_urls: body.back_urls }, { status: 500 })
+      return NextResponse.json({ error: 'Error creando pago' }, { status: 500 })
     }
 
     const data = await response.json()
