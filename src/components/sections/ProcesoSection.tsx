@@ -30,7 +30,7 @@ export default function ProcesoSection() {
           </h2>
         </motion.div>
 
-        <div style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:0 }}>
+        <div style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:0 }} className="proceso-grid">
           {STEPS.map((s, i) => (
             <motion.div
               key={i}

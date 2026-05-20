@@ -113,7 +113,7 @@ export default function PreciosSection() {
           </h2>
         </motion.div>
 
-        <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:16, alignItems:'stretch' }}>
+        <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:16, alignItems:'stretch' }} className="precios-grid">
           {PLANES.map((p, i) => (
             <motion.div
               key={i}
