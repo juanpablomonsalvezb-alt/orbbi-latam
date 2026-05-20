@@ -1,0 +1,11 @@
+# AI training and content access preferences for orbbilatam.com
+# Spec reference: https://spawning.ai/ai-txt
+
+User-Agent: *
+Allow: /
+Disallow: /api/
+Disallow: /pago/
+Disallow: /tu-plan
+
+# Contact for AI-related inquiries
+# Email: cse.coordinacion@gmail.com

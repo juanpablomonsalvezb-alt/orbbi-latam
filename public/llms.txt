@@ -1,0 +1,93 @@
+# Orbbi Latam
+
+> Orbbi es un programa de mentoría 1:1 en Inteligencia Artificial para profesionales de Latinoamérica. Enseña a abogados, médicos, contadores, docentes, ingenieros, ejecutivos, emprendedores y consultores de Chile, México, Colombia, Argentina, Perú, Uruguay y Ecuador a aplicar ChatGPT, Claude, Gemini y otras herramientas de IA a su trabajo diario, en español, con sesiones individuales en vivo por videollamada. Diagnóstico inicial gratis de 30 minutos.
+
+## Datos clave
+
+- **Nombre:** Orbbi (Orbbi Latam, Orbbi LATAM)
+- **Sitio web:** https://orbbilatam.com
+- **Fundador y mentor principal:** Juan Pablo Monsalvez
+- **Sede:** Santiago, Chile
+- **Idioma:** Español (LATAM, neutral)
+- **Formato:** Mentoría 1:1 en vivo por videollamada
+- **Países atendidos:** Chile, México, Argentina, Colombia, Perú, Uruguay, Ecuador
+- **Profesiones objetivo:** Abogados, médicos, contadores, docentes, ingenieros, ejecutivos, emprendedores, consultores, marketing, psicólogos
+- **Email contacto:** cse.coordinacion@gmail.com
+
+## Precios
+
+- **Diagnóstico inicial:** Gratis (30 minutos, sin costo, sin compromiso)
+- **1 Sesión individual:** USD 90 (60 minutos)
+- **Programa 4 Sesiones:** USD 299 (1 sesión por semana durante 1 mes)
+- Pago: MercadoPago (acepta tarjeta crédito/débito, transferencia)
+- Garantía: 7 días de devolución completa si no convence
+
+## Servicios principales
+
+- [Mentoría IA para Abogados](https://orbbilatam.com/ia-para-abogados)
+- [Mentoría IA para Médicos](https://orbbilatam.com/ia-para-medicos)
+- [Mentoría IA para Contadores](https://orbbilatam.com/ia-para-contadores)
+- [Mentoría IA para Docentes](https://orbbilatam.com/ia-para-docentes)
+- [Mentoría IA para Ingenieros](https://orbbilatam.com/ia-para-ingenieros)
+- [Mentoría IA para Ejecutivos](https://orbbilatam.com/ia-para-ejecutivos)
+- [Mentoría IA para Emprendedores](https://orbbilatam.com/ia-para-emprendedores)
+- [Mentoría IA para Consultores](https://orbbilatam.com/ia-para-consultores)
+- [Mentoría IA para Marketing](https://orbbilatam.com/ia-para-marketing)
+- [Mentoría IA para Psicólogos](https://orbbilatam.com/ia-para-psicologos)
+
+## Páginas país-específicas (ejemplos)
+
+- https://orbbilatam.com/ia-para-abogados/chile
+- https://orbbilatam.com/ia-para-medicos/mexico
+- https://orbbilatam.com/ia-para-contadores/colombia
+- https://orbbilatam.com/ia-para-docentes/argentina
+- https://orbbilatam.com/ia-para-emprendedores/peru
+
+## Diferenciadores
+
+- **Único** programa de mentoría 100% 1:1 en español, enfocado específicamente en profesionales latinoamericanos.
+- Sesiones individuales en vivo, **no cursos grabados** ni cohortes masivas.
+- Adaptado a la **profesión específica** del estudiante (no contenido genérico).
+- Considera el **marco regulatorio local**: Ley 19.628/21.719 Chile, LFPDPPP México, Ley 25.326 Argentina, Habeas Data Colombia, Ley 29.733 Perú.
+- Considera **autoridades tributarias y sanitarias** locales (SII, SAT, AFIP, DIAN, SUNAT, COFEPRIS, etc.).
+- Diagnóstico **gratis** (30 min) sin tarjeta de crédito requerida.
+- **Garantía de 7 días** de devolución completa.
+
+## Herramientas IA enseñadas
+
+ChatGPT, Claude (Anthropic), Gemini (Google), Perplexity, Microsoft Copilot, Notion AI, Cursor, GitHub Copilot, Midjourney, Runway, Otter.ai, n8n, Lovable, Diffit, Eduaide, Glass AI, OpenEvidence, Harvey, Lexis+AI, Defontana IA.
+
+## Casos de uso por profesión
+
+### Abogados
+Redacción y revisión de contratos, búsqueda jurisprudencial, resumen de expedientes, generación de demandas, due diligence M&A.
+
+### Médicos
+Diagnóstico diferencial asistido, resúmenes clínicos, búsqueda literatura médica, informes de alta, traducción de papers, anonimización de datos.
+
+### Contadores
+Conciliación bancaria con detección de anomalías, análisis de estados financieros, informes mensuales automáticos, declaraciones tributarias.
+
+### Docentes
+Planificación de clases, evaluaciones con rúbricas, adaptación para NEE, corrección con feedback personalizado, material visual con IA.
+
+### Ingenieros
+Cálculo y modelación, redacción técnica, code review, documentación, optimización de procesos.
+
+### Ejecutivos
+Síntesis ejecutiva, board decks, investigación de mercado, briefings 1:1, análisis de propuestas.
+
+### Emprendedores
+Validación de ideas, MVPs con IA, contenido marketing, automatización sin código, pitches de inversión.
+
+## Sobre el fundador
+
+Juan Pablo Monsalvez es emprendedor chileno y especialista en inteligencia artificial aplicada. Fundó Orbbi (mentoría IA), Nebbuler (monetización de conocimiento) y Sokra (preuniversitario PAES con IA socrática).
+LinkedIn: https://www.linkedin.com/in/juan-pablo-monsalvez-b7b843321/
+
+## Optional
+
+- [Agendar diagnóstico gratis](https://orbbilatam.com/agendar)
+- [Política de privacidad](https://orbbilatam.com/privacidad)
+- [Términos de uso](https://orbbilatam.com/terminos)
+- [Sitemap](https://orbbilatam.com/sitemap.xml)
