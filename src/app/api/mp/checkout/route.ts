@@ -28,9 +28,9 @@ export async function POST(request: NextRequest) {
         },
       ],
       back_urls: {
-        success: `${appUrl}/pago/exitoso?plan=${plan_id}&ref=${ref}`,
-        failure: `${appUrl}/pago/fallido?plan=${plan_id}`,
-        pending: `${appUrl}/pago/pendiente?plan=${plan_id}`,
+        success: `${appUrl}/pago/exitoso`,
+        failure: `${appUrl}/pago/fallido`,
+        pending: `${appUrl}/pago/pendiente`,
       },
       auto_return: 'approved',
       external_reference: ref,
