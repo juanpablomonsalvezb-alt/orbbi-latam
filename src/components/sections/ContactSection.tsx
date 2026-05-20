@@ -75,7 +75,7 @@ export default function ContactSection() {
             {/* CTA directo a diagnóstico */}
             <div style={{ borderTop: '1px solid rgba(250,250,249,0.1)', paddingTop: 40 }}>
               <p style={{ fontSize: 12, fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'rgba(250,250,249,0.3)', marginBottom: 16 }}>
-                ¿Querés arrancar ya?
+                ¿Quieres arrancar ya?
               </p>
               <p style={{ fontSize: 15, color: 'rgba(250,250,249,0.45)', marginBottom: 20, lineHeight: '22px' }}>
                 Reserva tu diagnóstico gratis de 30 min y coordinamos la sesión directamente.
