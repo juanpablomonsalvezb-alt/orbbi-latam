@@ -91,3 +91,44 @@ LinkedIn: https://www.linkedin.com/in/juan-pablo-monsalvez-b7b843321/
 - [Política de privacidad](https://orbbilatam.com/privacidad)
 - [Términos de uso](https://orbbilatam.com/terminos)
 - [Sitemap](https://orbbilatam.com/sitemap.xml)
+
+## Blog / Recursos informacionales
+
+### Fundamentos de IA
+- [Qué es Prompt Engineering — guía profesional](https://orbbilatam.com/blog/que-es-prompt-engineering)
+- [Qué es un LLM explicado simple](https://orbbilatam.com/blog/que-es-llm)
+- [Qué es la IA generativa](https://orbbilatam.com/blog/que-es-ia-generativa)
+- [Qué es RAG (Retrieval-Augmented Generation)](https://orbbilatam.com/blog/que-es-rag)
+- [Qué son los agentes de IA](https://orbbilatam.com/blog/que-es-agente-ia)
+- [Qué es MCP (Model Context Protocol)](https://orbbilatam.com/blog/que-es-mcp)
+
+### Comparativas
+- [ChatGPT vs Claude 2026 — comparativa LATAM](https://orbbilatam.com/blog/chatgpt-vs-claude)
+- [ChatGPT vs Gemini](https://orbbilatam.com/blog/chatgpt-vs-gemini)
+- [Mejor IA para escribir en español LATAM](https://orbbilatam.com/blog/mejor-ia-para-escribir-espanol)
+- [Mentoría 1:1 vs curso online de IA](https://orbbilatam.com/blog/mentoria-ia-vs-curso-online)
+- [Cuánto cuesta aprender IA en 2026](https://orbbilatam.com/blog/cuanto-cuesta-aprender-ia-2026)
+
+### Prompts por profesión
+- [15 prompts probados para abogados](https://orbbilatam.com/blog/mejores-prompts-abogados)
+- [12 prompts para médicos respetando privacidad](https://orbbilatam.com/blog/mejores-prompts-medicos)
+- [10 prompts para contadores](https://orbbilatam.com/blog/mejores-prompts-contadores)
+- [20 prompts para docentes](https://orbbilatam.com/blog/mejores-prompts-docentes)
+- [30 prompts en español neutro para profesionales](https://orbbilatam.com/blog/prompts-espanol-chatgpt)
+
+### Herramientas
+- [Qué es Perplexity AI](https://orbbilatam.com/blog/que-es-perplexity)
+- [Qué es n8n — automatización sin código](https://orbbilatam.com/blog/que-es-n8n)
+
+### Casos de uso por industria
+- [IA en salud chilena (Ley 21.719)](https://orbbilatam.com/blog/ia-en-salud-chile)
+- [IA en derecho mexicano (LFPDPPP)](https://orbbilatam.com/blog/ia-derecho-mexico)
+- [IA aplicada al marketing LATAM](https://orbbilatam.com/blog/ia-aplicada-marketing)
+- [IA aplicada a finanzas](https://orbbilatam.com/blog/ia-aplicada-finanzas)
+
+### Aprender IA por país
+- [Aprender IA en Chile](https://orbbilatam.com/blog/aprender-ia-chile)
+- [Aprender IA en México](https://orbbilatam.com/blog/aprender-ia-mexico)
+- [Aprender IA en Colombia](https://orbbilatam.com/blog/aprender-ia-colombia)
+- [Aprender IA en Argentina](https://orbbilatam.com/blog/aprender-ia-argentina)
+- [Aprender IA en Perú](https://orbbilatam.com/blog/aprender-ia-peru)

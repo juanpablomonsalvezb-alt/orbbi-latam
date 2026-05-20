@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next'
 import { PROFESIONES, PAISES, BASE_URL } from '@/lib/seo/data'
+import { ARTICLES } from '@/lib/seo/articles'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date()
@@ -74,6 +75,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
           },
         },
       })
+    })
+  })
+
+  // Blog index
+  entries.push({
+    url: `${BASE_URL}/blog`,
+    lastModified: now,
+    changeFrequency: 'weekly',
+    priority: 0.7,
+  })
+
+  // Blog articles
+  ARTICLES.forEach(a => {
+    entries.push({
+      url: `${BASE_URL}/blog/${a.slug}`,
+      lastModified: new Date(a.fechaPublicacion),
+      changeFrequency: 'monthly',
+      priority: 0.6,
     })
   })
 
