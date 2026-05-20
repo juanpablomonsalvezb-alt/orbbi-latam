@@ -52,15 +52,7 @@ export async function POST(request: NextRequest) {
     if (!response.ok) {
       const err = await response.json().catch(() => ({}))
       console.error('MercadoPago error:', response.status, JSON.stringify(err))
-      return NextResponse.json({
-        error: 'Error creando pago',
-        detail: err,
-        sent_body: body,
-        mp_token_len: process.env.MP_ACCESS_TOKEN?.length || 0,
-        mercadopago_token_len: process.env.MERCADOPAGO_ACCESS_TOKEN?.length || 0,
-        all_env_keys: Object.keys(process.env).filter(k => k.includes('MP') || k.includes('MERCADO') || k.includes('RESEND') || k.includes('APP')),
-        app_url: appUrl,
-      }, { status: 500 })
+      return NextResponse.json({ error: 'Error creando pago' }, { status: 500 })
     }
 
     const data = await response.json()
