@@ -52,7 +52,7 @@ export async function POST(request: NextRequest) {
     if (!response.ok) {
       const err = await response.json().catch(() => ({}))
       console.error('MercadoPago error:', response.status, JSON.stringify(err))
-      return NextResponse.json({ error: 'Error creando pago' }, { status: 500 })
+      return NextResponse.json({ error: 'Error creando pago', detail: err, sent_back_urls: body.back_urls }, { status: 500 })
     }
 
     const data = await response.json()
