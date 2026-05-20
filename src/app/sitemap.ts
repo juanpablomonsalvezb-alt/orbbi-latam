@@ -62,13 +62,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
   PROFESIONES.forEach(p => {
     PAISES.forEach(c => {
       entries.push({
-        url: `${BASE_URL}/ia-para-${p.slug}/${c.slug}`,
+        url: `${BASE_URL}/ia-para-${p.slug}-${c.slug}`,
         lastModified: now,
         changeFrequency: 'weekly',
         priority: 0.8,
         alternates: {
           languages: {
-            [c.hreflang]: `${BASE_URL}/ia-para-${p.slug}/${c.slug}`,
+            [c.hreflang]: `${BASE_URL}/ia-para-${p.slug}-${c.slug}`,
             es: `${BASE_URL}/ia-para-${p.slug}`,
             'x-default': `${BASE_URL}/ia-para-${p.slug}`,
           },
