@@ -3,10 +3,13 @@ import { useState, useEffect } from 'react'
 
 const SLOTS_HORA = [9, 10, 11, 14, 15, 16, 17, 18]
 
-// Patrón determinístico — no cambia en refresh
+// Todo reservado hasta el jueves 21 mayo inclusive, aleatorio desde el viernes 22
 function esTomado(fecha: Date, horaIdx: number): boolean {
+  const CORTE = new Date(2026, 4, 21) // 21 mayo 2026 (mes 0-indexed)
+  CORTE.setHours(23, 59, 59, 999)
+  if (fecha <= CORTE) return true
   const seed = fecha.getDate() * 11 + fecha.getMonth() * 37 + horaIdx * 17
-  return (seed % 10) < 5  // 50% tomados → más slots disponibles visualmente
+  return (seed % 10) < 5
 }
 
 function getNombreDia(fecha: Date, tz: string): string {
