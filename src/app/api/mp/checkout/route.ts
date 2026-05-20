@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Plan no válido' }, { status: 400 })
     }
 
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://orbbilatam.com'
+    const appUrl = process.env.BUILD_APP_URL || process.env.NEXT_PUBLIC_APP_URL || 'https://orbbilatam.com'
     const ref = `${plan_id}_${Date.now()}`
 
     const body: Record<string, unknown> = {
