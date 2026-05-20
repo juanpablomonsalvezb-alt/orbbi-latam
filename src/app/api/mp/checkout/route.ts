@@ -56,8 +56,9 @@ export async function POST(request: NextRequest) {
         error: 'Error creando pago',
         detail: err,
         sent_body: body,
-        token_first8: process.env.MP_ACCESS_TOKEN?.slice(0, 8) || 'EMPTY',
-        token_len: process.env.MP_ACCESS_TOKEN?.length || 0,
+        mp_token_len: process.env.MP_ACCESS_TOKEN?.length || 0,
+        mercadopago_token_len: process.env.MERCADOPAGO_ACCESS_TOKEN?.length || 0,
+        all_env_keys: Object.keys(process.env).filter(k => k.includes('MP') || k.includes('MERCADO') || k.includes('RESEND') || k.includes('APP')),
         app_url: appUrl,
       }, { status: 500 })
     }
