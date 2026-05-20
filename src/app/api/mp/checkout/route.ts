@@ -28,9 +28,9 @@ export async function POST(request: NextRequest) {
         },
       ],
       back_urls: {
-        success: `${appUrl}/pago/exitoso`,
-        failure: `${appUrl}/pago/fallido`,
-        pending: `${appUrl}/pago/pendiente`,
+        success: `${appUrl}/pago/exitoso?plan=${plan_id}&ref=${ref}`,
+        failure: `${appUrl}/pago/fallido?plan=${plan_id}`,
+        pending: `${appUrl}/pago/pendiente?plan=${plan_id}`,
       },
       auto_return: 'approved',
       external_reference: ref,
@@ -52,7 +52,7 @@ export async function POST(request: NextRequest) {
     if (!response.ok) {
       const err = await response.json().catch(() => ({}))
       console.error('MercadoPago error:', response.status, JSON.stringify(err))
-      return NextResponse.json({ error: 'Error creando pago', detail: err, mp_status: response.status }, { status: 500 })
+      return NextResponse.json({ error: 'Error creando pago' }, { status: 500 })
     }
 
     const data = await response.json()
