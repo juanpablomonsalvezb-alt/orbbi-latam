@@ -42,13 +42,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
   })
 
   PROFESIONES.forEach(p => {
-    const url = `${BASE_URL}/ia-para-${p.slug}`
+    const url = `${BASE_URL}/ia-para/${p.slug}`
     const langAlternates: Record<string, string> = {
       es: url,
       'es-419': url,
     }
     PAISES.forEach(c => {
-      langAlternates[c.hreflang] = `${url}/${c.slug}`
+      langAlternates[c.hreflang] = `${url}-${c.slug}`
     })
     entries.push({
       url,
@@ -62,15 +62,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
   PROFESIONES.forEach(p => {
     PAISES.forEach(c => {
       entries.push({
-        url: `${BASE_URL}/ia-para-${p.slug}-${c.slug}`,
+        url: `${BASE_URL}/ia-para/${p.slug}-${c.slug}`,
         lastModified: now,
         changeFrequency: 'weekly',
         priority: 0.8,
         alternates: {
           languages: {
-            [c.hreflang]: `${BASE_URL}/ia-para-${p.slug}-${c.slug}`,
-            es: `${BASE_URL}/ia-para-${p.slug}`,
-            'x-default': `${BASE_URL}/ia-para-${p.slug}`,
+            [c.hreflang]: `${BASE_URL}/ia-para/${p.slug}-${c.slug}`,
+            es: `${BASE_URL}/ia-para/${p.slug}`,
+            'x-default': `${BASE_URL}/ia-para/${p.slug}`,
           },
         },
       })

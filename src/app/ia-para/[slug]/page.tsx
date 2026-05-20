@@ -5,41 +5,40 @@ import ProgrammaticLanding from '@/components/seo/ProgrammaticLanding'
 
 type Params = { slug: string }
 
-export function generateStaticParams(): Params[] {
-  const result: Params[] = []
-  for (const p of PROFESIONES) {
-    result.push({ slug: p.slug })
-    for (const c of PAISES) {
-      result.push({ slug: `${p.slug}-${c.slug}` })
-    }
-  }
-  console.log('[generateStaticParams ia-para] count:', result.length, 'sample:', result.slice(0, 3))
-  return result
+export const dynamicParams = false
+
+export async function generateStaticParams(): Promise<Params[]> {
+  const out: Params[] = []
+  PROFESIONES.forEach(p => {
+    out.push({ slug: p.slug })
+    PAISES.forEach(c => out.push({ slug: `${p.slug}-${c.slug}` }))
+  })
+  return out
 }
 
 function resolve(slug: string | undefined) {
   if (!slug || typeof slug !== 'string') return { prof: undefined, pais: undefined }
+  const exact = PROFESIONES.find(x => x.slug === slug)
+  if (exact) return { prof: exact, pais: undefined }
   const parts = slug.split('-')
-  let prof = PROFESIONES.find(x => x.slug === slug)
-  let pais: typeof PAISES[number] | undefined
-  if (!prof) {
-    pais = PAISES.find(x => x.slug === parts[parts.length - 1])
-    if (pais) {
+  for (const c of PAISES) {
+    if (parts[parts.length - 1] === c.slug) {
       const profSlug = parts.slice(0, -1).join('-')
-      prof = PROFESIONES.find(x => x.slug === profSlug)
+      const prof = PROFESIONES.find(x => x.slug === profSlug)
+      if (prof) return { prof, pais: c }
     }
   }
-  return { prof, pais }
+  return { prof: undefined, pais: undefined }
 }
 
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const { slug } = await params
   const { prof, pais } = resolve(slug)
-  if (!prof) return {}
+  if (!prof) return { title: 'No encontrada | Orbbi' }
 
   const url = pais
-    ? `${BASE_URL}/ia-para-${prof.slug}-${pais.slug}`
-    : `${BASE_URL}/ia-para-${prof.slug}`
+    ? `${BASE_URL}/ia-para/${prof.slug}-${pais.slug}`
+    : `${BASE_URL}/ia-para/${prof.slug}`
 
   const title = pais
     ? `Mentoría 1:1 de IA para ${prof.pluralMasc} en ${pais.nombre} | Orbbi`
@@ -50,16 +49,16 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     : `Programa de mentoría individual en IA para ${prof.pluralMasc} de Latinoamérica. Aprende ${prof.herramientas.slice(0, 3).join(', ')} aplicado a tu trabajo real. Diagnóstico gratis 30 min.`
 
   const languages: Record<string, string> = {
-    es: pais ? `${BASE_URL}/ia-para-${prof.slug}` : url,
-    'es-419': pais ? `${BASE_URL}/ia-para-${prof.slug}` : url,
+    es: pais ? `${BASE_URL}/ia-para/${prof.slug}` : url,
+    'es-419': pais ? `${BASE_URL}/ia-para/${prof.slug}` : url,
   }
   if (!pais) {
     PAISES.forEach(c => {
-      languages[c.hreflang] = `${BASE_URL}/ia-para-${prof.slug}-${c.slug}`
+      languages[c.hreflang] = `${BASE_URL}/ia-para/${prof.slug}-${c.slug}`
     })
   } else {
     languages[pais.hreflang] = url
-    languages['x-default'] = `${BASE_URL}/ia-para-${prof.slug}`
+    languages['x-default'] = `${BASE_URL}/ia-para/${prof.slug}`
   }
 
   return {
@@ -85,6 +84,6 @@ export default async function Page({ params }: { params: Promise<Params> }) {
   const { slug } = await params
   const { prof, pais } = resolve(slug)
   if (!prof) return notFound()
-  const fullSlug = pais ? `ia-para-${prof.slug}-${pais.slug}` : `ia-para-${prof.slug}`
+  const fullSlug = pais ? `ia-para/${prof.slug}-${pais.slug}` : `ia-para/${prof.slug}`
   return <ProgrammaticLanding profesion={prof} pais={pais} slug={fullSlug} />
 }

@@ -24,24 +24,24 @@
 
 ## Servicios principales
 
-- [Mentoría IA para Abogados](https://orbbilatam.com/ia-para-abogados)
-- [Mentoría IA para Médicos](https://orbbilatam.com/ia-para-medicos)
-- [Mentoría IA para Contadores](https://orbbilatam.com/ia-para-contadores)
-- [Mentoría IA para Docentes](https://orbbilatam.com/ia-para-docentes)
-- [Mentoría IA para Ingenieros](https://orbbilatam.com/ia-para-ingenieros)
-- [Mentoría IA para Ejecutivos](https://orbbilatam.com/ia-para-ejecutivos)
-- [Mentoría IA para Emprendedores](https://orbbilatam.com/ia-para-emprendedores)
-- [Mentoría IA para Consultores](https://orbbilatam.com/ia-para-consultores)
-- [Mentoría IA para Marketing](https://orbbilatam.com/ia-para-marketing)
-- [Mentoría IA para Psicólogos](https://orbbilatam.com/ia-para-psicologos)
+- [Mentoría IA para Abogados](https://orbbilatam.com/ia-para/abogados)
+- [Mentoría IA para Médicos](https://orbbilatam.com/ia-para/medicos)
+- [Mentoría IA para Contadores](https://orbbilatam.com/ia-para/contadores)
+- [Mentoría IA para Docentes](https://orbbilatam.com/ia-para/docentes)
+- [Mentoría IA para Ingenieros](https://orbbilatam.com/ia-para/ingenieros)
+- [Mentoría IA para Ejecutivos](https://orbbilatam.com/ia-para/ejecutivos)
+- [Mentoría IA para Emprendedores](https://orbbilatam.com/ia-para/emprendedores)
+- [Mentoría IA para Consultores](https://orbbilatam.com/ia-para/consultores)
+- [Mentoría IA para Marketing](https://orbbilatam.com/ia-para/marketing)
+- [Mentoría IA para Psicólogos](https://orbbilatam.com/ia-para/psicologos)
 
 ## Páginas país-específicas (ejemplos)
 
-- https://orbbilatam.com/ia-para-abogados/chile
-- https://orbbilatam.com/ia-para-medicos/mexico
-- https://orbbilatam.com/ia-para-contadores/colombia
-- https://orbbilatam.com/ia-para-docentes/argentina
-- https://orbbilatam.com/ia-para-emprendedores/peru
+- https://orbbilatam.com/ia-para/abogados-chile
+- https://orbbilatam.com/ia-para/medicos-mexico
+- https://orbbilatam.com/ia-para/contadores-colombia
+- https://orbbilatam.com/ia-para/docentes-argentina
+- https://orbbilatam.com/ia-para/emprendedores-peru
 
 ## Diferenciadores
 
