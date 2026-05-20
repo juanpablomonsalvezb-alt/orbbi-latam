@@ -298,6 +298,11 @@
   .sec-pad-lg  { padding-top: 72px !important; padding-bottom: 0 !important; }
   /* Page wrap lateral más chico */
   .page-wrap   { padding: 0 16px !important; }
+  /* Todas las secciones del main excepto el hero (primera) — padding compacto en mobile */
+  main > section:not(:first-child) {
+    padding-top: 64px !important;
+    padding-bottom: 64px !important;
+  }
   /* Announce bar más compacto */
   .announce-bar {
     font-size: 12px !important;
