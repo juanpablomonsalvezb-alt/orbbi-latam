@@ -32,9 +32,9 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
       type: 'article',
       publishedTime: a.fechaPublicacion,
       authors: ['Juan Pablo Monsalvez'],
-      images: [{ url: `${BASE_URL}/og-image.jpg`, width: 1200, height: 630, alt: a.titulo }],
+      // images: usa opengraph-image.tsx auto-generado
     },
-    twitter: { card: 'summary_large_image', title: a.titulo, description: a.intro, images: [`${BASE_URL}/og-image.jpg`] },
+    twitter: { card: 'summary_large_image', title: a.titulo, description: a.intro },
     keywords: a.keywords.join(', '),
     authors: [{ name: 'Juan Pablo Monsalvez', url: BASE_URL }],
     category: a.categoria,

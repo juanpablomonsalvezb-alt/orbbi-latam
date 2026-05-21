@@ -11,7 +11,7 @@ const LINKS = [
   { label: 'Mentorías',      href: '/#mentorias' },
   { label: 'Cómo funciona',  href: '/#como-funciona' },
   { label: 'Nosotros',       href: '/#nosotros' },
-  { label: 'Testimonios',    href: '/#testimonios' },
+  { label: 'Blog',           href: '/blog' },
   { label: 'Contacto',       href: '/#contacto' },
 ]
 
