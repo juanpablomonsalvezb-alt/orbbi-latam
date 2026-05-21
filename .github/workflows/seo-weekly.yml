@@ -1,9 +1,9 @@
-name: SEO Weekly Maintenance
+name: SEO Growth Weekly (100% gratis)
 
 on:
   schedule:
     - cron: '0 12 * * 1'  # Lunes 12:00 UTC
-  workflow_dispatch:        # Manual trigger desde GitHub UI
+  workflow_dispatch:
 
 jobs:
   sitemap-warmer:
@@ -15,31 +15,7 @@ jobs:
         with:
           node-version: '20'
       - run: npm ci
-      - name: Warm sitemap + ping IndexNow
-        run: npx tsx scripts/sitemap-warmer.ts
-
-  ai-citation-monitor:
-    name: AI Citation Monitor
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-      - run: npm ci
-      - name: Monitor AI citations
-        env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          PERPLEXITY_API_KEY: ${{ secrets.PERPLEXITY_API_KEY }}
-        run: npx tsx scripts/ai-citation-monitor.ts
-      - name: Commit reporte si hay cambios
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add scripts/output/*.md || true
-          git diff --cached --quiet || git commit -m "report: AI citations weekly $(date +%Y-%m-%d)"
-          git push || true
+      - run: npx tsx scripts/sitemap-warmer.ts
 
   internal-link-sniper:
     name: Internal Link Sniper
@@ -50,12 +26,66 @@ jobs:
         with:
           node-version: '20'
       - run: npm ci
-      - name: Buscar oportunidades de internal linking
-        run: npx tsx scripts/internal-link-sniper.ts
+      - run: npx tsx scripts/internal-link-sniper.ts
       - name: Commit reporte
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add scripts/output/*.md || true
           git diff --cached --quiet || git commit -m "report: internal links weekly $(date +%Y-%m-%d)"
+          git push || true
+
+  serp-monitor:
+    name: SERP Monitor (Google + Bing scraping)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm ci
+      - run: npx playwright install chromium --with-deps
+      - run: npx tsx scripts/serp-monitor.ts
+      - name: Commit reporte
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add scripts/output/*.md || true
+          git diff --cached --quiet || git commit -m "report: SERP positions weekly $(date +%Y-%m-%d)"
+          git push || true
+
+  reddit-monitor:
+    name: Reddit Opportunity Monitor
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm ci
+      - run: npx tsx scripts/reddit-opportunity-monitor.ts
+      - name: Commit reporte
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add scripts/output/*.md || true
+          git diff --cached --quiet || git commit -m "report: reddit opportunities $(date +%Y-%m-%d)"
+          git push || true
+
+  hn-monitor:
+    name: Hacker News Monitor
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm ci
+      - run: npx tsx scripts/hn-monitor.ts
+      - name: Commit reporte
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add scripts/output/*.md || true
+          git diff --cached --quiet || git commit -m "report: HN opportunities $(date +%Y-%m-%d)"
           git push || true
