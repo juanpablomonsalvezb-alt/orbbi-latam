@@ -18,6 +18,9 @@ export type Pais = {
   reguladorTributario: string
   reguladorSalud: string
   reguladorDatos: string
+  contextoLocal: string         // párrafo único país sobre adopción IA
+  ciudadesPrincipales: string[] // 3-5 ciudades para SEO local
+  husoHorario: string
   precioCLP_a_local: (clp: number) => string
 }
 
@@ -35,6 +38,9 @@ export const PAISES: Pais[] = [
     reguladorTributario: 'SII (Servicio de Impuestos Internos)',
     reguladorSalud: 'Superintendencia de Salud',
     reguladorDatos: 'Ley 19.628 / Ley 21.719',
+    contextoLocal: 'Chile es uno de los países LATAM más avanzados en adopción de IA profesional, con la entrada en vigencia de la Ley 21.719 que exige protección reforzada de datos personales y la creación de la Agencia Nacional de Protección de Datos. Los profesionales chilenos enfrentan presión competitiva de equipos remotos internacionales, lo que acelera la necesidad de productividad con IA. El SII ya integra IA en su fiscalización, y la Superintendencia de Salud está actualizando guías sobre IA clínica.',
+    ciudadesPrincipales: ['Santiago', 'Valparaíso', 'Concepción', 'Antofagasta', 'La Serena'],
+    husoHorario: 'CLT (UTC-4)',
     precioCLP_a_local: (clp) => `$${clp.toLocaleString('es-CL')}`,
   },
   {
@@ -50,6 +56,9 @@ export const PAISES: Pais[] = [
     reguladorTributario: 'SAT (Servicio de Administración Tributaria)',
     reguladorSalud: 'COFEPRIS',
     reguladorDatos: 'LFPDPPP',
+    contextoLocal: 'México es el mercado profesional más grande de LATAM y está viviendo una adopción acelerada de IA, especialmente en CDMX, Monterrey y Guadalajara. La LFPDPPP exige consentimiento expreso para tratar datos personales, lo que obliga a anonimizar información antes de procesar con LLMs externos. El nearshoring impulsó la demanda de productividad: empresas mexicanas que atienden a EE.UU. compiten con equipos americanos, y la IA es el ecualizador. El SAT empezó a aplicar IA en auditorías electrónicas.',
+    ciudadesPrincipales: ['Ciudad de México', 'Guadalajara', 'Monterrey', 'Puebla', 'Querétaro'],
+    husoHorario: 'CST (UTC-6)',
     precioCLP_a_local: (clp) => `${Math.round(clp / 50)} MXN aprox.`,
   },
   {
@@ -65,6 +74,9 @@ export const PAISES: Pais[] = [
     reguladorTributario: 'DIAN',
     reguladorSalud: 'INVIMA',
     reguladorDatos: 'Habeas Data (Ley 1581)',
+    contextoLocal: 'Colombia lidera el ranking de adopción de IA en LATAM 2026 según varios estudios, impulsada por Bogotá y Medellín como hubs de tech. La Ley Habeas Data (1581 de 2012) regula el tratamiento de datos personales y exige autorización previa. La DIAN exige facturación electrónica y nómina electrónica, abriendo casos de uso de IA para conciliación masiva. El gobierno publicó CONPES de IA y MinTIC promueve talleres en empresas.',
+    ciudadesPrincipales: ['Bogotá', 'Medellín', 'Cali', 'Barranquilla', 'Cartagena'],
+    husoHorario: 'COT (UTC-5)',
     precioCLP_a_local: (clp) => `${Math.round(clp * 4.2).toLocaleString('es-CO')} COP aprox.`,
   },
   {
@@ -80,6 +92,9 @@ export const PAISES: Pais[] = [
     reguladorTributario: 'AFIP',
     reguladorSalud: 'ANMAT',
     reguladorDatos: 'Ley 25.326',
+    contextoLocal: 'Argentina tiene la mayor densidad de talento técnico de LATAM por habitante, con Buenos Aires como hub fundador de unicornios (Mercado Libre, Globant, Auth0). La adopción de IA es agresiva en sectores de fintech, salud y educación. La inestabilidad económica obliga a profesionales a buscar productividad extra, y el trabajo remoto internacional pagado en dólares aumenta la presión por estar al día. La Ley 25.326 regula datos personales con autoridad propia (AAIP).',
+    ciudadesPrincipales: ['Buenos Aires', 'Córdoba', 'Rosario', 'Mendoza', 'La Plata'],
+    husoHorario: 'ART (UTC-3)',
     precioCLP_a_local: (clp) => `${Math.round(clp * 1.05).toLocaleString('es-AR')} ARS aprox.`,
   },
   {
@@ -95,6 +110,9 @@ export const PAISES: Pais[] = [
     reguladorTributario: 'SUNAT',
     reguladorSalud: 'DIGEMID',
     reguladorDatos: 'Ley 29.733',
+    contextoLocal: 'Perú está en una fase de adopción acelerada de IA, con Lima concentrando el ecosistema tech y consultor. La SUNAT impulsó facturación electrónica obligatoria, creando demanda de IA para automatización contable. Las universidades peruanas (PUCP, UPC) están abriendo postgrados en IA. La Ley 29.733 establece principios de protección de datos personales con autoridad propia.',
+    ciudadesPrincipales: ['Lima', 'Arequipa', 'Trujillo', 'Cusco', 'Piura'],
+    husoHorario: 'PET (UTC-5)',
     precioCLP_a_local: (clp) => `S/${(clp / 280).toFixed(0)}`,
   },
   {
@@ -110,6 +128,9 @@ export const PAISES: Pais[] = [
     reguladorTributario: 'DGI',
     reguladorSalud: 'MSP',
     reguladorDatos: 'Ley 18.331',
+    contextoLocal: 'Uruguay tiene la mayor penetración de talento tecnológico per cápita de LATAM y es un hub de offshoring tech (Globant, Mercado Libre, dLocal nacieron acá). El gobierno publicó la Estrategia Nacional de IA con foco ético. La Ley 18.331 está alineada con el RGPD europeo, lo que permite a Uruguay servir clientes europeos sin fricción de datos. La adopción de IA es alta en abogados corporativos y contadores que trabajan con holdings internacionales.',
+    ciudadesPrincipales: ['Montevideo', 'Punta del Este', 'Salto', 'Paysandú'],
+    husoHorario: 'UYT (UTC-3)',
     precioCLP_a_local: (clp) => `${Math.round(clp * 0.045).toLocaleString('es-UY')} UYU aprox.`,
   },
   {
@@ -125,6 +146,9 @@ export const PAISES: Pais[] = [
     reguladorTributario: 'SRI',
     reguladorSalud: 'ARCSA',
     reguladorDatos: 'LOPDP',
+    contextoLocal: 'Ecuador dolarizó su economía hace 25 años, lo que elimina la fricción de pagar herramientas IA en USD. Quito y Guayaquil concentran la actividad profesional, con creciente adopción de IA en estudios contables y jurídicos. La LOPDP (Ley Orgánica de Protección de Datos Personales) entró en plena vigencia en 2023 con sanciones reales. El SRI exige facturación electrónica, generando demanda de automatización contable.',
+    ciudadesPrincipales: ['Quito', 'Guayaquil', 'Cuenca', 'Ambato'],
+    husoHorario: 'ECT (UTC-5)',
     precioCLP_a_local: (clp) => `$${(clp / 950).toFixed(0)} USD`,
   },
 ]

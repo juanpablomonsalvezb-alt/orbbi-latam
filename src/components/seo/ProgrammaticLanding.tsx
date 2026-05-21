@@ -192,6 +192,41 @@ export default function ProgrammaticLanding({ profesion, pais, slug }: Props) {
           </div>
         </section>
 
+        {/* Contexto país — solo si hay país, contenido único */}
+        {pais && (
+          <section style={{ padding: '0 20px 72px', maxWidth: 900, margin: '0 auto' }}>
+            <h2 style={{
+              fontFamily: '"disp",Georgia,serif',
+              fontSize: 'clamp(26px,3vw,36px)',
+              lineHeight: 1.15, letterSpacing: '-0.02em',
+              fontWeight: 400, color: '#0F0E0D', marginBottom: 16,
+            }}>
+              {profesion.nombre}s en {pais.nombre}: contexto 2026
+            </h2>
+            <p style={{ fontSize: 17, lineHeight: '28px', color: 'rgba(15,14,13,0.7)', marginBottom: 32 }}>
+              {pais.contextoLocal}
+            </p>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }} className="proyectos-grid">
+              <div style={{ background: '#fff', border: '1px solid rgba(15,14,13,0.08)', borderRadius: 10, padding: '20px 22px' }}>
+                <p style={{ fontSize: 12, color: 'rgba(15,14,13,0.45)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 8 }}>
+                  Ciudades atendidas
+                </p>
+                <p style={{ fontSize: 15, color: '#0F0E0D', lineHeight: '22px' }}>
+                  {pais.ciudadesPrincipales.join(' · ')}
+                </p>
+              </div>
+              <div style={{ background: '#fff', border: '1px solid rgba(15,14,13,0.08)', borderRadius: 10, padding: '20px 22px' }}>
+                <p style={{ fontSize: 12, color: 'rgba(15,14,13,0.45)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 8 }}>
+                  Coordinación de horarios
+                </p>
+                <p style={{ fontSize: 15, color: '#0F0E0D', lineHeight: '22px' }}>
+                  {pais.husoHorario} · Coordinamos según tu agenda local
+                </p>
+              </div>
+            </div>
+          </section>
+        )}
+
         {/* Comparativa — extraíble por LLMs */}
         <section style={{ padding: '0 20px 72px', maxWidth: 900, margin: '0 auto' }}>
           <h2 style={{
