@@ -1,0 +1,42 @@
+{
+  "name": "Orbbi Latam — Mentoría 1:1 de IA",
+  "short_name": "Orbbi",
+  "description": "Mentoría 1:1 en Inteligencia Artificial para profesionales de Latinoamérica.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0F0E0D",
+  "theme_color": "#0F0E0D",
+  "orientation": "portrait-primary",
+  "lang": "es",
+  "dir": "ltr",
+  "categories": ["education", "productivity", "business"],
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "16x16 32x32 48x48",
+      "type": "image/x-icon"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Agendar diagnóstico gratis",
+      "short_name": "Agendar",
+      "description": "Reserva tu diagnóstico inicial sin costo",
+      "url": "/agendar",
+      "icons": [{ "src": "/favicon.ico", "sizes": "32x32" }]
+    },
+    {
+      "name": "Ver programas",
+      "short_name": "Programas",
+      "description": "Mentoría 1 sesión o programa 4 sesiones",
+      "url": "/#precios"
+    },
+    {
+      "name": "Blog",
+      "short_name": "Blog",
+      "description": "Artículos sobre IA aplicada para profesionales LATAM",
+      "url": "/blog"
+    }
+  ]
+}

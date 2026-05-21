@@ -311,6 +311,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="dns-prefetch" href="https://api.mercadopago.com" />
 
+        {/* PWA manifest + iconos */}
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="application-name" content="Orbbi" />
+        <meta name="apple-mobile-web-app-title" content="Orbbi" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="format-detection" content="telephone=no" />
+
+        {/* IndexNow key (Bing/Yandex) */}
+        <meta name="indexnow-key" content="532cdbb074f00984ba7a9d42c9b5bb63" />
+
         {/* Canonical + hreflang */}
         <link rel="canonical" href={`${BASE_URL}/`} />
         <link rel="alternate" hrefLang="es" href={`${BASE_URL}/`} />

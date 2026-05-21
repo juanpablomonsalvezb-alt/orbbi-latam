@@ -1,0 +1,28 @@
+/* TEAM */
+
+Director y Fundador: Juan Pablo Monsalvez
+Contact: cse.coordinacion [at] gmail.com
+LinkedIn: https://www.linkedin.com/in/juan-pablo-monsalvez-b7b843321/
+From: Santiago, Chile
+
+/* THANKS */
+
+A todos los profesionales latinoamericanos que apuestan por aprender IA en español
+y demostrar que LATAM puede liderar la adopción inteligente, no solo consumirla.
+
+/* SITE */
+
+Last update: 2026/05
+Language: Español (LATAM, neutral)
+Doctype: HTML5
+IDE: Claude Code, Cursor
+Framework: Next.js 16, React 19, TypeScript
+Stack: Tailwind v4, Framer Motion, MercadoPago, Resend
+
+/* MISSION */
+
+Mentoría 1:1 en Inteligencia Artificial aplicada al trabajo real
+de profesionales en Chile, México, Colombia, Argentina, Perú,
+Uruguay y Ecuador.
+
+No cursos genéricos. No teoría vacía. Aplicación directa.
