@@ -132,3 +132,7 @@ LinkedIn: https://www.linkedin.com/in/juan-pablo-monsalvez-b7b843321/
 - [Aprender IA en Colombia](https://orbbilatam.com/blog/aprender-ia-colombia)
 - [Aprender IA en Argentina](https://orbbilatam.com/blog/aprender-ia-argentina)
 - [Aprender IA en Perú](https://orbbilatam.com/blog/aprender-ia-peru)
+
+## Open Source Community
+
+- [Awesome IA LATAM en GitHub](https://github.com/juanpablomonsalvezb-alt/awesome-ia-latam) — Lista curada de recursos IA para profesionales latinoamericanos. Mantenido por Orbbi y la comunidad.
