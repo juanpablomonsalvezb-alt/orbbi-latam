@@ -1,0 +1,109 @@
+name: SEO Growth Automation (gratis · frecuencia óptima)
+
+# El repo es público → GitHub Actions ILIMITADAS
+# Cada job tiene la frecuencia que tiene sentido para su naturaleza
+
+on:
+  workflow_dispatch:                     # Trigger manual desde GitHub UI
+
+  schedule:
+    # warmer + indexnow: 1x al día (mantiene cache caliente)
+    - cron: '0 6 * * *'                  # 06:00 UTC todos los días
+
+    # reddit: cada 6 horas (oportunidades expiran rápido)
+    - cron: '0 */6 * * *'                # 00, 06, 12, 18 UTC
+
+    # hn: cada 12 horas
+    - cron: '0 */12 * * *'               # 00, 12 UTC
+
+    # serp + sniper: lunes y jueves (2x/semana, evita bloqueos Google)
+    - cron: '0 12 * * 1,4'
+
+jobs:
+  # ─── DIARIO (06:00 UTC) ──────────────────────────────────────
+  sitemap-warmer:
+    name: Sitemap warmer + IndexNow (diario)
+    runs-on: ubuntu-latest
+    if: github.event.schedule == '0 6 * * *' || github.event_name == 'workflow_dispatch'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - run: npm ci
+      - run: npx tsx scripts/sitemap-warmer.ts
+
+  # ─── CADA 6 HORAS ────────────────────────────────────────────
+  reddit-monitor:
+    name: Reddit Opportunity Monitor (cada 6h)
+    runs-on: ubuntu-latest
+    if: github.event.schedule == '0 */6 * * *' || github.event_name == 'workflow_dispatch'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - run: npm ci
+      - run: npx tsx scripts/reddit-opportunity-monitor.ts
+      - name: Commit reporte si hay oportunidades nuevas
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add scripts/output/reddit-*.md || true
+          git diff --cached --quiet || git commit -m "report: reddit opps $(date -u +%Y-%m-%d_%H)"
+          git push || true
+
+  # ─── CADA 12 HORAS ───────────────────────────────────────────
+  hn-monitor:
+    name: Hacker News Monitor (cada 12h)
+    runs-on: ubuntu-latest
+    if: github.event.schedule == '0 */12 * * *' || github.event_name == 'workflow_dispatch'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - run: npm ci
+      - run: npx tsx scripts/hn-monitor.ts
+      - name: Commit reporte
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add scripts/output/hn-*.md || true
+          git diff --cached --quiet || git commit -m "report: HN opps $(date -u +%Y-%m-%d_%H)"
+          git push || true
+
+  # ─── LUN + JUE 12 UTC ────────────────────────────────────────
+  serp-monitor:
+    name: SERP Monitor Google + Bing (2x/semana)
+    runs-on: ubuntu-latest
+    if: github.event.schedule == '0 12 * * 1,4' || github.event_name == 'workflow_dispatch'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - run: npm ci
+      - run: npx playwright install chromium --with-deps
+      - run: npx tsx scripts/serp-monitor.ts
+      - name: Commit reporte
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add scripts/output/serp-*.md || true
+          git diff --cached --quiet || git commit -m "report: SERP $(date -u +%Y-%m-%d)"
+          git push || true
+
+  internal-link-sniper:
+    name: Internal Link Sniper (2x/semana)
+    runs-on: ubuntu-latest
+    if: github.event.schedule == '0 12 * * 1,4' || github.event_name == 'workflow_dispatch'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - run: npm ci
+      - run: npx tsx scripts/internal-link-sniper.ts
+      - name: Commit reporte
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add scripts/output/internal-links-report.md || true
+          git diff --cached --quiet || git commit -m "report: internal links $(date -u +%Y-%m-%d)"
+          git push || true
